@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScienceAndMaths.Hydraulics
+namespace ScienceAndMaths.Shared
 {
-    public class Canal
+    public static class Constants
     {
-        public double Flow { get; set; }
+        public const double GravityAcceleration = 9.80665;
     }
 }
