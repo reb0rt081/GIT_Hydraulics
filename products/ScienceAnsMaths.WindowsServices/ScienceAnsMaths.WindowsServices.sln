@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Service", "ScienceAndMaths.Service\ScienceAndMaths.Service.csproj", "{3C869165-C9A6-4B25-BDB4-A93604C79334}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Hydraulics", "ScienceAndMaths.Hydraulics\ScienceAndMaths.Hydraulics.csproj", "{B14FF188-99E1-48F2-90EC-8745E42412A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{3C869165-C9A6-4B25-BDB4-A93604C79334}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C869165-C9A6-4B25-BDB4-A93604C79334}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C869165-C9A6-4B25-BDB4-A93604C79334}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B14FF188-99E1-48F2-90EC-8745E42412A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B14FF188-99E1-48F2-90EC-8745E42412A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B14FF188-99E1-48F2-90EC-8745E42412A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B14FF188-99E1-48F2-90EC-8745E42412A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
