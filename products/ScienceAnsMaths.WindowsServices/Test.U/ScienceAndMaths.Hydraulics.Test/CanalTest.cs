@@ -9,7 +9,7 @@ namespace ScienceAndMaths.Hydraulics.Test
     public class CanalTest
     {
         [TestMethod]
-        public void BasicFlowTest()
+        public void BasicRectangularFlowTest()
         {
             Canal canal = new Canal(602, 20.32, new RectangularSection(5, 0.028, 0));
 
@@ -21,6 +21,12 @@ namespace ScienceAndMaths.Hydraulics.Test
 
             //  Act
             double result = solver.Solve(0, 2.9);
+
+            double actualRh = (5.0 * 2.9) / (5.0 + 2.0 * 2.9);
+            Assert.IsTrue(rh - actualRh <= double.Epsilon);
+            Assert.IsTrue(mv - 0 <= double.Epsilon);
+            Assert.IsTrue(fr - 0 <= double.Epsilon);
+            Assert.IsTrue(result - 2.8988 <= 0.00001);
         }
     }
 }
