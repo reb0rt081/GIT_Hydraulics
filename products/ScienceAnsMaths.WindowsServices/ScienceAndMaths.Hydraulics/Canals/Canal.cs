@@ -34,7 +34,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
         public CanalSection CanalSection { get; set; }
 
         /// <summary>
-        /// Gets or sets the flow equation
+        /// Returns the flow equation
         /// </summary>
         /// <returns></returns>
         public Func<double, double, double> FlowEquation()

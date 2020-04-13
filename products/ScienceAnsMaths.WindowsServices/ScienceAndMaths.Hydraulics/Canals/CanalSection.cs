@@ -55,7 +55,8 @@ namespace ScienceAndMaths.Hydraulics.Canals
         }
 
         /// <summary>
-        /// Returns the Hydraulic depth that can be used to obtain the Froude number
+        /// Returns the Hydraulic depth that can be used to obtain the Froude number.
+        /// HydraulicDepth = HydraulicArea / T, where T is the width of free surface
         /// </summary>
         /// <param name="waterLevel">The level of the water in the canal section</param>
         /// <returns></returns>
