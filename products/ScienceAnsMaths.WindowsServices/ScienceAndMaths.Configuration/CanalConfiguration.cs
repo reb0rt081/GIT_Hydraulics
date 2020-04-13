@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ScienceAndMaths.Configuration
 {
-    public class Class1
+    public class CanalConfiguration
     {
     }
 }
