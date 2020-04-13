@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Hydraulics"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Shared", "ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj", "{32271CAC-A2CE-4F84-8065-C356E66E2895}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Mathematics", "ScienceAndMaths.Mathematics\ScienceAndMaths.Mathematics.csproj", "{FE52CF6D-A8E0-4B30-9FB9-926C71639BC2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{32271CAC-A2CE-4F84-8065-C356E66E2895}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{32271CAC-A2CE-4F84-8065-C356E66E2895}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{32271CAC-A2CE-4F84-8065-C356E66E2895}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FE52CF6D-A8E0-4B30-9FB9-926C71639BC2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FE52CF6D-A8E0-4B30-9FB9-926C71639BC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FE52CF6D-A8E0-4B30-9FB9-926C71639BC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FE52CF6D-A8E0-4B30-9FB9-926C71639BC2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
