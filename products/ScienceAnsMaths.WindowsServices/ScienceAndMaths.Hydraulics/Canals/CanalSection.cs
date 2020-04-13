@@ -15,15 +15,10 @@ namespace ScienceAndMaths.Hydraulics.Canals
     public abstract class CanalSection
     {
         /// <summary>
-        /// Roughness coefficient applyin Manning's rule
+        /// Roughness coefficient applying Manning's rule
         /// </summary>
         public double Roughness { get; set; }
-
-        /// <summary>
-        /// Length of the canal section
-        /// </summary>
-        public double Length { get; set; }
-        
+                      
         /// <summary>
         /// Slope of the canal section in 1/1 (m/m)
         /// </summary>
@@ -46,7 +41,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
         /// <returns></returns>
         public double GetManningVelocity(double waterLevel)
         {
-            return (1 / Slope) * Math.Pow(GetHydraulicRadius(waterLevel), 2.0/3.0) * Math.Sqrt(Slope);
+            return (1 / Roughness) * Math.Pow(GetHydraulicRadius(waterLevel), 2.0/3.0) * Math.Sqrt(Slope);
         }
 
         /// <summary>

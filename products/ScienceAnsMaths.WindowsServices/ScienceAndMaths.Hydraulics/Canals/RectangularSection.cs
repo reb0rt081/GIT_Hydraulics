@@ -8,6 +8,13 @@ namespace ScienceAndMaths.Hydraulics.Canals
 {
     public class RectangularSection : CanalSection
     {
+        public RectangularSection(double width, double roughness, double slope)
+        {
+            Width = width;
+            Roughness = roughness;
+            Slope = slope;
+        }
+
         public double Width { get; set; }
 
         public override double GetHydraulicDepth(double waterLevel)

@@ -37,7 +37,7 @@ namespace ScienceAndMaths.Mathematics
             double k3 = Equation(initX + 0.5 * Interval, initY + 0.5 * k2 * Interval);
             double k4 = Equation(initX + Interval, initY + k3 * Interval);
 
-            return initY + 1d / 6d * Interval * (k1 + 2 * k2 + 2 * k3 + k4);
+            return initY + 1.0 / 6.0 * Interval * (k1 + 2 * k2 + 2 * k3 + k4);
         }
     }
 }
