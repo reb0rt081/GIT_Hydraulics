@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Shared", "S
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Mathematics", "ScienceAndMaths.Mathematics\ScienceAndMaths.Mathematics.csproj", "{FE52CF6D-A8E0-4B30-9FB9-926C71639BC2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test.U", "Test.U", "{7EF3CB4B-337D-4040-89F9-E79D054516FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Mathematics.Test", "Test.U\ScienceAndMaths.Mathematics.Test\ScienceAndMaths.Mathematics.Test.csproj", "{64D08C15-85E4-4DC5-BE8F-BD04D0ECAD1E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,9 +37,16 @@ Global
 		{FE52CF6D-A8E0-4B30-9FB9-926C71639BC2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FE52CF6D-A8E0-4B30-9FB9-926C71639BC2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FE52CF6D-A8E0-4B30-9FB9-926C71639BC2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64D08C15-85E4-4DC5-BE8F-BD04D0ECAD1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64D08C15-85E4-4DC5-BE8F-BD04D0ECAD1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64D08C15-85E4-4DC5-BE8F-BD04D0ECAD1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64D08C15-85E4-4DC5-BE8F-BD04D0ECAD1E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{64D08C15-85E4-4DC5-BE8F-BD04D0ECAD1E} = {7EF3CB4B-337D-4040-89F9-E79D054516FC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BE24E04F-40D9-4FB0-AA78-F257C195F495}

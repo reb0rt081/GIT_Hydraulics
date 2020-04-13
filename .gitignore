@@ -9,4 +9,4 @@ release/
 .cache
 .vs/
 .suo
-/packages
+packages/
