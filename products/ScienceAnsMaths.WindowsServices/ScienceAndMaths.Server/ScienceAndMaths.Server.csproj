@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{3C869165-C9A6-4B25-BDB4-A93604C79334}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Rob.Engineering.ScienceAndMaths.Service</RootNamespace>
-    <AssemblyName>Rob.Engineering.ScienceAndMaths.Service</AssemblyName>
+    <RootNamespace>Rob.Engineering.ScienceAndMaths.Server</RootNamespace>
+    <AssemblyName>Rob.Engineering.ScienceAndMaths.Server</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

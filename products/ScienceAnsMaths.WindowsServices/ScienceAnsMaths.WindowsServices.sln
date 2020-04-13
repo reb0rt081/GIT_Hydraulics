@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27703.2000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Service", "ScienceAndMaths.Service\ScienceAndMaths.Service.csproj", "{3C869165-C9A6-4B25-BDB4-A93604C79334}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Server", "ScienceAndMaths.Server\ScienceAndMaths.Server.csproj", "{3C869165-C9A6-4B25-BDB4-A93604C79334}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Hydraulics", "ScienceAndMaths.Hydraulics\ScienceAndMaths.Hydraulics.csproj", "{B14FF188-99E1-48F2-90EC-8745E42412A4}"
 EndProject
