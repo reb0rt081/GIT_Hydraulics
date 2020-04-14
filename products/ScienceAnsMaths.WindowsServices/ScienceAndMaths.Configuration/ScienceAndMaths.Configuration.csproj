@@ -46,6 +46,7 @@
     <Compile Include="Canals\CanalConfiguration.cs" />
     <Compile Include="Canals\CanalNode.cs" />
     <Compile Include="Canals\RectangularSection.cs" />
+    <Compile Include="Canals\TrapezoidalSection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

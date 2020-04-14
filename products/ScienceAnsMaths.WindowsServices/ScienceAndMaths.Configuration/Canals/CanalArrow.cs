@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 using ScienceAndMaths.Shared;
 
@@ -26,6 +27,32 @@ namespace ScienceAndMaths.Configuration.Canals
         public string ToNodeId { get; set; }
 
         [DataMember]
+        public RectangularSection RectangularSectionn
+        {
+            get
+            {
+                return CanalSection as RectangularSection;
+            }
+            set
+            {
+                CanalSection = value;
+            }
+        }
+
+        [DataMember]
+        public TrapezoidalSection TrapezoidalSection
+        {
+            get
+            {
+                return CanalSection as TrapezoidalSection;
+            }
+            set
+            {
+                CanalSection = value;
+            }
+        }
+
+        [XmlIgnore]
         public ICanalSection CanalSection { get; set; }
     }
 }
