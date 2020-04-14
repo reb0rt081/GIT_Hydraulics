@@ -44,5 +44,15 @@
     <Compile Include="ICanalFlowService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ScienceAndMaths.Hydraulics\ScienceAndMaths.Hydraulics.csproj">
+      <Project>{B14FF188-99E1-48F2-90EC-8745E42412A4}</Project>
+      <Name>ScienceAndMaths.Hydraulics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj">
+      <Project>{32271CAC-A2CE-4F84-8065-C356E66E2895}</Project>
+      <Name>ScienceAndMaths.Shared</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

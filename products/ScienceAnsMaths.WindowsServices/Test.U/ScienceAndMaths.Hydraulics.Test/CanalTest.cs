@@ -11,7 +11,7 @@ namespace ScienceAndMaths.Hydraulics.Test
         [TestMethod]
         public void BasicRectangularFlowTest()
         {
-            Canal canal = new Canal(602, 20.32, new RectangularSection(5, 0.028, 0));
+            CanalStretch canal = new CanalStretch(602, 20.32, new RectangularSection(5, 0.028, 0));
 
             double rh = canal.CanalSection.GetHydraulicRadius(2.9);
             double mv = canal.CanalSection.GetManningVelocity(2.9);

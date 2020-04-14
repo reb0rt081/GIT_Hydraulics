@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace ScienceAndMaths.Hydraulics.Canals
 {
-    public class Canal
+    public class CanalEdge
     {
         public string Id { get; set; }
-
-        public List<CanalEdge> CanelEdges;
-
-        public List<CanalStretch> CanalStretches;
     }
 }
