@@ -18,14 +18,23 @@ namespace ScienceAndMaths.Hydraulics.Canals
             CanalSection = canalSection;
         }
 
+        /// <summary>
+        /// Gets or sets the unique identifier for the canal.
+        /// </summary>
         public string Id { get; set; }
 
+        /// <summary>
+        /// Gets or sets the source node for this canal stretch.
+        /// </summary>
         public CanalEdge FromNode { get; set; }
 
+        /// <summary>
+        /// Gets or sets the destination node for this canal stretch.
+        /// </summary>
         public CanalEdge ToNode { get; set; }
 
         /// <summary>
-        /// Gets or sets the lenght of the canal
+        /// Gets or sets the length of the canal
         /// </summary>
         public double Length { get; set; }
 
