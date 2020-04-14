@@ -12,7 +12,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
     /// <summary>
     /// This class describes an uniform canal section of a given length an shape
     /// </summary>
-    public abstract class CanalSection
+    public abstract class CanalSection : ICanalSection
     {
         /// <summary>
         /// Roughness coefficient applying Manning's rule

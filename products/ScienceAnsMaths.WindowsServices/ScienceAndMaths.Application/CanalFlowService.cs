@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ScienceAndMaths.Domain;
+
 namespace ScienceAndMaths.Application
 {
-    public class CanalFlowService
+    public class CanalFlowService : ICanalFlowService
     {
     }
 }
