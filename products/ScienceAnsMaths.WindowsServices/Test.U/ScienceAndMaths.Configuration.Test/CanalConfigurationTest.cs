@@ -15,10 +15,11 @@ namespace ScienceAndMaths.Configuration.Test
     public class CanalConfigurationTest
     {
         [TestMethod]
-        public void SerializingTest()
+        public void RectangularSerializingTest()
         {
+            //  Arrange
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(CanalConfiguration));
-            var canalConfiguration = new CanalConfiguration();            
+            CanalConfiguration canalConfiguration = new CanalConfiguration();            
             canalConfiguration.ConfigId = "TestConfig";
             
             CanalNode initNode = new CanalNode()
@@ -46,6 +47,7 @@ namespace ScienceAndMaths.Configuration.Test
             canalConfiguration.Nodes = new List<CanalNode>() { initNode, endNode };
             var xml = "";
 
+            //  Act
             using (var sww = new StringWriter())
             {
                 using (XmlWriter writer = XmlWriter.Create(sww))
@@ -55,14 +57,27 @@ namespace ScienceAndMaths.Configuration.Test
                 }
             }
 
+            //  Assert
             Assert.IsTrue(xml != null);
+
+            CanalConfiguration deserializedConfiguration = null;
+
+            using (StringReader sr = new StringReader(xml))
+            {
+                deserializedConfiguration = (CanalConfiguration)xmlSerializer.Deserialize(sr);
+            }
+
+            Assert.IsTrue(deserializedConfiguration != null);
+            Assert.AreEqual(2, deserializedConfiguration.Nodes.Count);
+            Assert.AreEqual(1, deserializedConfiguration.Arrows.Count);
         }
 
         [TestMethod]
         public void TrapezoidSerializingTest()
         {
+            //  Arrange
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(CanalConfiguration));
-            var canalConfiguration = new CanalConfiguration();
+            CanalConfiguration canalConfiguration = new CanalConfiguration();
             canalConfiguration.ConfigId = "TestConfig";
 
             CanalNode initNode = new CanalNode()
@@ -91,6 +106,7 @@ namespace ScienceAndMaths.Configuration.Test
             canalConfiguration.Nodes = new List<CanalNode>() { initNode, endNode };
             var xml = "";
 
+            //  Act
             using (var sww = new StringWriter())
             {
                 using (XmlWriter writer = XmlWriter.Create(sww))
@@ -100,7 +116,18 @@ namespace ScienceAndMaths.Configuration.Test
                 }
             }
 
+            //  Assert
             Assert.IsTrue(xml != null);
+            CanalConfiguration deserializedConfiguration = null;
+
+            using (StringReader sr = new StringReader(xml))
+            {
+                deserializedConfiguration =  (CanalConfiguration)xmlSerializer.Deserialize(sr);
+            }
+
+            Assert.IsTrue(deserializedConfiguration != null);
+            Assert.AreEqual(2, deserializedConfiguration.Nodes.Count);
+            Assert.AreEqual(1, deserializedConfiguration.Arrows.Count);
         }
     }
 }
