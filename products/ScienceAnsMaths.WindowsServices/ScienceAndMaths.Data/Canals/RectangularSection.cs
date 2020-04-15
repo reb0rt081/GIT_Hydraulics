@@ -1,17 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.Serialization;
-using System.Text;
-using System.Threading.Tasks;
-
 using ScienceAndMaths.Shared;
 
-namespace ScienceAndMaths.Configuration.Canals
+namespace ScienceAndMaths.Data.Canals
 {
     [DataContract(Namespace = XmlConsts.XmlNamespace)]
     [Serializable]
-    public class TrapezoidalSection : ICanalSection
+    public class RectangularSection : ICanalSection
     {
         [DataMember]
         public double Width { get; set; }
@@ -21,8 +16,5 @@ namespace ScienceAndMaths.Configuration.Canals
 
         [DataMember]
         public double Slope { get; set; }
-
-        [DataMember]
-        public double Incline { get; set; }
     }
 }

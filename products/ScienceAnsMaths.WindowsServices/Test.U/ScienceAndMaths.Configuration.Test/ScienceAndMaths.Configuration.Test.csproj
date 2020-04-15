@@ -61,6 +61,10 @@
       <Project>{C3210660-EB04-4688-933D-A19A0DC18C1B}</Project>
       <Name>ScienceAndMaths.Configuration</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\ScienceAndMaths.Data\ScienceAndMaths.Data.csproj">
+      <Project>{372D6698-C64E-417D-83D5-954D61EFAFDF}</Project>
+      <Name>ScienceAndMaths.Data</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj">
       <Project>{32271CAC-A2CE-4F84-8065-C356E66E2895}</Project>
       <Name>ScienceAndMaths.Shared</Name>

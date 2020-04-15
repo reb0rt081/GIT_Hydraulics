@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{9DF6D77C-6ED1-4B3A-8639-4BFDEA83A579}</ProjectGuid>
+    <ProjectGuid>{372D6698-C64E-417D-83D5-954D61EFAFDF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ScienceAndMaths.Domain</RootNamespace>
-    <AssemblyName>ScienceAndMaths.Domain</AssemblyName>
+    <RootNamespace>ScienceAndMaths.Data</RootNamespace>
+    <AssemblyName>ScienceAndMaths.Data</AssemblyName>
     <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -41,19 +42,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ICanalConfigurationLoader.cs" />
-    <Compile Include="ICanalFlowService.cs" />
+    <Compile Include="Canals\CanalArrow.cs" />
+    <Compile Include="Canals\CanalConfiguration.cs" />
+    <Compile Include="Canals\CanalNode.cs" />
+    <Compile Include="Canals\RectangularSection.cs" />
+    <Compile Include="Canals\TrapezoidalSection.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ScienceAndMaths.Data\ScienceAndMaths.Data.csproj">
-      <Project>{372d6698-c64e-417d-83d5-954d61efafdf}</Project>
-      <Name>ScienceAndMaths.Data</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ScienceAndMaths.Hydraulics\ScienceAndMaths.Hydraulics.csproj">
-      <Project>{B14FF188-99E1-48F2-90EC-8745E42412A4}</Project>
-      <Name>ScienceAndMaths.Hydraulics</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj">
       <Project>{32271CAC-A2CE-4F84-8065-C356E66E2895}</Project>
       <Name>ScienceAndMaths.Shared</Name>

@@ -33,23 +33,28 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Canals\CanalArrow.cs" />
-    <Compile Include="Canals\CanalConfiguration.cs" />
-    <Compile Include="Canals\CanalNode.cs" />
-    <Compile Include="Canals\RectangularSection.cs" />
-    <Compile Include="Canals\TrapezoidalSection.cs" />
+    <Compile Include="Canals\CanalConfigurationLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ScienceAndMaths.Data\ScienceAndMaths.Data.csproj">
+      <Project>{372D6698-C64E-417D-83D5-954D61EFAFDF}</Project>
+      <Name>ScienceAndMaths.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ScienceAndMaths.Domain\ScienceAndMaths.Domain.csproj">
+      <Project>{9DF6D77C-6ED1-4B3A-8639-4BFDEA83A579}</Project>
+      <Name>ScienceAndMaths.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ScienceAndMaths.Hydraulics\ScienceAndMaths.Hydraulics.csproj">
+      <Project>{B14FF188-99E1-48F2-90EC-8745E42412A4}</Project>
+      <Name>ScienceAndMaths.Hydraulics</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj">
       <Project>{32271CAC-A2CE-4F84-8065-C356E66E2895}</Project>
       <Name>ScienceAndMaths.Shared</Name>
