@@ -46,10 +46,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ScienceAndMaths.Data\ScienceAndMaths.Data.csproj">
-      <Project>{372d6698-c64e-417d-83d5-954d61efafdf}</Project>
-      <Name>ScienceAndMaths.Data</Name>
-    </ProjectReference>
     <ProjectReference Include="..\ScienceAndMaths.Hydraulics\ScienceAndMaths.Hydraulics.csproj">
       <Project>{B14FF188-99E1-48F2-90EC-8745E42412A4}</Project>
       <Name>ScienceAndMaths.Hydraulics</Name>

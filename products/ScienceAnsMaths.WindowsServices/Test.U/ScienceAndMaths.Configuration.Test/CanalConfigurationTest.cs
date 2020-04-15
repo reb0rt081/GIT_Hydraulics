@@ -8,7 +8,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
-using ScienceAndMaths.Data.Canals;
 
 namespace ScienceAndMaths.Configuration.Test
 {

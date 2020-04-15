@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 using ScienceAndMaths.Shared;
 
-namespace ScienceAndMaths.Data.Canals
+namespace ScienceAndMaths.Configuration.Canals
 {
     [DataContract(Namespace = XmlConsts.XmlNamespace)]
     [Serializable]
