@@ -11,12 +11,17 @@ namespace ScienceAndMaths.Hydraulics.Canals
     /// </summary>
     public class Canal
     {
+        public Canal()
+        {
+            CanelEdges = new List<CanalEdge>();
+            CanalStretches = new List<CanalStretch>();
+        }
+
         /// <summary>
         /// Gets or sets the unique identifier for the canal.
         /// </summary>
         public string Id { get; set; }
-
-
+        
         /// <summary>
         /// Gets or sets the canal edges to define the boundary conditions.
         /// </summary>

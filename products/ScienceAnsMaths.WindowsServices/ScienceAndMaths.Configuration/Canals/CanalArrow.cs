@@ -22,11 +22,11 @@ namespace ScienceAndMaths.Configuration.Canals
         public string ToNodeId { get; set; }
 
         [DataMember]
-        public RectangularSection RectangularSectionn
+        public RectangularSectionConfiguration RectangularSectionn
         {
             get
             {
-                return CanalSection as RectangularSection;
+                return CanalSection as RectangularSectionConfiguration;
             }
             set
             {
@@ -35,11 +35,11 @@ namespace ScienceAndMaths.Configuration.Canals
         }
 
         [DataMember]
-        public TrapezoidalSection TrapezoidalSection
+        public TrapezoidalSectionConfiguration TrapezoidalSection
         {
             get
             {
-                return CanalSection as TrapezoidalSection;
+                return CanalSection as TrapezoidalSectionConfiguration;
             }
             set
             {

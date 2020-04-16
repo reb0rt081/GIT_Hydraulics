@@ -44,10 +44,12 @@
   <ItemGroup>
     <Compile Include="Canals\CanalArrow.cs" />
     <Compile Include="Canals\CanalConfiguration.cs" />
-    <Compile Include="Canals\CanalConfigurationLoader.cs" />
+    <Compile Include="Converter\BaseConfigurationConverter.cs" />
+    <Compile Include="Converter\CanalConfigurationConverter.cs" />
+    <Compile Include="Loader\CanalConfigurationLoader.cs" />
     <Compile Include="Canals\CanalNode.cs" />
-    <Compile Include="Canals\RectangularSection.cs" />
-    <Compile Include="Canals\TrapezoidalSection.cs" />
+    <Compile Include="Canals\RectangularSectionConfiguration.cs" />
+    <Compile Include="Canals\TrapezoidalSectionConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -64,5 +66,6 @@
       <Name>ScienceAndMaths.Shared</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

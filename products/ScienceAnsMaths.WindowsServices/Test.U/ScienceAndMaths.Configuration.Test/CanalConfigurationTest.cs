@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
+using ScienceAndMaths.Configuration.Converter;
 
 namespace ScienceAndMaths.Configuration.Test
 {
@@ -37,7 +38,7 @@ namespace ScienceAndMaths.Configuration.Test
                 FromNodeId = initNode.NodeId,
                 ToNodeId = endNode.NodeId
             };
-            arrow.CanalSection = new RectangularSection()
+            arrow.CanalSection = new RectangularSectionConfiguration()
             {
                 Roughness = 0.028,
                 Slope = 0.001,
@@ -70,6 +71,20 @@ namespace ScienceAndMaths.Configuration.Test
             Assert.IsTrue(deserializedConfiguration != null);
             Assert.AreEqual(2, deserializedConfiguration.Nodes.Count);
             Assert.AreEqual(1, deserializedConfiguration.Arrows.Count);
+
+            CanalConfigurationConverter converter = new CanalConfigurationConverter();
+
+            var data = converter.Convert(deserializedConfiguration);
+
+            Assert.IsTrue(data != null);
+            Assert.AreEqual(2, data.CanelEdges.Count);
+            Assert.AreEqual(1, data.CanalStretches.Count);
+
+            canalConfiguration = converter.ConvertBack(data);
+
+            Assert.IsTrue(canalConfiguration != null);
+            Assert.AreEqual(2, canalConfiguration.Nodes.Count);
+            Assert.AreEqual(1, canalConfiguration.Arrows.Count);
         }
 
         [TestMethod]
@@ -95,7 +110,7 @@ namespace ScienceAndMaths.Configuration.Test
                 FromNodeId = initNode.NodeId,
                 ToNodeId = endNode.NodeId
             };
-            arrow.CanalSection = new TrapezoidalSection()
+            arrow.CanalSection = new TrapezoidalSectionConfiguration()
             {
                 Roughness = 0.028,
                 Slope = 0.001,
@@ -128,6 +143,20 @@ namespace ScienceAndMaths.Configuration.Test
             Assert.IsTrue(deserializedConfiguration != null);
             Assert.AreEqual(2, deserializedConfiguration.Nodes.Count);
             Assert.AreEqual(1, deserializedConfiguration.Arrows.Count);
+
+            CanalConfigurationConverter converter = new CanalConfigurationConverter();
+
+            var data = converter.Convert(deserializedConfiguration);
+
+            Assert.IsTrue(data != null);
+            Assert.AreEqual(2, data.CanelEdges.Count);
+            Assert.AreEqual(1, data.CanalStretches.Count);
+
+            canalConfiguration = converter.ConvertBack(data);
+
+            Assert.IsTrue(canalConfiguration != null);
+            Assert.AreEqual(2, canalConfiguration.Nodes.Count);
+            Assert.AreEqual(1, canalConfiguration.Arrows.Count);
         }
     }
 }
