@@ -7,10 +7,8 @@ using ScienceAndMaths.Hydraulics.Canals;
 
 namespace ScienceAndMaths.Domain
 {
-    public interface ICanalConfigurationLoader
+    public interface ICanalManager
     {
-        void LoadCanalConfiguration();
-
-        Canal LoadCanalConfiguration(string configurationLocation);
+        void SetCanal(Canal newCanal);
     }
 }

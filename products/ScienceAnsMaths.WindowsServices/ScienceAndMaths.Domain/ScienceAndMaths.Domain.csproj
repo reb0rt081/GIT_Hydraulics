@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="ICanalConfigurationLoader.cs" />
     <Compile Include="ICanalFlowService.cs" />
+    <Compile Include="ICanalManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

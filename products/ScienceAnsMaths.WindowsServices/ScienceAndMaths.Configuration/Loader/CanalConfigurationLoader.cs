@@ -10,6 +10,15 @@ namespace ScienceAndMaths.Configuration.Loader
 {
     public class CanalConfigurationLoader : ICanalConfigurationLoader
     {
+        private ICanalManager canalManager;
+
+        public void LoadCanalConfiguration()
+        {
+            var canal = LoadCanalConfiguration("test");
+
+            canalManager.SetCanal(canal);
+        }
+
         public Canal LoadCanalConfiguration(string configurationLocation)
         {
             string fileContent = null;
@@ -70,5 +79,7 @@ namespace ScienceAndMaths.Configuration.Loader
 
             return new Canal();
         }
+
+        
     }
 }
