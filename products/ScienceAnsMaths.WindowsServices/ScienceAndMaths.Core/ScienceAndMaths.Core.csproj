@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D6154186-D621-4D44-853A-173886DBA0D2}</ProjectGuid>
+    <ProjectGuid>{233E869A-0F43-4E77-8DB7-3773EC7C83CE}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ScienceAndMaths.Application</RootNamespace>
-    <AssemblyName>ScienceAndMaths.Application</AssemblyName>
+    <RootNamespace>ScienceAndMaths.Core</RootNamespace>
+    <AssemblyName>ScienceAndMaths.Core</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -42,7 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CanalFlowService.cs" />
+    <Compile Include="CanalManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -53,10 +52,6 @@
     <ProjectReference Include="..\ScienceAndMaths.Hydraulics\ScienceAndMaths.Hydraulics.csproj">
       <Project>{B14FF188-99E1-48F2-90EC-8745E42412A4}</Project>
       <Name>ScienceAndMaths.Hydraulics</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj">
-      <Project>{32271CAC-A2CE-4F84-8065-C356E66E2895}</Project>
-      <Name>ScienceAndMaths.Shared</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

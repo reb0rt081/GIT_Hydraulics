@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ScienceAndMaths.Domain;
 using ScienceAndMaths.Hydraulics.Canals;
 
-namespace ScienceAndMaths.Application
+namespace ScienceAndMaths.Core
 {
     public class CanalManager : ICanalManager
     {
