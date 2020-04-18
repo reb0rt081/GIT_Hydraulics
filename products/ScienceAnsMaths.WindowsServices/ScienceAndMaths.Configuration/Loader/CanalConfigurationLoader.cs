@@ -52,6 +52,11 @@ namespace ScienceAndMaths.Configuration.Loader
             throw new ArgumentException($"It was not possible to load canal configuration from <{configurationLocation}>");
         }
 
+        public void SaveCanalConfiguration(Canal canal, string saveLocation)
+        {
+            throw new NotImplementedException();
+        }
+
         private Canal GetAndValidateCanalConfiguration(CanalConfiguration configuration)
         {
             if (string.IsNullOrEmpty(configuration.ConfigId))
@@ -75,11 +80,7 @@ namespace ScienceAndMaths.Configuration.Loader
                 throw new ArgumentException($"{typeof(CanalConfiguration).Name} must have nodes configured for all arrows!");
             }
 
-
-
             return new Canal();
         }
-
-        
     }
 }

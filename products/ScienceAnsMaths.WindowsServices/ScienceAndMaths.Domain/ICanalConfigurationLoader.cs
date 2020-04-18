@@ -12,5 +12,7 @@ namespace ScienceAndMaths.Domain
         void LoadCanalConfiguration();
 
         Canal LoadCanalConfiguration(string configurationLocation);
+
+        void SaveCanalConfiguration(Canal canal, string saveLocation);
     }
 }
