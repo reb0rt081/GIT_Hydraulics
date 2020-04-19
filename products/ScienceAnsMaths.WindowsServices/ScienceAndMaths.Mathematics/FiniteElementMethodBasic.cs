@@ -8,6 +8,9 @@ namespace ScienceAndMaths.Mathematics
 {
     public class FiniteElementMethodBasic
     {
+        /// <summary>
+        /// For 1D problems this represents a 1D element where we want to find a u(x) in a discrete set of elements (u1, u2)
+        /// </summary>
         public class LinearElement
         {
             public LinearElement(double x1, double x2)
@@ -21,6 +24,12 @@ namespace ScienceAndMaths.Mathematics
 
             public Node Vertex2;
 
+            /// <summary>
+            /// Matrix "A" for a linear interpolation of the desired solution
+            /// [1  x1]
+            /// [1  x2]
+            /// </summary>
+            /// <returns></returns>
             public double[][] GetInterpolationMatrix()
             {
                 var matrix = MatrixOperations.MatrixCreate(2, 2);
@@ -41,6 +50,11 @@ namespace ScienceAndMaths.Mathematics
                 return matrix[0][0] * matrix[1][1] - matrix[1][0] * matrix[0][1];
             }
 
+            /// <summary>
+            /// The resultand matrix when the interpolation function is derived
+            /// du/dx = 1/|A| * [1  1] * [u1    u2] -> du/dx = B * [u1 u2]
+            /// </summary>
+            /// <returns></returns>
             public double[][] GetBMatrix()
             {
                 var matrix = MatrixOperations.MatrixCreate(1, 2);
