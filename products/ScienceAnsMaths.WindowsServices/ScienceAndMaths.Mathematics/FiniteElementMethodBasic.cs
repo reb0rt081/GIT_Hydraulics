@@ -43,10 +43,41 @@ namespace ScienceAndMaths.Mathematics
 
                return matrix;
             }
-                
-            public double[][] GetInverseInterpolationMatrix()
+
+            public double GetInterpolationMatrixDeterminant()
             {
-                return GetInterpolationMatrix().MatrixInverse();
+                var matrix = GetInterpolationMatrix();
+
+                return (matrix[0][0] * matrix[1][1] * matrix[2][2] + matrix[0][1] * matrix[1][2] * matrix [2][0] + matrix[1][0] * matrix[2][1] * matrix[0][2]) - (matrix[0][2]* matrix[1][1] * matrix[2][0] + matrix[1][0] * matrix[0][1] * matrix[2][2] + matrix[2][1] * matrix[1][2] * matrix[0][0])
+            }
+                
+            public double[][] GetBMatrix()
+            {
+                var matrix = MatrixOperations.MatrixCreate(3, 6);
+                double determinant = GetInterpolationMatrixDeterminant();
+
+                matrix[0][0] = (Vertex2.Y - Vertex3.Y) / determinant;
+                matrix[0][1] = 0.0;
+                matrix[0][2] = (Vertex3.Y - Vertex1.Y) / determinant;
+                matrix[0][3] = 0.0;
+                matrix[0][4] = (Vertex1.Y - Vertex2.Y) / determinant;
+                matrix[0][5] = 0.0;
+                
+                matrix[1][0] = 0.0;
+                matrix[1][1] = -(Vertex2.X - Vertex3.X) / determinant;
+                matrix[1][2] = 0.0;
+                matrix[1][3] = - (Vertex3.X - Vertex1.X) / determinant;
+                matrix[1][4] = 0.0;
+                matrix[1][5] = - (Vertex1.X - Vertex2.X) / determinant;
+
+                matrix[2][0] = - (Vertex2.X - Vertex3.X) / determinant;
+                matrix[2][1] = (Vertex2.Y - Vertex3.Y) / determinant;
+                matrix[2][2] = - (Vertex3.X - Vertex1.X) / determinant;
+                matrix[2][3] = (Vertex3.Y - Vertex1.Y) / determinant;
+                matrix[2][4] = - (Vertex1.X - Vertex2.X) / determinant;
+                matrix[2][5] = (Vertex1.Y - Vertex2.Y) / determinant;
+
+                return matrix;
             }
 
         }
@@ -59,7 +90,7 @@ namespace ScienceAndMaths.Mathematics
                 Y = y;
             }
 
-            public double X;
+            public double X; 
             public double Y;
         }
     }
