@@ -9,7 +9,7 @@ namespace ScienceAndMaths.Mathematics
     public class FiniteElementMethodBasic
     {
         /// <summary>
-        /// For 1D problems this represents a 1D element where we want to find a u(x) in a discrete set of elements (u1, u2)
+        /// For 1D problems this represents a 1D element where we want to find a function u(x) in a discrete set of elements (u1, u2)
         /// </summary>
         public class LinearElement
         {
@@ -19,6 +19,8 @@ namespace ScienceAndMaths.Mathematics
 
                 Vertex2 = new Node(x2, 0.0);
             }
+            
+            public double SectionArea;
 
             public Node Vertex1;
 
@@ -51,7 +53,7 @@ namespace ScienceAndMaths.Mathematics
             }
 
             /// <summary>
-            /// The resultand matrix when the interpolation function is derived
+            /// The resultant "B" matrix when the interpolation function is derived
             /// du/dx = 1/|A| * [1  1] * [u1    u2] -> du/dx = B * [u1 u2]
             /// </summary>
             /// <returns></returns>
@@ -67,6 +69,9 @@ namespace ScienceAndMaths.Mathematics
             }
         }
 
+        /// <summary>
+        /// For 2D problems this represents a 2D element where we want to find a function u(x,y) and v(x,y) in a discrete set of elements ({u1, v1}, {u2, v2} {u3, v3})
+        /// </summary>
         public class TriangularElement
         {
             public TriangularElement(double x1, double y1, double x2, double y2, double x3, double y3)
@@ -78,13 +83,21 @@ namespace ScienceAndMaths.Mathematics
                 Vertex3 = new Node(x3, y3);
             }
 
+            public double Thickness;
+
             public Node Vertex1;
 
             public Node Vertex2;
 
             public Node Vertex3;
 
-            //  Linear interpolation
+            /// <summary>
+            /// Matrix "A" for a linear interpolation of the desired solution
+            /// [1  x1  y1]
+            /// [1  x2  y2]
+            /// [1  x3  y3]
+            /// </summary>
+            /// <returns></returns>
             public double[][] GetInterpolationMatrix()
             {
                 var matrix = MatrixOperations.MatrixCreate(3, 3);
@@ -114,7 +127,13 @@ namespace ScienceAndMaths.Mathematics
                         matrix[2][1] * matrix[1][2] * matrix[0][0]);
             }
 
-            //  This matrix applies for a 
+            /// <summary>
+            /// The resultant "B" matrix when the interpolation function is derived
+            /// du/dx = 1/|A| * [y2 - y3    0   y3 - y1 0   y1 - y2 0] * [u1 v1 u2 v2 u3 v3] -> du/dx = B * [u1 v1 u2 v2 u3 v3]
+            /// dv/dy = 1/|A| * [0      -(x2 - x3)    0   -(x3 - x1)    0   -(x1 -x2)] * [u1 v1 u2 v2 u3 v3] -> dv/dy = B * [u1 v1 u2 v2 u3 v3]
+            /// 0.5 * (du/dy + dv/dx) = 1/|A| * [-(x2 - x3)    y2-y3   -(x3 - x1)    y3 - y1   -(x1 -x2)    y1 - y2] * [u1 v1 u2 v2 u3 v3] -> dv/dy = B * [u1 v1 u2 v2 u3 v3]
+            /// </summary>
+            /// <returns></returns>
             public double[][] GetBMatrix()
             {
                 var matrix = MatrixOperations.MatrixCreate(3, 6);
