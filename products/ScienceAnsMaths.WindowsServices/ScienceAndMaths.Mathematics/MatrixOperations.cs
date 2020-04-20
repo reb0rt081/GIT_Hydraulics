@@ -223,32 +223,65 @@ namespace ScienceAndMaths.Mathematics
 
         public static double MatrixDeterminant(this double[][] matrix)
         {
-            var auxMatrix = MatrixDuplicate(matrix);
-            int size = auxMatrix.Length;
-            double aux;
-
-            for(int j = 0; j < size - 1;  j++)
+            if(matrix.Length == 2)
             {
-                for (int i = j + 1; i < size; i++)
+                return matrix[0][0] * matrix[1][1] - matrix[1][0] * matrix[0][1];
+            }
+            else if(matrix.Length == 3)
+            {
+                return (matrix[0][0] * matrix[1][1] * matrix[2][2] + matrix[0][1] * matrix[1][2] * matrix[2][0] +
+                        matrix[1][0] * matrix[2][1] * matrix[0][2]) -
+                    (matrix[0][2] * matrix[1][1] * matrix[2][0] + matrix[1][0] * matrix[0][1] * matrix[2][2] +
+                        matrix[2][1] * matrix[1][2] * matrix[0][0]);
+            }
+            else
+            {
+                double determinant = 0.0;
+                for(int i = 0; i < matrix.Length; i++)
                 {
-                    aux = auxMatrix[i][j] / auxMatrix[j][j];
-                    for(int k = 1; k < size; k++)
+                    for (int j = 0; j < matrix[0].Length; j++)
                     {
-                        auxMatrix[i][k] = auxMatrix[i][k] - auxMatrix[j][k] * aux;
+                        double exponent = Math.Pow(-1.0, i + 1 + j + 1);
+                        double[][] adjointMatrix = matrix.MatrixAdjoint(i, j);
+                        double adjointDeterminant = MatrixDeterminant(adjointMatrix);
+                        determinant = determinant + matrix[i][j] * exponent * adjointDeterminant;
                     }
 
-                    auxMatrix[i][j] = 0.0;
+                    return determinant;
+                }
+
+                return determinant / 4.0;
+            }
+        }
+
+        public static double[][] MatrixAdjoint(this double[][] matrix, int row, int column)
+        {
+            var auxMatrix = MatrixDuplicate(matrix);
+            var adjointMatrix = MatrixCreate(auxMatrix.Length - 1, auxMatrix[0].Length - 1);
+
+            int newRow = 0;
+            int newColumn = 0;
+            for (int i = 0; i < auxMatrix.Length; i++)
+            {
+                if(i != row)
+                {
+                    for (int j = 0; j < auxMatrix[0].Length; j++)
+                    {
+                        if(j != column)
+                        {
+                            adjointMatrix[newRow][newColumn] = auxMatrix[i][j];
+
+                            newColumn++;
+                        }
+                    }
+
+                    newColumn = 0;
+                    newRow++;
                 }
             }
-
-            aux = 1.0;
-
-            for(int i = 0; i < size; i++)
-            {
-                auxMatrix[i][i] = auxMatrix[i][i] * aux;
-            }
-
-            return auxMatrix[size - 1][size - 1];
+            
+            return adjointMatrix;
         }
     }
 }
+
