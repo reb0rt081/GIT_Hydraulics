@@ -220,5 +220,35 @@ namespace ScienceAndMaths.Mathematics
 
             return result;
         }
+
+        public static double MatrixDeterminant(this double[][] matrix)
+        {
+            var auxMatrix = MatrixDuplicate(matrix);
+            int size = auxMatrix.Length;
+            double aux;
+
+            for(int j = 0; j < size - 1;  j++)
+            {
+                for (int i = j + 1; i < size; i++)
+                {
+                    aux = auxMatrix[i][j] / auxMatrix[j][j];
+                    for(int k = 1; k < size; k++)
+                    {
+                        auxMatrix[i][k] = auxMatrix[i][k] - auxMatrix[j][k] * aux;
+                    }
+
+                    auxMatrix[i][j] = 0.0;
+                }
+            }
+
+            aux = 1.0;
+
+            for(int i = 0; i < size; i++)
+            {
+                auxMatrix[i][i] = auxMatrix[i][i] * aux;
+            }
+
+            return auxMatrix[size - 1][size - 1];
+        }
     }
 }

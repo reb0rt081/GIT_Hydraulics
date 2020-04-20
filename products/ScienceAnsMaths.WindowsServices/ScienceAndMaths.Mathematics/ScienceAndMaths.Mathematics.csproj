@@ -42,10 +42,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FiniteElementMethodBasic.cs" />
+    <Compile Include="FEM\FiniteElementMethodBasic.cs" />
+    <Compile Include="FEM\LinearElement.cs" />
+    <Compile Include="FEM\Node.cs" />
+    <Compile Include="FEM\TriangularElement.cs" />
     <Compile Include="MatrixOperations.cs" />
     <Compile Include="RungeKutta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj">
+      <Project>{32271cac-a2ce-4f84-8065-c356e66e2895}</Project>
+      <Name>ScienceAndMaths.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

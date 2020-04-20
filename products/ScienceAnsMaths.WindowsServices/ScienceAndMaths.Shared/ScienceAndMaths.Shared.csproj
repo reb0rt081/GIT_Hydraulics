@@ -44,6 +44,8 @@
     <Compile Include="Canals\CanalSimulationResult.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="ICanalSection.cs" />
+    <Compile Include="INode.cs" />
+    <Compile Include="IInterpolationElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="XmlConsts.cs" />
   </ItemGroup>
