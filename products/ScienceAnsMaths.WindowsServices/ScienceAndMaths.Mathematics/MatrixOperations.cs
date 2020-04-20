@@ -223,6 +223,11 @@ namespace ScienceAndMaths.Mathematics
 
         public static double MatrixDeterminant(this double[][] matrix)
         {
+            if (matrix.Length != matrix[0].Length)
+            {
+                throw new ArgumentException("Matrix is not Squared!");
+            }
+
             if(matrix.Length == 2)
             {
                 return matrix[0][0] * matrix[1][1] - matrix[1][0] * matrix[0][1];
@@ -252,6 +257,21 @@ namespace ScienceAndMaths.Mathematics
 
                 return determinant / 4.0;
             }
+        }
+
+        public static double[][] MatrixTranspose(this double [][] matrix)
+        {
+            double[][] transposed = MatrixCreate(matrix.Length, matrix[0].Length);
+
+            for (int i = 0; i < matrix.Length; i++)
+            {
+                for (int j = 0; j < matrix[0].Length; j++)
+                {
+                    transposed[j][i] = matrix[i][j];
+                }
+            }
+
+            return transposed;
         }
 
         public static double[][] MatrixAdjoint(this double[][] matrix, int row, int column)
