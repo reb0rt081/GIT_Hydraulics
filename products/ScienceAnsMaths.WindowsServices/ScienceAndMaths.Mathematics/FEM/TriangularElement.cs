@@ -13,13 +13,13 @@ namespace ScienceAndMaths.Mathematics.FEM
     /// </summary>
     public class TriangularElement : IInterpolationElement
     {
-        public TriangularElement(double x1, double y1, double x2, double y2, double x3, double y3)
+        public TriangularElement(Node node1, Node node2, Node node3)
         {
-            Vertex1 = new Node(x1, y1);
+            Vertex1 = node1;
 
-            Vertex2 = new Node(x2, y2);
+            Vertex2 = node2;
 
-            Vertex3 = new Node(x3, y3);
+            Vertex3 = node3;
         }
 
         public double Thickness;
@@ -64,6 +64,11 @@ namespace ScienceAndMaths.Mathematics.FEM
                     matrix[1][0] * matrix[2][1] * matrix[0][2]) -
                    (matrix[0][2] * matrix[1][1] * matrix[2][0] + matrix[1][0] * matrix[0][1] * matrix[2][2] +
                     matrix[2][1] * matrix[1][2] * matrix[0][0]);
+        }
+
+        public double GetElementDimension()
+        {
+            return 0.5 * GetInterpolationMatrixDeterminant();
         }
 
         /// <summary>

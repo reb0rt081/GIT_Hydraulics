@@ -261,7 +261,7 @@ namespace ScienceAndMaths.Mathematics
 
         public static double[][] MatrixTranspose(this double [][] matrix)
         {
-            double[][] transposed = MatrixCreate(matrix.Length, matrix[0].Length);
+            double[][] transposed = MatrixCreate(matrix[0].Length, matrix.Length);
 
             for (int i = 0; i < matrix.Length; i++)
             {
@@ -301,6 +301,21 @@ namespace ScienceAndMaths.Mathematics
             }
             
             return adjointMatrix;
+        }
+
+        public static double[][] MatrixProductByConstant(this double[][] matrix, double constant)
+        {
+            double[][] result = MatrixCreate(matrix.Length, matrix[0].Length);
+
+            for (int i = 0; i < matrix.Length; i++)
+            {
+                for (int j = 0; j < matrix[0].Length; j++)
+                {
+                    result[i][j] = matrix[i][j] * constant;
+                }
+            }
+
+            return result;
         }
     }
 }

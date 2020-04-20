@@ -13,11 +13,11 @@ namespace ScienceAndMaths.Mathematics.FEM
     /// </summary>
     public class LinearElement : IInterpolationElement
     {
-        public LinearElement(double x1, double x2)
+        public LinearElement(Node node1, Node node2)
         {
-            Vertex1 = new Node(x1);
+            Vertex1 = node1;
 
-            Vertex2 = new Node(x2);
+            Vertex2 = node2;
         }
 
         public double SectionArea;
@@ -50,6 +50,11 @@ namespace ScienceAndMaths.Mathematics.FEM
             var matrix = GetInterpolationMatrix();
 
             return matrix[0][0] * matrix[1][1] - matrix[1][0] * matrix[0][1];
+        }
+
+        public double GetElementDimension()
+        {
+            return GetInterpolationMatrixDeterminant();
         }
 
         /// <summary>

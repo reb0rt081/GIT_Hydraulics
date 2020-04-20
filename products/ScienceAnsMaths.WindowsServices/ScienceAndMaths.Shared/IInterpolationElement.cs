@@ -16,6 +16,8 @@ namespace ScienceAndMaths.Shared
 
         double GetInterpolationMatrixDeterminant();
 
+        double GetElementDimension();
+
         /// <summary>
         /// The resultant "B" matrix when the interpolation function is derived
         /// </summary>

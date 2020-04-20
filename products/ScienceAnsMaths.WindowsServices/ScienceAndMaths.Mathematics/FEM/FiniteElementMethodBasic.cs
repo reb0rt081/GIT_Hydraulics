@@ -9,7 +9,5 @@ namespace ScienceAndMaths.Mathematics.FEM
     public class FiniteElementMethodBasic
     {
         
-
-        
     }
 }
