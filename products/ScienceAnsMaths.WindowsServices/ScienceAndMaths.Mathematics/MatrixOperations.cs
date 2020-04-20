@@ -177,13 +177,13 @@ namespace ScienceAndMaths.Mathematics
                 // a 0 in column j, and swap that good row with row j
                 // --------------------------------------------------
 
-                if (result[j][j] == 0.0)
+                if (result[j][j] <= double.Epsilon)
                 {
                     // find a good row to swap
                     int goodRow = -1;
                     for (int row = j + 1; row < n; ++row)
                     {
-                        if (result[row][j] != 0.0)
+                        if (result[row][j] >= double.Epsilon)
                             goodRow = row;
                     }
 
