@@ -11,7 +11,7 @@ namespace ScienceAndMaths.Mathematics.FEM
     /// <summary>
     /// For 2D problems this represents a 2D element where we want to find a function u(x,y) and v(x,y) in a discrete set of elements ({u1, v1}, {u2, v2} {u3, v3})
     /// </summary>
-    public class TriangularElement : IInterpolationElement
+    public class TriangularElement : BaseInterpolationElement
     {
         public TriangularElement(Node node1, Node node2, Node node3)
         {
@@ -22,8 +22,6 @@ namespace ScienceAndMaths.Mathematics.FEM
             Vertex3 = node3;
         }
 
-        public double[][] DMatrix { get; private set; }
-
         public double Thickness { get; set; }
 
         public Node Vertex1 { get; set; }
@@ -33,22 +31,13 @@ namespace ScienceAndMaths.Mathematics.FEM
         public Node Vertex3 { get; set; }
 
         /// <summary>
-        /// Sets the matrix that relates two functions {A(x,y,z)} = [D] · {B(x,y,z)}
-        /// </summary>
-        /// <param name="dMatrix"></param>
-        public void SetDMatrix(double[][] dMatrix)
-        {
-            DMatrix = dMatrix;
-        }
-
-        /// <summary>
         /// Matrix "A" for a linear interpolation of the desired solution
         /// [1  x1  y1]
         /// [1  x2  y2]
         /// [1  x3  y3]
         /// </summary>
         /// <returns></returns>
-        public double[][] GetInterpolationMatrix()
+        public override double[][] GetInterpolationMatrix()
         {
             var matrix = MatrixOperations.MatrixCreate(3, 3);
 
@@ -67,7 +56,7 @@ namespace ScienceAndMaths.Mathematics.FEM
             return matrix;
         }
 
-        public double GetInterpolationMatrixDeterminant()
+        public override double GetInterpolationMatrixDeterminant()
         {
             var matrix = GetInterpolationMatrix();
 
@@ -77,7 +66,7 @@ namespace ScienceAndMaths.Mathematics.FEM
                     matrix[2][1] * matrix[1][2] * matrix[0][0]);
         }
 
-        public double GetElementDimension()
+        public override double GetElementDimension()
         {
             return 0.5 * GetInterpolationMatrixDeterminant();
         }
@@ -89,7 +78,7 @@ namespace ScienceAndMaths.Mathematics.FEM
         /// 0.5 * (du/dy + dv/dx) = 1/|A| * [-(x2 - x3)    y2-y3   -(x3 - x1)    y3 - y1   -(x1 -x2)    y1 - y2] * [u1 v1 u2 v2 u3 v3] -> dv/dy = B * [u1 v1 u2 v2 u3 v3]
         /// </summary>
         /// <returns></returns>
-        public double[][] GetBMatrix()
+        public override double[][] GetBMatrix()
         {
             var matrix = MatrixOperations.MatrixCreate(3, 6);
             double determinant = GetInterpolationMatrixDeterminant();
@@ -116,28 +105,6 @@ namespace ScienceAndMaths.Mathematics.FEM
             matrix[2][5] = (Vertex1.Y - Vertex2.Y) / determinant;
 
             return matrix;
-        }
-
-        /// <summary>
-        /// The resultant "K" matrix as [K] = [B]^T · [D] · [B] · ElementDimension
-        /// du/dx = 1/|A| * [1  1] * [u1    u2] -> du/dx = B * [u1 u2]
-        /// </summary>
-        /// <returns></returns>
-        public double[][] GetKMatrix()
-        {
-            double el1Area = GetElementDimension();
-
-            double[][] el1BMatrix = GetBMatrix();
-
-            double[][] el1BMatrixTranspose = el1BMatrix.MatrixTranspose();
-
-            double[][] el1Product1 = el1BMatrixTranspose.MatrixProduct(DMatrix);
-
-            double[][] el1Product2 = el1Product1.MatrixProduct(el1BMatrix);
-
-            double[][] k1 = el1Product2.MatrixProductByConstant(el1Area);
-
-            return k1;
         }
     }
 }

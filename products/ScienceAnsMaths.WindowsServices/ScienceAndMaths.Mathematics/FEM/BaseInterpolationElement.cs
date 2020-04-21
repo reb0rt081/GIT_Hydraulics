@@ -17,7 +17,7 @@ namespace ScienceAndMaths.Mathematics.FEM
 
         public abstract double[][] GetInterpolationMatrix();
       
-        public double GetInterpolationMatrixDeterminant()
+        public virtual double GetInterpolationMatrixDeterminant()
         {
             var matrix = GetInterpolationMatrix();
 
