@@ -36,15 +36,15 @@ namespace ScienceAndMaths.Mathematics.Test
             
             Node node1 = new Node(0.0, 0.0);
 
-            Node node2 = new Node(0.0, 15.0);
+            Node node2 = new Node(15.0, 0.0);
 
-            Node node3 = new Node(15.0, 0.0);
+            Node node3 = new Node(0.0, 15.0);
 
             Node node4 = new Node(15.0, 15.0);
 
-            TriangularElement element1 = new TriangularElement(node1, node2, node4);
+            TriangularElement element1 = new TriangularElement(node1, node3, node4);
 
-            TriangularElement element2 = new TriangularElement(node1, node3, node4);
+            TriangularElement element2 = new TriangularElement(node1, node2, node4);
 
             var dMatrix = cMatrix.MatrixProductByConstant(elasticCoefficient);
 
@@ -78,6 +78,19 @@ namespace ScienceAndMaths.Mathematics.Test
 
             var kGlobal = model.BuildGlobalKMatrix();
 
+            double[][] uMatrix = MatrixOperations.MatrixCreate(8, 1);
+
+            uMatrix[0][0] = 0.0;
+            uMatrix[1][0] = 0.0;
+            uMatrix[2][0] = 0.364E-2;
+            uMatrix[3][0] = 0.742E-3;
+            uMatrix[4][0] = 0.0;
+            uMatrix[5][0] = 0.0;
+            uMatrix[6][0] = 0.316E-2;
+            uMatrix[7][0] = -0.259E-3;
+
+            double[][] fMatrix = kGlobal.MatrixProduct(uMatrix);
+
             #endregion
 
         }
@@ -86,39 +99,67 @@ namespace ScienceAndMaths.Mathematics.Test
         public void GetKMatrix2Test()
         {
             Node node1 = new Node(0.0, 0.0);
-
             Node node2 = new Node(1.0, 0.0);
+            Node node3 = new Node(2.0, 0.0);
+            Node node4 = new Node(2.0, 1.0);
+            Node node5 = new Node(1.0, 1.0);
+            Node node6 = new Node(0.0, 1.0);
 
-            Node node3 = new Node(1.0, 1.0);
+            TriangularElement element1 = new TriangularElement(node1, node2, node5);
+            TriangularElement element2 = new TriangularElement(node2, node3, node4);
+            TriangularElement element3 = new TriangularElement(node2, node4, node5);
+            TriangularElement element4 = new TriangularElement(node1, node5, node6);
 
-            TriangularElement element1 = new TriangularElement(node1, node2, node3);
+            double[][] dMatrix = MatrixOperations.MatrixCreate(3, 3);
+            dMatrix[0][0] = 1.0;
+            dMatrix[0][1] = 0.5;
+            dMatrix[0][2] = 0.0;
 
-            var interpolationMatrix = element1.GetInterpolationMatrix();
+            dMatrix[1][0] = 0.5;
+            dMatrix[1][1] = 1.0;
+            dMatrix[1][2] = 0.0;
 
-            var elementArea = element1.GetElementDimension();
+            dMatrix[2][0] = 0.0;
+            dMatrix[2][1] = 0.0;
+            dMatrix[2][2] = 1.0;
 
-            var bMatrix = element1.GetBMatrix();
+            element1.SetDMatrix(dMatrix);
+            element2.SetDMatrix(dMatrix);
+            element3.SetDMatrix(dMatrix);
+            element4.SetDMatrix(dMatrix);
 
-            double[][] cMatrix = MatrixOperations.MatrixCreate(3, 3);
-            cMatrix[0][0] = 1.0;
-            cMatrix[0][1] = 0.5;
-            cMatrix[0][2] = 0.0;
+            #region Kglobal
 
-            cMatrix[1][0] = 0.5;
-            cMatrix[1][1] = 1.0;
-            cMatrix[1][2] = 0.0;
+            FiniteElementMethodModel model = new FiniteElementMethodModel();
 
-            cMatrix[2][0] = 0.0;
-            cMatrix[2][1] = 0.0;
-            cMatrix[2][2] = 1.0;
+            model.Nodes.Add(node1);
+            model.Nodes.Add(node2);
+            model.Nodes.Add(node3);
+            model.Nodes.Add(node4);
+            model.Nodes.Add(node5);
+            model.Nodes.Add(node6);
 
-            var bMatrixTranspose = bMatrix.MatrixTranspose();
+            model.Elements.Add(element1);
+            model.Elements.Add(element2);
+            model.Elements.Add(element3);
+            model.Elements.Add(element4);
 
-            var product1 = bMatrixTranspose.MatrixProduct(cMatrix);
+            var kGlobal = model.BuildGlobalKMatrix();
 
-            var product2 = product1.MatrixProduct(bMatrix);
+            double[][] uMatrix = MatrixOperations.MatrixCreate(8, 1);
 
-            var result = product2.MatrixProductByConstant(elementArea);
+            uMatrix[0][0] = 0.0;
+            uMatrix[1][0] = 0.0;
+            uMatrix[2][0] = 0.364E-2;
+            uMatrix[3][0] = 0.742E-3;
+            uMatrix[4][0] = 0.0;
+            uMatrix[5][0] = 0.0;
+            uMatrix[6][0] = 0.316E-2;
+            uMatrix[7][0] = -0.259E-3;
+
+            double[][] fMatrix = kGlobal.MatrixProduct(uMatrix);
+
+            #endregion
         }
     }
 }
