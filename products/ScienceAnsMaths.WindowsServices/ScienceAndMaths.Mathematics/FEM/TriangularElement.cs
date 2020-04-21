@@ -22,13 +22,24 @@ namespace ScienceAndMaths.Mathematics.FEM
             Vertex3 = node3;
         }
 
-        public double Thickness;
+        public double[][] DMatrix { get; private set; }
 
-        public Node Vertex1;
+        public double Thickness { get; set; }
 
-        public Node Vertex2;
+        public Node Vertex1 { get; set; }
 
-        public Node Vertex3;
+        public Node Vertex2 { get; set; }
+
+        public Node Vertex3 { get; set; }
+
+        /// <summary>
+        /// Sets the matrix that relates two functions {A(x,y,z)} = [D] · {B(x,y,z)}
+        /// </summary>
+        /// <param name="dMatrix"></param>
+        public void SetDMatrix(double[][] dMatrix)
+        {
+            DMatrix = dMatrix;
+        }
 
         /// <summary>
         /// Matrix "A" for a linear interpolation of the desired solution
@@ -105,6 +116,28 @@ namespace ScienceAndMaths.Mathematics.FEM
             matrix[2][5] = (Vertex1.Y - Vertex2.Y) / determinant;
 
             return matrix;
+        }
+
+        /// <summary>
+        /// The resultant "K" matrix as [K] = [B]^T · [D] · [B] · ElementDimension
+        /// du/dx = 1/|A| * [1  1] * [u1    u2] -> du/dx = B * [u1 u2]
+        /// </summary>
+        /// <returns></returns>
+        public double[][] GetKMatrix()
+        {
+            double el1Area = GetElementDimension();
+
+            double[][] el1BMatrix = GetBMatrix();
+
+            double[][] el1BMatrixTranspose = el1BMatrix.MatrixTranspose();
+
+            double[][] el1Product1 = el1BMatrixTranspose.MatrixProduct(DMatrix);
+
+            double[][] el1Product2 = el1Product1.MatrixProduct(el1BMatrix);
+
+            double[][] k1 = el1Product2.MatrixProductByConstant(el1Area);
+
+            return k1;
         }
     }
 }

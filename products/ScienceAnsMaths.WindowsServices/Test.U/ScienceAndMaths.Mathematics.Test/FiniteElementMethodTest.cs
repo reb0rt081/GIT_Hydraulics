@@ -18,7 +18,7 @@ namespace ScienceAndMaths.Mathematics.Test
             //  Modulo elastico acero: E = 2,10E+06
             //  Coeficiente de Poisson Acero: v = E/2G - 1 = 0.3
             //  Modulo de elasticidad transversal acero: G = E/(2*(1 + v))
-
+            //  ElasticCoefficient = E / (1 - v^2)
             double elasticCoefficient = 2.31E+06;
 
             double[][] cMatrix = MatrixOperations.MatrixCreate(3, 3);
@@ -33,9 +33,7 @@ namespace ScienceAndMaths.Mathematics.Test
             cMatrix[2][0] = 0.0;
             cMatrix[2][1] = 0.0;
             cMatrix[2][2] = 0.35;
-
-
-
+            
             Node node1 = new Node(0.0, 0.0);
 
             Node node2 = new Node(0.0, 15.0);
@@ -48,40 +46,21 @@ namespace ScienceAndMaths.Mathematics.Test
 
             TriangularElement element2 = new TriangularElement(node1, node3, node4);
 
+            var dMatrix = cMatrix.MatrixProductByConstant(elasticCoefficient);
+
             #region Element 1
 
-            var el1InterpolationMatrix = element1.GetInterpolationMatrix();
+            element1.SetDMatrix(dMatrix);
 
-            var el1Area = element1.GetElementDimension();
-
-            var el1BMatrix = element1.GetBMatrix();
-
-            var el1BMatrixTranspose = el1BMatrix.MatrixTranspose();
-
-            var el1Product1 = el1BMatrixTranspose.MatrixProduct(cMatrix);
-
-            var el1Product2 = el1Product1.MatrixProduct(el1BMatrix);
-
-            var k1 = el1Product2.MatrixProductByConstant(el1Area * elasticCoefficient);
+            var k1 = element1.GetKMatrix();
 
             #endregion
 
             #region Element 1
 
-            var el2InterpolationMatrix = element2.GetInterpolationMatrix();
+            element2.SetDMatrix(dMatrix);
 
-            var el2Area = element2.GetElementDimension();
-
-            var el2BMatrix = element2.GetBMatrix();
-
-
-            var el2BMatrixTranspose = el2BMatrix.MatrixTranspose();
-
-            var el2Product1 = el2BMatrixTranspose.MatrixProduct(cMatrix);
-
-            var el2Product2 = el2Product1.MatrixProduct(el2BMatrix);
-
-            var k2 = el2Product2.MatrixProductByConstant(el2Area * elasticCoefficient);
+            var k2 = element2.GetKMatrix();
 
             #endregion
 
