@@ -42,8 +42,14 @@ namespace ScienceAndMaths.Mathematics.Test
 
             Node node4 = new Node(15.0, 15.0);
 
+            //  It looks it is important that all elements are set up with the same spin direction
+
+            //  Check what happens in 3D how does it work
+
+            //  node1 => node4 => node3
             TriangularElement element1 = new TriangularElement(node1, node4, node3);
 
+            //  node1 => node2 => node4
             TriangularElement element2 = new TriangularElement(node1, node2, node4);
 
             var dMatrix = cMatrix.MatrixProductByConstant(elasticCoefficient);
