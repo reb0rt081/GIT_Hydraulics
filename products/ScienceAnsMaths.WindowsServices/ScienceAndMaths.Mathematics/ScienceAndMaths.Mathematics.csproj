@@ -42,7 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FEM\FiniteElementMethodBasic.cs" />
+    <Compile Include="FEM\BaseInterpolationElement.cs" />
+    <Compile Include="FEM\FiniteElementMethodModel.cs" />
     <Compile Include="FEM\LinearElement.cs" />
     <Compile Include="FEM\Node.cs" />
     <Compile Include="FEM\TriangularElement.cs" />

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ScienceAndMaths.Mathematics.FEM
 {
-    public class FiniteElementMethodBasic
+    public class FiniteElementMethodModel
     {
         
     }
