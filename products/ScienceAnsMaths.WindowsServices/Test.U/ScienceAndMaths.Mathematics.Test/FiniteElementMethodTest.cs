@@ -64,6 +64,22 @@ namespace ScienceAndMaths.Mathematics.Test
 
             #endregion
 
+            #region Kglobal
+
+            FiniteElementMethodModel model = new FiniteElementMethodModel();
+
+            model.Nodes.Add(node1);
+            model.Nodes.Add(node2);
+            model.Nodes.Add(node3);
+            model.Nodes.Add(node4);
+
+            model.Elements.Add(element1);
+            model.Elements.Add(element2);
+
+            var kGlobal = model.BuildGlobalKMatrix();
+
+            #endregion
+
         }
 
         [TestMethod]

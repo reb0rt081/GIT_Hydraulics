@@ -22,7 +22,7 @@ namespace ScienceAndMaths.Mathematics.FEM
 
         public double[][] BuildGlobalKMatrix()
         {
-            double[][] globalKMatrix = MatrixOperations.MatrixCreate(Nodes.Count, Nodes.Count);
+            double[][] globalKMatrix = MatrixOperations.MatrixCreate(Nodes.Count * 2, Nodes.Count * 2);
 
             foreach (IInterpolationElement element in Elements)
             {
