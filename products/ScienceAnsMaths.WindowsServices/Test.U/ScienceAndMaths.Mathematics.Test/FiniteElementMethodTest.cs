@@ -42,7 +42,7 @@ namespace ScienceAndMaths.Mathematics.Test
 
             Node node4 = new Node(15.0, 15.0);
 
-            TriangularElement element1 = new TriangularElement(node1, node3, node4);
+            TriangularElement element1 = new TriangularElement(node1, node4, node3);
 
             TriangularElement element2 = new TriangularElement(node1, node2, node4);
 
@@ -90,6 +90,15 @@ namespace ScienceAndMaths.Mathematics.Test
             uMatrix[7][0] = -0.259E-3;
 
             double[][] fMatrix = kGlobal.MatrixProduct(uMatrix);
+
+            Assert.IsTrue(fMatrix[0][0] - (-3750.0) < 0.2);
+            Assert.IsTrue(fMatrix[1][0] - (-1198.0) < 10);
+            Assert.IsTrue(fMatrix[2][0] - (3750) < 10);
+            Assert.IsTrue(fMatrix[3][0] - (0) < 1);
+            Assert.IsTrue(fMatrix[4][0] - (-3750.0) < 10);
+            Assert.IsTrue(fMatrix[5][0] - (1198) < 10);
+            Assert.IsTrue(fMatrix[6][0] - (3750.0) < 10);
+            Assert.IsTrue(fMatrix[7][0] - (0) < 1);
 
             #endregion
 
@@ -145,19 +154,6 @@ namespace ScienceAndMaths.Mathematics.Test
             model.Elements.Add(element4);
 
             var kGlobal = model.BuildGlobalKMatrix();
-
-            double[][] uMatrix = MatrixOperations.MatrixCreate(8, 1);
-
-            uMatrix[0][0] = 0.0;
-            uMatrix[1][0] = 0.0;
-            uMatrix[2][0] = 0.364E-2;
-            uMatrix[3][0] = 0.742E-3;
-            uMatrix[4][0] = 0.0;
-            uMatrix[5][0] = 0.0;
-            uMatrix[6][0] = 0.316E-2;
-            uMatrix[7][0] = -0.259E-3;
-
-            double[][] fMatrix = kGlobal.MatrixProduct(uMatrix);
 
             #endregion
         }
