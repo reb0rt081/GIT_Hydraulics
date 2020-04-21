@@ -32,6 +32,12 @@ namespace ScienceAndMaths.Mathematics.Test
 
             var bMatrix = element1.GetBMatrix();
 
+            //  E/(1-v^2) =	2,31E+06
+            //  Modulo elastico acero: E = 2,10E+06
+            //  Coeficiente de Poisson Acero: v = E/2G - 1 = 0.3
+            //  Modulo de elasticidad transversal acero: G = E/(2*(1 + v))
+
+
             double[][] cMatrix = MatrixOperations.MatrixCreate(3, 3);
             cMatrix[0][0] = 1.0;
             cMatrix[0][1] = 0.3;
