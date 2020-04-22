@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -139,6 +140,41 @@ namespace ScienceAndMaths.Mathematics.Test
             Assert.AreEqual(identity[2][0], result[2][0]);
             Assert.AreEqual(identity[2][1], result[2][1]);
             Assert.AreEqual(identity[2][2], result[2][2]);
+        }
+
+        [TestMethod, Timeout(60000)]
+        public void MatrixInversePerformanceTest()
+        {
+            Stopwatch watch = new Stopwatch();
+
+            double[][] bigMatrix = MatrixOperations.MatrixIdentity(2000);
+
+            watch.Start();
+
+            double[][] inverse = bigMatrix.MatrixInverse();
+
+            Assert.IsNotNull(inverse);
+
+            Assert.AreEqual(1.0, inverse[0][0]);
+            Assert.AreEqual(1.0, inverse[1][1]);
+            Assert.AreEqual(1.0, inverse[2][2]);
+            Console.Write($"Calculation took {watch.Elapsed.TotalSeconds} seconds!");
+        }
+
+        [TestMethod, Timeout(60000)]
+        public void MatrixDeterminantPerformanceTest()
+        {
+            Stopwatch watch = new Stopwatch();
+
+            double[][] bigMatrix = MatrixOperations.MatrixIdentity(10);
+
+            watch.Start();
+
+            double determinant = bigMatrix.MatrixDeterminant();
+
+            Assert.IsTrue(determinant != 0.0);
+
+            Console.Write($"Calculation took {watch.Elapsed.TotalSeconds} seconds!");
         }
 
         [TestMethod]

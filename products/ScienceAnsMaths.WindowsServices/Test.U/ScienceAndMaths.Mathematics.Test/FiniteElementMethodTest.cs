@@ -102,6 +102,8 @@ namespace ScienceAndMaths.Mathematics.Test
             //  Obtaining global matrix
             double[][] fMatrix = kGlobal.MatrixProduct(uMatrix);
 
+            Console.Write(kGlobal.DisplayMatrixToString());
+
             //  Checking for absolute errors
             var absErrorF1X = Math.Abs(fMatrix[0][0] - (-3750.0));
             var absErrorF1Y = Math.Abs(fMatrix[1][0] - (-1198.0));
@@ -177,6 +179,8 @@ namespace ScienceAndMaths.Mathematics.Test
             model.Elements.Add(element4);
 
             var kGlobal = model.BuildGlobalKMatrix();
+
+            Console.Write(kGlobal.DisplayMatrixToString());
 
             Assert.AreEqual(1.0, kGlobal[0][0]);
             Assert.AreEqual(-0.75, kGlobal[0][9]);

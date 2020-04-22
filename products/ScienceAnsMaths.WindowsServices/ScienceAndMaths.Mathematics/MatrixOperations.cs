@@ -317,6 +317,33 @@ namespace ScienceAndMaths.Mathematics
 
             return result;
         }
+
+        public static string DisplayMatrixToString(this double [][] matrix)
+        {
+            string matrixDisplay = $"Matrix of order {matrix.Length} x {matrix[0].Length}:";
+
+            for (int i = 0; i < matrix.Length; i++)
+            {
+                matrixDisplay += Environment.NewLine;
+
+                for (int j = 0; j < matrix[0].Length; j++)
+                {
+                    if(j == 0)
+                    {
+                        matrixDisplay = matrixDisplay + "\t" + "|";
+                    }
+
+                    matrixDisplay = matrixDisplay + "\t" + matrix[i][j];
+
+                    if(j == matrix[0].Length - 1)
+                    {
+                        matrixDisplay = matrixDisplay + "\t" + "|";
+                    }
+                }
+            }
+
+            return matrixDisplay;
+        }
     }
 }
 
