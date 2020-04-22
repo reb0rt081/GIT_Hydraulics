@@ -308,6 +308,15 @@ namespace ScienceAndMaths.Mathematics.Test
             //  todo improve matrix inverse and determinant
             double[][] fMatrix = kGlobal.MatrixProduct(uMatrix);
 
+            //  With those strains, this is equivalent to a force of 2310 N applying on the free side
+            Assert.AreEqual(-2310, fMatrix[0][0]);
+            Assert.AreEqual(0, fMatrix[1][0]);
+            Assert.AreEqual(0, fMatrix[2][0]);
+            Assert.AreEqual(0, fMatrix[3][0]);
+            Assert.AreEqual(2310, fMatrix[4][0]);
+
+            //  Let's get the submatrix and get its inverse to solve the problem automatically and compare its results
+
             double[][] subKMatrix = MatrixOperations.MatrixCreate(4, 4);
             double[][] subFMatrix = MatrixOperations.MatrixCreate(4, 1);
             int i2 = 0;
@@ -328,13 +337,6 @@ namespace ScienceAndMaths.Mathematics.Test
 
             double[][] subKInverse = subKMatrix.MatrixInverse();
             double[][] newUMatrix = subKInverse.MatrixProduct(subFMatrix);
-
-            //  With those strains, this is equivalent to a force of 2310 N applying on the free side
-            Assert.AreEqual(-2310, fMatrix[0][0]);
-            Assert.AreEqual(0, fMatrix[1][0]);
-            Assert.AreEqual(0, fMatrix[2][0]);
-            Assert.AreEqual(0, fMatrix[3][0]);
-            Assert.AreEqual(2310, fMatrix[4][0]);
 
             Assert.IsTrue(Math.Abs(uMatrix[1][0] - newUMatrix[0][0]) < 0.001 );
             Assert.IsTrue(Math.Abs(uMatrix[2][0] - newUMatrix[1][0]) < 0.001);
