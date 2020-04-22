@@ -75,7 +75,7 @@ namespace ScienceAndMaths.Mathematics.FEM
         /// The resultant "B" matrix when the interpolation function is derived
         /// du/dx = 1/|A| * [y2 - y3    0   y3 - y1 0   y1 - y2 0] * [u1 v1 u2 v2 u3 v3] -> du/dx = B * [u1 v1 u2 v2 u3 v3]
         /// dv/dy = 1/|A| * [0      -(x2 - x3)    0   -(x3 - x1)    0   -(x1 -x2)] * [u1 v1 u2 v2 u3 v3] -> dv/dy = B * [u1 v1 u2 v2 u3 v3]
-        /// 0.5 * (du/dy + dv/dx) = 1/|A| * [-(x2 - x3)    y2-y3   -(x3 - x1)    y3 - y1   -(x1 -x2)    y1 - y2] * [u1 v1 u2 v2 u3 v3] -> dv/dy = B * [u1 v1 u2 v2 u3 v3]
+        /// (du/dy + dv/dx) = 1/|A| * [-(x2 - x3)    y2-y3   -(x3 - x1)    y3 - y1   -(x1 -x2)    y1 - y2] * [u1 v1 u2 v2 u3 v3] -> dv/dy = B * [u1 v1 u2 v2 u3 v3]
         /// </summary>
         /// <returns></returns>
         public override double[][] GetBMatrix()
