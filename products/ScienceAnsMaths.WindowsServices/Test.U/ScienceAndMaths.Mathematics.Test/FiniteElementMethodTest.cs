@@ -111,6 +111,7 @@ namespace ScienceAndMaths.Mathematics.Test
 
         }
 
+        //  todo adjust this test
         [TestMethod]
         public void GetKMatrix2Test()
         {

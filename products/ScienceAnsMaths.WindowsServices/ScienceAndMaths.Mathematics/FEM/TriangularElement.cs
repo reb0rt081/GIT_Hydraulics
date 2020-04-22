@@ -20,6 +20,8 @@ namespace ScienceAndMaths.Mathematics.FEM
             Vertex2 = node2;
 
             Vertex3 = node3;
+
+            Thickness = 1.0;
         }
 
         public double Thickness { get; set; }
@@ -68,7 +70,7 @@ namespace ScienceAndMaths.Mathematics.FEM
 
         public override double GetElementDimension()
         {
-            return 0.5 * GetInterpolationMatrixDeterminant();
+            return 0.5 * GetInterpolationMatrixDeterminant() * Thickness;
         }
 
         /// <summary>
