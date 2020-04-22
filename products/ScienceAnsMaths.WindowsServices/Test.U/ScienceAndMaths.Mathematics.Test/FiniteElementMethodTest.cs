@@ -241,12 +241,79 @@ namespace ScienceAndMaths.Mathematics.Test
             uMatrix[0][0] = 0.0;
             uMatrix[1][0] = 0.001;
 
-            //  todo missing global calculation Obtaining global matrix
+            //  todo improve matrix inverse and determinant
             double[][] fMatrix = kGlobal.MatrixProduct(uMatrix);
             
             //  With those strains, this is equivalent to a force of 2310 N applying on the free side
             Assert.AreEqual(-2310, fMatrix[0][0]);
             Assert.AreEqual(2310, fMatrix[1][0]);
+            #endregion
+        }
+
+        /// <summary>
+        /// Problem for linear elements
+        /// </summary>
+        [TestMethod]
+        public void GetKMatrixLinearNElementTest()
+        {
+            //  ElasticCoefficient = E / (1 - v^2)
+            double elasticCoefficient = 2.31E+06;
+
+            Node node1 = new Node(0.0, 0.0);
+            Node node2 = new Node(0.25, 0.0);
+            Node node3 = new Node(0.5, 0.0);
+            Node node4 = new Node(0.75, 0.0);
+            Node node5 = new Node(1.0, 0.0);
+
+            LinearElement element1 = new LinearElement(node1, node2);
+            LinearElement element2 = new LinearElement(node2, node3);
+            LinearElement element3 = new LinearElement(node3, node4);
+            LinearElement element4 = new LinearElement(node4, node5);
+
+            double[][] dMatrix = MatrixOperations.MatrixCreate(1, 1);
+            dMatrix[0][0] = elasticCoefficient;
+
+            element1.SetDMatrix(dMatrix);
+            element2.SetDMatrix(dMatrix);
+            element3.SetDMatrix(dMatrix);
+            element4.SetDMatrix(dMatrix);
+
+            #region Kglobal
+
+            FiniteElementMethodModel model = new FiniteElementMethodModel();
+
+            model.Nodes.Add(node1);
+            model.Nodes.Add(node2);
+            model.Nodes.Add(node3);
+            model.Nodes.Add(node4);
+            model.Nodes.Add(node5);
+            model.Elements.Add(element1);
+            model.Elements.Add(element2);
+            model.Elements.Add(element3);
+            model.Elements.Add(element4);
+
+            var kGlobal = model.BuildGlobalKMatrix();
+            
+            Console.Write(kGlobal.DisplayMatrixToString());
+
+            //  Setting displacements
+            double[][] uMatrix = MatrixOperations.MatrixCreate(5, 1);
+
+            uMatrix[0][0] = 0.0;
+            uMatrix[1][0] = 0.00025;
+            uMatrix[2][0] = 0.0005;
+            uMatrix[3][0] = 0.00075;
+            uMatrix[4][0] = 0.001;
+
+            //  todo improve matrix inverse and determinant
+            double[][] fMatrix = kGlobal.MatrixProduct(uMatrix);
+
+            //  With those strains, this is equivalent to a force of 2310 N applying on the free side
+            Assert.AreEqual(-2310, fMatrix[0][0]);
+            Assert.AreEqual(0, fMatrix[1][0]);
+            Assert.AreEqual(0, fMatrix[2][0]);
+            Assert.AreEqual(0, fMatrix[3][0]);
+            Assert.AreEqual(2310, fMatrix[4][0]);
             #endregion
         }
     }
