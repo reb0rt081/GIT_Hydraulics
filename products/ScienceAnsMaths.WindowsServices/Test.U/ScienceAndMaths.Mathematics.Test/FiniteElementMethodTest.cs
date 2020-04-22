@@ -244,6 +244,7 @@ namespace ScienceAndMaths.Mathematics.Test
             //  todo missing global calculation Obtaining global matrix
             double[][] fMatrix = kLocal.MatrixProduct(uMatrix);
             
+            //  With those strains, this is equivalent to a force of 2310 N applying on the free side
             Assert.AreEqual(-2310, fMatrix[0][0]);
             Assert.AreEqual(2310, fMatrix[1][0]);
             #endregion
