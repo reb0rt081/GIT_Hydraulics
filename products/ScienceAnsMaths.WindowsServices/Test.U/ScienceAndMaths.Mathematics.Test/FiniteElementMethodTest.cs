@@ -18,7 +18,8 @@ namespace ScienceAndMaths.Mathematics.Test
             //  Modulo elastico acero: E = 2,10E+06
             //  Coeficiente de Poisson Acero: v = E/2G - 1 = 0.3
             //  Modulo de elasticidad transversal acero: G = E/(2*(1 + v)), este cálculo asume que Tension_tangencial = G * (2 * Deformacion_tangencial)
-            //  Esta fórmula es la que aplicaremos para simplificar calculos en la matriz de derivadas, aunque en realidad: G = E /(1 + v)
+            //  La fórmula de arriba es la que aplicaremos para simplificar calculos en la matriz de derivadas, aunque en realidad: G = E /(1 + v)
+            
             //  ElasticCoefficient = E / (1 - v^2)
             double elasticCoefficient = 2.31E+06;
 
@@ -59,15 +60,11 @@ namespace ScienceAndMaths.Mathematics.Test
 
             element1.SetDMatrix(dMatrix);
 
-            var k1 = element1.GetKMatrix();
-
             #endregion
 
-            #region Element 1
+            #region Element 2
 
             element2.SetDMatrix(dMatrix);
-
-            var k2 = element2.GetKMatrix();
 
             #endregion
 
@@ -85,6 +82,7 @@ namespace ScienceAndMaths.Mathematics.Test
 
             var kGlobal = model.BuildGlobalKMatrix();
 
+            //  Setting displacements
             double[][] uMatrix = MatrixOperations.MatrixCreate(8, 1);
 
             uMatrix[0][0] = 0.0;
@@ -96,16 +94,28 @@ namespace ScienceAndMaths.Mathematics.Test
             uMatrix[6][0] = 0.316E-2;
             uMatrix[7][0] = -0.259E-3;
 
+            //  Obtaining global matrix
             double[][] fMatrix = kGlobal.MatrixProduct(uMatrix);
 
-            Assert.IsTrue(fMatrix[0][0] - (-3750.0) < 0.2);
-            Assert.IsTrue(fMatrix[1][0] - (-1198.0) < 10);
-            Assert.IsTrue(fMatrix[2][0] - (3750) < 10);
-            Assert.IsTrue(fMatrix[3][0] - (0) < 1);
-            Assert.IsTrue(fMatrix[4][0] - (-3750.0) < 10);
-            Assert.IsTrue(fMatrix[5][0] - (1198) < 10);
-            Assert.IsTrue(fMatrix[6][0] - (3750.0) < 10);
-            Assert.IsTrue(fMatrix[7][0] - (0) < 1);
+            //  Checking for absolute errors
+            var absErrorF1X = Math.Abs(fMatrix[0][0] - (-3750.0));
+            var absErrorF1Y = Math.Abs(fMatrix[1][0] - (-1198.0));
+            var absErrorF2X = Math.Abs(fMatrix[2][0] - (3750));
+            var absErrorF2Y = Math.Abs(fMatrix[3][0] - (0));
+            var absErrorF3X = Math.Abs(fMatrix[4][0] - (-3750.0));
+            var absErrorF3Y = Math.Abs(fMatrix[5][0] - (1198));
+            var absErrorF4X = Math.Abs(fMatrix[6][0] - (3750.0));
+            var absErrorF4Y = Math.Abs(fMatrix[7][0] - (0));
+
+            //  Making sure absolute errors are less than 1%
+            Assert.IsTrue(absErrorF1X < Math.Abs(fMatrix[0][0] * 0.01));
+            Assert.IsTrue(absErrorF1Y < Math.Abs(fMatrix[1][0] * 0.01));
+            Assert.IsTrue(absErrorF2X < Math.Abs(fMatrix[2][0] * 0.01));
+            Assert.IsTrue(absErrorF2Y < 1.0);
+            Assert.IsTrue(absErrorF3X < Math.Abs(fMatrix[4][0] * 0.01));
+            Assert.IsTrue(absErrorF3Y < Math.Abs(fMatrix[5][0] * 0.01));
+            Assert.IsTrue(absErrorF4X < Math.Abs(fMatrix[6][0] * 0.01));
+            Assert.IsTrue(absErrorF4Y < 1.0);
 
             #endregion
 
@@ -118,7 +128,7 @@ namespace ScienceAndMaths.Mathematics.Test
             Node node1 = new Node(0.0, 0.0);
             Node node2 = new Node(1.0, 0.0);
             Node node3 = new Node(2.0, 0.0);
-            Node node4 = new Node(2.0, 1.0);
+            Node node4 = new Node(2.0, 1.0); 
             Node node5 = new Node(1.0, 1.0);
             Node node6 = new Node(0.0, 1.0);
 
@@ -162,6 +172,26 @@ namespace ScienceAndMaths.Mathematics.Test
             model.Elements.Add(element4);
 
             var kGlobal = model.BuildGlobalKMatrix();
+
+            Assert.AreEqual(1.0, kGlobal[0][0]);
+            Assert.AreEqual(-0.75, kGlobal[0][9]);
+            Assert.AreEqual(-0.5, kGlobal[0][10]);
+
+            Assert.AreEqual(-0.5, kGlobal[1][3]);
+            Assert.AreEqual(-0.0, kGlobal[1][6]);
+            Assert.AreEqual(-0.5, kGlobal[1][11]);
+
+            Assert.AreEqual(2.0, kGlobal[2][2]);
+            Assert.AreEqual(0.25, kGlobal[2][5]);
+            Assert.AreEqual(-0.75, kGlobal[2][7]);
+
+            Assert.AreEqual(0.25, kGlobal[3][0]);
+            Assert.AreEqual(2.0, kGlobal[3][3]);
+            Assert.AreEqual(-0.0, kGlobal[3][7]);
+
+            Assert.AreEqual(0.0, kGlobal[8][0]);
+            Assert.AreEqual(2.0, kGlobal[8][8]);
+            Assert.AreEqual(-0.75, kGlobal[8][9]);
 
             #endregion
         }
