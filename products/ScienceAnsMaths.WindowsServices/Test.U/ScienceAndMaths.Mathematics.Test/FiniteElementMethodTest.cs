@@ -308,12 +308,38 @@ namespace ScienceAndMaths.Mathematics.Test
             //  todo improve matrix inverse and determinant
             double[][] fMatrix = kGlobal.MatrixProduct(uMatrix);
 
+            double[][] subKMatrix = MatrixOperations.MatrixCreate(4, 4);
+            double[][] subFMatrix = MatrixOperations.MatrixCreate(4, 1);
+            int i2 = 0;
+
+            for (int i1 = 1; i1 < kGlobal.Length; i1++)
+            {
+                int j2 = 0;
+                for (int j1 = 1; j1 < kGlobal[0].Length; j1++)
+                {
+                    subKMatrix[i2][j2] = kGlobal[i1][j1];
+                    
+                    j2++;
+                }
+
+                subFMatrix[i2] = fMatrix[i1];
+                i2++;
+            }
+
+            double[][] subKInverse = subKMatrix.MatrixInverse();
+            double[][] newUMatrix = subKInverse.MatrixProduct(subFMatrix);
+
             //  With those strains, this is equivalent to a force of 2310 N applying on the free side
             Assert.AreEqual(-2310, fMatrix[0][0]);
             Assert.AreEqual(0, fMatrix[1][0]);
             Assert.AreEqual(0, fMatrix[2][0]);
             Assert.AreEqual(0, fMatrix[3][0]);
             Assert.AreEqual(2310, fMatrix[4][0]);
+
+            Assert.IsTrue(Math.Abs(uMatrix[1][0] - newUMatrix[0][0]) < 0.001 );
+            Assert.IsTrue(Math.Abs(uMatrix[2][0] - newUMatrix[1][0]) < 0.001);
+            Assert.IsTrue(Math.Abs(uMatrix[3][0] - newUMatrix[2][0]) < 0.001);
+            Assert.IsTrue(Math.Abs(uMatrix[4][0] - newUMatrix[3][0]) < 0.001);
             #endregion
         }
     }
