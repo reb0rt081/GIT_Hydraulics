@@ -17,7 +17,8 @@ namespace ScienceAndMaths.Mathematics.Test
             //  E/(1-v^2) =	2,31E+06
             //  Modulo elastico acero: E = 2,10E+06
             //  Coeficiente de Poisson Acero: v = E/2G - 1 = 0.3
-            //  Modulo de elasticidad transversal acero: G = E/(2*(1 + v))
+            //  Modulo de elasticidad transversal acero: G = E/(2*(1 + v)), este cálculo asume que Tension_tangencial = G * (2 * Deformacion_tangencial)
+            //  Esta fórmula es la que aplicaremos para simplificar calculos en la matriz de derivadas, aunque en realidad: G = E /(1 + v)
             //  ElasticCoefficient = E / (1 - v^2)
             double elasticCoefficient = 2.31E+06;
 
