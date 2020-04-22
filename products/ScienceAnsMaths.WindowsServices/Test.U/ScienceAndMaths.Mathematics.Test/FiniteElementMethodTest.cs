@@ -14,7 +14,7 @@ namespace ScienceAndMaths.Mathematics.Test
         [TestMethod]
         public void GetKMatrixTest()
         {
-            //  E/(1-v^2) =	2,31E+06
+            //  E/(1-v^2) = E / ((1-v)*(1+v) =	2,31E+06
             //  Modulo elastico acero: E = 2,10E+06
             //  Coeficiente de Poisson Acero: v = E/2G - 1 = 0.3
             //  Modulo de elasticidad transversal acero: G = E/(2*(1 + v)), este cálculo asume que Tension_tangencial = G * (2 * Deformacion_tangencial)
@@ -22,6 +22,11 @@ namespace ScienceAndMaths.Mathematics.Test
             
             //  ElasticCoefficient = E / (1 - v^2)
             double elasticCoefficient = 2.31E+06;
+
+            // D matrix: {Stress} = [D] * {Strain}
+            //                        | 1   v      0    |   |   Strain_X    |
+            //  [D] = E / (1 - v^2) * | v   1      0    | * |   Strain_Y    |
+            //                        | 0   0   (1-v)/2 |   |   Strain_XY   |, Strain_XY = 2 * Actual_Strain_XY (That's why there is a 2 dividing (1-v).
 
             double[][] cMatrix = MatrixOperations.MatrixCreate(3, 3);
             cMatrix[0][0] = 1.0;
