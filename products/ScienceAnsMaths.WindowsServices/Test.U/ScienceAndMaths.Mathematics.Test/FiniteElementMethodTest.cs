@@ -204,6 +204,9 @@ namespace ScienceAndMaths.Mathematics.Test
             #endregion
         }
 
+        /// <summary>
+        /// Problem for linear elements
+        /// </summary>
         [TestMethod]
         public void GetKMatrixLinearElementTest()
         {
@@ -229,7 +232,20 @@ namespace ScienceAndMaths.Mathematics.Test
             model.Elements.Add(element1);
 
             var kLocal = element1.GetKMatrix();
+
+            Console.Write(kLocal);
+
+            //  Setting displacements
+            double[][] uMatrix = MatrixOperations.MatrixCreate(2, 1);
+
+            uMatrix[0][0] = 0.0;
+            uMatrix[1][0] = 0.001;
+
+            //  todo missing global calculation Obtaining global matrix
+            double[][] fMatrix = kLocal.MatrixProduct(uMatrix);
             
+            Assert.AreEqual(-2310, fMatrix[0][0]);
+            Assert.AreEqual(2310, fMatrix[1][0]);
             #endregion
         }
     }
