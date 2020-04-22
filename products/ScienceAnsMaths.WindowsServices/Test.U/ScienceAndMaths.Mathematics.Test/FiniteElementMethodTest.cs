@@ -128,7 +128,6 @@ namespace ScienceAndMaths.Mathematics.Test
 
         }
 
-        //  todo adjust this test
         [TestMethod]
         public void GetKMatrix2Test()
         {
@@ -202,6 +201,35 @@ namespace ScienceAndMaths.Mathematics.Test
             Assert.AreEqual(2.0, kGlobal[8][8]);
             Assert.AreEqual(-0.75, kGlobal[8][9]);
 
+            #endregion
+        }
+
+        [TestMethod]
+        public void GetKMatrixLinearElementTest()
+        {
+            //  ElasticCoefficient = E / (1 - v^2)
+            double elasticCoefficient = 2.31E+06;
+
+            Node node1 = new Node(0.0, 0.0);
+            Node node2 = new Node(1.0, 0.0);
+
+            LinearElement element1 = new LinearElement(node1, node2);
+            
+            double[][] dMatrix = MatrixOperations.MatrixCreate(1, 1);
+            dMatrix[0][0] = elasticCoefficient;
+            
+            element1.SetDMatrix(dMatrix);
+            
+            #region Kglobal
+
+            FiniteElementMethodModel model = new FiniteElementMethodModel();
+
+            model.Nodes.Add(node1);
+            model.Nodes.Add(node2);
+            model.Elements.Add(element1);
+
+            var kLocal = element1.GetKMatrix();
+            
             #endregion
         }
     }

@@ -18,6 +18,8 @@ namespace ScienceAndMaths.Mathematics.FEM
             Vertex1 = node1;
 
             Vertex2 = node2;
+
+            SectionArea = 1.0;
         }
 
         public double SectionArea { get; set; }
@@ -54,7 +56,7 @@ namespace ScienceAndMaths.Mathematics.FEM
 
         public override double GetElementDimension()
         {
-            return GetInterpolationMatrixDeterminant();
+            return GetInterpolationMatrixDeterminant() * SectionArea;
         }
 
         /// <summary>
