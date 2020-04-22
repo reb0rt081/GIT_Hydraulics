@@ -22,7 +22,16 @@ namespace ScienceAndMaths.Mathematics.FEM
 
         public double[][] BuildGlobalKMatrix()
         {
-            double[][] globalKMatrix = MatrixOperations.MatrixCreate(Nodes.Count * 2, Nodes.Count * 2);
+            double[][] globalKMatrix = null;
+
+            if(Elements.Any(el => el is TriangularElement))
+            {
+                globalKMatrix = MatrixOperations.MatrixCreate(Nodes.Count * 2, Nodes.Count * 2);
+            }
+            else if(Elements.Any(el => el is LinearElement))
+            {
+                globalKMatrix = MatrixOperations.MatrixCreate(Nodes.Count, Nodes.Count);
+            }
 
             foreach (IInterpolationElement element in Elements)
             {
@@ -35,8 +44,7 @@ namespace ScienceAndMaths.Mathematics.FEM
                     int indexVertex1 = Nodes.IndexOf(triangularElement.Vertex1);
                     int indexVertex2 = Nodes.IndexOf(triangularElement.Vertex2);
                     int indexVertex3 = Nodes.IndexOf(triangularElement.Vertex3);
-
-
+                    
                     //  Element local F1H
                     globalKMatrix[indexVertex1 * 2][indexVertex1 * 2] = globalKMatrix[indexVertex1 * 2][indexVertex1 * 2] + localKmatrix[0][0];
                     globalKMatrix[indexVertex1 * 2][indexVertex1 * 2 + 1] = globalKMatrix[indexVertex1 * 2][indexVertex1 * 2 + 1] + localKmatrix[0][1];
@@ -84,6 +92,24 @@ namespace ScienceAndMaths.Mathematics.FEM
                     globalKMatrix[indexVertex3 * 2 + 1][indexVertex2 * 2 + 1] = globalKMatrix[indexVertex3 * 2 + 1][indexVertex2 * 2 + 1] + localKmatrix[5][3];
                     globalKMatrix[indexVertex3 * 2 + 1][indexVertex3 * 2] = globalKMatrix[indexVertex3 * 2 + 1][indexVertex3 * 2] + localKmatrix[5][4];
                     globalKMatrix[indexVertex3 * 2 + 1][indexVertex3 * 2 + 1] = globalKMatrix[indexVertex3 * 2 + 1][indexVertex3 * 2 + 1] + localKmatrix[5][5];
+                }
+                //  1D simulation: {u1, u2}
+                else if (element is LinearElement linearElement)
+                {
+                    //  {u1, u2}
+                    double[][] localKmatrix = linearElement.GetKMatrix();
+
+                    int indexVertex1 = Nodes.IndexOf(linearElement.Vertex1);
+                    int indexVertex2 = Nodes.IndexOf(linearElement.Vertex2);
+
+
+                    //  Element local F1H
+                    globalKMatrix[indexVertex1 ][indexVertex1] = globalKMatrix[indexVertex1][indexVertex1] + localKmatrix[0][0];
+                    globalKMatrix[indexVertex1 ][indexVertex2] = globalKMatrix[indexVertex1][indexVertex2] + localKmatrix[0][1];
+                    
+                    //  Element local F2H
+                    globalKMatrix[indexVertex2][indexVertex1] = globalKMatrix[indexVertex2][indexVertex1] + localKmatrix[1][0];
+                    globalKMatrix[indexVertex2][indexVertex2] = globalKMatrix[indexVertex2][indexVertex2] + localKmatrix[1][1];
                 }
             }
 

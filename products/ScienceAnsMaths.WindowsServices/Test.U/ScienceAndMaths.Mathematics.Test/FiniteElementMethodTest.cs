@@ -231,9 +231,9 @@ namespace ScienceAndMaths.Mathematics.Test
             model.Nodes.Add(node2);
             model.Elements.Add(element1);
 
-            var kLocal = element1.GetKMatrix();
+            var kGlobal = model.BuildGlobalKMatrix();
 
-            Console.Write(kLocal);
+            Console.Write(kGlobal.DisplayMatrixToString());
 
             //  Setting displacements
             double[][] uMatrix = MatrixOperations.MatrixCreate(2, 1);
@@ -242,7 +242,7 @@ namespace ScienceAndMaths.Mathematics.Test
             uMatrix[1][0] = 0.001;
 
             //  todo missing global calculation Obtaining global matrix
-            double[][] fMatrix = kLocal.MatrixProduct(uMatrix);
+            double[][] fMatrix = kGlobal.MatrixProduct(uMatrix);
             
             //  With those strains, this is equivalent to a force of 2310 N applying on the free side
             Assert.AreEqual(-2310, fMatrix[0][0]);
