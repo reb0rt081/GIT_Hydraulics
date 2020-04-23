@@ -10,10 +10,11 @@ namespace ScienceAndMaths.Core
 {
     public class CanalManager : ICanalManager
     {
-        private Canal canal;
+        public Canal Canal { get; private set; }
+
         public void SetCanal(Canal newCanal)
         {
-            canal = newCanal;
+            Canal = newCanal;
         }
     }
 }
