@@ -6,22 +6,25 @@ using ScienceAndMaths.Configuration.Canals;
 using ScienceAndMaths.Domain;
 using ScienceAndMaths.Hydraulics.Canals;
 
+using Unity;
+
 namespace ScienceAndMaths.Configuration.Loader
 {
     public class CanalConfigurationLoader : ICanalConfigurationLoader
     {
-        private ICanalManager canalManager;
+        [Dependency]
+        public ICanalManager CanalManager { get; set; }
 
         public void LoadCanalConfiguration()
         {
             var canal = LoadCanalConfiguration("test");
 
-            canalManager.SetCanal(canal);
+            CanalManager.SetCanal(canal);
         }
 
         public Canal LoadCanalConfiguration(string configurationLocation)
         {
-            string fileContent = null;
+            string fileContent;
 
             if (string.IsNullOrEmpty(configurationLocation))
             {
@@ -36,7 +39,7 @@ namespace ScienceAndMaths.Configuration.Loader
             if (!string.IsNullOrEmpty(fileContent))
             {
                 XmlSerializer xmlSerializer = new XmlSerializer(typeof(CanalConfiguration));
-                CanalConfiguration deserializedConfiguration = null;
+                CanalConfiguration deserializedConfiguration;
 
                 using (StringReader sr = new StringReader(fileContent))
                 {
