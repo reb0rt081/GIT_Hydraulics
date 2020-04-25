@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ScienceAndMaths.Domain;
 using ScienceAndMaths.Hydraulics.Canals;
+using ScienceAndMaths.Shared.Canals;
 
 namespace ScienceAndMaths.Core
 {
@@ -15,6 +16,11 @@ namespace ScienceAndMaths.Core
         public void SetCanal(Canal newCanal)
         {
             Canal = newCanal;
+        }
+
+        public CanalSimulationResult ExecuteCanalSimulation()
+        {
+            return new CanalSimulationResult();
         }
     }
 }

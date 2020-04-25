@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ScienceAndMaths.Shared.Canals;
 
 namespace ScienceAndMaths.Hydraulics.Canals
 {
@@ -31,5 +32,14 @@ namespace ScienceAndMaths.Hydraulics.Canals
         /// Gets or sets the canal homogeneous sections.
         /// </summary>
         public List<CanalStretch> CanalStretches;
+
+        /// <summary>
+        /// Executes the canal simulation
+        /// </summary>
+        /// <returns></returns>
+        public CanalSimulationResult ExecuteCanalSimulation()
+        {
+            return new CanalSimulationResult();
+        }
     }
 }

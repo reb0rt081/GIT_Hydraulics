@@ -18,9 +18,10 @@ namespace ScienceAndMaths.Hydraulics.Canals
         /// Roughness coefficient applying Manning's rule
         /// </summary>
         public double Roughness { get; set; }
-                      
+
         /// <summary>
         /// Slope of the canal section in 1/1 (m/m)
+        /// Slope = dz/dx = elevation viariation / length variation (hypotenuse)
         /// </summary>
         public double Slope { get; set; }
 

@@ -54,12 +54,22 @@ namespace ScienceAndMaths.Hydraulics.Canals
         public CanalSection CanalSection { get; set; }
 
         /// <summary>
+        /// Returns the critical depth of the canal stretch when Fr = 1
+        /// </summary>
+        /// <param name="y"></param>
+        /// <returns></returns>
+        public double GetCriticalDepth(double y)
+        {
+            return Math.Pow(Flow, 2) / (Constants.GravityAcceleration * CanalSection.GetHydraulicArea(y)); 
+        }
+
+        /// <summary>
         /// Returns the flow equation
         /// </summary>
         /// <returns></returns>
         public Func<double, double, double> FlowEquation()
         {
-            return (x, y) => (CanalSection.Slope - (Math.Pow(Flow, 2) * Math.Pow(CanalSection.Roughness, 2)) / (Math.Pow(CanalSection.GetHydraulicArea(y), 2) * Math.Pow(CanalSection.GetHydraulicRadius(y), 2.0 / 3.0))) / (1 - Math.Pow(CanalSection.GetFroudeNumber(y), 2));
+            return (x, y) => (CanalSection.Slope - (Math.Pow(Flow, 2) * Math.Pow(CanalSection.Roughness, 2)) / (Math.Pow(CanalSection.GetHydraulicArea(y), 2) * Math.Pow(CanalSection.GetHydraulicRadius(y), 2.0 / 3.0))) / (Math.Cos(Math.Asin(CanalSection.Slope)) - Math.Pow(CanalSection.GetFroudeNumber(y), 2));
         }
     }
 }
