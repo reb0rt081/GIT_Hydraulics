@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScienceAndMaths.Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
     /// <summary>
     /// Represents the canal boundary conditions.
     /// </summary>
-    public class CanalEdge
+    public class CanalEdge : ICanalEdge
     {
         /// <summary>
         /// Gets or sets the unique identifier for the canal edge.

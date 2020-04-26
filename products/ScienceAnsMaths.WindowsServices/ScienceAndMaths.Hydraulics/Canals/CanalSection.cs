@@ -25,8 +25,6 @@ namespace ScienceAndMaths.Hydraulics.Canals
         /// </summary>
         public double Slope { get; set; }
 
-
-
         /// <summary>
         /// Returns the flow of a canal section in Manning and uniform conditions.
         /// The water level will tend to this value.
@@ -78,7 +76,6 @@ namespace ScienceAndMaths.Hydraulics.Canals
         /// </summary>
         /// <param name="waterLevel">The level of the water in the canal section</param>
         /// <returns></returns>
-        public abstract double GetHydraulicPerimeter(double waterLevel);
- 
+        public abstract double GetHydraulicPerimeter(double waterLevel); 
     }
 }

@@ -10,7 +10,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
     /// <summary>
     /// Represents a canal of equal dimensions with certain length
     /// </summary>
-    public class CanalStretch
+    public class CanalStretch : ICanalStretch
     {
         public CanalStretch(double length, double flow, CanalSection canalSection)
         {
@@ -31,12 +31,12 @@ namespace ScienceAndMaths.Hydraulics.Canals
         /// <summary>
         /// Gets or sets the source node for this canal stretch.
         /// </summary>
-        public CanalEdge FromNode { get; set; }
+        public ICanalEdge FromNode { get; set; }
 
         /// <summary>
         /// Gets or sets the destination node for this canal stretch.
         /// </summary>
-        public CanalEdge ToNode { get; set; }
+        public ICanalEdge ToNode { get; set; }
 
         /// <summary>
         /// Gets or sets the length of the canal
@@ -51,7 +51,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
         /// <summary>
         /// Gets or sets the canal section
         /// </summary>
-        public CanalSection CanalSection { get; set; }
+        public ICanalSection CanalSection { get; set; }
 
         /// <summary>
         /// Returns the Froude number of a canal stretch at a given length
@@ -64,13 +64,13 @@ namespace ScienceAndMaths.Hydraulics.Canals
         }
 
         /// <summary>
-        /// Returns the critical depth of the canal stretch when Fr = 1
+        /// Returns the critical depth of the canal stretch when Froude Number = 1
         /// </summary>
-        /// <param name="y"></param>
+        /// <param name="waterLvel"></param>
         /// <returns></returns>
-        public double GetCriticalDepth(double y)
+        public double GetCriticalHydraulicDepth(double waterLevel)
         {
-            return Math.Pow(Flow, 2.0) / (Constants.GravityAcceleration * Math.Pow(CanalSection.GetHydraulicArea(y), 2.0)); 
+            return Math.Pow(Flow, 2.0) / (Constants.GravityAcceleration * Math.Pow(CanalSection.GetHydraulicArea(waterLevel), 2.0)); 
         }
 
         /// <summary>
