@@ -15,7 +15,7 @@ namespace ScienceAndMaths.Hydraulics.Test
 
             double rh = canal.CanalSection.GetHydraulicRadius(2.9);
             double mv = canal.CanalSection.GetManningVelocity(2.9);
-            double fr = canal.CanalSection.GetFroudeNumber(2.9);
+            double fr2 = Math.Pow(canal.GetFroudeNumber(2.9), 2.0);
 
             RungeKutta solver = new RungeKutta(1, canal.FlowEquation());
 
@@ -25,7 +25,7 @@ namespace ScienceAndMaths.Hydraulics.Test
             double actualRh = (5.0 * 2.9) / (5.0 + 2.0 * 2.9);
             Assert.IsTrue(rh - actualRh <= double.Epsilon);
             Assert.IsTrue(mv - 0 <= double.Epsilon);
-            Assert.IsTrue(fr - 0 <= double.Epsilon);
+            Assert.IsTrue(fr2 - 0.0690 <= 0.0001);
             Assert.IsTrue(result - 2.8988 <= 0.00001);
         }
     }

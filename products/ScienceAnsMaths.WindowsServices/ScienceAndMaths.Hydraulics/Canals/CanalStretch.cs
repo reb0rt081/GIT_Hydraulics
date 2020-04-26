@@ -54,6 +54,16 @@ namespace ScienceAndMaths.Hydraulics.Canals
         public CanalSection CanalSection { get; set; }
 
         /// <summary>
+        /// Returns the Froude number of a canal stretch at a given length
+        /// </summary>
+        /// <param name="waterLevel">The level of the water in the canal section</param>
+        /// <returns></returns>
+        public double GetFroudeNumber(double waterLevel)
+        {
+            return Flow / (Math.Sqrt(Constants.GravityAcceleration * CanalSection.GetHydraulicDepth(waterLevel)) * CanalSection.GetHydraulicArea(waterLevel));
+        }
+
+        /// <summary>
         /// Returns the critical depth of the canal stretch when Fr = 1
         /// </summary>
         /// <param name="y"></param>
@@ -69,7 +79,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
         /// <returns></returns>
         public Func<double, double, double> FlowEquation()
         {
-            return (x, y) => (CanalSection.Slope - (Math.Pow(Flow, 2) * Math.Pow(CanalSection.Roughness, 2)) / (Math.Pow(CanalSection.GetHydraulicArea(y), 2) * Math.Pow(CanalSection.GetHydraulicRadius(y), 2.0 / 3.0))) / (Math.Cos(Math.Asin(CanalSection.Slope)) - Math.Pow(CanalSection.GetFroudeNumber(y), 2));
+            return (x, y) => (CanalSection.Slope - (Math.Pow(Flow, 2) * Math.Pow(CanalSection.Roughness, 2)) / (Math.Pow(CanalSection.GetHydraulicArea(y), 2) * Math.Pow(CanalSection.GetHydraulicRadius(y), 4.0 / 6.0))) / (Math.Cos(Math.Asin(CanalSection.Slope)) - Math.Pow(GetFroudeNumber(y), 2));
         }
     }
 }

@@ -25,14 +25,16 @@ namespace ScienceAndMaths.Hydraulics.Canals
         /// </summary>
         public double Slope { get; set; }
 
+
+
         /// <summary>
-        /// Returns the Froude number of a canal section at a given length
+        /// Returns the flow of a canal section in Manning and uniform conditions
         /// </summary>
-        /// <param name="waterLevel">The level of the water in the canal section</param>
+        /// <param name="waterLevel"></param>
         /// <returns></returns>
-        public double GetFroudeNumber(double waterLevel)
+        public double GetManningFlow(double waterLevel)
         {
-            return GetManningVelocity(waterLevel) / Math.Sqrt(Constants.GravityAcceleration * GetHydraulicDepth(waterLevel));
+            return GetManningVelocity(waterLevel) * GetHydraulicArea(waterLevel);
         }
 
         /// <summary>
