@@ -6,7 +6,7 @@ namespace ScienceAndMaths.Configuration.Canals
 {
     [DataContract(Namespace = XmlConsts.XmlNamespace)]
     [Serializable]
-    public class TrapezoidalSectionConfiguration : IBaseCanalSection
+    public class TrapezoidalSectionConfiguration : ICanalSection
     {
         [DataMember]
         public double Width { get; set; }

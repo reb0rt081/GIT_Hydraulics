@@ -75,7 +75,7 @@ namespace ScienceAndMaths.Configuration.Converter
 
             foreach (CanalStretch canalStretch in data.CanalStretches)
             {
-                IBaseCanalSection canalSection;
+                ICanalSection canalSection;
 
                 if (canalStretch.CanalSection is RectangularSection rectangularSection)
                 {

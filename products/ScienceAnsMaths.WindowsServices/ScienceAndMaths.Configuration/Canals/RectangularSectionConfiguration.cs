@@ -6,7 +6,7 @@ namespace ScienceAndMaths.Configuration.Canals
 {
     [DataContract(Namespace = XmlConsts.XmlNamespace)]
     [Serializable]
-    public class RectangularSectionConfiguration : IBaseCanalSection
+    public class RectangularSectionConfiguration : ICanalSection
     {
         [DataMember]
         public double Width { get; set; }

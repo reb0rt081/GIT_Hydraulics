@@ -51,7 +51,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
         /// <summary>
         /// Gets or sets the canal section
         /// </summary>
-        public ICanalSection CanalSection { get; set; }
+        public ICanalSectionModel CanalSection { get; set; }
 
         /// <summary>
         /// Returns the Froude number of a canal stretch at a given length

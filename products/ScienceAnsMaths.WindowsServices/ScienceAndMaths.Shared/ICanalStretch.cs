@@ -36,7 +36,7 @@ namespace ScienceAndMaths.Shared
         /// <summary>
         /// Gets or sets the canal section
         /// </summary>
-        ICanalSection CanalSection { get; set; }
+        ICanalSectionModel CanalSection { get; set; }
 
         /// <summary>
         /// Returns the Froude number of a canal stretch at a given length

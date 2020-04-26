@@ -43,9 +43,9 @@
   <ItemGroup>
     <Compile Include="Canals\CanalSimulationResult.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="IBaseCanalSection.cs" />
-    <Compile Include="ICanalEdge.cs" />
     <Compile Include="ICanalSection.cs" />
+    <Compile Include="ICanalEdge.cs" />
+    <Compile Include="ICanalSectionModel.cs" />
     <Compile Include="ICanalStretch.cs" />
     <Compile Include="INode.cs" />
     <Compile Include="IInterpolationElement.cs" />
