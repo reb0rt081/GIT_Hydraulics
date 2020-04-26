@@ -17,9 +17,14 @@ namespace ScienceAndMaths.Hydraulics.Canals
 
         public double Width { get; set; }
 
-        public override double GetHydraulicDepth(double waterLevel)
+        public override double ConvertWaterLevelToHydraulicDepth(double waterLevel)
         {
             return waterLevel;
+        }
+
+        public override double ConvertHydraulicDepthToWaterLevel(double hydraulicDepth)
+        {
+            return hydraulicDepth;
         }
 
         public override double GetHydraulicArea(double waterLevel)
@@ -30,6 +35,6 @@ namespace ScienceAndMaths.Hydraulics.Canals
         public override double GetHydraulicPerimeter(double waterLevel)
         {
             return Width + 2 * waterLevel;
-        }
+        }        
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using ScienceAndMaths.Shared;
 using ScienceAndMaths.Mathematics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ScienceAndMaths.Hydraulics.Canals;

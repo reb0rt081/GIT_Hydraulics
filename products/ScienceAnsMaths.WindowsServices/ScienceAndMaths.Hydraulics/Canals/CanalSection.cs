@@ -57,12 +57,20 @@ namespace ScienceAndMaths.Hydraulics.Canals
         }
 
         /// <summary>
-        /// Returns the Hydraulic depth that can be used to obtain the Froude number.
+        /// Returns the hydraulic depth for a given canal section based on the water level.
         /// HydraulicDepth = HydraulicArea / T, where T is the width of free surface
         /// </summary>
         /// <param name="waterLevel">The level of the water in the canal section</param>
         /// <returns></returns>
-        public abstract double GetHydraulicDepth(double waterLevel);
+        public abstract double ConvertWaterLevelToHydraulicDepth(double waterLevel);
+
+        /// <summary>
+        /// Returns the water level for a given canal section based on the hydraulic depth.
+        /// HydraulicDepth = HydraulicArea / T, where T is the width of free surface
+        /// </summary>
+        /// <param name="hydraulicDepth">The hydraulic depth in the canal section</param>
+        /// <returns></returns>
+        public abstract double ConvertHydraulicDepthToWaterLevel(double hydraulicDepth);
 
         /// <summary>
         /// Returns the Hydraulic area of the canal section
@@ -76,6 +84,6 @@ namespace ScienceAndMaths.Hydraulics.Canals
         /// </summary>
         /// <param name="waterLevel">The level of the water in the canal section</param>
         /// <returns></returns>
-        public abstract double GetHydraulicPerimeter(double waterLevel); 
+        public abstract double GetHydraulicPerimeter(double waterLevel);
     }
 }

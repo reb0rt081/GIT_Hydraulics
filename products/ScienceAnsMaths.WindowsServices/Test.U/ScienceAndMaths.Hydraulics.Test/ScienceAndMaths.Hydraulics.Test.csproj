@@ -65,6 +65,10 @@
       <Project>{fe52cf6d-a8e0-4b30-9fb9-926c71639bc2}</Project>
       <Name>ScienceAndMaths.Mathematics</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj">
+      <Project>{32271cac-a2ce-4f84-8065-c356e66e2895}</Project>
+      <Name>ScienceAndMaths.Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

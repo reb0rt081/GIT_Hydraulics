@@ -48,6 +48,6 @@ namespace ScienceAndMaths.Configuration.Canals
         }
 
         [XmlIgnore]
-        public ICanalSection CanalSection { get; set; }
+        public IBaseCanalSection CanalSection { get; set; }
     }
 }

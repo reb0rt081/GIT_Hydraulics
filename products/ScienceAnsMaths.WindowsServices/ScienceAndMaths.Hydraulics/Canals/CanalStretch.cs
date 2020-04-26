@@ -60,7 +60,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
         /// <returns></returns>
         public double GetFroudeNumber(double waterLevel)
         {
-            return Flow / (Math.Sqrt(Constants.GravityAcceleration * CanalSection.GetHydraulicDepth(waterLevel)) * CanalSection.GetHydraulicArea(waterLevel));
+            return CanalSection.ConvertHydraulicDepthToWaterLevel(Flow / (Math.Sqrt(Constants.GravityAcceleration * CanalSection.ConvertWaterLevelToHydraulicDepth(waterLevel)) * CanalSection.GetHydraulicArea(waterLevel)));
         }
 
         /// <summary>
