@@ -70,7 +70,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
         /// <returns></returns>
         public double GetCriticalDepth(double y)
         {
-            return Math.Pow(Flow, 2) / (Constants.GravityAcceleration * CanalSection.GetHydraulicArea(y)); 
+            return Math.Pow(Flow, 2.0) / (Constants.GravityAcceleration * Math.Pow(CanalSection.GetHydraulicArea(y), 2.0)); 
         }
 
         /// <summary>
