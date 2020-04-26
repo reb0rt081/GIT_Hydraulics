@@ -28,7 +28,8 @@ namespace ScienceAndMaths.Hydraulics.Canals
 
 
         /// <summary>
-        /// Returns the flow of a canal section in Manning and uniform conditions
+        /// Returns the flow of a canal section in Manning and uniform conditions.
+        /// The water level will tend to this value.
         /// </summary>
         /// <param name="waterLevel"></param>
         /// <returns></returns>
