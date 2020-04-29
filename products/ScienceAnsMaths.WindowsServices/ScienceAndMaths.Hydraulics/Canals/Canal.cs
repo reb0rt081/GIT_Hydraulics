@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using ScienceAndMaths.Mathematics;
 using ScienceAndMaths.Shared.Canals;
 
 namespace ScienceAndMaths.Hydraulics.Canals
@@ -39,7 +41,36 @@ namespace ScienceAndMaths.Hydraulics.Canals
         /// <returns></returns>
         public CanalSimulationResult ExecuteCanalSimulation()
         {
-            return new CanalSimulationResult();
+            var result = new CanalSimulationResult();
+
+            RungeKutta solver = new RungeKutta();
+
+            foreach (CanalStretch canalStretch in CanalStretches)
+            {
+                if(canalStretch.Flow > 0 && canalStretch.FromNode.WaterLevel.HasValue)
+                {
+                    double waterLevel = canalStretch.FromNode.WaterLevel.Value;
+                    result.AddCanalPointResult(0.0, waterLevel);
+
+                    int steps = (int) (canalStretch.Length > 500
+                        ? canalStretch.Length
+                        : 500);
+
+                    solver.Interval = canalStretch.Length / steps;
+                    solver.Equation = canalStretch.FlowEquation();
+                    
+                    for(int i = 1; i <= steps; i++)
+                    {
+                        double x = i * solver.Interval;
+
+                        waterLevel = solver.Solve(x, waterLevel);
+
+                        result.AddCanalPointResult(x, waterLevel);
+                    }
+                }
+            }
+
+            return result;
         }
     }
 }

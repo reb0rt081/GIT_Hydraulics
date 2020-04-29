@@ -27,6 +27,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Configurati
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Core", "ScienceAndMaths.Core\ScienceAndMaths.Core.csproj", "{233E869A-0F43-4E77-8DB7-3773EC7C83CE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Core.Test", "Test.U\ScienceAndMaths.Core.Test\ScienceAndMaths.Core.Test.csproj", "{2739BA50-1954-48AA-B781-8A7BF014433F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,10 @@ Global
 		{233E869A-0F43-4E77-8DB7-3773EC7C83CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{233E869A-0F43-4E77-8DB7-3773EC7C83CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{233E869A-0F43-4E77-8DB7-3773EC7C83CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2739BA50-1954-48AA-B781-8A7BF014433F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2739BA50-1954-48AA-B781-8A7BF014433F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2739BA50-1954-48AA-B781-8A7BF014433F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2739BA50-1954-48AA-B781-8A7BF014433F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -85,6 +91,7 @@ Global
 		{64D08C15-85E4-4DC5-BE8F-BD04D0ECAD1E} = {7EF3CB4B-337D-4040-89F9-E79D054516FC}
 		{172CD2D7-B401-451D-AA88-96B889AC24F4} = {7EF3CB4B-337D-4040-89F9-E79D054516FC}
 		{9AD56D02-A61B-4D82-99A5-6AFD90881AA2} = {7EF3CB4B-337D-4040-89F9-E79D054516FC}
+		{2739BA50-1954-48AA-B781-8A7BF014433F} = {7EF3CB4B-337D-4040-89F9-E79D054516FC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BE24E04F-40D9-4FB0-AA78-F257C195F495}

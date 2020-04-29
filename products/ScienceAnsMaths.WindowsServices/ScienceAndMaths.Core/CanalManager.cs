@@ -20,7 +20,7 @@ namespace ScienceAndMaths.Core
 
         public CanalSimulationResult ExecuteCanalSimulation()
         {
-            return new CanalSimulationResult();
+            return Canal.ExecuteCanalSimulation();
         }
     }
 }

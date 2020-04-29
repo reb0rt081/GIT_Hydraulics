@@ -16,5 +16,10 @@ namespace ScienceAndMaths.Hydraulics.Canals
         /// Gets or sets the unique identifier for the canal edge.
         /// </summary>
         public string Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the water level in the edge
+        /// </summary>
+        public double? WaterLevel { get; set; }
     }
 }

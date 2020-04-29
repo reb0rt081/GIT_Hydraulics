@@ -49,6 +49,10 @@
     <Compile Include="Canals\RectangularSection.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ScienceAndMaths.Mathematics\ScienceAndMaths.Mathematics.csproj">
+      <Project>{FE52CF6D-A8E0-4B30-9FB9-926C71639BC2}</Project>
+      <Name>ScienceAndMaths.Mathematics</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj">
       <Project>{32271CAC-A2CE-4F84-8065-C356E66E2895}</Project>
       <Name>ScienceAndMaths.Shared</Name>

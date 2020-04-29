@@ -18,6 +18,11 @@ namespace ScienceAndMaths.Mathematics
         /// </summary>
         public Func<double, double, double> Equation { get; set; }
 
+        public RungeKutta()
+        {
+
+        }
+
         public RungeKutta(double interval,Func<double,double, double> equation)
         {
             Interval = interval;

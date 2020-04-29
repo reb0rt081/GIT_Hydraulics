@@ -12,5 +12,10 @@ namespace ScienceAndMaths.Shared
         /// Gets or sets the unique identifier for the canal edge.
         /// </summary>
         string Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the water level in the edge
+        /// </summary>
+        double? WaterLevel { get; set; }
     }
 }
