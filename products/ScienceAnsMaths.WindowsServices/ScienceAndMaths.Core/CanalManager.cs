@@ -20,6 +20,7 @@ namespace ScienceAndMaths.Core
 
         public CanalSimulationResult ExecuteCanalSimulation()
         {
+            //  Coordinate and sync calls to make sure no race conditions and odd stuff can happen in sync
             return Canal.ExecuteCanalSimulation();
         }
     }

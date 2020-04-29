@@ -17,7 +17,8 @@ namespace ScienceAndMaths.Application
 
         public CanalSimulationResult ExecuteCanalSimulation()
         {
-            return new CanalSimulationResult();
+            //  Make sure here we control how many request and threads can execute (SequenceTokenDispatcher)
+            return CanalManager.ExecuteCanalSimulation();
         }
     }
 }
