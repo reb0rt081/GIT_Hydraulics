@@ -32,6 +32,8 @@ namespace ScienceAndMaths.Client.Shared
 
         public const string CanalRibbon = nameof(CanalRibbon);
 
+        public const string LocationRibbon = nameof(LocationRibbon);
+
         #endregion
 
     }

@@ -12,17 +12,16 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Prism.Regions;
 using Unity;
 
 namespace ScienceAndMaths.Client.Modules.Canal.Ribbon
 {
     /// <summary>
-    /// Interaction logic for CanalRibbon.xaml
+    /// Interaction logic for LocationRibbon.xaml
     /// </summary>
-    public partial class CanalRibbon : UserControl
+    public partial class LocationRibbon : UserControl
     {
-        public CanalRibbon()
+        public LocationRibbon()
         {
             InitializeComponent();
         }
@@ -30,7 +29,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.Ribbon
         [Dependency]
         public CanalModule CanalModule
         {
-            get { return (CanalModule) DataContext; }
+            get { return (CanalModule)DataContext; }
             set
             {
                 DataContext = value;

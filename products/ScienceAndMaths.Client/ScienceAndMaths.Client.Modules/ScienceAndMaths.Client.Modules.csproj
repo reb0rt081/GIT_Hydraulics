@@ -83,8 +83,13 @@
     <Compile Include="Canal\Ribbon\CanalRibbon.xaml.cs">
       <DependentUpon>CanalRibbon.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Canal\Ribbon\LocationRibbon.xaml.cs">
+      <DependentUpon>LocationRibbon.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Canal\ViewModels\ICanalViewModel.cs" />
     <Compile Include="Canal\ViewModels\CanalViewModel.cs" />
+    <Compile Include="Canal\ViewModels\ILocationViewModel.cs" />
+    <Compile Include="Canal\ViewModels\LocationViewModel.cs" />
     <Compile Include="Canal\Views\CanalView.xaml.cs">
       <DependentUpon>CanalView.xaml</DependentUpon>
     </Compile>
@@ -123,6 +128,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Canal\Ribbon\CanalRibbon.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Canal\Ribbon\LocationRibbon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

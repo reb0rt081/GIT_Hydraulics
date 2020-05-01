@@ -12,6 +12,7 @@ using ScienceAndMaths.Client.Shared;
 
 using Prism.Ioc;
 using Prism.Modularity;
+using Prism.Mvvm;
 using Prism.Regions;
 using Prism.Unity;
 
@@ -41,10 +42,17 @@ namespace ScienceAndMaths.Client.Modules.Canal
 
         public override void OnInitialized(IContainerProvider containerProvider)
         {
-            this.RegisterViewAndViewModelInRegionAndContainer<LocationView, ICanalViewModel, CanalViewModel>(new CanalViewModel(), Shared.Constants.MainRegion, Shared.Constants.LocationView);
+            this.RegisterViewAndViewModelInRegionAndContainer<LocationView, ILocationViewModel, LocationViewModel>(new LocationViewModel(), Shared.Constants.MainRegion, Shared.Constants.LocationView);
 
-            this.RegisterViewInRegionAndContainer<CanalView>(Shared.Constants.MainRegion,
-                Shared.Constants.CanalView);
+            this.RegisterViewAndViewModelInRegionAndContainer<CanalView, ICanalViewModel, CanalViewModel>(new CanalViewModel(), Shared.Constants.MainRegion, Shared.Constants.CanalView);
+
+            // TODO be able to update ribbon upon navigation to main view
+
+            ViewModelLocationProvider.Register(typeof(LocationRibbon).ToString(), () => Container.Resolve<ILocationViewModel>());
+
+            this.RegisterViewInRegionAndContainer<LocationRibbon>(Shared.Constants.RibbonRegion, Shared.Constants.LocationRibbon);
+
+            ViewModelLocationProvider.Register(typeof(CanalRibbon).ToString(), () => Container.Resolve<ICanalViewModel>());
 
             this.RegisterViewInRegionAndContainer<CanalRibbon>(Shared.Constants.RibbonRegion, Shared.Constants.CanalRibbon);
         }
