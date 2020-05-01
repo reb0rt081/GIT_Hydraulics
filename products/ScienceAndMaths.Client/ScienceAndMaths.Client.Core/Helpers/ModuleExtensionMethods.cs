@@ -33,5 +33,16 @@ namespace ScienceAndMaths.Client.Core.Helpers
 
             RegisterViewInRegionAndContainer<T1>(scienceAndMathsModule, regionName, viewName);
         }
+
+        public static void RegisterViewAndViewModelInRegionAndRibbonAndContainer<T1, T2, T3, T4>(this ScienceAndMathsModule scienceAndMathsModule, T3 viewModel, T4 ribbon, string regionName, string viewName, string ribbonName) where T3 : T2
+        {
+            scienceAndMathsModule.Container.RegisterInstance<T2>(viewModel, new ContainerControlledLifetimeManager());
+            scienceAndMathsModule.Container.BuildUp(viewModel);
+
+            RegisterViewInRegionAndContainer<T1>(scienceAndMathsModule, regionName, viewName);
+            RegisterViewInRegionAndContainer<T4>(scienceAndMathsModule, Constants.RibbonRegion, ribbonName);
+
+            RegionManagerExtensionMethods.RegistrationMapping.Add(viewName, ribbonName);
+        }
     }
 }

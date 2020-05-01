@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Prism.Commands;
 using Prism.Regions;
+using ScienceAndMaths.Client.Core.Helpers;
+using ScienceAndMaths.Client.Modules.Canal.Ribbon;
 using ScienceAndMaths.Client.Modules.Canal.Views;
 using Unity;
 
@@ -25,7 +27,8 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
 
         private void OnLocationEnteredCommandExecuted(string obj)
         {
-            RegionManager.RequestNavigate(Shared.Constants.MainRegion, typeof(CanalView).Name);
+            //RegionManager.RequestNavigate(Shared.Constants.MainRegion, typeof(CanalView).Name);
+            RegionManager.NavigateToViewAndRibbon(Shared.Constants.MainRegion, typeof(CanalView).Name);
         }
     }
 }

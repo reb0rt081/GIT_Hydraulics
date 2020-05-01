@@ -42,19 +42,9 @@ namespace ScienceAndMaths.Client.Modules.Canal
 
         public override void OnInitialized(IContainerProvider containerProvider)
         {
-            this.RegisterViewAndViewModelInRegionAndContainer<LocationView, ILocationViewModel, LocationViewModel>(new LocationViewModel(), Shared.Constants.MainRegion, Shared.Constants.LocationView);
+            this.RegisterViewAndViewModelInRegionAndRibbonAndContainer<LocationView, ILocationViewModel, LocationViewModel, LocationRibbon>(new LocationViewModel(), new LocationRibbon(), Shared.Constants.MainRegion, Shared.Constants.LocationView, Shared.Constants.LocationRibbon);
 
-            this.RegisterViewAndViewModelInRegionAndContainer<CanalView, ICanalViewModel, CanalViewModel>(new CanalViewModel(), Shared.Constants.MainRegion, Shared.Constants.CanalView);
-
-            // TODO be able to update ribbon upon navigation to main view
-
-            ViewModelLocationProvider.Register(typeof(LocationRibbon).ToString(), () => Container.Resolve<ILocationViewModel>());
-
-            this.RegisterViewInRegionAndContainer<LocationRibbon>(Shared.Constants.RibbonRegion, Shared.Constants.LocationRibbon);
-
-            ViewModelLocationProvider.Register(typeof(CanalRibbon).ToString(), () => Container.Resolve<ICanalViewModel>());
-
-            this.RegisterViewInRegionAndContainer<CanalRibbon>(Shared.Constants.RibbonRegion, Shared.Constants.CanalRibbon);
+            this.RegisterViewAndViewModelInRegionAndRibbonAndContainer<CanalView, ICanalViewModel, CanalViewModel, CanalRibbon>(new CanalViewModel(), new CanalRibbon(), Shared.Constants.MainRegion, Shared.Constants.CanalView, Shared.Constants.CanalRibbon);
         }
     }
 }

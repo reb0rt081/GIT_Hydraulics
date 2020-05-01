@@ -17,7 +17,7 @@ using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
 using Prism.Unity;
-
+using ScienceAndMaths.Client.Core.Helpers;
 using Unity;
 
 namespace ScienceAndMaths.Client.Desktop
@@ -88,7 +88,7 @@ namespace ScienceAndMaths.Client.Desktop
 
             canalButton.HorizontalAlignment = HorizontalAlignment.Stretch;
             canalButton.Style = MainMenu.mainGrid.Resources["MenuButtonStyle"] as Style;
-            canalButton.Command = new DelegateCommand(() => regionManager.RequestNavigate(Shared.Constants.MainRegion, scienceAndMathsModuleInfo.MainViewUri));
+            canalButton.Command = new DelegateCommand(() => regionManager.NavigateToViewAndRibbon(Shared.Constants.MainRegion, scienceAndMathsModuleInfo.MainViewUri));
 
             return canalButton;
         }
