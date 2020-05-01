@@ -21,21 +21,21 @@ using Unity;
 namespace ScienceAndMaths.Client.Modules.Picking.Views
 {
     /// <summary>
-    /// Interaction logic for PickingView.xaml
+    /// Interaction logic for CanalView.xaml
     /// </summary>
-    public partial class PickingView : UserControl
+    public partial class CanalView : UserControl
     {
         [Dependency]
-        public IPickingViewModel PickingViewModel
+        public ICanalViewModel PickingViewModel
         {
-            get { return (IPickingViewModel) DataContext; }
+            get { return (ICanalViewModel) DataContext; }
             set
             {
                 DataContext = value;
             }
         }
 
-        public PickingView()
+        public CanalView()
         {
             InitializeComponent();
         }

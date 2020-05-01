@@ -43,11 +43,11 @@ namespace ScienceAndMaths.Client.Desktop
             IRegionManager regionManager =
                 Container.Resolve<IRegionManager>();
 
-            PickingView pickingView = new PickingView();
-            Container.RegisterInstance<PickingView>(Shared.Constants.PickingView, pickingView, new ContainerControlledLifetimeManager());
-            Container.BuildUp(pickingView);
+            CanalView canalView = new CanalView();
+            Container.RegisterInstance<CanalView>(Shared.Constants.PickingView, canalView, new ContainerControlledLifetimeManager());
+            Container.BuildUp(canalView);
             
-            regionManager.RegisterViewWithRegion(Shared.Constants.MainRegion, () => Container.Resolve<PickingView>(Shared.Constants.PickingView));
+            regionManager.RegisterViewWithRegion(Shared.Constants.MainRegion, () => Container.Resolve<CanalView>(Shared.Constants.PickingView));
             
             LocationView locationView = new LocationView();
             Container.RegisterInstance<LocationView>(locationView, new ContainerControlledLifetimeManager());

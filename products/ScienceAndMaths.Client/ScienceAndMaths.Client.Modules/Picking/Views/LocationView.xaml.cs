@@ -25,9 +25,9 @@ namespace ScienceAndMaths.Client.Modules.Picking.Views
     public partial class LocationView : UserControl
     {
         [Dependency]
-        public IPickingViewModel PickingViewModel
+        public ICanalViewModel PickingViewModel
         {
-            get { return (IPickingViewModel)DataContext; }
+            get { return (ICanalViewModel)DataContext; }
             set
             {
                 DataContext = value;

@@ -45,7 +45,7 @@ namespace ScienceAndMaths.Client.Desktop
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
-            moduleCatalog.AddModule<PickingModule>();
+            moduleCatalog.AddModule<CanalModule>();
         }
 
         protected override void InitializeModules()
@@ -53,11 +53,11 @@ namespace ScienceAndMaths.Client.Desktop
             base.InitializeModules();
 
             IRegionManager regionManager = Container.Resolve<IRegionManager>();
-            var module = Container.Resolve<PickingModule>();
+            var module = Container.Resolve<CanalModule>();
             
-            if(module is ScienceAndMathsModule ScienceAndMathsModule)
+            if(module is ScienceAndMathsModule scienceAndMathsModule)
             {
-                var moduleInfo = ScienceAndMathsModule.GetModuleInfo();
+                var moduleInfo = scienceAndMathsModule.GetModuleInfo();
 
                 Button pickingButton = GetModuleMenuButton(regionManager, moduleInfo);
 
@@ -69,7 +69,7 @@ namespace ScienceAndMaths.Client.Desktop
             regionManager.RequestNavigate(Shared.Constants.MainRegion, typeof(MainMenuView).Name);
         }
 
-        protected Button GetModuleMenuButton(IRegionManager regionManager, ScienceAndMathsModuleInfo ScienceAndMathsModuleInfo)
+        protected Button GetModuleMenuButton(IRegionManager regionManager, ScienceAndMathsModuleInfo scienceAndMathsModuleInfo)
         {
             Button pickingButton = new Button();
             StackPanel stackPanel = new StackPanel()
@@ -81,14 +81,14 @@ namespace ScienceAndMaths.Client.Desktop
             stackPanel.Children.Add(new Label()
             {
                 HorizontalAlignment = HorizontalAlignment.Center,
-                Content = ScienceAndMathsModuleInfo.Name
+                Content = scienceAndMathsModuleInfo.Name
             });
 
-            stackPanel.Children.Add(new Image() { Width = 200, Height = 200, Source = new BitmapImage(new Uri(ScienceAndMathsModuleInfo.ImageUri)) });
+            stackPanel.Children.Add(new Image() { Width = 200, Height = 200, Source = new BitmapImage(new Uri(scienceAndMathsModuleInfo.ImageUri)) });
 
             pickingButton.HorizontalAlignment = HorizontalAlignment.Stretch;
             pickingButton.Style = MainMenu.mainGrid.Resources["MenuButtonStyle"] as Style;
-            pickingButton.Command = new DelegateCommand(() => regionManager.RequestNavigate(Shared.Constants.MainRegion, ScienceAndMathsModuleInfo.MainViewUri));
+            pickingButton.Command = new DelegateCommand(() => regionManager.RequestNavigate(Shared.Constants.MainRegion, scienceAndMathsModuleInfo.MainViewUri));
 
             return pickingButton;
         }

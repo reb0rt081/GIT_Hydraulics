@@ -18,19 +18,19 @@ using Unity;
 namespace ScienceAndMaths.Client.Modules.Picking.Ribbon
 {
     /// <summary>
-    /// Interaction logic for PickingRibbon.xaml
+    /// Interaction logic for CanalRibbon.xaml
     /// </summary>
-    public partial class PickingRibbon : UserControl
+    public partial class CanalRibbon : UserControl
     {
-        public PickingRibbon()
+        public CanalRibbon()
         {
             InitializeComponent();
         }
 
         [Dependency]
-        public PickingModule PickingModule
+        public CanalModule PickingModule
         {
-            get { return (PickingModule) DataContext; }
+            get { return (CanalModule) DataContext; }
             set
             {
                 DataContext = value;

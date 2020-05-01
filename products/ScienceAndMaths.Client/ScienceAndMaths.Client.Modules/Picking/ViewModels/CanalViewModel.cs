@@ -14,11 +14,11 @@ using Unity;
 
 namespace ScienceAndMaths.Client.Modules.Picking.ViewModels
 {
-    public class PickingViewModel : BindableBase, INavigationAware, IPickingViewModel
+    public class CanalViewModel : BindableBase, INavigationAware, ICanalViewModel
     {
         #region Constructor and Initialize
 
-        public PickingViewModel()
+        public CanalViewModel()
         {
             ResetView();
         }
@@ -84,7 +84,7 @@ namespace ScienceAndMaths.Client.Modules.Picking.ViewModels
             {
                 RaisePropertiesChanged();
                 
-                RegionManager.RequestNavigate(Shared.Constants.MainRegion, typeof(PickingView).Name);
+                RegionManager.RequestNavigate(Shared.Constants.MainRegion, typeof(CanalView).Name);
             }
         }
 

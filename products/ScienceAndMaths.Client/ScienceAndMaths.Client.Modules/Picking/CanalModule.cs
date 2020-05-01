@@ -20,12 +20,12 @@ using Unity.Lifetime;
 
 namespace ScienceAndMaths.Client.Modules.Picking
 {
-    public class PickingModule : ScienceAndMathsModule
+    public class CanalModule : ScienceAndMathsModule
     {
         public override void RegisterTypes(IContainerRegistry containerRegistry)
         {
-            containerRegistry.RegisterForNavigation<PickingRibbon>();
-            containerRegistry.RegisterForNavigation<PickingView>();
+            containerRegistry.RegisterForNavigation<CanalRibbon>();
+            containerRegistry.RegisterForNavigation<CanalView>();
             containerRegistry.RegisterForNavigation<LocationView>();
         }
 
@@ -33,7 +33,7 @@ namespace ScienceAndMaths.Client.Modules.Picking
         {
             return new ScienceAndMathsModuleInfo()
             {
-                Name = "Picking",
+                Name = "Canals",
                 MainViewUri = typeof(LocationView).Name,
                 ImageUri = "pack://application:,,,/ScienceAndMaths.Client.Shared;component/Images/picking_icon.png"
             };
@@ -41,12 +41,12 @@ namespace ScienceAndMaths.Client.Modules.Picking
 
         public override void OnInitialized(IContainerProvider containerProvider)
         {
-            this.RegisterViewAndViewModelInRegionAndContainer<LocationView, IPickingViewModel, PickingViewModel>(new PickingViewModel(), Shared.Constants.MainRegion, Shared.Constants.LocationView);
+            this.RegisterViewAndViewModelInRegionAndContainer<LocationView, ICanalViewModel, CanalViewModel>(new CanalViewModel(), Shared.Constants.MainRegion, Shared.Constants.LocationView);
 
-            this.RegisterViewInRegionAndContainer<PickingView>(Shared.Constants.MainRegion,
+            this.RegisterViewInRegionAndContainer<CanalView>(Shared.Constants.MainRegion,
                 Shared.Constants.PickingView);
 
-            this.RegisterViewInRegionAndContainer<PickingRibbon>(Shared.Constants.RibbonRegion, Shared.Constants.PickingRibbon);
+            this.RegisterViewInRegionAndContainer<CanalRibbon>(Shared.Constants.RibbonRegion, Shared.Constants.PickingRibbon);
         }
     }
 }

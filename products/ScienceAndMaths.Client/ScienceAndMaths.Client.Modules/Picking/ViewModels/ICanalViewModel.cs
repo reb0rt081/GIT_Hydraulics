@@ -10,7 +10,7 @@ using Prism.Mvvm;
 
 namespace ScienceAndMaths.Client.Modules.Picking.ViewModels
 {
-    public interface IPickingViewModel
+    public interface ICanalViewModel
     {
         DelegateCommand<string> LocationEnteredCommand { get; set; }
 
