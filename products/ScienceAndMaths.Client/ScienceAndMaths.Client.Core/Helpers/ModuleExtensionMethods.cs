@@ -13,25 +13,25 @@ namespace ScienceAndMaths.Client.Core.Helpers
 {
     public static class ModuleExtensionMethods
     {
-        public static void RegisterViewInRegion<T>(this ScienceAndMathsModule ScienceAndMathsModule, string regionName, string viewName)
+        public static void RegisterViewInRegion<T>(this ScienceAndMathsModule scienceAndMathsModule, string regionName, string viewName)
         {
-            ScienceAndMathsModule.RegionManager.Regions[regionName].Add(ScienceAndMathsModule.Container.Resolve(typeof(T), viewName), viewName);
+            scienceAndMathsModule.RegionManager.Regions[regionName].Add(scienceAndMathsModule.Container.Resolve(typeof(T), viewName), viewName);
         }
 
-        public static void RegisterViewInRegionAndContainer<T>(this ScienceAndMathsModule ScienceAndMathsModule, string regionName,
+        public static void RegisterViewInRegionAndContainer<T>(this ScienceAndMathsModule scienceAndMathsModule, string regionName,
             string viewName)
         {
-            ScienceAndMathsModule.Container.RegisterType(typeof(T), typeof(T), viewName, new ContainerControlledLifetimeManager());
+            scienceAndMathsModule.Container.RegisterType(typeof(T), typeof(T), viewName, new ContainerControlledLifetimeManager());
 
-            RegisterViewInRegion<T>(ScienceAndMathsModule, regionName, viewName);
+            RegisterViewInRegion<T>(scienceAndMathsModule, regionName, viewName);
         }
 
-        public static void RegisterViewAndViewModelInRegionAndContainer<T1, T2, T3>(this ScienceAndMathsModule ScienceAndMathsModule, T3 viewModel, string regionName, string viewName) where T3 : T2
+        public static void RegisterViewAndViewModelInRegionAndContainer<T1, T2, T3>(this ScienceAndMathsModule scienceAndMathsModule, T3 viewModel, string regionName, string viewName) where T3 : T2
         {
-            ScienceAndMathsModule.Container.RegisterInstance<T2>(viewModel, new ContainerControlledLifetimeManager());
-            ScienceAndMathsModule.Container.BuildUp(viewModel);
+            scienceAndMathsModule.Container.RegisterInstance<T2>(viewModel, new ContainerControlledLifetimeManager());
+            scienceAndMathsModule.Container.BuildUp(viewModel);
 
-            RegisterViewInRegionAndContainer<T1>(ScienceAndMathsModule, regionName, viewName);
+            RegisterViewInRegionAndContainer<T1>(scienceAndMathsModule, regionName, viewName);
         }
     }
 }
