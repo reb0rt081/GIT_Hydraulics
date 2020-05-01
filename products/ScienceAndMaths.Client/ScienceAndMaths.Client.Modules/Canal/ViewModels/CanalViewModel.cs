@@ -9,7 +9,7 @@ using ScienceAndMaths.Client.Modules.Canal.Views;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
-
+using ScienceAndMaths.Client.Shared;
 using Unity;
 
 namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
@@ -139,6 +139,8 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
+            //  Navigation to the required Ribbon
+            RegionManager.RequestNavigate(Constants.RibbonRegion, Constants.CanalRibbon);
             RaisePropertiesChanged();
         }
 
