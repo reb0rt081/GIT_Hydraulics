@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Core", "Sci
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Core.Test", "Test.U\ScienceAndMaths.Core.Test\ScienceAndMaths.Core.Test.csproj", "{2739BA50-1954-48AA-B781-8A7BF014433F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.ServiceAgents", "ScienceAndMaths.ServiceAgents\ScienceAndMaths.ServiceAgents.csproj", "{AD291586-8CA9-4FFD-A607-AC694908A22B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +85,10 @@ Global
 		{2739BA50-1954-48AA-B781-8A7BF014433F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2739BA50-1954-48AA-B781-8A7BF014433F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2739BA50-1954-48AA-B781-8A7BF014433F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD291586-8CA9-4FFD-A607-AC694908A22B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD291586-8CA9-4FFD-A607-AC694908A22B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD291586-8CA9-4FFD-A607-AC694908A22B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD291586-8CA9-4FFD-A607-AC694908A22B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
