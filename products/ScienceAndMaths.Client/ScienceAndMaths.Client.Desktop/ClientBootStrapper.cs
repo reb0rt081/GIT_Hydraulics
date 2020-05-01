@@ -44,10 +44,10 @@ namespace ScienceAndMaths.Client.Desktop
                 Container.Resolve<IRegionManager>();
 
             CanalView canalView = new CanalView();
-            Container.RegisterInstance<CanalView>(Shared.Constants.PickingView, canalView, new ContainerControlledLifetimeManager());
+            Container.RegisterInstance<CanalView>(Shared.Constants.CanalView, canalView, new ContainerControlledLifetimeManager());
             Container.BuildUp(canalView);
             
-            regionManager.RegisterViewWithRegion(Shared.Constants.MainRegion, () => Container.Resolve<CanalView>(Shared.Constants.PickingView));
+            regionManager.RegisterViewWithRegion(Shared.Constants.MainRegion, () => Container.Resolve<CanalView>(Shared.Constants.CanalView));
             
             LocationView locationView = new LocationView();
             Container.RegisterInstance<LocationView>(locationView, new ContainerControlledLifetimeManager());

@@ -25,7 +25,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
     public partial class LocationView : UserControl
     {
         [Dependency]
-        public ICanalViewModel PickingViewModel
+        public ICanalViewModel canalViewModel
         {
             get { return (ICanalViewModel)DataContext; }
             set
@@ -46,14 +46,14 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
 
         private void ScienceAndMathsScannerControl_OnScanSubmitted(object sender, string e)
         {
-            PickingViewModel.LocationEnteredCommand.Execute(e);
+            canalViewModel.LocationEnteredCommand.Execute(e);
         }
 
         private void ConfirmButton_OnClick(object sender, RoutedEventArgs e)
         {
             if (ScienceAndMathsScannerControl != null && !string.IsNullOrEmpty(ScienceAndMathsScannerControl.LastSuccessfulScan))
             {
-                PickingViewModel.LocationEnteredCommand.Execute(ScienceAndMathsScannerControl.LastSuccessfulScan);
+                canalViewModel.LocationEnteredCommand.Execute(ScienceAndMathsScannerControl.LastSuccessfulScan);
             }
         }
     }

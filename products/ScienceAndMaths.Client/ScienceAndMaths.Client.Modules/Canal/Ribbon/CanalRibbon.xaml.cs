@@ -28,7 +28,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.Ribbon
         }
 
         [Dependency]
-        public CanalModule PickingModule
+        public CanalModule canalModule
         {
             get { return (CanalModule) DataContext; }
             set

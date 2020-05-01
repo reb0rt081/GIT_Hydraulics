@@ -59,9 +59,9 @@ namespace ScienceAndMaths.Client.Desktop
             {
                 var moduleInfo = scienceAndMathsModule.GetModuleInfo();
 
-                Button pickingButton = GetModuleMenuButton(regionManager, moduleInfo);
+                Button canalButton = GetModuleMenuButton(regionManager, moduleInfo);
 
-                MainMenu.menuPanel.Children.Add(pickingButton);
+                MainMenu.menuPanel.Children.Add(canalButton);
             }
 
             regionManager.Regions[Shared.Constants.MainRegion].Add(MainMenu, Shared.Constants.MainMenuView);
@@ -71,13 +71,13 @@ namespace ScienceAndMaths.Client.Desktop
 
         protected Button GetModuleMenuButton(IRegionManager regionManager, ScienceAndMathsModuleInfo scienceAndMathsModuleInfo)
         {
-            Button pickingButton = new Button();
+            Button canalButton = new Button();
             StackPanel stackPanel = new StackPanel()
             {
                 Orientation = Orientation.Vertical
             };
 
-            pickingButton.Content = stackPanel;
+            canalButton.Content = stackPanel;
             stackPanel.Children.Add(new Label()
             {
                 HorizontalAlignment = HorizontalAlignment.Center,
@@ -86,11 +86,11 @@ namespace ScienceAndMaths.Client.Desktop
 
             stackPanel.Children.Add(new Image() { Width = 200, Height = 200, Source = new BitmapImage(new Uri(scienceAndMathsModuleInfo.ImageUri)) });
 
-            pickingButton.HorizontalAlignment = HorizontalAlignment.Stretch;
-            pickingButton.Style = MainMenu.mainGrid.Resources["MenuButtonStyle"] as Style;
-            pickingButton.Command = new DelegateCommand(() => regionManager.RequestNavigate(Shared.Constants.MainRegion, scienceAndMathsModuleInfo.MainViewUri));
+            canalButton.HorizontalAlignment = HorizontalAlignment.Stretch;
+            canalButton.Style = MainMenu.mainGrid.Resources["MenuButtonStyle"] as Style;
+            canalButton.Command = new DelegateCommand(() => regionManager.RequestNavigate(Shared.Constants.MainRegion, scienceAndMathsModuleInfo.MainViewUri));
 
-            return pickingButton;
+            return canalButton;
         }
 
     }

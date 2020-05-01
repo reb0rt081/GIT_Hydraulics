@@ -35,9 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>nerobIcon.ico</ApplicationIcon>
   </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
@@ -166,7 +166,9 @@
       <Name>ScienceAndMaths.Domain</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="nerobIcon.ico" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\nerobIcon.ico">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

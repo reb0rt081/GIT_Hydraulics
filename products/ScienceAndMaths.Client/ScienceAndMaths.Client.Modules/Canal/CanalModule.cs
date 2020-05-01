@@ -35,7 +35,7 @@ namespace ScienceAndMaths.Client.Modules.Canal
             {
                 Name = "Canals",
                 MainViewUri = typeof(LocationView).Name,
-                ImageUri = "pack://application:,,,/ScienceAndMaths.Client.Shared;component/Images/picking_icon.png"
+                ImageUri = "pack://application:,,,/ScienceAndMaths.Client.Shared;component/Images/canal_icon.png"
             };
         }
 
@@ -44,9 +44,9 @@ namespace ScienceAndMaths.Client.Modules.Canal
             this.RegisterViewAndViewModelInRegionAndContainer<LocationView, ICanalViewModel, CanalViewModel>(new CanalViewModel(), Shared.Constants.MainRegion, Shared.Constants.LocationView);
 
             this.RegisterViewInRegionAndContainer<CanalView>(Shared.Constants.MainRegion,
-                Shared.Constants.PickingView);
+                Shared.Constants.CanalView);
 
-            this.RegisterViewInRegionAndContainer<CanalRibbon>(Shared.Constants.RibbonRegion, Shared.Constants.PickingRibbon);
+            this.RegisterViewInRegionAndContainer<CanalRibbon>(Shared.Constants.RibbonRegion, Shared.Constants.CanalRibbon);
         }
     }
 }

@@ -20,7 +20,7 @@ namespace ScienceAndMaths.Client.Shared
 
         #region Views
 
-        public const string PickingView = nameof(PickingView);
+        public const string CanalView = nameof(CanalView);
 
         public const string LocationView = nameof(LocationView);
 
@@ -30,7 +30,7 @@ namespace ScienceAndMaths.Client.Shared
 
         #region Ribbons
 
-        public const string PickingRibbon = nameof(PickingRibbon);
+        public const string CanalRibbon = nameof(CanalRibbon);
 
         #endregion
 
