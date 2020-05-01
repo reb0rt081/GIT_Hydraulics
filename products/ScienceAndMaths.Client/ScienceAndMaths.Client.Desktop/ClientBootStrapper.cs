@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Windows;
-using ScienceAndMaths.Client.Modules.Picking.Views;
+using ScienceAndMaths.Client.Modules.Canal.Views;
 
 using Prism.Regions;
 using Prism.Unity;

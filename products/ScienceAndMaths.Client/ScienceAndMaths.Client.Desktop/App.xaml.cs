@@ -8,8 +8,8 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
-using ScienceAndMaths.Client.Modules.Picking;
-using ScienceAndMaths.Client.Modules.Picking.Views;
+using ScienceAndMaths.Client.Modules.Canal;
+using ScienceAndMaths.Client.Modules.Canal.Views;
 using ScienceAndMaths.Client.Shared;
 
 using Prism.Commands;

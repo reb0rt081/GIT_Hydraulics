@@ -12,12 +12,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using ScienceAndMaths.Client.Modules.Picking.ViewModels;
+using ScienceAndMaths.Client.Modules.Canal.ViewModels;
 using Prism.Regions;
 
 using Unity;
 
-namespace ScienceAndMaths.Client.Modules.Picking.Views
+namespace ScienceAndMaths.Client.Modules.Canal.Views
 {
     /// <summary>
     /// Interaction logic for StockCountView.xaml

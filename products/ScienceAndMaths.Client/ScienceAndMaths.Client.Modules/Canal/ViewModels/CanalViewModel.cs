@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using ScienceAndMaths.Client.Modules.Picking.Views;
+using ScienceAndMaths.Client.Modules.Canal.Views;
 
 using Prism.Commands;
 using Prism.Mvvm;
@@ -12,7 +12,7 @@ using Prism.Regions;
 
 using Unity;
 
-namespace ScienceAndMaths.Client.Modules.Picking.ViewModels
+namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
 {
     public class CanalViewModel : BindableBase, INavigationAware, ICanalViewModel
     {

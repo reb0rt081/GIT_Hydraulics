@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using Prism.Commands;
 using Prism.Mvvm;
 
-namespace ScienceAndMaths.Client.Modules.Picking.ViewModels
+namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
 {
     public interface ICanalViewModel
     {

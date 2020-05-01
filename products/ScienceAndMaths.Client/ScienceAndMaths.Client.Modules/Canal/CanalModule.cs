@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using ScienceAndMaths.Client.Core;
 using ScienceAndMaths.Client.Core.Helpers;
-using ScienceAndMaths.Client.Modules.Picking.Ribbon;
-using ScienceAndMaths.Client.Modules.Picking.ViewModels;
-using ScienceAndMaths.Client.Modules.Picking.Views;
+using ScienceAndMaths.Client.Modules.Canal.Ribbon;
+using ScienceAndMaths.Client.Modules.Canal.ViewModels;
+using ScienceAndMaths.Client.Modules.Canal.Views;
 using ScienceAndMaths.Client.Shared;
 
 using Prism.Ioc;
@@ -18,7 +18,7 @@ using Prism.Unity;
 using Unity;
 using Unity.Lifetime;
 
-namespace ScienceAndMaths.Client.Modules.Picking
+namespace ScienceAndMaths.Client.Modules.Canal
 {
     public class CanalModule : ScienceAndMathsModule
     {

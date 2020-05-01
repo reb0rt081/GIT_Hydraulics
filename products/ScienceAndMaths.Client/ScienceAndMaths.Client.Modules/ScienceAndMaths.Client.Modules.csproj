@@ -79,22 +79,22 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Picking\CanalModule.cs" />
-    <Compile Include="Picking\Ribbon\CanalRibbon.xaml.cs">
+    <Compile Include="Canal\CanalModule.cs" />
+    <Compile Include="Canal\Ribbon\CanalRibbon.xaml.cs">
       <DependentUpon>CanalRibbon.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Picking\ViewModels\ICanalViewModel.cs" />
-    <Compile Include="Picking\ViewModels\CanalViewModel.cs" />
-    <Compile Include="Picking\Views\CanalView.xaml.cs">
+    <Compile Include="Canal\ViewModels\ICanalViewModel.cs" />
+    <Compile Include="Canal\ViewModels\CanalViewModel.cs" />
+    <Compile Include="Canal\Views\CanalView.xaml.cs">
       <DependentUpon>CanalView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Picking\Views\LocationView.xaml.cs">
+    <Compile Include="Canal\Views\LocationView.xaml.cs">
       <DependentUpon>LocationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Picking\Repository\" />
+    <Folder Include="Canal\Repository\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -122,15 +122,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Picking\Ribbon\CanalRibbon.xaml">
+    <Page Include="Canal\Ribbon\CanalRibbon.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Picking\Views\CanalView.xaml">
+    <Page Include="Canal\Views\CanalView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Picking\Views\LocationView.xaml">
+    <Page Include="Canal\Views\LocationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

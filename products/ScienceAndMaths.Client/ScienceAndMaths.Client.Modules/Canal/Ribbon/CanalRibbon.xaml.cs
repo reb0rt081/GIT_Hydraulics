@@ -15,7 +15,7 @@ using System.Windows.Shapes;
 using Prism.Regions;
 using Unity;
 
-namespace ScienceAndMaths.Client.Modules.Picking.Ribbon
+namespace ScienceAndMaths.Client.Modules.Canal.Ribbon
 {
     /// <summary>
     /// Interaction logic for CanalRibbon.xaml
