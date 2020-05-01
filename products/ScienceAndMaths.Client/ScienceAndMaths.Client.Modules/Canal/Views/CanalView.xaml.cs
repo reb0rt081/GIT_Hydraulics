@@ -26,7 +26,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
     public partial class CanalView : UserControl
     {
         [Dependency]
-        public ICanalViewModel canalViewModel
+        public ICanalViewModel CanalViewModel
         {
             get { return (ICanalViewModel) DataContext; }
             set
@@ -42,7 +42,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
 
         private void ScienceAndMathsScannerControl_OnScanSubmitted(object sender, string e)
         {
-            canalViewModel.BarcodeEnteredCommand.Execute(e);
+            CanalViewModel.BarcodeEnteredCommand.Execute(e);
         }
     }
 }
