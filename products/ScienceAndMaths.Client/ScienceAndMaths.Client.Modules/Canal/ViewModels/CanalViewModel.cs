@@ -11,6 +11,7 @@ using Prism.Mvvm;
 using Prism.Regions;
 using ScienceAndMaths.Client.Shared;
 using Unity;
+using Microsoft.Win32;
 
 namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
 {
@@ -70,7 +71,11 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
 
         private void OnLoadCanalCommandExecuted(string obj)
         {
-            throw new NotImplementedException();
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                string file = openFileDialog.FileName;
+            }                
         }
 
         private void OnBarcodeEnteredCommandExecuted(string barcode)
