@@ -14,7 +14,7 @@ using Unity;
 
 namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
 {
-    public class LocationViewModel : BindableBase, INavigationAware, ILocationViewModel
+    public class LocationViewModel : ScienceAndMathsViewModel, INavigationAware, ILocationViewModel
     {
         public DelegateCommand<string> LocationEnteredCommand { get; set; }
 
@@ -24,9 +24,6 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
             LocationEnteredCommand = new DelegateCommand<string>(OnLocationEnteredCommandExecuted);
         }
 
-        [Dependency]
-        public IRegionManager RegionManager { get; set; }
-
         private void OnLocationEnteredCommandExecuted(string obj)
         {
             RegionManager.NavigateToViewAndRibbon(Shared.Constants.MainRegion, typeof(CanalView).Name);
@@ -35,7 +32,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             //  Navigation to the required Ribbon
-            RegionManager.RequestNavigate(Constants.RibbonRegion, Constants.LocationRibbon);
+            //RegionManager.RequestNavigate(Constants.RibbonRegion, Constants.LocationRibbon);
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

@@ -21,6 +21,7 @@ namespace ScienceAndMaths.Client.Shared
         protected virtual void OnNavigateBackCommandExecuted()
         {
             RegionManager.Regions[Constants.MainRegion].NavigationService.Journal.GoBack();
+            RegionManager.Regions[Constants.RibbonRegion].NavigationService.Journal.GoBack();
         }
 
         public DelegateCommand NavigateBackCommand { get; set; }

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Prism.Regions;
+using ScienceAndMaths.Client.Modules.Canal.ViewModels;
 using Unity;
 
 namespace ScienceAndMaths.Client.Modules.Canal.Ribbon
@@ -28,9 +29,9 @@ namespace ScienceAndMaths.Client.Modules.Canal.Ribbon
         }
 
         [Dependency]
-        public CanalModule CanalModule
+        public CanalViewModel CanalModule
         {
-            get { return (CanalModule) DataContext; }
+            get { return (CanalViewModel) DataContext; }
             set
             {
                 DataContext = value;

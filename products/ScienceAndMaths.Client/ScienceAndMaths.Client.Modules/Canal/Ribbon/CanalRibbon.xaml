@@ -21,7 +21,8 @@
             <RibbonTab Header="Home" KeyTip="H" >
                 <RibbonGroup Header="Actions">
                     <controls:ScienceAndMathsBackRibbonButton LargeImageSource="pack://application:,,,/ScienceAndMaths.Client.Shared;component/Images/back_icon.png" KeyTip="X" />
-                </RibbonGroup>
+                    <RibbonButton Command="" Label="Load canal" LargeImageSource="pack://application:,,,/ScienceAndMaths.Client.Shared;component/Images/load_icon.png"/>
+                </RibbonGroup>                
             </RibbonTab>
             <!-- Ribbon Tab #2: -->
             <RibbonTab Header="Insert" KeyTip="I"/>

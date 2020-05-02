@@ -31,9 +31,9 @@ namespace ScienceAndMaths.Client.Controls
         {
             base.OnApplyTemplate();
 
-            if (!(DataContext is ScienceAndMathsModule))
+            if (!(DataContext is ScienceAndMathsModule) && !(DataContext is ScienceAndMathsViewModel))
             {
-                throw new InvalidCastException($"{nameof(ScienceAndMathsBackRibbonButton)} needs a {nameof(DataContext)} of type {typeof(ScienceAndMathsModule)}. Actual type is {DataContext.GetType()}");
+                throw new InvalidCastException($"{nameof(ScienceAndMathsBackRibbonButton)} needs a {nameof(DataContext)} of type {typeof(ScienceAndMathsModule)} or {typeof(ScienceAndMathsViewModel)}. Actual type is {DataContext.GetType()}");
             }
         }
     }

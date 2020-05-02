@@ -14,7 +14,7 @@ using Unity;
 
 namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
 {
-    public class CanalViewModel : BindableBase, INavigationAware, ICanalViewModel
+    public class CanalViewModel : ScienceAndMathsViewModel, INavigationAware, ICanalViewModel
     {
         #region Constructor and Initialize
 
@@ -50,9 +50,6 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
         #endregion
 
         #region Properties
-
-        [Dependency]
-        public IRegionManager RegionManager { get; set; }
 
         public string ItemImagePath { get; set; }
 
@@ -140,7 +137,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             //  Navigation to the required Ribbon
-            RegionManager.RequestNavigate(Constants.RibbonRegion, Constants.CanalRibbon);
+            //RegionManager.RequestNavigate(Constants.RibbonRegion, Constants.CanalRibbon);
             RaisePropertiesChanged();
         }
 
