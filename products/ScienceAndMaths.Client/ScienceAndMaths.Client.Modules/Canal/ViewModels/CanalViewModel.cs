@@ -26,6 +26,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
         [InjectionMethod]
         public void Initialize()
         {
+            LoadCanalCommand = new DelegateCommand<string>(OnLoadCanalCommandExecuted);
             LocationEnteredCommand = new DelegateCommand<string>(OnLocationEnteredCommandExecuted);
             BarcodeEnteredCommand = new DelegateCommand<string>(OnBarcodeEnteredCommandExecuted);
             ConfirmPickCommand = new DelegateCommand(OnPickConfirmCommandExecuted, OnPickConfirmCommandCanExecute);
@@ -36,6 +37,8 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
         #endregion
 
         #region Commands
+
+        public DelegateCommand<string> LoadCanalCommand { get; set; }
 
         public DelegateCommand<string> LocationEnteredCommand { get; set; }
 
@@ -54,7 +57,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
         public string ItemImagePath { get; set; }
 
         public int QuantitySelected { get; set; }
-
+        
         #endregion
 
         #region Private methods
@@ -63,6 +66,11 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
         {
             ItemImagePath = @"pack://application:,,,/ScienceAndMaths.Client.Shared;component/Images/questionMark.png";
             QuantitySelected = 0;
+        }
+
+        private void OnLoadCanalCommandExecuted(string obj)
+        {
+            throw new NotImplementedException();
         }
 
         private void OnBarcodeEnteredCommandExecuted(string barcode)

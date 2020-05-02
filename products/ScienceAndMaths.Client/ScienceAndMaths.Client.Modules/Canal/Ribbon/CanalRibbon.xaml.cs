@@ -29,9 +29,9 @@ namespace ScienceAndMaths.Client.Modules.Canal.Ribbon
         }
 
         [Dependency]
-        public CanalViewModel CanalModule
+        public ICanalViewModel CanalModule
         {
-            get { return (CanalViewModel) DataContext; }
+            get { return (ICanalViewModel) DataContext; }
             set
             {
                 DataContext = value;

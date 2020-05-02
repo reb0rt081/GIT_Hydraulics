@@ -12,6 +12,8 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
 {
     public interface ICanalViewModel
     {
+        DelegateCommand<string> LoadCanalCommand { get; set; }
+
         DelegateCommand<string> LocationEnteredCommand { get; set; }
 
         DelegateCommand<string> BarcodeEnteredCommand { get; set; }
