@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScienceAndMaths.Domain
+namespace ScienceAndMaths.ServiceAgents
 {
-    public interface IConfigurationService
+    public interface IConfigurationServiceAgent
     {
         Canal LoadCanalConfiguration(string file);
     }

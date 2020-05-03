@@ -1,4 +1,5 @@
 ﻿using ScienceAndMaths.Domain;
+using ScienceAndMaths.Hydraulics.Canals;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,9 @@ namespace ScienceAndMaths.Application
     {
         [Dependency]
         public ICanalConfigurationLoader ConfigurationLoader { get; set; }
-        public void LoadCanalConfiguration(string file)
+        public Canal LoadCanalConfiguration(string file)
         {
-            ConfigurationLoader.LoadCanalConfiguration(file);
+            return ConfigurationLoader.LoadCanalConfiguration(file);
         }
     }
 }

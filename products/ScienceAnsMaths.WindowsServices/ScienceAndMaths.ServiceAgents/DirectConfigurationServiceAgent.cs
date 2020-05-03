@@ -4,20 +4,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ScienceAndMaths.Domain;
-using ScienceAndMaths.Shared.Canals;
+using ScienceAndMaths.Hydraulics.Canals;
 using Unity;
 
 namespace ScienceAndMaths.ServiceAgents
 {
-    public class CanalDirectServiceAgent : ICanalServiceAgent
+    public class DirectConfigurationServiceAgent : IConfigurationServiceAgent
     {
         [Dependency]
-        public ICanalFlowService CanalFlowService { get; set; }
+        public IConfigurationService ConfigurationService { get; set; }
 
-        public CanalSimulationResult ExecuteCanalSimulation()
+        public Canal LoadCanalConfiguration(string file)
         {
             // Normally use correlation Ids to correlate messages and async methods
-            return CanalFlowService.ExecuteCanalSimulation();
+            return ConfigurationService.LoadCanalConfiguration(file);
         }
     }
 }

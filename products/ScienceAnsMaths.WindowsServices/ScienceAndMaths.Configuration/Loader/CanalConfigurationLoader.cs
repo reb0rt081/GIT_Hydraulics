@@ -24,7 +24,7 @@ namespace ScienceAndMaths.Configuration.Loader
             string relativePath = ConfigurationManager.AppSettings[ServerConfigConsts.RelativeModelsLocation];
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string subFolderPath = Path.Combine(path, relativePath + "\\CanalConfiguration.xml");
-            var canal = LoadCanalConfiguration(subFolderPath);
+            Canal canal = LoadCanalConfiguration(subFolderPath);
 
             CanalManager.SetCanal(canal);
         }
@@ -56,7 +56,10 @@ namespace ScienceAndMaths.Configuration.Loader
                 if (deserializedConfiguration != null)
                 {
                     CanalConfigurationConverter converter = new CanalConfigurationConverter();
-                    return converter.Convert(deserializedConfiguration);
+                    Canal canal = converter.Convert(deserializedConfiguration);
+                    CanalManager.SetCanal(canal);
+
+                    return canal;                 
                 }
             }
 
