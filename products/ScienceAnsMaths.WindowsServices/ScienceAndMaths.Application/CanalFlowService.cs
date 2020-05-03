@@ -15,10 +15,15 @@ namespace ScienceAndMaths.Application
         [Dependency]
         public ICanalManager CanalManager { get; set; }
 
-        public CanalSimulationResult ExecuteCanalSimulation()
+        public async Task<CanalSimulationResult> ExecuteCanalSimulationAsync()
         {
             //  Make sure here we control how many request and threads can execute (SequenceTokenDispatcher)
-            return CanalManager.ExecuteCanalSimulation();
+            return await Task.Run(() => CanalManager.ExecuteCanalSimulation());
+
+            // Normally we would create an event "OnCanalSimulationCompleted" that is raised when the task is finally run on a queue
+            // The "CanalServiceAgent" registers to "OnCanalSimulationCompleted" event in "CanalFlowService" and makes sure it returns a result when checking running task against the correlation id
+            //SequenceTokenWorkDispatcher.EnqueueUnitOfWork(() => CanalManager.ExecuteCanalSimulation(),
+            //                 OnGetLoadCarrierCompleted, correlationId, TransactionManager, name);
         }
     }
 }

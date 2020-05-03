@@ -9,6 +9,6 @@ namespace ScienceAndMaths.ServiceAgents
 {
     public interface ICanalServiceAgent
     {
-        CanalSimulationResult ExecuteCanalSimulation();
+        Task<CanalSimulationResult> ExecuteCanalSimulationAsync();
     }
 }

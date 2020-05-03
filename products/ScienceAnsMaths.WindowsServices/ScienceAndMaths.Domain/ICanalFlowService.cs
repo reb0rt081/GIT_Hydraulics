@@ -10,6 +10,6 @@ namespace ScienceAndMaths.Domain
 {
     public interface ICanalFlowService
     {
-        CanalSimulationResult ExecuteCanalSimulation();
+        Task<CanalSimulationResult> ExecuteCanalSimulationAsync();
     }
 }

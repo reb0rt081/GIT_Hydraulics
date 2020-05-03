@@ -14,10 +14,13 @@ namespace ScienceAndMaths.ServiceAgents
         [Dependency]
         public ICanalFlowService CanalFlowService { get; set; }
 
-        public CanalSimulationResult ExecuteCanalSimulation()
+        public async Task<CanalSimulationResult> ExecuteCanalSimulationAsync()
         {
             // Normally use correlation Ids to correlate messages and async methods
-            return CanalFlowService.ExecuteCanalSimulation();
+            return await CanalFlowService.ExecuteCanalSimulationAsync();
+
+            //  Normally the direct service agent will register to event in CanalFlowService when simulation is completed.
+            //  It will then check the correlation id provided in the event and find the executing task that is related to this correlation id, and set the result
         }
     }
 }
