@@ -18,6 +18,8 @@ using Prism.Modularity;
 using Prism.Regions;
 using Prism.Unity;
 using ScienceAndMaths.Client.Core.Helpers;
+using ScienceAndMaths.ServiceAgents;
+
 using Unity;
 
 namespace ScienceAndMaths.Client.Desktop
@@ -50,18 +52,44 @@ namespace ScienceAndMaths.Client.Desktop
 
         protected override void InitializeModules()
         {
+            // Load and register services
+            LoadServiceAndServiceAgents();
+
             base.InitializeModules();
 
+            CreateMainMenu();
+        }
+
+        protected virtual void LoadServiceAndServiceAgents()
+        {
+            // add here necessary stuff to the container
+            var unityContainer = Container.Resolve<IUnityContainer>();
+            var canalDirectServiceAgent = new CanalDirectServiceAgent();
+            unityContainer.RegisterInstance<ICanalServiceAgent>(canalDirectServiceAgent);
+
+            // build up everything
+
+            // register for start/connect/etc
+        }
+
+        protected void CreateMainMenu()
+        {
             IRegionManager regionManager = Container.Resolve<IRegionManager>();
-            var module = Container.Resolve<CanalModule>();
-            
-            if(module is ScienceAndMathsModule scienceAndMathsModule)
+            IModuleCatalog moduleCatalog = Container.Resolve<IModuleCatalog>();
+
+            foreach (IModuleInfo moduleInfo in moduleCatalog.Modules)
             {
-                var moduleInfo = scienceAndMathsModule.GetModuleInfo();
+                Type moduleType = Type.GetType(moduleInfo.ModuleType);
+                var module = Container.Resolve(moduleType);
 
-                Button canalButton = GetModuleMenuButton(regionManager, moduleInfo);
+                if (module is ScienceAndMathsModule scienceAndMathsModule)
+                {
+                    ScienceAndMathsModuleInfo samModuleInfo = scienceAndMathsModule.GetModuleInfo();
 
-                MainMenu.menuPanel.Children.Add(canalButton);
+                    Button canalButton = GetModuleMenuButton(regionManager, samModuleInfo);
+
+                    MainMenu.menuPanel.Children.Add(canalButton);
+                }
             }
 
             regionManager.Regions[Shared.Constants.MainRegion].Add(MainMenu, Shared.Constants.MainMenuView);

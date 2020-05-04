@@ -23,7 +23,7 @@ namespace ScienceAndMaths.Application
             // Normally we would create an event "OnCanalSimulationCompleted" that is raised when the task is finally run on a queue
             // The "CanalServiceAgent" registers to "OnCanalSimulationCompleted" event in "CanalFlowService" and makes sure it returns a result when checking running task against the correlation id
             //SequenceTokenWorkDispatcher.EnqueueUnitOfWork(() => CanalManager.ExecuteCanalSimulation(),
-            //                 OnGetLoadCarrierCompleted, correlationId, TransactionManager, name);
+            //                 OnCanalSimulationCompleted, correlationId, TransactionManager, name);
         }
     }
 }

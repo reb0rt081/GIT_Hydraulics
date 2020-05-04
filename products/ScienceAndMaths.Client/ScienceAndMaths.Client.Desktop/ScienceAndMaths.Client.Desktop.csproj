@@ -8,12 +8,13 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>ScienceAndMaths.Client.Desktop</RootNamespace>
     <AssemblyName>ScienceAndMaths.Client.Desktop</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -145,6 +146,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ScienceAnsMaths.WindowsServices\ScienceAndMaths.ServiceAgents\ScienceAndMaths.ServiceAgents.csproj">
+      <Project>{AD291586-8CA9-4FFD-A607-AC694908A22B}</Project>
+      <Name>ScienceAndMaths.ServiceAgents</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ScienceAndMaths.Client.Controls\ScienceAndMaths.Client.Controls.csproj">
       <Project>{18b5998d-433e-4cdb-a328-240a2a9d2bed}</Project>
       <Name>ScienceAndMaths.Client.Controls</Name>
@@ -160,10 +165,6 @@
     <ProjectReference Include="..\ScienceAndMaths.Client.Shared\ScienceAndMaths.Client.Shared.csproj">
       <Project>{f61de32b-cad1-4bd4-9213-043d31d0bf06}</Project>
       <Name>ScienceAndMaths.Client.Shared</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ScienceAndMaths.Domain\ScienceAndMaths.Domain.csproj">
-      <Project>{0DD9D973-62F7-4ECB-9AC5-C3A8AA7BD031}</Project>
-      <Name>ScienceAndMaths.Domain</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
