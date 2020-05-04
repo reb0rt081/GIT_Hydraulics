@@ -17,7 +17,12 @@ using Prism.Ioc;
 using Prism.Modularity;
 using Prism.Regions;
 using Prism.Unity;
+
+using ScienceAndMaths.Application;
 using ScienceAndMaths.Client.Core.Helpers;
+using ScienceAndMaths.Configuration.Loader;
+using ScienceAndMaths.Core;
+using ScienceAndMaths.Domain;
 using ScienceAndMaths.ServiceAgents;
 
 using Unity;
@@ -65,9 +70,25 @@ namespace ScienceAndMaths.Client.Desktop
             // add here necessary stuff to the container
             var unityContainer = Container.Resolve<IUnityContainer>();
             var canalDirectServiceAgent = new CanalDirectServiceAgent();
+            var configurationDirectServiceAgent = new ConfigurationDirectServiceAgent();
+            var canalFlowService = new CanalFlowService();
+            var configurationService = new ConfigurationService();
+            var canalManager = new CanalManager();
+            var configurationLoader = new CanalConfigurationLoader();
+
             unityContainer.RegisterInstance<ICanalServiceAgent>(canalDirectServiceAgent);
+            unityContainer.RegisterInstance<IConfigurationServiceAgent>(configurationDirectServiceAgent);
+            unityContainer.RegisterInstance<ICanalFlowService>(canalFlowService);
+            unityContainer.RegisterInstance<IConfigurationService>(configurationService);
+            unityContainer.RegisterInstance<ICanalManager>(canalManager);
+            unityContainer.RegisterInstance<ICanalConfigurationLoader>(configurationLoader);
 
             // build up everything
+            unityContainer.BuildUp(canalDirectServiceAgent);
+            unityContainer.BuildUp(configurationDirectServiceAgent);
+            unityContainer.BuildUp(canalFlowService);
+            unityContainer.BuildUp(configurationService);
+            unityContainer.BuildUp(configurationLoader);
 
             // register for start/connect/etc
         }

@@ -54,7 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CanalDirectServiceAgent.cs" />
-    <Compile Include="DirectConfigurationServiceAgent.cs" />
+    <Compile Include="ConfigurationDirectServiceAgent.cs" />
     <Compile Include="ICanalServiceAgent.cs" />
     <Compile Include="IConfigurationServiceAgent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -9,7 +9,7 @@ using Unity;
 
 namespace ScienceAndMaths.ServiceAgents
 {
-    public class DirectConfigurationServiceAgent : IConfigurationServiceAgent
+    public class ConfigurationDirectServiceAgent : IConfigurationServiceAgent
     {
         [Dependency]
         public IConfigurationService ConfigurationService { get; set; }
