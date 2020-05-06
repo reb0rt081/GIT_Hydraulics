@@ -12,12 +12,16 @@ using Prism.Regions;
 using ScienceAndMaths.Client.Shared;
 using Unity;
 using Microsoft.Win32;
+using ScienceAndMaths.ServiceAgents;
 
 namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
 {
     public class CanalViewModel : ScienceAndMathsViewModel, INavigationAware, ICanalViewModel
     {
         #region Constructor and Initialize
+
+        [Dependency]
+        public IConfigurationServiceAgent ConfigurationServiceAgent { get; set; }
 
         public CanalViewModel()
         {
@@ -75,6 +79,8 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
             if (openFileDialog.ShowDialog() == true)
             {
                 string file = openFileDialog.FileName;
+
+                var canal = ConfigurationServiceAgent.LoadCanalConfiguration(file);
             }                
         }
 

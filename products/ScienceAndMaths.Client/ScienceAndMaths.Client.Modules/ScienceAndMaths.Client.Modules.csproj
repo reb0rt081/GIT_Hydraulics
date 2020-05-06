@@ -106,6 +106,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\ScienceAnsMaths.WindowsServices\ScienceAndMaths.Hydraulics\ScienceAndMaths.Hydraulics.csproj">
+      <Project>{B14FF188-99E1-48F2-90EC-8745E42412A4}</Project>
+      <Name>ScienceAndMaths.Hydraulics</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ScienceAnsMaths.WindowsServices\ScienceAndMaths.ServiceAgents\ScienceAndMaths.ServiceAgents.csproj">
+      <Project>{AD291586-8CA9-4FFD-A607-AC694908A22B}</Project>
+      <Name>ScienceAndMaths.ServiceAgents</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ScienceAndMaths.Client.Controls\ScienceAndMaths.Client.Controls.csproj">
       <Project>{18B5998D-433E-4CDB-A328-240A2A9D2BED}</Project>
       <Name>ScienceAndMaths.Client.Controls</Name>

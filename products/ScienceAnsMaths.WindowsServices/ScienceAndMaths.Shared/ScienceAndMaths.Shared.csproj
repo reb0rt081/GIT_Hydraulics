@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="Canals\CanalPointResult.cs" />
     <Compile Include="Canals\CanalSimulationResult.cs" />
+    <Compile Include="Canals\ICanal.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="ICanalSection.cs" />
     <Compile Include="ICanalEdge.cs" />

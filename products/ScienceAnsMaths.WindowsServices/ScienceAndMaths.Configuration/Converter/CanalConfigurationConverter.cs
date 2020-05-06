@@ -41,8 +41,8 @@ namespace ScienceAndMaths.Configuration.Converter
                     throw new ArgumentException($"Canal section for arrow {arrow.ArrowId} is not valid.");
                 }
 
-                CanalEdge fromNode = data.CanelEdges.Single(ce => ce.Id == arrow.FromNodeId);
-                CanalEdge toNode = data.CanelEdges.Single(ce => ce.Id == arrow.ToNodeId);
+                ICanalEdge fromNode = data.CanelEdges.Single(ce => ce.Id == arrow.FromNodeId);
+                ICanalEdge toNode = data.CanelEdges.Single(ce => ce.Id == arrow.ToNodeId);
 
                 data.CanalStretches.Add(new CanalStretch()
                 {

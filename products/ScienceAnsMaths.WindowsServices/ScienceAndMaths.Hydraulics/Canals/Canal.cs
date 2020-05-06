@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using ScienceAndMaths.Mathematics;
+using ScienceAndMaths.Shared;
 using ScienceAndMaths.Shared.Canals;
 
 namespace ScienceAndMaths.Hydraulics.Canals
@@ -12,12 +13,12 @@ namespace ScienceAndMaths.Hydraulics.Canals
     /// <summary>
     /// Represents a canal configuration with a set of edges and stretches.
     /// </summary>
-    public class Canal
+    public class Canal : ICanal
     {
         public Canal()
         {
-            CanelEdges = new List<CanalEdge>();
-            CanalStretches = new List<CanalStretch>();
+            CanelEdges = new List<ICanalEdge>();
+            CanalStretches = new List<ICanalStretch>();
         }
 
         /// <summary>
@@ -28,12 +29,12 @@ namespace ScienceAndMaths.Hydraulics.Canals
         /// <summary>
         /// Gets or sets the canal edges to define the boundary conditions.
         /// </summary>
-        public List<CanalEdge> CanelEdges;
+        public List<ICanalEdge> CanelEdges { get; set; }
 
         /// <summary>
         /// Gets or sets the canal homogeneous sections.
         /// </summary>
-        public List<CanalStretch> CanalStretches;
+        public List<ICanalStretch> CanalStretches { get; set; }
 
         /// <summary>
         /// Executes the canal simulation
@@ -45,7 +46,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
 
             RungeKutta solver = new RungeKutta();
 
-            foreach (CanalStretch canalStretch in CanalStretches)
+            foreach (ICanalStretch canalStretch in CanalStretches)
             {
                 if(canalStretch.Flow > 0 && canalStretch.FromNode.WaterLevel.HasValue)
                 {
