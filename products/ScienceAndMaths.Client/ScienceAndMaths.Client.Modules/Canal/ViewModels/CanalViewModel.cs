@@ -10,6 +10,7 @@ using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Regions;
 using ScienceAndMaths.Client.Shared;
+using ScienceAndMaths.Shared.Canals;
 using Unity;
 using Microsoft.Win32;
 using ScienceAndMaths.ServiceAgents;

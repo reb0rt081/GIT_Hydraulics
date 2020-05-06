@@ -9,6 +9,7 @@ using ScienceAndMaths.Configuration.Converter;
 using ScienceAndMaths.Domain;
 using ScienceAndMaths.Hydraulics.Canals;
 using ScienceAndMaths.Shared;
+using ScienceAndMaths.Shared.Canals;
 
 using Unity;
 
@@ -24,12 +25,12 @@ namespace ScienceAndMaths.Configuration.Loader
             string relativePath = ConfigurationManager.AppSettings[ServerConfigConsts.RelativeModelsLocation];
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             string subFolderPath = Path.Combine(path, relativePath + "\\CanalConfiguration.xml");
-            Canal canal = LoadCanalConfiguration(subFolderPath);
+            Canal canal = LoadCanalConfiguration(subFolderPath) as Canal;
 
             CanalManager.SetCanal(canal);
         }
 
-        public Canal LoadCanalConfiguration(string configurationLocation)
+        public ICanal LoadCanalConfiguration(string configurationLocation)
         {
             string fileContent;
 

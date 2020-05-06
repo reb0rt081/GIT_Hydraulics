@@ -1,10 +1,12 @@
 ﻿using ScienceAndMaths.Domain;
-using ScienceAndMaths.Hydraulics.Canals;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+
+using ScienceAndMaths.Shared.Canals;
+
 using Unity;
 
 namespace ScienceAndMaths.Application
@@ -13,7 +15,7 @@ namespace ScienceAndMaths.Application
     {
         [Dependency]
         public ICanalConfigurationLoader ConfigurationLoader { get; set; }
-        public Canal LoadCanalConfiguration(string file)
+        public ICanal LoadCanalConfiguration(string file)
         {
             return ConfigurationLoader.LoadCanalConfiguration(file);
         }

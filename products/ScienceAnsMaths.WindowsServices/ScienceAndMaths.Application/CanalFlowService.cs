@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ScienceAndMaths.Domain;
-using ScienceAndMaths.Hydraulics.Canals;
 using ScienceAndMaths.Shared.Canals;
 using Unity;
 

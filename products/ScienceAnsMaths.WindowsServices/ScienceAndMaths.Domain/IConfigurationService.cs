@@ -5,10 +5,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ScienceAndMaths.Shared.Canals;
+
 namespace ScienceAndMaths.Domain
 {
     public interface IConfigurationService
     {
-        Canal LoadCanalConfiguration(string file);
+        ICanal LoadCanalConfiguration(string file);
     }
 }
