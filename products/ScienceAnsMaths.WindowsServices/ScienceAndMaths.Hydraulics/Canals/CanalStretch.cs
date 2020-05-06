@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ScienceAndMaths.Shared;
+using ScienceAndMaths.Shared.Canals;
 
 namespace ScienceAndMaths.Hydraulics.Canals
 {

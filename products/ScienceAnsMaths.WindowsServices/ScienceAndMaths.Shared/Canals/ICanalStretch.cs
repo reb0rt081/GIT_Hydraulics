@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ScienceAndMaths.Shared
+namespace ScienceAndMaths.Shared.Canals
 {
     public interface ICanalStretch
     {

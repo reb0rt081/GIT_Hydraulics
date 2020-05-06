@@ -13,6 +13,7 @@ using ScienceAndMaths.Configuration.Loader;
 using ScienceAndMaths.Core;
 using ScienceAndMaths.Hydraulics.Canals;
 using ScienceAndMaths.Shared;
+using ScienceAndMaths.Shared.Canals;
 
 namespace ScienceAndMaths.Configuration.Test
 {

@@ -45,10 +45,10 @@
     <Compile Include="Canals\CanalSimulationResult.cs" />
     <Compile Include="Canals\ICanal.cs" />
     <Compile Include="Constants.cs" />
-    <Compile Include="ICanalSection.cs" />
-    <Compile Include="ICanalEdge.cs" />
-    <Compile Include="ICanalSectionModel.cs" />
-    <Compile Include="ICanalStretch.cs" />
+    <Compile Include="Canals\ICanalSection.cs" />
+    <Compile Include="Canals\ICanalEdge.cs" />
+    <Compile Include="Canals\ICanalSectionModel.cs" />
+    <Compile Include="Canals\ICanalStretch.cs" />
     <Compile Include="INode.cs" />
     <Compile Include="IInterpolationElement.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

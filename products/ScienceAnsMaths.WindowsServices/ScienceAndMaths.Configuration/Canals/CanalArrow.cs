@@ -2,6 +2,7 @@
 using System.Runtime.Serialization;
 using System.Xml.Serialization;
 using ScienceAndMaths.Shared;
+using ScienceAndMaths.Shared.Canals;
 
 namespace ScienceAndMaths.Configuration.Canals
 {

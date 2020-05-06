@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ScienceAndMaths.Configuration.Canals;
 using ScienceAndMaths.Hydraulics.Canals;
-using ScienceAndMaths.Shared;
+using ScienceAndMaths.Shared.Canals;
 
 namespace ScienceAndMaths.Configuration.Converter
 {

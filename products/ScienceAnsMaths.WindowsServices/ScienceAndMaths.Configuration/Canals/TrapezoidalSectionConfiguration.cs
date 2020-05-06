@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using ScienceAndMaths.Shared;
+using ScienceAndMaths.Shared.Canals;
 
 namespace ScienceAndMaths.Configuration.Canals
 {
