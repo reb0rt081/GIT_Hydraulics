@@ -10,5 +10,8 @@ namespace ScienceAndMaths.Configuration.Canals
     {
         [DataMember]
         public string NodeId { get; set; }
+
+        [DataMember]
+        public double? WaterLevel { get; set; }
     }
 }

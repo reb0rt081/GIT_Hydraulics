@@ -20,7 +20,8 @@ namespace ScienceAndMaths.Configuration.Converter
             {
                 data.CanelEdges.Add(new CanalEdge()
                 {
-                    Id =  node.NodeId
+                    Id =  node.NodeId,
+                    WaterLevel = node.WaterLevel
                 });
             }
 
@@ -69,7 +70,8 @@ namespace ScienceAndMaths.Configuration.Converter
             {
                 configuration.Nodes.Add(new CanalNode()
                 {
-                    NodeId = edges.Id
+                    NodeId = edges.Id,
+                    WaterLevel = edges.WaterLevel,
                 });
             }
 

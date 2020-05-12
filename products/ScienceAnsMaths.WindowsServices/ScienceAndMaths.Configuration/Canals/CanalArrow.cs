@@ -23,7 +23,7 @@ namespace ScienceAndMaths.Configuration.Canals
         public string ToNodeId { get; set; }
 
         [DataMember]
-        public RectangularSectionConfiguration RectangularSectionn
+        public RectangularSectionConfiguration RectangularSection
         {
             get
             {
