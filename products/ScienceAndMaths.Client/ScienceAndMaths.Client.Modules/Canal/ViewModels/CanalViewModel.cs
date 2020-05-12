@@ -24,20 +24,32 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
         [Dependency]
         public IConfigurationServiceAgent ConfigurationServiceAgent { get; set; }
 
+        [Dependency]
+        public ICanalServiceAgent CanalServiceAgent { get; set; }
+
         public CanalViewModel()
         {
-            ResetView();
         }
 
         [InjectionMethod]
         public void Initialize()
         {
             LoadCanalCommand = new DelegateCommand<string>(OnLoadCanalCommandExecuted);
-            LocationEnteredCommand = new DelegateCommand<string>(OnLocationEnteredCommandExecuted);
-            BarcodeEnteredCommand = new DelegateCommand<string>(OnBarcodeEnteredCommandExecuted);
-            ConfirmPickCommand = new DelegateCommand(OnPickConfirmCommandExecuted, OnPickConfirmCommandCanExecute);
-            IncreaseQuantityCommand = new DelegateCommand(OnIncreaseQuantityCommandExecuted, OnIncreaseQuantityCommandCanExecute);
-            DecreaseQuantityCommand = new DelegateCommand(OnDecreaseQuantityCommandExecuted, OnDecreaseQuantityCommandCanExecute);
+            SimulateCanalCommand = new DelegateCommand<string>(OnSimulateCanalCommandExecuted, OnSimulateCanalCommandCanExecute);
+        }
+
+        private bool OnSimulateCanalCommandCanExecute(string arg)
+        {
+            return Canal != null;
+        }
+
+        private void OnSimulateCanalCommandExecuted(string obj)
+        {
+            Task<CanalSimulationResult> task = CanalServiceAgent.ExecuteCanalSimulationAsync();
+
+            task.Wait();
+
+            var result = task.Result;
         }
 
         #endregion
@@ -45,36 +57,17 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
         #region Commands
 
         public DelegateCommand<string> LoadCanalCommand { get; set; }
-
-        public DelegateCommand<string> LocationEnteredCommand { get; set; }
-
-        public DelegateCommand<string> BarcodeEnteredCommand { get; set; }
-
-        public DelegateCommand ConfirmPickCommand { get; set; }
-
-        public DelegateCommand IncreaseQuantityCommand { get; set; }
-
-        public DelegateCommand DecreaseQuantityCommand { get; set; }
+        public DelegateCommand<string> SimulateCanalCommand { get; set; }
 
         #endregion
 
         #region Properties
-
-        public string ItemImagePath { get; set; }
-
-        public int QuantitySelected { get; set; }
 
         public ICanal Canal { get; set; }
 
         #endregion
 
         #region Private methods
-
-        private void ResetView()
-        {
-            ItemImagePath = @"pack://application:,,,/ScienceAndMaths.Client.Shared;component/Images/questionMark.png";
-            QuantitySelected = 0;
-        }
 
         private void OnLoadCanalCommandExecuted(string obj)
         {
@@ -90,70 +83,11 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
             }                
         }
 
-        private void OnBarcodeEnteredCommandExecuted(string barcode)
-        {
-            if (IncreaseQuantityCommand.CanExecute())
-            {
-                    IncreaseQuantityCommand.Execute();
-            }
-
-            RaisePropertiesChanged();
-        }
-
-        private void OnLocationEnteredCommandExecuted(string barcode)
-        {
-            if (!string.IsNullOrEmpty(barcode))
-            {
-                RaisePropertiesChanged();
-                
-                RegionManager.RequestNavigate(Shared.Constants.MainRegion, typeof(CanalView).Name);
-            }
-        }
-
-        private void OnIncreaseQuantityCommandExecuted()
-        {
-            QuantitySelected++;
-            RaisePropertiesChanged();
-        }
-
-        private void OnDecreaseQuantityCommandExecuted()
-        {
-            QuantitySelected--;
-            RaisePropertiesChanged();
-        }
-
-        private bool OnDecreaseQuantityCommandCanExecute()
-        {
-            return QuantitySelected > 0;
-        }
-
-        private bool OnIncreaseQuantityCommandCanExecute()
-        {
-            return true;
-        }
-
-        private void OnPickConfirmCommandExecuted()
-        {
-            ResetView();
-
-            RaisePropertiesChanged();
-
-            RegionManager.RequestNavigate(Shared.Constants.MainRegion, typeof(LocationView).Name);
-        }
-
-        private bool OnPickConfirmCommandCanExecute()
-        {
-            return QuantitySelected > 0;
-        }
-
         private void RaisePropertiesChanged()
         {
-            RaisePropertyChanged(nameof(ItemImagePath));
-            RaisePropertyChanged(nameof(QuantitySelected));
             RaisePropertyChanged(nameof(Canal));
-            DecreaseQuantityCommand.RaiseCanExecuteChanged();
-            IncreaseQuantityCommand.RaiseCanExecuteChanged();
-            ConfirmPickCommand.RaiseCanExecuteChanged();
+            LoadCanalCommand.RaiseCanExecuteChanged();
+            SimulateCanalCommand.RaiseCanExecuteChanged();
         }
 
         #endregion

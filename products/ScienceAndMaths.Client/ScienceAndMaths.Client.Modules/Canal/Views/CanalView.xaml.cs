@@ -41,16 +41,12 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
             InitializeComponent();
         }
 
-        private void ScienceAndMathsScannerControl_OnScanSubmitted(object sender, string e)
-        {
-            CanalViewModel.BarcodeEnteredCommand.Execute(e);
-        }
-
         private void CanalCanvas_OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             double previousX1 = canalCanvas.ActualWidth / 10;
             double previousY1 = canalCanvas.ActualHeight / 2;
 
+            //  Drawing canal botton
             foreach (ICanalStretch canalStretch in CanalViewModel.Canal.CanalStretches)
             {
                 Line canalLine = new Line();

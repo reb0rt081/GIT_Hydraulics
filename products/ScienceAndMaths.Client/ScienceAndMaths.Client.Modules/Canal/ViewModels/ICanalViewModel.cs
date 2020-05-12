@@ -16,19 +16,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
     {
         DelegateCommand<string> LoadCanalCommand { get; set; }
 
-        DelegateCommand<string> LocationEnteredCommand { get; set; }
-
-        DelegateCommand<string> BarcodeEnteredCommand { get; set; }
-
-        DelegateCommand ConfirmPickCommand { get; set; }
-
-        DelegateCommand IncreaseQuantityCommand { get; set; }
-
-        DelegateCommand DecreaseQuantityCommand { get; set; }
-
-        string ItemImagePath { get; set; }
-
-        int QuantitySelected { get; set; }
+        DelegateCommand<string> SimulateCanalCommand { get; set; }
 
         ICanal Canal { get; set; }
     }
