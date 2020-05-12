@@ -63,7 +63,9 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
         public string ItemImagePath { get; set; }
 
         public int QuantitySelected { get; set; }
-        
+
+        public ICanal Canal { get; set; }
+
         #endregion
 
         #region Private methods
@@ -79,9 +81,12 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {
+                // C:\Users\rbo\Documents\ScienceAndMaths
                 string file = openFileDialog.FileName;
 
-                var canal = ConfigurationServiceAgent.LoadCanalConfiguration(file);
+                Canal = ConfigurationServiceAgent.LoadCanalConfiguration(file);
+
+                RaisePropertiesChanged();
             }                
         }
 
@@ -145,6 +150,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
         {
             RaisePropertyChanged(nameof(ItemImagePath));
             RaisePropertyChanged(nameof(QuantitySelected));
+            RaisePropertyChanged(nameof(Canal));
             DecreaseQuantityCommand.RaiseCanExecuteChanged();
             IncreaseQuantityCommand.RaiseCanExecuteChanged();
             ConfirmPickCommand.RaiseCanExecuteChanged();

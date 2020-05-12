@@ -44,5 +44,10 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
         {
             CanalViewModel.BarcodeEnteredCommand.Execute(e);
         }
+
+        private void CanalCanvas_OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
