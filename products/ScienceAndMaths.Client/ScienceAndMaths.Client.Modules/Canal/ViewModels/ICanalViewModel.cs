@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Prism.Commands;
 using Prism.Mvvm;
 
+using ScienceAndMaths.Shared.Canals;
+
 namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
 {
     public interface ICanalViewModel
@@ -24,9 +26,10 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
 
         DelegateCommand DecreaseQuantityCommand { get; set; }
 
-        
         string ItemImagePath { get; set; }
 
         int QuantitySelected { get; set; }
+
+        ICanal Canal { get; set; }
     }
 }

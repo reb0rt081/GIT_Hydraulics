@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 using ScienceAndMaths.Client.Modules.Canal.ViewModels;
+using ScienceAndMaths.Shared.Canals;
 
 using Unity;
 
@@ -47,7 +48,27 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
 
         private void CanalCanvas_OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            throw new NotImplementedException();
+            double previousX1 = canalCanvas.ActualWidth / 10;
+            double previousY1 = canalCanvas.ActualHeight / 2;
+
+            foreach (ICanalStretch canalStretch in CanalViewModel.Canal.CanalStretches)
+            {
+                Line canalLine = new Line();
+
+                canalLine.Stroke = Brushes.Black;
+                canalLine.X1 = previousX1;
+                canalLine.Y1 = previousY1;
+
+                canalLine.X2 = canalLine.X1 + canalStretch.Length;
+                canalLine.Y2 = canalLine.Y1 + canalStretch.CanalSection.Slope * canalStretch.Length;
+
+                canalLine.StrokeThickness = 1;
+
+                canalCanvas.Children.Add(canalLine);
+
+                previousX1 = canalLine.X2;
+                previousY1 = canalLine.Y2;
+            }
         }
     }
 }
