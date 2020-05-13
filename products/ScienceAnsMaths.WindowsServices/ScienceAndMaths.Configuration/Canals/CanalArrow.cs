@@ -17,6 +17,9 @@ namespace ScienceAndMaths.Configuration.Canals
         public double Length { get; set; }
 
         [DataMember]
+        public double Flow { get; set; }
+
+        [DataMember]
         public string FromNodeId { get; set; }
 
         [DataMember]

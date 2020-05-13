@@ -33,27 +33,21 @@ namespace ScienceAndMaths.Configuration.Test
             {
                 Id = "TestConfig"
             };
-            CanalEdge initNode = new CanalEdge()
-            {
-                Id = "InitNode"
-            };
 
-            CanalEdge endNode = new CanalEdge()
+            canal.CanelEdges.Add(new CanalEdge()
             {
-                Id = "EndNode"
-            };
+                Id = "SourceCanal",
+                WaterLevel = 2.9
+            });
 
-            canal.CanelEdges.Add(initNode);
-            canal.CanelEdges.Add(endNode);
-
-            CanalStretch canalStretch = new CanalStretch
+            canal.CanelEdges.Add(new CanalEdge()
             {
-                Id = "TestStretch",
-                CanalSection = new RectangularSection(5.0, 0.028, 0.001),
-                Length = 500.0,
-                FromNode = initNode,
-                ToNode = endNode
-            };
+                Id = "EndCanal"
+            });
+
+            CanalStretch canalStretch = new CanalStretch(602, 20.32, new RectangularSection(5, 0.028, 0));
+            canalStretch.FromNode = canal.CanelEdges.First();
+            canalStretch.ToNode = canal.CanelEdges.Last();
 
             canal.CanalStretches.Add(canalStretch);
 

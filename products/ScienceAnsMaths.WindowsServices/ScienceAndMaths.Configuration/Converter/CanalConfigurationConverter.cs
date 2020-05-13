@@ -48,6 +48,7 @@ namespace ScienceAndMaths.Configuration.Converter
                 data.CanalStretches.Add(new CanalStretch()
                 {
                     Length = arrow.Length,
+                    Flow = arrow.Flow,
                     CanalSection = canalSection,
                     FromNode = fromNode,
                     ToNode = toNode,
@@ -96,6 +97,7 @@ namespace ScienceAndMaths.Configuration.Converter
                 configuration.Arrows.Add(new CanalArrow()
                 {
                     Length = canalStretch.Length,
+                    Flow = canalStretch.Flow,
                     CanalSection = canalSection,
                     FromNodeId = canalStretch.FromNode.Id,
                     ToNodeId = canalStretch.ToNode.Id,
