@@ -150,6 +150,10 @@
       <Project>{D6154186-D621-4D44-853A-173886DBA0D2}</Project>
       <Name>ScienceAndMaths.Application</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\ScienceAnsMaths.WindowsServices\ScienceAndMaths.Common\ScienceAndMaths.Common.csproj">
+      <Project>{1389BA52-0D48-4B0D-A907-A229FF679732}</Project>
+      <Name>ScienceAndMaths.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\ScienceAnsMaths.WindowsServices\ScienceAndMaths.Configuration\ScienceAndMaths.Configuration.csproj">
       <Project>{C3210660-EB04-4688-933D-A19A0DC18C1B}</Project>
       <Name>ScienceAndMaths.Configuration</Name>

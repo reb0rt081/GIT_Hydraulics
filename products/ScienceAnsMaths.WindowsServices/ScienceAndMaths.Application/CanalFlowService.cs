@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ScienceAndMaths.Common;
 using ScienceAndMaths.Domain;
 using ScienceAndMaths.Shared.Canals;
 using Unity;
@@ -11,18 +12,28 @@ namespace ScienceAndMaths.Application
 {
     public class CanalFlowService : ICanalFlowService
     {
+        public event ActionCompletedEventHandler<CanalSimulationResult> CanalSimulationCompleted;
+
         [Dependency]
         public ICanalManager CanalManager { get; set; }
 
-        public async Task<CanalSimulationResult> ExecuteCanalSimulationAsync()
+        [Dependency]
+        public SequenceTaskScheduler SequenceTaskScheduler { get; set; }
+
+        public void ExecuteCanalSimulationAsync(string correlationId)
         {
             //  Make sure here we control how many request and threads can execute (SequenceTokenDispatcher)
-            return await Task.Run(() => CanalManager.ExecuteCanalSimulation());
+            SequenceTaskScheduler.EnqueueWork(() => CanalManager.ExecuteCanalSimulation(), ExecuteCanalSimulationCompleted, correlationId);
+        }
 
-            // Normally we would create an event "OnCanalSimulationCompleted" that is raised when the task is finally run on a queue
-            // The "CanalServiceAgent" registers to "OnCanalSimulationCompleted" event in "CanalFlowService" and makes sure it returns a result when checking running task against the correlation id
-            //SequenceTokenWorkDispatcher.EnqueueUnitOfWork(() => CanalManager.ExecuteCanalSimulation(),
-            //                 OnCanalSimulationCompleted, correlationId, TransactionManager, name);
+        private void ExecuteCanalSimulationCompleted(ActionCompletedEventArgs<CanalSimulationResult> eventArgs)
+        {
+            ActionCompletedEventHandler<CanalSimulationResult> handler =
+                CanalSimulationCompleted;
+            if (handler != null)
+            {
+                handler(this, eventArgs);
+            }
         }
     }
 }

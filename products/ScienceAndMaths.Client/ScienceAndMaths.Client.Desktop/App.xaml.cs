@@ -20,6 +20,7 @@ using Prism.Unity;
 
 using ScienceAndMaths.Application;
 using ScienceAndMaths.Client.Core.Helpers;
+using ScienceAndMaths.Common;
 using ScienceAndMaths.Configuration.Loader;
 using ScienceAndMaths.Core;
 using ScienceAndMaths.Domain;
@@ -75,6 +76,7 @@ namespace ScienceAndMaths.Client.Desktop
             var configurationService = new ConfigurationService();
             var canalManager = new CanalManager();
             var configurationLoader = new CanalConfigurationLoader();
+            var sequenceTaskScheduler = new SequenceTaskScheduler();
 
             unityContainer.RegisterInstance<ICanalServiceAgent>(canalDirectServiceAgent);
             unityContainer.RegisterInstance<IConfigurationServiceAgent>(configurationDirectServiceAgent);
@@ -82,6 +84,7 @@ namespace ScienceAndMaths.Client.Desktop
             unityContainer.RegisterInstance<IConfigurationService>(configurationService);
             unityContainer.RegisterInstance<ICanalManager>(canalManager);
             unityContainer.RegisterInstance<ICanalConfigurationLoader>(configurationLoader);
+            unityContainer.RegisterInstance(sequenceTaskScheduler);
 
             // build up everything
             unityContainer.BuildUp(canalDirectServiceAgent);

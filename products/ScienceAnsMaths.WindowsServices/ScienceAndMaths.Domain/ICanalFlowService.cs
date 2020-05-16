@@ -10,6 +10,7 @@ namespace ScienceAndMaths.Domain
 {
     public interface ICanalFlowService
     {
-        Task<CanalSimulationResult> ExecuteCanalSimulationAsync();
+        event ActionCompletedEventHandler<CanalSimulationResult> CanalSimulationCompleted;
+        void ExecuteCanalSimulationAsync(string correlationId);
     }
 }
