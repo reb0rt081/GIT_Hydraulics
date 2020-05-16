@@ -65,6 +65,32 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
                 previousX1 = canalLine.X2;
                 previousY1 = canalLine.Y2;
             }
+
+            previousX1 = canalCanvas.ActualWidth / 10;
+            previousY1 = canalCanvas.ActualHeight / 2;
+
+            if (CanalViewModel.CanalResult != null)
+            {
+                foreach (CanalPointResult pointResult in CanalViewModel.CanalResult.CanalPointResults)
+                {
+                    Line canalLine = new Line();
+
+                    canalLine.Stroke = Brushes.Blue;
+                    canalLine.X1 = previousX1;
+                    canalLine.Y1 = previousY1;
+
+                    canalLine.X2 = pointResult.X;
+                    canalLine.Y2 = canalLine.Y1 + pointResult.WaterLevel;
+
+                    canalLine.StrokeThickness = 1;
+
+                    canalCanvas.Children.Add(canalLine);
+
+                    previousX1 = canalLine.X2;
+                    previousY1 = canalLine.Y2;
+                }
+            }
+            
         }
     }
 }

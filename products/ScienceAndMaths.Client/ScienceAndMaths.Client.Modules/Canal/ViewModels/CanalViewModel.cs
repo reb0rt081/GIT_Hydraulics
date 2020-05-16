@@ -49,7 +49,9 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
 
             task.Wait();
 
-            var result = task.Result;
+            CanalResult = task.Result;
+
+            RaisePropertiesChanged();
         }
 
         #endregion
@@ -64,6 +66,8 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
         #region Properties
 
         public ICanal Canal { get; set; }
+
+        public CanalSimulationResult CanalResult { get; set; }
 
         #endregion
 
@@ -86,6 +90,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
         private void RaisePropertiesChanged()
         {
             RaisePropertyChanged(nameof(Canal));
+            RaisePropertyChanged(nameof(CanalResult));
             LoadCanalCommand.RaiseCanExecuteChanged();
             SimulateCanalCommand.RaiseCanExecuteChanged();
         }
