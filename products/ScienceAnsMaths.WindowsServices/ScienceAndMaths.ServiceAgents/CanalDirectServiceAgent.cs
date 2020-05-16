@@ -43,7 +43,6 @@ namespace ScienceAndMaths.ServiceAgents
             {
                 runningTask.TrySetResult(eventArgs.Result);
             }
-
         }
     }
 }
