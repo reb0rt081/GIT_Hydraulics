@@ -91,26 +91,22 @@ namespace ScienceAndMaths.Common
                 return task;
             }
             
-            QueueMessage(task, sequenceToken);
+            GetQueForToken(sequenceToken).QueueMessage(task);
 
             return task;
         }
 
-        private void QueueMessage(Task task, string sequenceToken)
+        private MessageQueue GetQueForToken(string sequenceToken)
         {
-            // we need to remove the items
             lock (currentlyUsedQueues)
             {
-                if (currentlyUsedQueues.TryGetValue(sequenceToken, out var messageQueue))
-                {
-                    messageQueue.QueueMessage(task);
-                }
-                else
+                if (!currentlyUsedQueues.TryGetValue(sequenceToken, out MessageQueue messageQueue))
                 {
                     messageQueue = new MessageQueue(sequenceToken, TaskScheduler, () => RemoveMessageDispatcherByToken(sequenceToken));
                     currentlyUsedQueues.Add(sequenceToken, messageQueue);
-                    messageQueue.QueueMessage(task);
                 }
+
+                return messageQueue;
             }
         }
 
