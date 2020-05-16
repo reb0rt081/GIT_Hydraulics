@@ -23,7 +23,7 @@ namespace ScienceAndMaths.Application
         public void ExecuteCanalSimulationAsync(string correlationId)
         {
             //  Make sure here we control how many request and threads can execute (SequenceTokenDispatcher)
-            SequenceTaskScheduler.EnqueueWork(() => CanalManager.ExecuteCanalSimulation(), ExecuteCanalSimulationCompleted, correlationId);
+            SequenceTaskScheduler.EnqueueWork(() => CanalManager.ExecuteCanalSimulation(), ExecuteCanalSimulationCompleted, correlationId, "CanalSimulation");
         }
 
         private void ExecuteCanalSimulationCompleted(ActionCompletedEventArgs<CanalSimulationResult> eventArgs)

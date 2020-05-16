@@ -107,7 +107,7 @@ namespace ScienceAndMaths.Common
                 }
                 else
                 {
-                    messageQueue = new MessageQueue(sequenceToken, () => RemoveMessageDispatcherByToken(sequenceToken));
+                    messageQueue = new MessageQueue(sequenceToken, TaskScheduler, () => RemoveMessageDispatcherByToken(sequenceToken));
                     currentlyUsedQueues.Add(sequenceToken, messageQueue);
                     messageQueue.QueueMessage(task);
                 }
@@ -140,33 +140,34 @@ namespace ScienceAndMaths.Common
 
         internal string SequenceToken { get; set; }
 
-        internal MessageQueue(string sequenceToken, Action disposingAction)
+        internal MessageQueue(string sequenceToken, TaskScheduler taskScheduler, Action disposingAction)
         {
             SequenceToken = sequenceToken;
+            TaskScheduler = taskScheduler;
             disposeAction = disposingAction;
         }
 
         internal void QueueMessage(Task newTask)
         {
-            lock (this)
+            lock (queuedTasks)
             {
                 queuedTasks.Add(newTask);
-            }
 
-            // Do not wait for this
-            RunQueueWorker();
+                if (queuedTasks.Count == 1)
+                {
+                    // Do not wait for this
+                    RunQueueWorker();
+                }
+            }
         }
 
         internal async void RunQueueWorker()
         {
-            List<Task> tasksToRun;
-            lock (this)
-            {
-                tasksToRun = queuedTasks.ToList();
-            }
+            bool canContinue = queuedTasks.Count > 0;
 
-            foreach (var task in tasksToRun)
+            while(canContinue)
             {
+                Task task = queuedTasks[0];
                 try
                 {
                     task.Start(TaskScheduler);
@@ -179,11 +180,12 @@ namespace ScienceAndMaths.Common
                 }
                 finally
                 {
-                    lock (this)
+                    lock (queuedTasks)
                     {
                         queuedTasks.Remove(task);
+                        canContinue = queuedTasks.Count > 0;
 
-                        if (IsEmpty())
+                        if (!canContinue)
                         {
                             Dispose();
                         }
