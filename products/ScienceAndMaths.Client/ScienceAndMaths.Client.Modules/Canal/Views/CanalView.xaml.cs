@@ -23,9 +23,33 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
             }
         }
 
+        // Zoom.
+        private double Zoom = 1;
+        private void sliZoom_ValueChanged(object sender,
+            RoutedPropertyChangedEventArgs<double> e)
+        {
+            // Make sure the control's are all ready.
+            if (!IsInitialized) return;
+
+            // Display the zoom factor as a percentage.
+            lblZoom.Content = sliZoom.Value + "%";
+
+            // Get the scale factor as a fraction 0.25 - 2.00.
+            double scale = (double)(sliZoom.Value / 100.0);
+
+            // Scale the graph.
+            canalCanvas.LayoutTransform = new ScaleTransform(scale, scale);
+        }
+
         public CanalView()
         {
             InitializeComponent();
+            canalCanvas.SizeChanged += CanalCanvas_SizeChanged;
+        }
+
+        private void CanalCanvas_SizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            throw new System.NotImplementedException();
         }
 
         private void CanalCanvas_OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -43,7 +67,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
                 canalLine.Y1 = previousY1;
 
                 canalLine.X2 = canalLine.X1 + canalStretch.Length;
-                canalLine.Y2 = canalLine.Y1 + canalStretch.CanalSection.Slope * canalStretch.Length;
+                canalLine.Y2 = canalLine.Y1 + canalStretch.CanalSection.Slope * canalStretch.Length * 10;
 
                 canalLine.StrokeThickness = 1;
 
@@ -67,7 +91,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
                     canalLine.Y1 = previousY1;
 
                     canalLine.X2 = canalLine.X1 + CanalViewModel.CanalData.CanalResult.CanalPointResults[1].X - CanalViewModel.CanalData.CanalResult.CanalPointResults[0].X;
-                    canalLine.Y2 = canalLine.Y1 - pointResult.WaterLevel;
+                    canalLine.Y2 = canalLine.Y1 - pointResult.WaterLevel * 10;
 
                     canalLine.StrokeThickness = 1;
 

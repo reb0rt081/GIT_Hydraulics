@@ -6,5 +6,39 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="800">
-    <Canvas Name="canalCanvas" DataContext="{Binding Path=CanalData}" DataContextChanged="CanalCanvas_OnDataContextChanged"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Name="lblZoom" Content="100%"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               Grid.Row="0" Grid.Column="0"/>
+        <Slider Name="sliZoom" Orientation="Vertical"
+                ValueChanged="sliZoom_ValueChanged"
+                HorizontalAlignment="Center"
+                Margin="0,0,0,5"
+                Grid.Row="1" Grid.Column="0"
+                Minimum="25" Maximum="200" Value="100"
+                SmallChange="25" LargeChange="25"
+                TickFrequency="25" TickPlacement="BottomRight"
+                IsSnapToTickEnabled="True"/>
+        <ScrollViewer Name="scvGraph"
+                      Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"
+                      HorizontalScrollBarVisibility="Visible"
+                      VerticalScrollBarVisibility="Visible">
+            <Canvas Name="canalCanvas" 
+                    DataContext="{Binding Path=CanalData}" 
+                    DataContextChanged="CanalCanvas_OnDataContextChanged"
+                    Background="White"
+                    Width="400" Height="250"
+                    VerticalAlignment="Center"
+                    HorizontalAlignment="Center"/>
+        </ScrollViewer>
+    </Grid>
 </UserControl>
