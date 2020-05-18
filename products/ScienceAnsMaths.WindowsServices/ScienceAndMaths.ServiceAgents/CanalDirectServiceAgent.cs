@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ScienceAndMaths.Domain;
+using ScienceAndMaths.Shared;
 using ScienceAndMaths.Shared.Canals;
 using Unity;
 
@@ -12,7 +13,7 @@ namespace ScienceAndMaths.ServiceAgents
 {
     public class CanalDirectServiceAgent : ICanalServiceAgent
     {
-        private readonly ConcurrentDictionary<string, TaskCompletionSource<CanalSimulationResult>> canalSimulationPendingRequests = new ConcurrentDictionary<string, TaskCompletionSource<CanalSimulationResult>>();
+        private readonly ConcurrentDictionary<string, TaskCompletionSource<CanalData>> canalSimulationPendingRequests = new ConcurrentDictionary<string, TaskCompletionSource<CanalData>>();
 
         [InjectionMethod]
         public void Initialize()
@@ -23,10 +24,10 @@ namespace ScienceAndMaths.ServiceAgents
         [Dependency]
         public ICanalFlowService CanalFlowService { get; set; }
 
-        public Task<CanalSimulationResult> ExecuteCanalSimulationAsync()
+        public Task<CanalData> ExecuteCanalSimulationAsync()
         {
             // Normally use correlation Ids to correlate messages and async methods
-            TaskCompletionSource<CanalSimulationResult> completionSource = new TaskCompletionSource<CanalSimulationResult>();
+            TaskCompletionSource<CanalData> completionSource = new TaskCompletionSource<CanalData>();
             string correlationId = Guid.NewGuid().ToString();
 
             canalSimulationPendingRequests.TryAdd(correlationId, completionSource);
@@ -36,10 +37,10 @@ namespace ScienceAndMaths.ServiceAgents
             return completionSource.Task;
         }
 
-        private void CanalFlowServiceOnCanalSimulationCompleted(object sender, ActionCompletedEventArgs<CanalSimulationResult> eventArgs)
+        private void CanalFlowServiceOnCanalSimulationCompleted(object sender, ActionCompletedEventArgs<CanalData> eventArgs)
         {
             if (canalSimulationPendingRequests.TryRemove(eventArgs.CorrelationId,
-                    out TaskCompletionSource<CanalSimulationResult> runningTask))
+                    out TaskCompletionSource<CanalData> runningTask))
             {
                 runningTask.TrySetResult(eventArgs.Result);
             }

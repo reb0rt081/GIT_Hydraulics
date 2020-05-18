@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 using Prism.Commands;
 using Prism.Mvvm;
-
+using ScienceAndMaths.Shared;
 using ScienceAndMaths.Shared.Canals;
 
 namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
@@ -18,8 +18,6 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
 
         DelegateCommand<string> SimulateCanalCommand { get; set; }
 
-        ICanal Canal { get; set; }
-
-        CanalSimulationResult CanalResult { get; set; }
+        CanalData CanalData { get; set; }
     }
 }

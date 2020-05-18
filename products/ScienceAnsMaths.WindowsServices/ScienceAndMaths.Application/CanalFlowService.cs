@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ScienceAndMaths.Common;
 using ScienceAndMaths.Domain;
+using ScienceAndMaths.Shared;
 using ScienceAndMaths.Shared.Canals;
 using Unity;
 
@@ -12,7 +13,7 @@ namespace ScienceAndMaths.Application
 {
     public class CanalFlowService : ICanalFlowService
     {
-        public event ActionCompletedEventHandler<CanalSimulationResult> CanalSimulationCompleted;
+        public event ActionCompletedEventHandler<CanalData> CanalSimulationCompleted;
 
         [Dependency]
         public ICanalManager CanalManager { get; set; }
@@ -26,9 +27,9 @@ namespace ScienceAndMaths.Application
             SequenceTaskScheduler.EnqueueWork(() => CanalManager.ExecuteCanalSimulation(), ExecuteCanalSimulationCompleted, correlationId, "CanalSimulation");
         }
 
-        private void ExecuteCanalSimulationCompleted(ActionCompletedEventArgs<CanalSimulationResult> eventArgs)
+        private void ExecuteCanalSimulationCompleted(ActionCompletedEventArgs<CanalData> eventArgs)
         {
-            ActionCompletedEventHandler<CanalSimulationResult> handler =
+            ActionCompletedEventHandler<CanalData> handler =
                 CanalSimulationCompleted;
             if (handler != null)
             {

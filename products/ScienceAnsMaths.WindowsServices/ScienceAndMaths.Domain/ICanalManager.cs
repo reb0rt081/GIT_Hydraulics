@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ScienceAndMaths.Hydraulics.Canals;
+using ScienceAndMaths.Shared;
 using ScienceAndMaths.Shared.Canals;
 
 namespace ScienceAndMaths.Domain
@@ -12,6 +13,6 @@ namespace ScienceAndMaths.Domain
     {
         void SetCanal(Canal newCanal);
 
-        CanalSimulationResult ExecuteCanalSimulation();
+        CanalData ExecuteCanalSimulation();
     }
 }

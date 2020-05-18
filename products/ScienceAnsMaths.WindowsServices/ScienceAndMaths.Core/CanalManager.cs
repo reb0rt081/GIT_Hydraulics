@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ScienceAndMaths.Domain;
 using ScienceAndMaths.Hydraulics.Canals;
+using ScienceAndMaths.Shared;
 using ScienceAndMaths.Shared.Canals;
 
 namespace ScienceAndMaths.Core
@@ -18,10 +19,12 @@ namespace ScienceAndMaths.Core
             Canal = newCanal;
         }
 
-        public CanalSimulationResult ExecuteCanalSimulation()
+        public CanalData ExecuteCanalSimulation()
         {
             //  Coordinate and sync calls to make sure no race conditions and odd stuff can happen in sync
-            return Canal.ExecuteCanalSimulation();
+            CanalSimulationResult canalSimulationResult = Canal.ExecuteCanalSimulation();
+
+            return new CanalData(Canal, canalSimulationResult);
         }
     }
 }

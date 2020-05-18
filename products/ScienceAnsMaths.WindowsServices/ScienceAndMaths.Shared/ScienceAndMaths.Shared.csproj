@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CanalData.cs" />
     <Compile Include="Canals\CanalPointResult.cs" />
     <Compile Include="Canals\CanalSimulationResult.cs" />
     <Compile Include="Canals\ICanal.cs" />

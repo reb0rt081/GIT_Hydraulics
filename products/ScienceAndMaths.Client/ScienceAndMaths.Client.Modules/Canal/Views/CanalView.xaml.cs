@@ -47,7 +47,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
             double previousY1 = canalCanvas.ActualHeight / 2;
 
             //  Drawing canal botton
-            foreach (ICanalStretch canalStretch in CanalViewModel.Canal.CanalStretches)
+            foreach (ICanalStretch canalStretch in CanalViewModel.CanalData.Canal.CanalStretches)
             {
                 Line canalLine = new Line();
 
@@ -69,9 +69,9 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
             previousX1 = canalCanvas.ActualWidth / 10;
             previousY1 = canalCanvas.ActualHeight / 2;
 
-            if (CanalViewModel.CanalResult != null)
+            if (CanalViewModel.CanalData?.CanalResult != null)
             {
-                foreach (CanalPointResult pointResult in CanalViewModel.CanalResult.CanalPointResults)
+                foreach (CanalPointResult pointResult in CanalViewModel.CanalData.CanalResult.CanalPointResults)
                 {
                     Line canalLine = new Line();
 
@@ -79,8 +79,8 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
                     canalLine.X1 = previousX1;
                     canalLine.Y1 = previousY1;
 
-                    canalLine.X2 = pointResult.X;
-                    canalLine.Y2 = canalLine.Y1 + pointResult.WaterLevel;
+                    canalLine.X2 = canalLine.X1 + CanalViewModel.CanalData.CanalResult.CanalPointResults[1].X - CanalViewModel.CanalData.CanalResult.CanalPointResults[0].X;
+                    canalLine.Y2 = canalLine.Y1 - pointResult.WaterLevel;
 
                     canalLine.StrokeThickness = 1;
 
@@ -90,7 +90,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
                     previousY1 = canalLine.Y2;
                 }
             }
-            
+
         }
     }
 }

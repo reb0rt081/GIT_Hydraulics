@@ -14,6 +14,7 @@ using ScienceAndMaths.Shared.Canals;
 using Unity;
 using Microsoft.Win32;
 using ScienceAndMaths.ServiceAgents;
+using ScienceAndMaths.Shared;
 
 namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
 {
@@ -38,22 +39,6 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
             SimulateCanalCommand = new DelegateCommand<string>(OnSimulateCanalCommandExecuted, OnSimulateCanalCommandCanExecute);
         }
 
-        private bool OnSimulateCanalCommandCanExecute(string arg)
-        {
-            return Canal != null;
-        }
-
-        private void OnSimulateCanalCommandExecuted(string obj)
-        {
-            Task<CanalSimulationResult> task = CanalServiceAgent.ExecuteCanalSimulationAsync();
-
-            task.Wait();
-
-            CanalResult = task.Result;
-
-            RaisePropertiesChanged();
-        }
-
         #endregion
 
         #region Commands
@@ -65,13 +50,27 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
 
         #region Properties
 
-        public ICanal Canal { get; set; }
-
-        public CanalSimulationResult CanalResult { get; set; }
+        public CanalData CanalData { get; set; }
 
         #endregion
 
         #region Private methods
+
+        private bool OnSimulateCanalCommandCanExecute(string arg)
+        {
+            return CanalData != null;
+        }
+
+        private void OnSimulateCanalCommandExecuted(string obj)
+        {
+            Task<CanalData> task = CanalServiceAgent.ExecuteCanalSimulationAsync();
+
+            task.Wait();
+
+            CanalData = task.Result;
+
+            RaisePropertiesChanged();
+        }
 
         private void OnLoadCanalCommandExecuted(string obj)
         {
@@ -81,7 +80,9 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
                 // C:\Users\rbo\Documents\ScienceAndMaths
                 string file = openFileDialog.FileName;
 
-                Canal = ConfigurationServiceAgent.LoadCanalConfiguration(file);
+                ICanal canal = ConfigurationServiceAgent.LoadCanalConfiguration(file);
+
+                CanalData = new CanalData(canal);
 
                 RaisePropertiesChanged();
             }                
@@ -89,8 +90,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
 
         private void RaisePropertiesChanged()
         {
-            RaisePropertyChanged(nameof(Canal));
-            RaisePropertyChanged(nameof(CanalResult));
+            RaisePropertyChanged(nameof(CanalData));
             LoadCanalCommand.RaiseCanExecuteChanged();
             SimulateCanalCommand.RaiseCanExecuteChanged();
         }

@@ -37,6 +37,8 @@ namespace ScienceAndMaths.Core.Test
             canalManager.SetCanal(canal);
 
             var result = canalManager.ExecuteCanalSimulation();
+
+            Assert.IsTrue(result != null);
         }
     }
 }
