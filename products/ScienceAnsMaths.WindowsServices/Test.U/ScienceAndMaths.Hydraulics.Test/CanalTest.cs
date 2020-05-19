@@ -27,7 +27,7 @@ namespace ScienceAndMaths.Hydraulics.Test
             Assert.IsTrue(rh - actualRh <= double.Epsilon);
             Assert.IsTrue(mv - 0 <= double.Epsilon);
             Assert.IsTrue(fr2 - 0.0690 <= 0.0001);
-            Assert.IsTrue(result - 2.8988 <= 0.00001);
+            Assert.IsTrue(result - 2.89888 <= 0.00001);
         }
     }
 }
