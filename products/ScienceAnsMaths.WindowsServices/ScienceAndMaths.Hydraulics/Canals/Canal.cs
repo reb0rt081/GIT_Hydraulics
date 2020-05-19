@@ -50,6 +50,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
             {
                 if(canalStretch.Flow > 0 && canalStretch.FromNode.WaterLevel.HasValue)
                 {
+                    double x = 0.0;
                     double waterLevel = canalStretch.FromNode.WaterLevel.Value;
                     result.AddCanalPointResult(0.0, waterLevel);
 
@@ -62,9 +63,8 @@ namespace ScienceAndMaths.Hydraulics.Canals
                     
                     for(int i = 1; i <= steps; i++)
                     {
-                        double x = i * solver.Interval;
-
                         waterLevel = solver.Solve(x, waterLevel);
+                        x = x + solver.Interval;
 
                         result.AddCanalPointResult(x, waterLevel);
                     }
