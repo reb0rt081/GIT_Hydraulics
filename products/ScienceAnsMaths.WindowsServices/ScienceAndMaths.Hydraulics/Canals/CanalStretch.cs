@@ -80,7 +80,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
         /// <returns></returns>
         public Func<double, double, double> FlowEquation()
         {
-            return (x, y) => (CanalSection.Slope - (Math.Pow(Flow, 2) * Math.Pow(CanalSection.Roughness, 2)) / (Math.Pow(CanalSection.GetHydraulicArea(y), 2) * Math.Pow(CanalSection.GetHydraulicRadius(y), 4.0 / 6.0))) / (Math.Cos(Math.Asin(CanalSection.Slope)) - Math.Pow(GetFroudeNumber(y), 2));
+            return (x, y) => (CanalSection.Slope - (Math.Pow(Flow, 2) * Math.Pow(CanalSection.Roughness, 2)) / (Math.Pow(CanalSection.GetHydraulicArea(y), 2) * Math.Pow(CanalSection.GetHydraulicRadius(y), 4.0 / 3.0))) / (Math.Cos(Math.Asin(CanalSection.Slope)) - Math.Pow(GetFroudeNumber(y), 2));
         }
     }
 }
