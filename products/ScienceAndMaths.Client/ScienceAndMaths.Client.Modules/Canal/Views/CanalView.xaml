@@ -28,7 +28,7 @@
                 SmallChange="25" LargeChange="25"
                 TickFrequency="25" TickPlacement="BottomRight"
                 IsSnapToTickEnabled="True"/>
-        <ScrollViewer Name="scvGraph"
+        <ScrollViewer Name="scrollingControl"
                       Grid.Row="0" Grid.Column="1" Grid.RowSpan="2"
                       HorizontalScrollBarVisibility="Visible"
                       VerticalScrollBarVisibility="Visible">
@@ -36,7 +36,8 @@
                     DataContext="{Binding Path=CanalData}" 
                     DataContextChanged="CanalCanvas_OnDataContextChanged"
                     Background="White"
-                    Width="400" Height="250"
+                    Width="900"
+                    Height="450"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center"/>
         </ScrollViewer>

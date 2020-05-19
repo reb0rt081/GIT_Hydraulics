@@ -44,12 +44,6 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
         public CanalView()
         {
             InitializeComponent();
-            canalCanvas.SizeChanged += CanalCanvas_SizeChanged;
-        }
-
-        private void CanalCanvas_SizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            throw new System.NotImplementedException();
         }
 
         private void CanalCanvas_OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
