@@ -19,5 +19,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
         DelegateCommand<string> SimulateCanalCommand { get; set; }
 
         CanalData CanalData { get; set; }
+
+        ICanalStretch ActiveCanalStretch { get; set; }
     }
 }

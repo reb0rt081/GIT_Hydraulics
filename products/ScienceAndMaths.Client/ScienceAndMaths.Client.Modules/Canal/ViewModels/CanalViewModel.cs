@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using Prism.Commands;
 using Prism.Regions;
 using ScienceAndMaths.Client.Shared;
@@ -43,6 +44,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
         #region Properties
 
         public CanalData CanalData { get; set; }
+        public ICanalStretch ActiveCanalStretch { get; set; }
 
         #endregion
 
@@ -75,6 +77,8 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
                 ICanal canal = ConfigurationServiceAgent.LoadCanalConfiguration(file);
 
                 CanalData = new CanalData(canal);
+
+                ActiveCanalStretch = CanalData.Canal?.CanalStretches.FirstOrDefault();
 
                 RaisePropertiesChanged();
             }                
