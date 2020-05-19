@@ -15,11 +15,11 @@
             <ColumnDefinition Width="50"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Label Name="lblZoom" Content="100%"
+        <Label Name="zoomLabel" Content="100%"
                HorizontalAlignment="Center"
                VerticalAlignment="Center"
                Grid.Row="0" Grid.Column="0"/>
-        <Slider Name="sliZoom" Orientation="Vertical"
+        <Slider Name="zoomSlider" Orientation="Vertical"
                 ValueChanged="sliZoom_ValueChanged"
                 HorizontalAlignment="Center"
                 Margin="0,0,0,5"

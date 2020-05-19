@@ -25,8 +25,6 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
             }
         }
 
-        // Zoom.
-        private double Zoom = 1;
         private void sliZoom_ValueChanged(object sender,
             RoutedPropertyChangedEventArgs<double> e)
         {
@@ -34,10 +32,10 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
             if (!IsInitialized) return;
 
             // Display the zoom factor as a percentage.
-            lblZoom.Content = sliZoom.Value + "%";
+            zoomLabel.Content = zoomSlider.Value + "%";
 
             // Get the scale factor as a fraction 0.25 - 2.00.
-            double scale = (double)(sliZoom.Value / 100.0);
+            double scale = (double)(zoomSlider.Value / 100.0);
 
             // Scale the graph.
             canalCanvas.LayoutTransform = new ScaleTransform(scale, scale);
