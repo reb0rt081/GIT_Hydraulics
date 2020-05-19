@@ -63,7 +63,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
                 canalLine.Y1 = previousY1;
 
                 Label initialLabel = new Label();
-                initialLabel.Content = canalStretch.CanalSection.Roughness;
+                initialLabel.Content = CanalViewModel.CanalData.Canal.Id;
                 Canvas.SetLeft(initialLabel, previousX1);
                 Canvas.SetTop(initialLabel, previousY1  + 10);
 

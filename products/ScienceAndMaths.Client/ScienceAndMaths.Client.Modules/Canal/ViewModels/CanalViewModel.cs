@@ -87,6 +87,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
         private void RaisePropertiesChanged()
         {
             RaisePropertyChanged(nameof(CanalData));
+            RaisePropertyChanged(nameof(ActiveCanalStretch));
             LoadCanalCommand.RaiseCanExecuteChanged();
             SimulateCanalCommand.RaiseCanExecuteChanged();
         }
