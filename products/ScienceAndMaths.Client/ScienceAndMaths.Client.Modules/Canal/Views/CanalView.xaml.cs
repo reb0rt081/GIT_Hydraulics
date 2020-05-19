@@ -13,6 +13,8 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
     /// </summary>
     public partial class CanalView : UserControl
     {
+        public double ScaleY { get; set; }
+
         [Dependency]
         public ICanalViewModel CanalViewModel
         {
@@ -44,6 +46,8 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
         public CanalView()
         {
             InitializeComponent();
+
+            ScaleY = 20;
         }
 
         private void CanalCanvas_OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -60,12 +64,18 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
                 canalLine.X1 = previousX1;
                 canalLine.Y1 = previousY1;
 
+                Label initialLabel = new Label();
+                initialLabel.Content = canalStretch.CanalSection.Roughness;
+                Canvas.SetLeft(initialLabel, previousX1);
+                Canvas.SetTop(initialLabel, previousY1  + 10);
+
                 canalLine.X2 = canalLine.X1 + canalStretch.Length;
-                canalLine.Y2 = canalLine.Y1 + canalStretch.CanalSection.Slope * canalStretch.Length * 10;
+                canalLine.Y2 = canalLine.Y1 + canalStretch.CanalSection.Slope * canalStretch.Length * ScaleY;
 
                 canalLine.StrokeThickness = 1;
 
                 canalCanvas.Children.Add(canalLine);
+                canalCanvas.Children.Add(initialLabel);
 
                 previousX1 = canalLine.X2;
                 previousY1 = canalLine.Y2;
@@ -85,7 +95,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
                     canalLine.Y1 = previousY1;
 
                     canalLine.X2 = canalLine.X1 + CanalViewModel.CanalData.CanalResult.CanalPointResults[1].X - CanalViewModel.CanalData.CanalResult.CanalPointResults[0].X;
-                    canalLine.Y2 = canalLine.Y1 - pointResult.WaterLevel * 10;
+                    canalLine.Y2 = canalLine.Y1 - pointResult.WaterLevel * ScaleY;
 
                     canalLine.StrokeThickness = 1;
 

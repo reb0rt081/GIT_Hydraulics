@@ -67,7 +67,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
         /// <summary>
         /// Returns the critical depth of the canal stretch when Froude Number = 1
         /// </summary>
-        /// <param name="waterLvel"></param>
+        /// <param name="waterLevel"></param>
         /// <returns></returns>
         public double GetCriticalHydraulicDepth(double waterLevel)
         {
