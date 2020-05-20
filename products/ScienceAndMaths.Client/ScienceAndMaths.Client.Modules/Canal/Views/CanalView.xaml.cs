@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Shapes;
@@ -62,10 +63,10 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
                 canalLine.X1 = previousX1;
                 canalLine.Y1 = previousY1;
 
-                Label initialLabel = new Label();
-                initialLabel.Content = CanalViewModel.CanalData.Canal.Id;
-                Canvas.SetLeft(initialLabel, previousX1);
-                Canvas.SetTop(initialLabel, previousY1  + 10);
+                Label canalIdlabel = new Label();
+                canalIdlabel.Content = CanalViewModel.CanalData.Canal.Id;
+                Canvas.SetLeft(canalIdlabel, previousX1);
+                Canvas.SetTop(canalIdlabel, previousY1  + 10);
 
                 canalLine.X2 = canalLine.X1 + canalStretch.Length;
                 canalLine.Y2 = canalLine.Y1 + canalStretch.CanalSection.Slope * canalStretch.Length * ScaleY;
@@ -73,7 +74,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
                 canalLine.StrokeThickness = 1;
 
                 canalCanvas.Children.Add(canalLine);
-                canalCanvas.Children.Add(initialLabel);
+                canalCanvas.Children.Add(canalIdlabel);
 
                 previousX1 = canalLine.X2;
                 previousY1 = canalLine.Y2;
@@ -84,6 +85,18 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
 
             if (CanalViewModel.CanalData?.CanalResult != null)
             {
+                var firstPoint = CanalViewModel.CanalData.CanalResult.CanalPointResults.FirstOrDefault();
+
+                if(firstPoint != null)
+                {
+                    Label firstPointLabel = new Label();
+                    firstPointLabel.Content = firstPoint.WaterLevel + " m";
+                    Canvas.SetLeft(firstPointLabel, previousX1);
+                    Canvas.SetTop(firstPointLabel, previousY1 - firstPoint.WaterLevel * ScaleY - 50);
+
+                    canalCanvas.Children.Add(firstPointLabel);
+                }
+
                 foreach (CanalPointResult pointResult in CanalViewModel.CanalData.CanalResult.CanalPointResults)
                 {
                     Line canalLine = new Line();
@@ -100,6 +113,18 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
                     canalCanvas.Children.Add(canalLine);
 
                     previousX1 = canalLine.X2;
+                }
+
+                var lastPoint = CanalViewModel.CanalData.CanalResult.CanalPointResults.LastOrDefault();
+
+                if (lastPoint != null)
+                {
+                    Label lastPointLabel = new Label();
+                    lastPointLabel.Content = lastPoint.WaterLevel + " m";
+                    Canvas.SetLeft(lastPointLabel, previousX1);
+                    Canvas.SetTop(lastPointLabel, previousY1 - lastPoint.WaterLevel * ScaleY - 50);
+
+                    canalCanvas.Children.Add(lastPointLabel);
                 }
             }
 
