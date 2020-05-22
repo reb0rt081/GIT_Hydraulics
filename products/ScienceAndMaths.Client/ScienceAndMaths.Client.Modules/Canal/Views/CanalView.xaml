@@ -37,6 +37,7 @@
             <Canvas Name="canalCanvas" 
                     DataContext="{Binding Path=CanalData}" 
                     DataContextChanged="CanalCanvas_OnDataContextChanged"
+                    MouseDown="CanalCanvas_OnMouseDown"
                     Background="White"
                     Width="900"
                     Height="450"

@@ -58,5 +58,32 @@ namespace ScienceAndMaths.Shared
 
             return null;
         }
+
+        public CanalPointResult GetCanalPointResult(double horizontalDistance)
+        {
+            int canalIndex = 0;
+            bool found = false;
+            double relativehorizontalDistance = horizontalDistance;
+            double coordinateX = 0;
+
+            while (!found && canalIndex < Canal.CanalStretches.Count)
+            {
+                ICanalStretch canalStretch = Canal.CanalStretches[canalIndex];
+                double relativeLengthDistance = canalStretch.Length * Math.Cos(Math.Atan(canalStretch.CanalSection.Slope));
+
+                if (relativehorizontalDistance <= relativeLengthDistance)
+                {
+                    coordinateX += relativehorizontalDistance / Math.Cos(Math.Atan(canalStretch.CanalSection.Slope));
+                    found = true;
+                }
+                else
+                {
+                    relativehorizontalDistance -= relativeLengthDistance;
+                    coordinateX += canalStretch.Length;
+                }
+            }
+
+            return CanalResult.CanalPointResults.OrderBy(pr => Math.Abs(coordinateX - pr.X)).FirstOrDefault();
+        }
     }
 }

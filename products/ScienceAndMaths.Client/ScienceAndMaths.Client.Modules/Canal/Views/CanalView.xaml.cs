@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
 using ScienceAndMaths.Client.Modules.Canal.ViewModels;
@@ -19,7 +20,13 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
 
         public double ScaleX { get; set; }
 
-        [Dependency]
+        public double InitialCanalX { get; set; }
+
+        public double InitialCanalY { get; set; }
+
+        private Label DisplayResultLabel { get; set; }
+
+       [Dependency]
         public ICanalViewModel CanalViewModel
         {
             get { return (ICanalViewModel) DataContext; }
@@ -50,6 +57,28 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
             InitializeComponent();
 
             ScaleY = 20;
+
+            
+
+            
+        }
+        private void CanalCanvas_OnMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Point position = e.GetPosition(canalCanvas);
+
+            if(CanalViewModel.CanalData != null)
+            {
+                CanalPointResult canalPointResult = CanalViewModel.CanalData.GetCanalPointResult((position.X - InitialCanalX) / ScaleX);
+
+                canalCanvas.Children.Remove(DisplayResultLabel);
+
+                DisplayResultLabel = new Label();
+                DisplayResultLabel.Content = "X= " + canalPointResult.X + Environment.NewLine +"Y= " + canalPointResult.WaterLevel + " m";
+                Canvas.SetLeft(DisplayResultLabel, position.X);
+                Canvas.SetTop(DisplayResultLabel, position.Y);
+
+                canalCanvas.Children.Add(DisplayResultLabel);
+            }
         }
 
         private void CanalCanvas_OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
@@ -62,6 +91,9 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
             canalCanvas.Children.Clear();
 
             ResetCanalPointer(out double previousX1, out double previousY1);
+
+            InitialCanalX = previousX1;
+            InitialCanalY = previousY1;
 
             double finalX1 = canalCanvas.ActualWidth * 9 / 10;
 
@@ -93,7 +125,8 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
                 previousY1 = canalLine.Y2;
             }
 
-            ResetCanalPointer(out previousX1, out previousY1);
+            previousX1 = InitialCanalX;
+            previousY1 = InitialCanalY;
 
             //  Drawing canal solution
             if (CanalViewModel.CanalData?.CanalResult != null)
