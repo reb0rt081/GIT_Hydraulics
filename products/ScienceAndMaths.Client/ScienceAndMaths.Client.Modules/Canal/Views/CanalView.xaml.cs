@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -114,12 +115,14 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
                 foreach (CanalPointResult pointResult in CanalViewModel.CanalData.CanalResult.CanalPointResults)
                 {
                     Line canalLine = new Line();
+                    ICanalSection canalSection = CanalViewModel.CanalData.GetCanalSection(pointResult);
+                    double actualIncreaseX = increaseX * Math.Cos(Math.Atan(canalSection.Slope));
 
                     canalLine.Stroke = Brushes.Blue;
                     canalLine.X1 = previousX1;
                     canalLine.Y1 = previousY1;
 
-                    canalLine.X2 = canalLine.X1 + increaseX * ScaleX;
+                    canalLine.X2 = canalLine.X1 + actualIncreaseX * ScaleX;
                     canalLine.Y2 = canalLine.Y1 - pointResult.WaterLevel * ScaleY;
 
                     canalLine.StrokeThickness = 1;
@@ -127,7 +130,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
                     canalCanvas.Children.Add(canalLine);
 
                     previousX1 = canalLine.X2;
-                    previousY1 += increaseX * CanalViewModel.CanalData.GetCanalSection(pointResult).Slope * ScaleY;
+                    previousY1 += actualIncreaseX * canalSection.Slope * ScaleY;
                 }
 
                 var lastPoint = CanalViewModel.CanalData.CanalResult.CanalPointResults.LastOrDefault();
