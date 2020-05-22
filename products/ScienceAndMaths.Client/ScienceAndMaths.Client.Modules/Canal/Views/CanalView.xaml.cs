@@ -16,6 +16,8 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
     {
         public double ScaleY { get; set; }
 
+        public double ScaleX { get; set; }
+
         [Dependency]
         public ICanalViewModel CanalViewModel
         {
@@ -51,8 +53,18 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
 
         private void CanalCanvas_OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
-            double previousX1 = canalCanvas.ActualWidth / 10;
-            double previousY1 = canalCanvas.ActualHeight / 2;
+            DrawCanal();
+        }
+
+        private void DrawCanal()
+        {
+            canalCanvas.Children.Clear();
+
+            ResetCanalPointer(out double previousX1, out double previousY1);
+
+            double finalX1 = canalCanvas.ActualWidth * 9 / 10;
+
+            ScaleX = (finalX1 - previousX1) / CanalViewModel.CanalData.Canal.CanalStretches.Sum(cs => cs.Length);
 
             //  Drawing canal botton
             foreach (ICanalStretch canalStretch in CanalViewModel.CanalData.Canal.CanalStretches)
@@ -66,9 +78,9 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
                 Label canalIdlabel = new Label();
                 canalIdlabel.Content = CanalViewModel.CanalData.Canal.Id;
                 Canvas.SetLeft(canalIdlabel, previousX1);
-                Canvas.SetTop(canalIdlabel, previousY1  + 10);
+                Canvas.SetTop(canalIdlabel, previousY1 + 10);
 
-                canalLine.X2 = canalLine.X1 + canalStretch.Length;
+                canalLine.X2 = canalLine.X1 + canalStretch.Length * ScaleX;
                 canalLine.Y2 = canalLine.Y1 + canalStretch.CanalSection.Slope * canalStretch.Length * ScaleY;
 
                 canalLine.StrokeThickness = 1;
@@ -80,14 +92,16 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
                 previousY1 = canalLine.Y2;
             }
 
-            previousX1 = canalCanvas.ActualWidth / 10;
-            previousY1 = canalCanvas.ActualHeight / 2;
+            ResetCanalPointer(out previousX1, out previousY1);
 
+            //  Drawing canal solution
             if (CanalViewModel.CanalData?.CanalResult != null)
             {
                 var firstPoint = CanalViewModel.CanalData.CanalResult.CanalPointResults.FirstOrDefault();
 
-                if(firstPoint != null)
+                double increaseX = CanalViewModel.CanalData.CanalResult.CanalPointResults[1].X - CanalViewModel.CanalData.CanalResult.CanalPointResults[0].X;
+
+                if (firstPoint != null)
                 {
                     Label firstPointLabel = new Label();
                     firstPointLabel.Content = firstPoint.WaterLevel + " m";
@@ -105,7 +119,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
                     canalLine.X1 = previousX1;
                     canalLine.Y1 = previousY1;
 
-                    canalLine.X2 = canalLine.X1 + CanalViewModel.CanalData.CanalResult.CanalPointResults[1].X - CanalViewModel.CanalData.CanalResult.CanalPointResults[0].X;
+                    canalLine.X2 = canalLine.X1 + increaseX * ScaleX;
                     canalLine.Y2 = canalLine.Y1 - pointResult.WaterLevel * ScaleY;
 
                     canalLine.StrokeThickness = 1;
@@ -113,6 +127,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
                     canalCanvas.Children.Add(canalLine);
 
                     previousX1 = canalLine.X2;
+                    previousY1 += increaseX * CanalViewModel.CanalData.GetCanalSection(pointResult).Slope * ScaleY;
                 }
 
                 var lastPoint = CanalViewModel.CanalData.CanalResult.CanalPointResults.LastOrDefault();
@@ -127,7 +142,12 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
                     canalCanvas.Children.Add(lastPointLabel);
                 }
             }
+        }
 
+        private void ResetCanalPointer(out double initialX1, out double initialY1)
+        {
+            initialX1 = canalCanvas.ActualWidth / 10;
+            initialY1 = canalCanvas.ActualHeight / 2;
         }
     }
 }
