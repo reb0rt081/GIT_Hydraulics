@@ -83,7 +83,7 @@ namespace ScienceAndMaths.Shared
                 }
             }
 
-            return CanalResult.CanalPointResults.OrderBy(pr => Math.Abs(coordinateX - pr.X)).FirstOrDefault();
+            return CanalResult?.CanalPointResults?.OrderBy(pr => Math.Abs(coordinateX - pr.X)).FirstOrDefault();
         }
     }
 }

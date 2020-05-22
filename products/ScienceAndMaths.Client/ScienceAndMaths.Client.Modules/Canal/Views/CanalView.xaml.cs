@@ -70,14 +70,17 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
             {
                 CanalPointResult canalPointResult = CanalViewModel.CanalData.GetCanalPointResult((position.X - InitialCanalX) / ScaleX);
 
-                canalCanvas.Children.Remove(DisplayResultLabel);
+                if(canalPointResult != null)
+                {
+                    canalCanvas.Children.Remove(DisplayResultLabel);
 
-                DisplayResultLabel = new Label();
-                DisplayResultLabel.Content = "X= " + canalPointResult.X + Environment.NewLine +"Y= " + canalPointResult.WaterLevel + " m";
-                Canvas.SetLeft(DisplayResultLabel, position.X);
-                Canvas.SetTop(DisplayResultLabel, position.Y);
+                    DisplayResultLabel = new Label();
+                    DisplayResultLabel.Content = "X= " + canalPointResult.X + Environment.NewLine + "Y= " + canalPointResult.WaterLevel + " m";
+                    Canvas.SetLeft(DisplayResultLabel, position.X);
+                    Canvas.SetTop(DisplayResultLabel, position.Y);
 
-                canalCanvas.Children.Add(DisplayResultLabel);
+                    canalCanvas.Children.Add(DisplayResultLabel);
+                }
             }
         }
 
