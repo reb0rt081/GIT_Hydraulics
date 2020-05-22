@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
@@ -24,7 +25,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
 
         public double InitialCanalY { get; set; }
 
-        private Label DisplayResultLabel { get; set; }
+        private readonly  List<UIElement> temporaryCanvasElements = new List<UIElement>();
 
        [Dependency]
         public ICanalViewModel CanalViewModel
@@ -72,14 +73,18 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
 
                 if(canalPointResult != null)
                 {
-                    canalCanvas.Children.Remove(DisplayResultLabel);
+                    RemoveTemporaryCanvasElements();
 
-                    DisplayResultLabel = new Label();
-                    DisplayResultLabel.Content = "X= " + canalPointResult.X + Environment.NewLine + "Y= " + canalPointResult.WaterLevel + " m";
-                    Canvas.SetLeft(DisplayResultLabel, position.X);
-                    Canvas.SetTop(DisplayResultLabel, position.Y);
+                    //  Add cross
 
-                    canalCanvas.Children.Add(DisplayResultLabel);
+                    Label displayResultLabel = new Label();
+                    displayResultLabel.Content = "X= " + canalPointResult.X + Environment.NewLine + "Y= " + canalPointResult.WaterLevel + " m";
+                    Canvas.SetLeft(displayResultLabel, position.X);
+                    Canvas.SetTop(displayResultLabel, position.Y);
+
+                    temporaryCanvasElements.Add(displayResultLabel);
+
+                    canalCanvas.Children.Add(displayResultLabel);
                 }
             }
         }
@@ -119,7 +124,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
                 canalLine.X2 = canalLine.X1 + canalStretch.Length * ScaleX;
                 canalLine.Y2 = canalLine.Y1 + canalStretch.CanalSection.Slope * canalStretch.Length * ScaleY;
 
-                canalLine.StrokeThickness = 1;
+                canalLine.StrokeThickness = ScaleX;
 
                 canalCanvas.Children.Add(canalLine);
                 canalCanvas.Children.Add(canalIdlabel);
@@ -161,7 +166,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
                     canalLine.X2 = canalLine.X1 + actualIncreaseX * ScaleX;
                     canalLine.Y2 = canalLine.Y1 - pointResult.WaterLevel * ScaleY;
 
-                    canalLine.StrokeThickness = 1;
+                    canalLine.StrokeThickness = ScaleX;
 
                     canalCanvas.Children.Add(canalLine);
 
@@ -187,6 +192,16 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
         {
             initialX1 = canalCanvas.ActualWidth / 10;
             initialY1 = canalCanvas.ActualHeight / 2;
+        }
+
+        private void RemoveTemporaryCanvasElements()
+        {
+            foreach (var uiElement in temporaryCanvasElements)
+            {
+                canalCanvas.Children.Remove(uiElement);
+            }
+
+            temporaryCanvasElements.Clear();
         }
     }
 }
