@@ -18,7 +18,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
         public Canal()
         {
             CanelEdges = new List<ICanalEdge>();
-            CanalStretches = new List<ICanalStretch>();
+            CanalStretches = new List<ICanalStretchModel>();
         }
 
         /// <summary>
@@ -34,7 +34,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
         /// <summary>
         /// Gets or sets the canal homogeneous sections.
         /// </summary>
-        public List<ICanalStretch> CanalStretches { get; set; }
+        public List<ICanalStretchModel> CanalStretches { get; set; }
 
         /// <summary>
         /// Executes the canal simulation
@@ -46,7 +46,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
 
             RungeKutta solver = new RungeKutta();
 
-            foreach (ICanalStretch canalStretch in CanalStretches)
+            foreach (ICanalStretchModel canalStretch in CanalStretches)
             {
                 if(canalStretch.Flow > 0 && canalStretch.FromNode.WaterLevel.HasValue)
                 {

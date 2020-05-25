@@ -11,7 +11,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
     /// <summary>
     /// Represents a canal of equal dimensions with certain length
     /// </summary>
-    public class CanalStretch : ICanalStretch
+    public class CanalStretch : ICanalStretchModel
     {
         public CanalStretch(double length, double flow, CanalSection canalSection)
         {

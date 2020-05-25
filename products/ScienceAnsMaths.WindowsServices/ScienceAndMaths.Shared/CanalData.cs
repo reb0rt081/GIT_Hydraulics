@@ -25,14 +25,14 @@ namespace ScienceAndMaths.Shared
 
         public CanalSimulationResult CanalResult { get; set; }
 
-        public ICanalStretch GetCanalStretch(CanalPointResult canalPointResult)
+        public ICanalStretchModel GetCanalStretch(CanalPointResult canalPointResult)
         {
             int canalIndex = 0;
             double relativeCanalX = canalPointResult.X;
 
             while(canalIndex < Canal.CanalStretches.Count)
             {
-                ICanalStretch canalStretch = Canal.CanalStretches[canalIndex];
+                ICanalStretchModel canalStretch = Canal.CanalStretches[canalIndex];
 
                 if(relativeCanalX <= canalStretch.Length)
                 {
@@ -68,7 +68,7 @@ namespace ScienceAndMaths.Shared
 
             while (!found && canalIndex < Canal.CanalStretches.Count)
             {
-                ICanalStretch canalStretch = Canal.CanalStretches[canalIndex];
+                ICanalStretchModel canalStretch = Canal.CanalStretches[canalIndex];
                 double relativeLengthDistance = canalStretch.Length * Math.Cos(Math.Atan(canalStretch.CanalSection.Slope));
 
                 if (relativehorizontalDistance <= relativeLengthDistance)

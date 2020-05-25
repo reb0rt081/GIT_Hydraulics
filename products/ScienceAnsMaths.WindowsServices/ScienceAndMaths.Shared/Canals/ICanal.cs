@@ -22,6 +22,6 @@ namespace ScienceAndMaths.Shared.Canals
         /// <summary>
         /// Gets or sets the canal homogeneous sections.
         /// </summary>
-        List<ICanalStretch> CanalStretches { get; set; }
+        List<ICanalStretchModel> CanalStretches { get; set; }
     }
 }

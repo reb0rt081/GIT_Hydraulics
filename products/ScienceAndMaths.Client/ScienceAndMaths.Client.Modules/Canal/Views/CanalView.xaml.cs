@@ -108,7 +108,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
             ScaleX = (finalX1 - previousX1) / CanalViewModel.CanalData.Canal.CanalStretches.Sum(cs => cs.Length);
 
             //  Drawing canal botton
-            foreach (ICanalStretch canalStretch in CanalViewModel.CanalData.Canal.CanalStretches)
+            foreach (ICanalStretchModel canalStretch in CanalViewModel.CanalData.Canal.CanalStretches)
             {
                 Line canalLine = new Line();
 

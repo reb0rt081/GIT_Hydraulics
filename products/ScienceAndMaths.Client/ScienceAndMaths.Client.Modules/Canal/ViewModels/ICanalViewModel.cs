@@ -20,6 +20,6 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
 
         CanalData CanalData { get; set; }
 
-        ICanalStretch ActiveCanalStretch { get; set; }
+        ICanalStretchModel ActiveCanalStretch { get; set; }
     }
 }

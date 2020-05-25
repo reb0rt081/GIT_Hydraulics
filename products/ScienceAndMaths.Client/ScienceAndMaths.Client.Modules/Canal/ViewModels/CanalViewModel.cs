@@ -44,7 +44,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
         #region Properties
 
         public CanalData CanalData { get; set; }
-        public ICanalStretch ActiveCanalStretch { get; set; }
+        public ICanalStretchModel ActiveCanalStretch { get; set; }
 
         #endregion
 
