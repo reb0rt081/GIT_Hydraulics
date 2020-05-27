@@ -40,7 +40,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
             }
         }
 
-        private Line activeCanalLine { get; set; }
+        private Line activeCanalLine;
 
         private void sliZoom_ValueChanged(object sender,
             RoutedPropertyChangedEventArgs<double> e)
