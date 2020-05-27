@@ -44,7 +44,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
         #region Properties
 
         public CanalData CanalData { get; set; }
-        public ICanalStretchModel ActiveCanalStretch { get; set; }
+        public CanalGeometryData ActiveCanalGeometryData { get; set; }
 
         #endregion
 
@@ -78,7 +78,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
 
                 CanalData = new CanalData(canal);
 
-                ActiveCanalStretch = CanalData.Canal?.CanalStretches.FirstOrDefault();
+                ActiveCanalGeometryData = CanalData.Canal?.CanalStretches.FirstOrDefault()?.GetCanalGeometryData();
 
                 RaisePropertiesChanged();
             }                
@@ -87,7 +87,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
         private void RaisePropertiesChanged()
         {
             RaisePropertyChanged(nameof(CanalData));
-            RaisePropertyChanged(nameof(ActiveCanalStretch));
+            RaisePropertyChanged(nameof(ActiveCanalGeometryData));
             LoadCanalCommand.RaiseCanExecuteChanged();
             SimulateCanalCommand.RaiseCanExecuteChanged();
         }

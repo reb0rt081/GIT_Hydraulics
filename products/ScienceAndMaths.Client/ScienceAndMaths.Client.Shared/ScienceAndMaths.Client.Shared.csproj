@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="PropertyItem.cs" />
     <Compile Include="ScienceAndMathsModule.cs" />
     <Compile Include="ScienceAndMathsModuleInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

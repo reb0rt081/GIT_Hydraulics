@@ -6,6 +6,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+
+using ScienceAndMaths.Client.Controls;
 using ScienceAndMaths.Client.Modules.Canal.ViewModels;
 using ScienceAndMaths.Shared.Canals;
 using Unity;

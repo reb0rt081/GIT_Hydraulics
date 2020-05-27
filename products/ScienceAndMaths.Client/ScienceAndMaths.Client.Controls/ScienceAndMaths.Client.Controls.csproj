@@ -47,6 +47,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ScienceAndMathsPropertyGrid.xaml.cs">
+      <DependentUpon>ScienceAndMathsPropertyGrid.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ScienceAndMathsBackRibbonButton.xaml.cs">
       <DependentUpon>ScienceAndMathsBackRibbonButton.xaml</DependentUpon>
     </Compile>
@@ -56,6 +59,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Page Include="ScienceAndMathsPropertyGrid.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ScienceAndMathsBackRibbonButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
