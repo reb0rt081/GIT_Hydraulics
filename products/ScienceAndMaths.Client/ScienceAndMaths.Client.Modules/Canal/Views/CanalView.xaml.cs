@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -29,7 +30,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
 
         private readonly  List<UIElement> temporaryCanvasElements = new List<UIElement>();
 
-       [Dependency]
+        [Dependency]
         public ICanalViewModel CanalViewModel
         {
             get { return (ICanalViewModel) DataContext; }
@@ -38,6 +39,8 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
                 DataContext = value;
             }
         }
+
+        private Line activeCanalLine { get; set; }
 
         private void sliZoom_ValueChanged(object sender,
             RoutedPropertyChangedEventArgs<double> e)
@@ -60,40 +63,51 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
             InitializeComponent();
 
             ScaleY = 20;
-
-            
-
-            
         }
+
+        private void CanalCanvas_OnMouseMove(object sender, MouseEventArgs e)
+        {
+            Point position = e.GetPosition(canalCanvas);
+
+            DisplayCanalResult(position);
+        }
+
         private void CanalCanvas_OnMouseDown(object sender, MouseButtonEventArgs e)
         {
             Point position = e.GetPosition(canalCanvas);
 
-            if(CanalViewModel.CanalData != null)
+            DisplayCanalResult(position);
+        }
+
+        private void CanalCanvas_OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
+        {
+            DrawCanal();
+        }
+
+        private void DisplayCanalResult(Point position)
+        {
+            if (CanalViewModel.CanalData != null)
             {
                 CanalPointResult canalPointResult = CanalViewModel.CanalData.GetCanalPointResult((position.X - InitialCanalX) / ScaleX);
 
-                if(canalPointResult != null)
+                if (canalPointResult != null)
                 {
                     RemoveTemporaryCanvasElements();
 
                     //  Add cross
+                    activeCanalLine = GetClosestCanalLine(position.X);
+                    activeCanalLine.Stroke = Brushes.Red;
 
                     Label displayResultLabel = new Label();
                     displayResultLabel.Content = "X= " + canalPointResult.X + Environment.NewLine + "Y= " + canalPointResult.WaterLevel + " m";
-                    Canvas.SetLeft(displayResultLabel, position.X);
-                    Canvas.SetTop(displayResultLabel, position.Y);
+                    Canvas.SetLeft(displayResultLabel, activeCanalLine.X1);
+                    Canvas.SetTop(displayResultLabel, activeCanalLine.Y2 - 50);
 
                     temporaryCanvasElements.Add(displayResultLabel);
 
                     canalCanvas.Children.Add(displayResultLabel);
                 }
             }
-        }
-
-        private void CanalCanvas_OnDataContextChanged(object sender, DependencyPropertyChangedEventArgs e)
-        {
-            DrawCanal();
         }
 
         private void DrawCanal()
@@ -204,6 +218,21 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
             }
 
             temporaryCanvasElements.Clear();
+
+            if(activeCanalLine != null)
+            {
+                activeCanalLine.Stroke = Brushes.Blue;
+            }
+        }
+
+        private Line GetClosestCanalLine(double x)
+        {
+            if(canalCanvas?.Children.Count > 0)
+            {
+                return canalCanvas.Children.OfType<Line>().OrderBy(ln => Math.Abs(ln.X1 - x)).FirstOrDefault();
+            }
+
+            return null;
         }
     }
 }
