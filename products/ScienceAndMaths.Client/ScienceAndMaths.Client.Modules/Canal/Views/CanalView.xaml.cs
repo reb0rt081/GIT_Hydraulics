@@ -58,6 +58,37 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
             canalCanvas.LayoutTransform = new ScaleTransform(scale, scale);
         }
 
+        private void CanalCanvas_OnMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if(e.Delta > 0)
+            {
+                double newValue = zoomSlider.Value + 25;
+
+                if(newValue <= zoomSlider.Maximum)
+                {
+                    zoomSlider.Value = newValue;
+                }
+            }
+            else if(e.Delta < 0)
+            {
+                double newValue = zoomSlider.Value - 25;
+
+                if (newValue >= zoomSlider.Minimum)
+                {
+                    zoomSlider.Value = newValue;
+                }
+            }
+
+            // Display the zoom factor as a percentage.
+            zoomLabel.Content = zoomSlider.Value + "%";
+
+            // Get the scale factor as a fraction 0.25 - 2.00.
+            double scale = (double)(zoomSlider.Value / 100.0);
+
+            // Scale the graph.
+            canalCanvas.LayoutTransform = new ScaleTransform(scale, scale);
+        }
+
         public CanalView()
         {
             InitializeComponent();

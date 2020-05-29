@@ -39,6 +39,7 @@
                     DataContextChanged="CanalCanvas_OnDataContextChanged"
                     MouseDown="CanalCanvas_OnMouseDown"
                     MouseMove="CanalCanvas_OnMouseMove"
+                    MouseWheel="CanalCanvas_OnMouseWheel"
                     Background="White"
                     Width="900"
                     Height="450"
