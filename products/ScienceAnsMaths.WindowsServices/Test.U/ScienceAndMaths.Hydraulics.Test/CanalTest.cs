@@ -33,7 +33,7 @@ namespace ScienceAndMaths.Hydraulics.Test
         [TestMethod]
         public void BasicRectangularFlowTest2()
         {
-            CanalStretch canal = new CanalStretch(602, 10, new RectangularSection(4, 0.014, 0.0004));
+            CanalStretch canal = new CanalStretch(602, 2.5486, new RectangularSection(4, 0.014, 0.0004));
 
             double rh = canal.CanalSection.GetHydraulicRadius(0.694);
             double mv = canal.CanalSection.GetManningVelocity(0.694);
@@ -50,7 +50,7 @@ namespace ScienceAndMaths.Hydraulics.Test
             Assert.IsTrue(rh - actualRh <= double.Epsilon);
             Assert.IsTrue(mv - 0.91811 <= 0.0001);
             Assert.IsTrue(fr2 - 1.90669 <= 0.0001);
-            Assert.IsTrue(result - 0.700444 <= 0.00001);
+            Assert.IsTrue(result - 0.694 <= 0.00001);
         }
     }
 }
