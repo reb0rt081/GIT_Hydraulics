@@ -24,6 +24,8 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
 
         public double ScaleX { get; set; }
 
+        public double ElevationScale { get; set; }
+
         public double InitialCanalX { get; set; }
 
         public double InitialCanalY { get; set; }
@@ -154,6 +156,19 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
 
             ScaleX = (finalX1 - previousX1) / CanalViewModel.CanalData.Canal.CanalStretches.Sum(cs => cs.Length);
 
+            double accruedElevation =
+                CanalViewModel.CanalData.Canal.CanalStretches.Sum(cs => cs.Length * cs.CanalSection.Slope);
+
+            if (accruedElevation == 0d)
+            {
+                ElevationScale = ScaleY;
+            }
+            else
+            {
+                ElevationScale = (1.0/10.0 *  canalCanvas.ActualHeight) / accruedElevation;
+            }
+            
+
             //  Drawing canal botton
             foreach (ICanalStretchModel canalStretch in CanalViewModel.CanalData.Canal.CanalStretches)
             {
@@ -169,7 +184,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
                 Canvas.SetTop(canalIdlabel, previousY1 + 10);
 
                 canalLine.X2 = canalLine.X1 + canalStretch.Length * ScaleX;
-                canalLine.Y2 = canalLine.Y1 + canalStretch.CanalSection.Slope * canalStretch.Length * ScaleY;
+                canalLine.Y2 = canalLine.Y1 + canalStretch.CanalSection.Slope * canalStretch.Length * ElevationScale;
 
                 canalLine.StrokeThickness = ScaleX;
 
@@ -213,12 +228,12 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
                     canalLine.X2 = canalLine.X1 + actualIncreaseX * ScaleX;
                     canalLine.Y2 = canalLine.Y1 - pointResult.WaterLevel * ScaleY;
 
-                    canalLine.StrokeThickness = ScaleX;
+                    canalLine.StrokeThickness = increaseX * ScaleX;
 
                     canalCanvas.Children.Add(canalLine);
 
                     previousX1 = canalLine.X2;
-                    previousY1 += actualIncreaseX * canalSection.Slope * ScaleY;
+                    previousY1 += actualIncreaseX * canalSection.Slope * ElevationScale;
                 }
 
                 var lastPoint = CanalViewModel.CanalData.CanalResult.CanalPointResults.LastOrDefault();
