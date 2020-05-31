@@ -10,14 +10,34 @@ namespace ScienceAndMaths.Shared.Canals
     {
         public CanalSimulationResult()
         {
-            CanalPointResults = new List<CanalPointResult>();
+            CanalStretchResults = new Dictionary<string, CanalStretchResult>();
         }
 
-        public List<CanalPointResult> CanalPointResults { get; set; }
+        public Dictionary<string, CanalStretchResult> CanalStretchResults { get; set; }
 
-        public void AddCanalPointResult(double x, double waterLevel)
+        public List<CanalPointResult> CanalPointResults
         {
-            CanalPointResults.Add(new CanalPointResult(x, waterLevel));
+            get { return CanalStretchResults.Values.SelectMany(csr => csr.CanalPointResults).ToList(); }
+        }
+
+        public CanalStretchResult GetCanalStretchResult(string canalStretchId)
+        {
+            if (CanalStretchResults.TryGetValue(canalStretchId, out CanalStretchResult result))
+            {
+                return result;
+            }
+
+            return null;
+        }
+        
+        public void AddCanalPointResult(string canalStretchId, double x, double waterLevel)
+        {
+            if (!CanalStretchResults.ContainsKey(canalStretchId))
+            {
+                CanalStretchResults.Add(canalStretchId, new CanalStretchResult());
+            }
+
+            CanalStretchResults[canalStretchId].CanalPointResults.Add(new CanalPointResult(x, waterLevel));
         }
     }
 }

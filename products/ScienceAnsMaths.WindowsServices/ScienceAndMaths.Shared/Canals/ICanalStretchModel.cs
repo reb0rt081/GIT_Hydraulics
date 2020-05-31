@@ -9,11 +9,6 @@ namespace ScienceAndMaths.Shared.Canals
     public interface ICanalStretchModel : ICanalStretch
     {
         /// <summary>
-        /// Gets or sets the unique identifier for the canal.
-        /// </summary>
-        string Id { get; set; }
-
-        /// <summary>
         /// Gets or sets the source node for this canal stretch.
         /// </summary>
         ICanalEdge FromNode { get; set; }

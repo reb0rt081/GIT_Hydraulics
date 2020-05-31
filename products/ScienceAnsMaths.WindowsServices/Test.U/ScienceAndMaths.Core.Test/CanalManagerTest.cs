@@ -28,7 +28,7 @@ namespace ScienceAndMaths.Core.Test
                 Id = "EndCanal"
             });
 
-            CanalStretch canalStretch = new CanalStretch(602, 20.32, new RectangularSection(5, 0.028, 0));
+            CanalStretch canalStretch = new CanalStretch("stretch1", 602, 20.32, new RectangularSection(5, 0.028, 0));
             canalStretch.FromNode = canal.CanelEdges.First();
             canalStretch.ToNode = canal.CanelEdges.Last();
 

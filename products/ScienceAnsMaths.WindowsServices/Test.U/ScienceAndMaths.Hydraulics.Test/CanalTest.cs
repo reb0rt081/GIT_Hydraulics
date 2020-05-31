@@ -12,7 +12,7 @@ namespace ScienceAndMaths.Hydraulics.Test
         [TestMethod]
         public void BasicRectangularFlowTest()
         {
-            CanalStretch canal = new CanalStretch(602, 20.32, new RectangularSection(5, 0.028, 0));
+            CanalStretch canal = new CanalStretch("stretch1", 602, 20.32, new RectangularSection(5, 0.028, 0));
 
             double rh = canal.CanalSection.GetHydraulicRadius(2.9);
             double mv = canal.CanalSection.GetManningVelocity(2.9);
@@ -33,7 +33,7 @@ namespace ScienceAndMaths.Hydraulics.Test
         [TestMethod]
         public void BasicRectangularFlowTest2()
         {
-            CanalStretch canal = new CanalStretch(602, 2.5486, new RectangularSection(4, 0.014, 0.0004));
+            CanalStretch canal = new CanalStretch("stretch1", 602, 2.5486, new RectangularSection(4, 0.014, 0.0004));
 
             double rh = canal.CanalSection.GetHydraulicRadius(0.694);
             double mv = canal.CanalSection.GetManningVelocity(0.694);

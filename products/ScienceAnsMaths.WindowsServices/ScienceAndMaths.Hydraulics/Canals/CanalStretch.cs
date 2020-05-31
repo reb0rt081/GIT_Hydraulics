@@ -13,8 +13,9 @@ namespace ScienceAndMaths.Hydraulics.Canals
     /// </summary>
     public class CanalStretch : ICanalStretchModel
     {
-        public CanalStretch(double length, double flow, CanalSection canalSection)
+        public CanalStretch(string id, double length, double flow, CanalSection canalSection)
         {
+            Id = id;
             Length = length;
             Flow = flow;
             CanalSection = canalSection;
@@ -94,7 +95,8 @@ namespace ScienceAndMaths.Hydraulics.Canals
                 Length = Length,
                 Flow = Flow,
                 Roughness = CanalSection.Roughness,
-                Slope =  CanalSection.Slope
+                Slope =  CanalSection.Slope,
+                Id = Id
             };
         }
     }

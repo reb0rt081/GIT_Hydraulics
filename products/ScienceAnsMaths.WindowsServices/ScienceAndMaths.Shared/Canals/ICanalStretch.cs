@@ -9,6 +9,11 @@ namespace ScienceAndMaths.Shared.Canals
     public interface ICanalStretch
     {
         /// <summary>
+        /// Gets or sets the unique identifier for the canal.
+        /// </summary>
+        string Id { get; set; }
+
+        /// <summary>
         /// Gets or sets the length of the canal
         /// </summary>
         double Length { get; set; }

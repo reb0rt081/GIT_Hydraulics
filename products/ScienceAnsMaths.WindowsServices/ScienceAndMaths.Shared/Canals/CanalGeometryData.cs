@@ -12,5 +12,6 @@ namespace ScienceAndMaths.Shared.Canals
         public double Slope { get; set; }
         public double Length { get; set; }
         public double Flow { get; set; }
+        public string Id { get; set; }
     }
 }

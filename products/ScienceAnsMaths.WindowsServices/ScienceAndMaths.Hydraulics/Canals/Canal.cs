@@ -52,7 +52,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
                 {
                     double x = 0.0;
                     double waterLevel = canalStretch.FromNode.WaterLevel.Value;
-                    result.AddCanalPointResult(0.0, waterLevel);
+                    result.AddCanalPointResult(canalStretch.Id, 0.0, waterLevel);
 
                     int steps = (int) (canalStretch.Length > 10000
                         ? 10000
@@ -66,7 +66,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
                         waterLevel = solver.Solve(x, waterLevel);
                         x = x + solver.Interval;
 
-                        result.AddCanalPointResult(x, waterLevel);
+                        result.AddCanalPointResult(canalStretch.Id, x, waterLevel);
                     }
                 }
             }
