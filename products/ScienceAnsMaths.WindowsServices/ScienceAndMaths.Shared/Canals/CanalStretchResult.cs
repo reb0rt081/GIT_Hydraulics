@@ -14,5 +14,7 @@ namespace ScienceAndMaths.Shared.Canals
         }
 
         public List<CanalPointResult> CanalPointResults { get; set; }
+        
+        public double CriticalWaterLevel { get; set; }
     }
 }

@@ -62,5 +62,12 @@ namespace ScienceAndMaths.Shared.Canals
         /// <param name="waterLevel">The level of the water in the canal section</param>
         /// <returns></returns>
         double GetHydraulicPerimeter(double waterLevel);
+
+        /// <summary>
+        /// Returns the critical water level for a canal section given a flow
+        /// </summary>
+        /// <param name="flow">The flow through the canal section</param>
+        /// <returns></returns>
+        double GetCriticalWaterLevel(double flow);
     }
 }

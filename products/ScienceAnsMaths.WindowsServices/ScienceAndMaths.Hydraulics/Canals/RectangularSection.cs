@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScienceAndMaths.Shared;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,6 +20,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
 
         public override double ConvertWaterLevelToHydraulicDepth(double waterLevel)
         {
+            // En el caso trapezoidal seria el tirante hidraulico A/T
             return waterLevel;
         }
 
@@ -35,6 +37,11 @@ namespace ScienceAndMaths.Hydraulics.Canals
         public override double GetHydraulicPerimeter(double waterLevel)
         {
             return Width + 2 * waterLevel;
-        }        
+        }
+
+        public override double GetCriticalWaterLevel(double flow)
+        {
+            return ConvertHydraulicDepthToWaterLevel(Math.Pow((Math.Pow(flow, 2) / (Constants.GravityAcceleration * Math.Pow(Width, 2))), 1.0 / 3.0));
+        }
     }
 }

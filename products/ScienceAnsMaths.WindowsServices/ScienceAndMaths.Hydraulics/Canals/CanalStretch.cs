@@ -62,17 +62,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
         /// <returns></returns>
         public double GetFroudeNumber(double waterLevel)
         {
-            return CanalSection.ConvertHydraulicDepthToWaterLevel(Flow / (Math.Sqrt(Constants.GravityAcceleration * CanalSection.ConvertWaterLevelToHydraulicDepth(waterLevel)) * CanalSection.GetHydraulicArea(waterLevel)));
-        }
-
-        /// <summary>
-        /// Returns the critical depth of the canal stretch when Froude Number = 1
-        /// </summary>
-        /// <param name="waterLevel"></param>
-        /// <returns></returns>
-        public double GetCriticalHydraulicDepth(double waterLevel)
-        {
-            return Math.Pow(Flow, 2.0) / (Constants.GravityAcceleration * Math.Pow(CanalSection.GetHydraulicArea(waterLevel), 2.0)); 
+            return Flow / (Math.Sqrt(Constants.GravityAcceleration * CanalSection.ConvertWaterLevelToHydraulicDepth(waterLevel)) * CanalSection.GetHydraulicArea(waterLevel));
         }
 
         /// <summary>

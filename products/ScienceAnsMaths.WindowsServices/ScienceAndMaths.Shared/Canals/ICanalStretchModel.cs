@@ -31,13 +31,6 @@ namespace ScienceAndMaths.Shared.Canals
         double GetFroudeNumber(double waterLevel);
 
         /// <summary>
-        /// Returns the critical depth of the canal stretch when Froude Number = 1
-        /// </summary>
-        /// <param name="waterLevel"></param>
-        /// <returns></returns>
-        double GetCriticalHydraulicDepth(double waterLevel);
-
-        /// <summary>
         /// Returns the flow equation
         /// </summary>
         /// <returns></returns>
