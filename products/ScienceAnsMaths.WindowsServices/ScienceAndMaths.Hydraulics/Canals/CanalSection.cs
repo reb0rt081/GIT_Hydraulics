@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using ScienceAndMaths.Mathematics;
 using ScienceAndMaths.Shared;
 using ScienceAndMaths.Shared.Canals;
 
@@ -93,6 +94,20 @@ namespace ScienceAndMaths.Hydraulics.Canals
         /// <param name="flow">The flow through the canal section</param>
         /// <returns></returns>
         public abstract double GetCriticalWaterLevel(double flow);
+
+        /// <summary>
+        /// Returns the normal water level for a canal section given a flow
+        /// </summary>
+        /// <param name="flow">The flow through the canal section</param>
+        /// <returns></returns>
+        public double GetNormalWaterLevel(double flow)
+        {
+            Func<double, double> equation = (x) => GetManningFlow(x) - flow;
+
+            NewtonRaphson newtonRaphson = new NewtonRaphson(equation);
+
+            return newtonRaphson.Solve(GetCriticalWaterLevel(flow), 0.009);
+        }
 
         /// <summary>
         /// Returns the critical slope for a canal section given a flow

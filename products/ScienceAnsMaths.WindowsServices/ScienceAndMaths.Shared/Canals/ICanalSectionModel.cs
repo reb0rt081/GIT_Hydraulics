@@ -71,6 +71,13 @@ namespace ScienceAndMaths.Shared.Canals
         double GetCriticalWaterLevel(double flow);
 
         /// <summary>
+        /// Returns the normal water level for a canal section given a flow
+        /// </summary>
+        /// <param name="flow">The flow through the canal section</param>
+        /// <returns></returns>
+        double GetNormalWaterLevel(double flow);
+
+        /// <summary>
         /// Returns the critical slope for a canal section given a flow
         /// </summary>
         /// <param name="flow">The flow through the canal section</param>

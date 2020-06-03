@@ -19,6 +19,8 @@ namespace ScienceAndMaths.Hydraulics.Test
             double fr2 = Math.Pow(canal.GetFroudeNumber(2.9), 2.0);
             double criticalDepth = canal.CanalSection.GetCriticalWaterLevel(20.32);
             double criticalSlope = canal.CanalSection.GetCriticalSlope(20.32);
+            double flow = canal.CanalSection.GetManningFlow(canal.CanalSection.GetCriticalWaterLevel(20.32));
+            double normalDepth = canal.CanalSection.GetNormalWaterLevel(20.32);
             RungeKutta solver = new RungeKutta(1, canal.FlowEquation());
 
             //  Act
@@ -30,6 +32,7 @@ namespace ScienceAndMaths.Hydraulics.Test
             Assert.IsTrue(fr2 - 0.0690 <= 0.0001);
             Assert.IsTrue(result - 2.89888 <= 0.00001);
             Assert.IsTrue(criticalSlope > 0);
+            Assert.IsTrue(Math.Abs(flow - 0) < Double.Epsilon);
             Assert.IsTrue(Math.Abs(criticalDepth - 1.1897678822813287) <= double.Epsilon);
         }
 
@@ -44,6 +47,7 @@ namespace ScienceAndMaths.Hydraulics.Test
             double flow = canal.CanalSection.GetManningFlow(0.694);
             double criticalDepth = canal.CanalSection.GetCriticalWaterLevel(flow);
             double criticalSlope = canal.CanalSection.GetCriticalSlope(flow);
+            double normalDepth = canal.CanalSection.GetNormalWaterLevel(flow);
             RungeKutta solver = new RungeKutta(1, canal.FlowEquation());
 
             //  Act
@@ -55,6 +59,7 @@ namespace ScienceAndMaths.Hydraulics.Test
             Assert.IsTrue(fr2 - 1.90669 <= 0.0001);
             Assert.IsTrue(result - 0.694 <= 0.00001);
             Assert.IsTrue(criticalSlope > 0.0004);
+            Assert.IsTrue(normalDepth > criticalDepth);
             Assert.IsTrue(Math.Abs(criticalDepth - 0.34593708152888353) <= double.Epsilon);
         }
     }
