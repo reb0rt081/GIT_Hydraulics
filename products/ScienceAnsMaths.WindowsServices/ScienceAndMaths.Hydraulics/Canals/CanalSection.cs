@@ -93,5 +93,16 @@ namespace ScienceAndMaths.Hydraulics.Canals
         /// <param name="flow">The flow through the canal section</param>
         /// <returns></returns>
         public abstract double GetCriticalWaterLevel(double flow);
+
+        /// <summary>
+        /// Returns the critical slope for a canal section given a flow
+        /// </summary>
+        /// <param name="flow">The flow through the canal section</param>
+        /// <returns></returns>
+        public double GetCriticalSlope(double flow)
+        {
+            return Math.Pow((Roughness * flow) / (GetHydraulicArea(GetCriticalWaterLevel(flow)) * Math.Pow(GetHydraulicRadius(GetCriticalWaterLevel(flow)), 2.0 / 3.0)),
+                2);
+        }
     }
 }

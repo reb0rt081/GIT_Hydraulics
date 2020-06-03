@@ -69,5 +69,12 @@ namespace ScienceAndMaths.Shared.Canals
         /// <param name="flow">The flow through the canal section</param>
         /// <returns></returns>
         double GetCriticalWaterLevel(double flow);
+
+        /// <summary>
+        /// Returns the critical slope for a canal section given a flow
+        /// </summary>
+        /// <param name="flow">The flow through the canal section</param>
+        /// <returns></returns>
+        double GetCriticalSlope(double flow);
     }
 }
