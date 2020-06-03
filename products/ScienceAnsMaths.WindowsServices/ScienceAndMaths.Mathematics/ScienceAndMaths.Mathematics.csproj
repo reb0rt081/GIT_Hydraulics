@@ -48,6 +48,7 @@
     <Compile Include="FEM\Node.cs" />
     <Compile Include="FEM\TriangularElement.cs" />
     <Compile Include="MatrixOperations.cs" />
+    <Compile Include="NewtonRaphson.cs" />
     <Compile Include="RungeKutta.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

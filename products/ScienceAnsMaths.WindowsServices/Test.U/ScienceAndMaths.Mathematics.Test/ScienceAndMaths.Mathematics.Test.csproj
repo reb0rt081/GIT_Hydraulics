@@ -52,6 +52,7 @@
   <ItemGroup>
     <Compile Include="FiniteElementMethodTest.cs" />
     <Compile Include="MatrixOperationsTest.cs" />
+    <Compile Include="NewtonRaphsonTest.cs" />
     <Compile Include="RungeKuttaTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
