@@ -63,6 +63,8 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
 
             CanalData = task.Result;
 
+            ActiveCanalGeometryData = CanalData.GetCanalGeometryData(CanalData.Canal.CanalStretches.Select(cs => cs.Id).FirstOrDefault());
+
             RaisePropertiesChanged();
         }
 
@@ -78,7 +80,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
 
                 CanalData = new CanalData(canal);
 
-                ActiveCanalGeometryData = CanalData.Canal?.CanalStretches.FirstOrDefault()?.GetCanalGeometryData();
+                ActiveCanalGeometryData = CanalData.GetCanalGeometryData(CanalData.Canal.CanalStretches.Select(cs => cs.Id).FirstOrDefault());
 
                 RaisePropertiesChanged();
             }                

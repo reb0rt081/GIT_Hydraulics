@@ -35,11 +35,5 @@ namespace ScienceAndMaths.Shared.Canals
         /// </summary>
         /// <returns></returns>
         Func<double, double, double> FlowEquation();
-
-        /// <summary>
-        /// Returns the canal geometry data
-        /// </summary>
-        /// <returns></returns>
-        CanalGeometryData GetCanalGeometryData();
     }
 }

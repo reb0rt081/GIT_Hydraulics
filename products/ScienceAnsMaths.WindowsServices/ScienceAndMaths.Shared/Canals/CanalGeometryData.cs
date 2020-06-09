@@ -13,5 +13,8 @@ namespace ScienceAndMaths.Shared.Canals
         public double Length { get; set; }
         public double Flow { get; set; }
         public string Id { get; set; }
+        public double NormalWaterLevel { get; set; }
+        public double CriticalWaterLevel { get; set; }
+        public double CriticalSlope { get; set; }
     }
 }

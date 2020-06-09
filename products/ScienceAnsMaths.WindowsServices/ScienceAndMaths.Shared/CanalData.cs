@@ -47,6 +47,11 @@ namespace ScienceAndMaths.Shared
             return null;
         }
 
+        public ICanalStretchModel GetCanalStretch(string canalStretchId)
+        {
+            return Canal.CanalStretches.Single(cs => cs.Id == canalStretchId);
+        }
+
         public ICanalSection GetCanalSection(CanalPointResult canalPointResult)
         {
             var canalStretch = GetCanalStretch(canalPointResult);
@@ -84,6 +89,32 @@ namespace ScienceAndMaths.Shared
             }
 
             return CanalResult?.CanalPointResults?.OrderBy(pr => Math.Abs(coordinateX - pr.X)).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Returns the canal geometry data
+        /// </summary>
+        /// <returns></returns>
+        public CanalGeometryData GetCanalGeometryData(string canalStretchId)
+        {
+            if (canalStretchId == null)
+            {
+                return new CanalGeometryData();
+            }
+
+            ICanalStretchModel canalStretch = GetCanalStretch(canalStretchId);
+            
+            return new CanalGeometryData
+            {
+                Length = canalStretch.Length,
+                Flow = canalStretch.Flow,
+                Roughness = canalStretch.CanalSection.Roughness,
+                Slope = canalStretch.CanalSection.Slope,
+                Id = canalStretch.Id,
+                CriticalSlope = CanalResult?.GetCanalStretchResult(canalStretchId)?.CriticalSlope ?? 0,
+                CriticalWaterLevel = CanalResult?.GetCanalStretchResult(canalStretchId)?.CriticalWaterLevel ?? 0,
+                NormalWaterLevel = CanalResult?.GetCanalStretchResult(canalStretchId)?.NormalWaterLevel ?? 0,
+            };
         }
     }
 }

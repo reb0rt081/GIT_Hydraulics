@@ -73,21 +73,5 @@ namespace ScienceAndMaths.Hydraulics.Canals
         {
             return (x, y) => (CanalSection.Slope - (Math.Pow(Flow, 2) * Math.Pow(CanalSection.Roughness, 2)) / (Math.Pow(CanalSection.GetHydraulicArea(y), 2) * Math.Pow(CanalSection.GetHydraulicRadius(y), 4.0 / 3.0))) / (Math.Cos(Math.Asin(CanalSection.Slope)) - Math.Pow(GetFroudeNumber(y), 2));
         }
-
-        /// <summary>
-        /// Returns the canal geometry data
-        /// </summary>
-        /// <returns></returns>
-        public CanalGeometryData GetCanalGeometryData()
-        {
-            return new CanalGeometryData
-            {
-                Length = Length,
-                Flow = Flow,
-                Roughness = CanalSection.Roughness,
-                Slope =  CanalSection.Slope,
-                Id = Id
-            };
-        }
     }
 }

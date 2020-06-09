@@ -69,6 +69,11 @@ namespace ScienceAndMaths.Hydraulics.Canals
                         result.AddCanalPointResult(canalStretch.Id, x, waterLevel);
                     }
                 }
+
+                CanalStretchResult canalStretchResult = result.GetCanalStretchResult(canalStretch.Id);
+                canalStretchResult.CriticalSlope = canalStretch.CanalSection.GetCriticalSlope(canalStretch.Flow);
+                canalStretchResult.CriticalWaterLevel = canalStretch.CanalSection.GetCriticalWaterLevel(canalStretch.Flow);
+                canalStretchResult.NormalWaterLevel = canalStretch.CanalSection.GetNormalWaterLevel(canalStretch.Flow);
             }
 
             return result;
