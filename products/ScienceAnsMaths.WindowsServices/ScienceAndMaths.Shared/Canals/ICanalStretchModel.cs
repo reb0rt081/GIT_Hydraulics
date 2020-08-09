@@ -35,5 +35,11 @@ namespace ScienceAndMaths.Shared.Canals
         /// </summary>
         /// <returns></returns>
         Func<double, double, double> FlowEquation();
+
+        /// <summary>
+        /// Returns the associated depth downstream (y2) by means of the Belanger Equation that yields the relationship between the depth upstream (y1) and downstream (y2) in a Hydraulic Jump
+        /// </summary>
+        /// <returns></returns>
+        double GetHydraulicJumpDownstreamDepth(double y1);
     }
 }

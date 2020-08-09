@@ -58,6 +58,9 @@ namespace ScienceAndMaths.Hydraulics.Canals
                         ? 10000
                         : canalStretch.Length);
 
+                    // Regimen lento se impone aguas abajo
+                    // Regimen rapido se impone aguas arriba
+
                     solver.Interval = canalStretch.Length / steps;
                     solver.Equation = canalStretch.FlowEquation();
                     

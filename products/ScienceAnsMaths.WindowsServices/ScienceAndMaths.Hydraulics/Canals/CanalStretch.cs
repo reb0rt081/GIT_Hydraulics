@@ -73,5 +73,14 @@ namespace ScienceAndMaths.Hydraulics.Canals
         {
             return (x, y) => (CanalSection.Slope - (Math.Pow(Flow, 2) * Math.Pow(CanalSection.Roughness, 2)) / (Math.Pow(CanalSection.GetHydraulicArea(y), 2) * Math.Pow(CanalSection.GetHydraulicRadius(y), 4.0 / 3.0))) / (Math.Cos(Math.Asin(CanalSection.Slope)) - Math.Pow(GetFroudeNumber(y), 2));
         }
+
+        /// <summary>
+        /// Returns the associated depth downstream (y2) by means of the Belanger Equation that yields the relationship between the depth upstream (y1) and downstream (y2) in a Hydraulic Jump
+        /// </summary>
+        /// <returns></returns>
+        public double GetHydraulicJumpDownstreamDepth(double y1)
+        {
+            return y1 * 0.5 * (Math.Sqrt(1 + 8 * Math.Pow(GetFroudeNumber(y1), 2) - 1));
+        }
     }
 }
