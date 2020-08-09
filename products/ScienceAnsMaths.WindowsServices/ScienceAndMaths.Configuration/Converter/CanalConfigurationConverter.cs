@@ -25,8 +25,8 @@ namespace ScienceAndMaths.Configuration.Converter
                         Id = sluiceGateNode.NodeId,
                         WaterLevel = sluiceGateNode.WaterLevel,
                         ContractionCoefficient = sluiceGateNode.ContractionCoefficient,
-                        GateWaterLevel = sluiceGateNode.GateWaterLevel,
-                        GateWidth = sluiceGateNode.GateWidth
+                        RetainedWaterLevel = sluiceGateNode.RetainedWaterLevel,
+                        GateOpening = sluiceGateNode.GateOpening
                     });
                 }
                 else
@@ -91,8 +91,8 @@ namespace ScienceAndMaths.Configuration.Converter
                         NodeId = sluiceCanalEdge.Id,
                         WaterLevel = sluiceCanalEdge.WaterLevel,
                         ContractionCoefficient = sluiceCanalEdge.ContractionCoefficient,
-                        GateWaterLevel = sluiceCanalEdge.GateWaterLevel,
-                        GateWidth = sluiceCanalEdge.GateWidth
+                        RetainedWaterLevel = sluiceCanalEdge.RetainedWaterLevel,
+                        GateOpening = sluiceCanalEdge.GateOpening
                     });
                 }
                 else
