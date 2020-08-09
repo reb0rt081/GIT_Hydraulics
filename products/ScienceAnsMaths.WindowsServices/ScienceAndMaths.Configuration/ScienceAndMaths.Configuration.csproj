@@ -58,6 +58,7 @@
   <ItemGroup>
     <Compile Include="Canals\CanalArrow.cs" />
     <Compile Include="Canals\CanalConfiguration.cs" />
+    <Compile Include="Canals\SluiceGateNode.cs" />
     <Compile Include="Converter\BaseConfigurationConverter.cs" />
     <Compile Include="Converter\CanalConfigurationConverter.cs" />
     <Compile Include="Loader\CanalConfigurationLoader.cs" />

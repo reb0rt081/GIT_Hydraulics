@@ -18,11 +18,26 @@ namespace ScienceAndMaths.Configuration.Converter
 
             foreach (CanalNode node in configuration.Nodes)
             {
-                data.CanelEdges.Add(new CanalEdge()
+                if (node is SluiceGateNode sluiceGateNode)
                 {
-                    Id =  node.NodeId,
-                    WaterLevel = node.WaterLevel
-                });
+                    data.CanelEdges.Add(new SluiceCanalEdge()
+                    {
+                        Id = sluiceGateNode.NodeId,
+                        WaterLevel = sluiceGateNode.WaterLevel,
+                        ContractionCoefficient = sluiceGateNode.ContractionCoefficient,
+                        GateWaterLevel = sluiceGateNode.GateWaterLevel,
+                        GateWidth = sluiceGateNode.GateWidth
+                    });
+                }
+                else
+                {
+                    data.CanelEdges.Add(new CanalEdge()
+                    {
+                        Id = node.NodeId,
+                        WaterLevel = node.WaterLevel
+                    });
+                }
+                
             }
 
             foreach (CanalArrow arrow in configuration.Arrows)
@@ -69,11 +84,25 @@ namespace ScienceAndMaths.Configuration.Converter
 
             foreach (CanalEdge edges in data.CanelEdges)
             {
-                configuration.Nodes.Add(new CanalNode()
+                if (edges is SluiceCanalEdge sluiceCanalEdge)
                 {
-                    NodeId = edges.Id,
-                    WaterLevel = edges.WaterLevel,
-                });
+                    configuration.Nodes.Add(new SluiceGateNode()
+                    {
+                        NodeId = sluiceCanalEdge.Id,
+                        WaterLevel = sluiceCanalEdge.WaterLevel,
+                        ContractionCoefficient = sluiceCanalEdge.ContractionCoefficient,
+                        GateWaterLevel = sluiceCanalEdge.GateWaterLevel,
+                        GateWidth = sluiceCanalEdge.GateWidth
+                    });
+                }
+                else
+                {
+                    configuration.Nodes.Add(new CanalNode()
+                    {
+                        NodeId = edges.Id,
+                        WaterLevel = edges.WaterLevel,
+                    });
+                }
             }
 
             foreach (CanalStretch canalStretch in data.CanalStretches)

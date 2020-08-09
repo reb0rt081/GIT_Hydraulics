@@ -22,6 +22,6 @@ namespace ScienceAndMaths.Hydraulics.Canals
         /// <summary>
         /// Gets or sets the water level in the edge
         /// </summary>
-        public double? WaterLevel { get; set; }
+        public virtual double? WaterLevel { get; set; }
     }
 }

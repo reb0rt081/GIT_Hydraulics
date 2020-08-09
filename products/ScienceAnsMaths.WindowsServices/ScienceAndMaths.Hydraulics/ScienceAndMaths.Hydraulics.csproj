@@ -45,6 +45,7 @@
     <Compile Include="Canals\CanalEdge.cs" />
     <Compile Include="Canals\CanalStretch.cs" />
     <Compile Include="Canals\CanalSection.cs" />
+    <Compile Include="Canals\SluiceCanalEdge.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Canals\RectangularSection.cs" />
   </ItemGroup>
