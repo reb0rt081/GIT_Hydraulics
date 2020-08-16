@@ -17,7 +17,7 @@ namespace ScienceAndMaths.Shared.Canals
 
         public List<CanalPointResult> CanalPointResults
         {
-            get { return CanalStretchResults.Values.SelectMany(csr => csr.CanalPointResults).ToList(); }
+            get { return CanalStretchResults.Values.SelectMany(csr => csr.CanalPointResults).OrderBy(csr => csr.X).ToList(); }
         }
 
         public CanalStretchResult GetCanalStretchResult(string canalStretchId)
@@ -26,8 +26,13 @@ namespace ScienceAndMaths.Shared.Canals
             {
                 return result;
             }
+            else
+            {
+                result = new CanalStretchResult();
+                CanalStretchResults.Add(canalStretchId, result);
 
-            return null;
+                return result;
+            }
         }
         
         public void AddCanalPointResult(string canalStretchId, double x, double waterLevel)

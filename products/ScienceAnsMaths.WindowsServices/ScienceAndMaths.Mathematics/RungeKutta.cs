@@ -44,5 +44,17 @@ namespace ScienceAndMaths.Mathematics
 
             return initY + 1.0 / 6.0 * Interval * (k1 + 2.0 * k2 + 2.0 * k3 + k4);
         }
+
+        public double SolveBackwards(double initX, double initY)
+        {
+            double backwardsInterval = -Interval;
+
+            double k1 = Equation(initX, initY);
+            double k2 = Equation(initX + 0.5 * backwardsInterval, initY + 0.5 * k1 * backwardsInterval);
+            double k3 = Equation(initX + 0.5 * backwardsInterval, initY + 0.5 * k2 * backwardsInterval);
+            double k4 = Equation(initX + backwardsInterval, initY + k3 * backwardsInterval);
+
+            return initY + 1.0 / 6.0 * backwardsInterval * (k1 + 2.0 * k2 + 2.0 * k3 + k4);
+        }
     }
 }
