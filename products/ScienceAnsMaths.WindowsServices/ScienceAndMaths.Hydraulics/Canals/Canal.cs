@@ -113,16 +113,15 @@ namespace ScienceAndMaths.Hydraulics.Canals
 
                             result.AddCanalPointResult(canalStretch.Id, x, waterLevel);
                         }
+
+                        canalStretch.FromNode.WaterLevel = waterLevel;
                     }
                 }
+                //  Supercritical flow
                 else
                 {
                     
                 }
-
-                
-
-                
             }
 
             return result;
