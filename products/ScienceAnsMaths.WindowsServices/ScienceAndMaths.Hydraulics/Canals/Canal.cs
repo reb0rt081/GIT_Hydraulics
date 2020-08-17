@@ -26,7 +26,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
         /// Gets or sets the unique identifier for the canal.
         /// </summary>
         public string Id { get; set; }
-        
+
         /// <summary>
         /// Gets or sets the canal edges to define the boundary conditions.
         /// </summary>
@@ -63,14 +63,41 @@ namespace ScienceAndMaths.Hydraulics.Canals
                 canalStretchResult.CriticalWaterLevel = canalStretch.CanalSection.GetCriticalWaterLevel(canalStretch.Flow);
                 canalStretchResult.NormalWaterLevel = canalStretch.CanalSection.GetNormalWaterLevel(canalStretch.Flow);
 
-                //  Subcritical flow 
+                //  M flow 
                 if (canalStretch.CanalSection.Slope < canalStretchResult.CriticalSlope)
                 {
-                    if (canalStretch.ToNode.WaterLevel.HasValue)
+                    // M1, M2 Flow
+                    // Regimen lento se impone aguas abajo
+                    if (canalStretch.ToNode.WaterLevel.HasValue && canalStretch.ToNode.WaterLevel.Value > canalStretchResult.CriticalWaterLevel)
                     {
                         double x = canalStretch.Length;
                         double waterLevel = canalStretch.ToNode.WaterLevel.Value;
                         result.AddCanalPointResult(canalStretch.Id, canalStretch.Length, waterLevel);
+
+                        int steps = (int)(canalStretch.Length > 10000
+                            ? 10000
+                            : canalStretch.Length);
+
+                        solver.Interval = canalStretch.Length / steps;
+                        solver.Equation = canalStretch.FlowEquation();
+
+                        for (int i = 1; i <= steps; i++)
+                        {
+                            waterLevel = solver.SolveBackwards(x, waterLevel);
+                            x = x - solver.Interval;
+
+                            result.AddCanalPointResult(canalStretch.Id, x, waterLevel);
+                        }
+
+                        canalStretch.FromNode.WaterLevel = waterLevel;
+                    }
+                    // M3 Flow
+                    // Regimen rapido se impone aguas arriba
+                    else if (canalStretch.FromNode.WaterLevel.HasValue)
+                    {
+                        double x = 0.0;
+                        double waterLevel = canalStretch.FromNode.WaterLevel.Value;
+                        result.AddCanalPointResult(canalStretch.Id, 0.0, waterLevel);
 
                         int steps = (int)(canalStretch.Length > 10000
                             ? 10000
@@ -84,13 +111,19 @@ namespace ScienceAndMaths.Hydraulics.Canals
 
                         for (int i = 1; i <= steps; i++)
                         {
-                            waterLevel = solver.SolveBackwards(x, waterLevel);
-                            x = x - solver.Interval;
+                            waterLevel = solver.Solve(x, waterLevel);
+                            x = x + solver.Interval;
 
                             result.AddCanalPointResult(canalStretch.Id, x, waterLevel);
                         }
+
+                        canalStretch.ToNode.WaterLevel = waterLevel;
                     }
-                    else if (canalStretch.FromNode.WaterLevel.HasValue)
+                }
+                //  H flow
+                else
+                {
+                    if (canalStretch.FromNode.WaterLevel.HasValue)
                     {
                         double x = 0.0;
                         double waterLevel = canalStretch.FromNode.WaterLevel.Value;
@@ -116,11 +149,6 @@ namespace ScienceAndMaths.Hydraulics.Canals
 
                         canalStretch.FromNode.WaterLevel = waterLevel;
                     }
-                }
-                //  Supercritical flow
-                else
-                {
-                    
                 }
             }
 
