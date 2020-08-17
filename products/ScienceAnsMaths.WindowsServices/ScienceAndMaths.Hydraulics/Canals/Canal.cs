@@ -63,8 +63,8 @@ namespace ScienceAndMaths.Hydraulics.Canals
                 canalStretchResult.CriticalWaterLevel = canalStretch.CanalSection.GetCriticalWaterLevel(canalStretch.Flow);
                 canalStretchResult.NormalWaterLevel = canalStretch.CanalSection.GetNormalWaterLevel(canalStretch.Flow);
 
-                var preCanalStretch = CanalStretches.FirstOrDefault(cs => cs.ToNode.Id == canalStretch.FromNode.Id);
-                var postCanalStretch = CanalStretches.FirstOrDefault(cs => cs.FromNode.Id == canalStretch.ToNode.Id);
+                ICanalStretchModel preCanalStretch = CanalStretches.FirstOrDefault(cs => cs.ToNode.Id == canalStretch.FromNode.Id);
+                ICanalStretchModel postCanalStretch = CanalStretches.FirstOrDefault(cs => cs.FromNode.Id == canalStretch.ToNode.Id);
 
                 bool postCriticalSection = false;
 
@@ -78,6 +78,11 @@ namespace ScienceAndMaths.Hydraulics.Canals
                     postCriticalSection = postCanalStretch.CanalSection.GetNormalWaterLevel(postCanalStretch.Flow) < canalStretchResult.CriticalWaterLevel;
                 }
 
+                bool executeAnalysis = false;
+                double x = 0;
+                double waterLevel = 0;
+                bool backwardsAnalysis = false;
+
                 //  M flow 
                 if (canalStretch.CanalSection.Slope < canalStretchResult.CriticalSlope)
                 {
@@ -85,79 +90,27 @@ namespace ScienceAndMaths.Hydraulics.Canals
                     // Regimen lento se impone aguas abajo
                     if (canalStretch.ToNode.WaterLevel.HasValue && canalStretch.ToNode.WaterLevel.Value > canalStretchResult.CriticalWaterLevel)
                     {
-                        double x = canalStretch.Length;
-                        double waterLevel = canalStretch.ToNode.WaterLevel.Value;
-                        result.AddCanalPointResult(canalStretch.Id, canalStretch.Length, waterLevel);
-
-                        int steps = (int)(canalStretch.Length > 10000
-                            ? 10000
-                            : canalStretch.Length);
-
-                        solver.Interval = canalStretch.Length / steps;
-                        solver.Equation = canalStretch.FlowEquation();
-
-                        for (int i = 1; i <= steps; i++)
-                        {
-                            waterLevel = solver.SolveBackwards(x, waterLevel);
-                            x = x - solver.Interval;
-
-                            result.AddCanalPointResult(canalStretch.Id, x, waterLevel);
-                        }
-
-                        canalStretch.FromNode.WaterLevel = waterLevel;
+                        x = canalStretch.Length;
+                        waterLevel = canalStretch.ToNode.WaterLevel.Value;
+                        backwardsAnalysis = true;
+                        executeAnalysis = true;
                     }
                     //  M2 Flow
                     // Regimen lento se impone aguas abajo
                     else if (postCriticalSection)
                     {
-                        double x = canalStretch.Length;
-                        double waterLevel = canalStretchResult.CriticalWaterLevel;
-                        result.AddCanalPointResult(canalStretch.Id, canalStretch.Length, waterLevel);
-
-                        int steps = (int)(canalStretch.Length > 10000
-                            ? 10000
-                            : canalStretch.Length);
-
-                        solver.Interval = canalStretch.Length / steps;
-                        solver.Equation = canalStretch.FlowEquation();
-
-                        for (int i = 1; i <= steps; i++)
-                        {
-                            waterLevel = solver.SolveBackwards(x, waterLevel);
-                            x = x - solver.Interval;
-
-                            result.AddCanalPointResult(canalStretch.Id, x, waterLevel);
-                        }
-
-                        canalStretch.FromNode.WaterLevel = waterLevel;
+                        x = canalStretch.Length;
+                        waterLevel = canalStretchResult.CriticalWaterLevel;
+                        backwardsAnalysis = true;
+                        executeAnalysis = true;
                     }
                     // M3 Flow
                     // Regimen rapido se impone aguas arriba
                     else if (canalStretch.FromNode.WaterLevel.HasValue)
                     {
-                        double x = 0.0;
-                        double waterLevel = canalStretch.FromNode.WaterLevel.Value;
-                        result.AddCanalPointResult(canalStretch.Id, 0.0, waterLevel);
-
-                        int steps = (int)(canalStretch.Length > 10000
-                            ? 10000
-                            : canalStretch.Length);
-
-                        // Regimen lento se impone aguas abajo
-                        // Regimen rapido se impone aguas arriba
-
-                        solver.Interval = canalStretch.Length / steps;
-                        solver.Equation = canalStretch.FlowEquation();
-
-                        for (int i = 1; i <= steps; i++)
-                        {
-                            waterLevel = solver.Solve(x, waterLevel);
-                            x = x + solver.Interval;
-
-                            result.AddCanalPointResult(canalStretch.Id, x, waterLevel);
-                        }
-
-                        canalStretch.ToNode.WaterLevel = waterLevel;
+                        x = 0.0;
+                        waterLevel = canalStretch.FromNode.WaterLevel.Value;
+                        executeAnalysis = true;
                     }
                 }
                 //  H flow
@@ -165,19 +118,41 @@ namespace ScienceAndMaths.Hydraulics.Canals
                 {
                     if (canalStretch.FromNode.WaterLevel.HasValue)
                     {
-                        double x = 0.0;
-                        double waterLevel = canalStretch.FromNode.WaterLevel.Value;
-                        result.AddCanalPointResult(canalStretch.Id, 0.0, waterLevel);
+                        x = 0.0;
+                        waterLevel = canalStretch.FromNode.WaterLevel.Value;
+                        executeAnalysis = true;
+                    }
+                }
 
-                        int steps = (int)(canalStretch.Length > 10000
-                            ? 10000
-                            : canalStretch.Length);
+                if(executeAnalysis)
+                {
+                    int steps = (int)(canalStretch.Length > 10000
+                        ? 10000
+                        : canalStretch.Length);
+
+                    solver.Interval = canalStretch.Length / steps;
+                    solver.Equation = canalStretch.FlowEquation();
+
+                    if (backwardsAnalysis)
+                    {
+                        result.AddCanalPointResult(canalStretch.Id, canalStretch.Length, waterLevel);
+
+                        for (int i = 1; i <= steps; i++)
+                        {
+                            waterLevel = solver.SolveBackwards(x, waterLevel);
+                            x = x - solver.Interval;
+
+                            result.AddCanalPointResult(canalStretch.Id, x, waterLevel);
+                        }
+
+                        canalStretch.FromNode.WaterLevel = waterLevel;
+                    }
+                    else
+                    {
+                        result.AddCanalPointResult(canalStretch.Id, 0.0, waterLevel);
 
                         // Regimen lento se impone aguas abajo
                         // Regimen rapido se impone aguas arriba
-
-                        solver.Interval = canalStretch.Length / steps;
-                        solver.Equation = canalStretch.FlowEquation();
 
                         for (int i = 1; i <= steps; i++)
                         {
