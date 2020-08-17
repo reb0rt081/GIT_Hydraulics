@@ -63,15 +63,55 @@ namespace ScienceAndMaths.Hydraulics.Canals
                 canalStretchResult.CriticalWaterLevel = canalStretch.CanalSection.GetCriticalWaterLevel(canalStretch.Flow);
                 canalStretchResult.NormalWaterLevel = canalStretch.CanalSection.GetNormalWaterLevel(canalStretch.Flow);
 
+                var preCanalStretch = CanalStretches.FirstOrDefault(cs => cs.ToNode.Id == canalStretch.FromNode.Id);
+                var postCanalStretch = CanalStretches.FirstOrDefault(cs => cs.FromNode.Id == canalStretch.ToNode.Id);
+
+                bool postCriticalSection = false;
+
+                if (preCanalStretch != null)
+                {
+
+                }
+
+                if(postCanalStretch != null)
+                {
+                    postCriticalSection = postCanalStretch.CanalSection.GetNormalWaterLevel(postCanalStretch.Flow) < canalStretchResult.CriticalWaterLevel;
+                }
+
                 //  M flow 
                 if (canalStretch.CanalSection.Slope < canalStretchResult.CriticalSlope)
                 {
-                    // M1, M2 Flow
+                    // M1
                     // Regimen lento se impone aguas abajo
                     if (canalStretch.ToNode.WaterLevel.HasValue && canalStretch.ToNode.WaterLevel.Value > canalStretchResult.CriticalWaterLevel)
                     {
                         double x = canalStretch.Length;
                         double waterLevel = canalStretch.ToNode.WaterLevel.Value;
+                        result.AddCanalPointResult(canalStretch.Id, canalStretch.Length, waterLevel);
+
+                        int steps = (int)(canalStretch.Length > 10000
+                            ? 10000
+                            : canalStretch.Length);
+
+                        solver.Interval = canalStretch.Length / steps;
+                        solver.Equation = canalStretch.FlowEquation();
+
+                        for (int i = 1; i <= steps; i++)
+                        {
+                            waterLevel = solver.SolveBackwards(x, waterLevel);
+                            x = x - solver.Interval;
+
+                            result.AddCanalPointResult(canalStretch.Id, x, waterLevel);
+                        }
+
+                        canalStretch.FromNode.WaterLevel = waterLevel;
+                    }
+                    //  M2 Flow
+                    // Regimen lento se impone aguas abajo
+                    else if (postCriticalSection)
+                    {
+                        double x = canalStretch.Length;
+                        double waterLevel = canalStretchResult.CriticalWaterLevel;
                         result.AddCanalPointResult(canalStretch.Id, canalStretch.Length, waterLevel);
 
                         int steps = (int)(canalStretch.Length > 10000
