@@ -90,7 +90,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
                     // Regimen lento se impone aguas abajo
                     if (canalStretch.ToNode.WaterLevel.HasValue && canalStretch.ToNode.WaterLevel.Value > canalStretchResult.CriticalWaterLevel)
                     {
-                        x = canalStretch.Length;
+                        x = GetAbsoluteInitialLength(CanalStretches, canalStretch) + canalStretch.Length;
                         waterLevel = canalStretch.ToNode.WaterLevel.Value;
                         backwardsAnalysis = true;
                         executeAnalysis = true;
@@ -100,7 +100,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
                     else if (postCriticalSection)
                     {
                         canalStretch.ToNode.WaterLevel = canalStretchResult.CriticalWaterLevel;
-                        x = canalStretch.Length;
+                        x = GetAbsoluteInitialLength(CanalStretches, canalStretch) + canalStretch.Length;
                         waterLevel = canalStretchResult.CriticalWaterLevel;
                         backwardsAnalysis = true;
                         executeAnalysis = true;
@@ -109,7 +109,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
                     // Regimen rapido se impone aguas arriba
                     else if (canalStretch.FromNode.WaterLevel.HasValue)
                     {
-                        x = 0.0;
+                        x = GetAbsoluteInitialLength(CanalStretches, canalStretch) + 0.0;
                         waterLevel = canalStretch.FromNode.WaterLevel.Value;
                         executeAnalysis = true;
                     }
@@ -119,7 +119,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
                 {
                     if (canalStretch.FromNode.WaterLevel.HasValue)
                     {
-                        x = 0.0;
+                        x = GetAbsoluteInitialLength(CanalStretches, canalStretch) + 0.0;
                         waterLevel = canalStretch.FromNode.WaterLevel.Value;
                         executeAnalysis = true;
                     }
@@ -169,6 +169,27 @@ namespace ScienceAndMaths.Hydraulics.Canals
             }
 
             return result;
+        }
+
+        private double GetAbsoluteInitialLength(List<ICanalStretchModel> canalStretches, ICanalStretchModel activeCanalStretch)
+        {
+            double length = 0d;
+            ICanalStretchModel currentCanalStretch = activeCanalStretch;
+
+            do
+            {
+                ICanalStretchModel priorCanalStretch = canalStretches.FirstOrDefault(cs => cs.ToNode.Id == currentCanalStretch.FromNode.Id);
+
+                if(priorCanalStretch != null)
+                {
+                    length += priorCanalStretch.Length;
+                }
+
+                currentCanalStretch = priorCanalStretch;
+
+            } while (currentCanalStretch != null);
+
+            return length;
         }
     }
 }
