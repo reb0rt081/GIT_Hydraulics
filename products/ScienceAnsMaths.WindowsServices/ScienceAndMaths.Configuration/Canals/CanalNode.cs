@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Runtime.Serialization;
+using System.Xml.Serialization;
+
 using ScienceAndMaths.Shared;
 
 namespace ScienceAndMaths.Configuration.Canals
 {
+    [XmlInclude(typeof(SluiceGateNode))]
     [DataContract(Namespace = XmlConsts.XmlNamespace)]
     [Serializable]
     public class CanalNode

@@ -99,6 +99,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
                     // Regimen lento se impone aguas abajo
                     else if (postCriticalSection)
                     {
+                        canalStretch.ToNode.WaterLevel = canalStretchResult.CriticalWaterLevel;
                         x = canalStretch.Length;
                         waterLevel = canalStretchResult.CriticalWaterLevel;
                         backwardsAnalysis = true;
