@@ -17,6 +17,8 @@ namespace ScienceAndMaths.Hydraulics.Canals
     /// </summary>
     public class Canal : ICanal
     {
+        private const double Sensibility = 0.002;
+
         public Canal()
         {
             CanelEdges = new List<ICanalEdge>();
@@ -135,7 +137,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
                     {
                         canalStretch.ToNode.WaterLevel = canalStretchResult.CriticalWaterLevel;
                         options.InitialX = GetAbsoluteInitialLength(CanalStretches, canalStretch) + canalStretch.Length;
-                        options.InitialWaterLevel = canalStretchResult.CriticalWaterLevel + 0.01 /* Salvando numéricamente por la izquierda el problema */;
+                        options.InitialWaterLevel = canalStretchResult.CriticalWaterLevel + Sensibility /* Salvando numéricamente por la izquierda el problema */;
                         options.BackwardsAnalysis = true;
                         options.ExecuteAnalysis = true;
                     }
@@ -164,7 +166,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
                     else if (canalStretch.FromNode.WaterLevel.HasValue && canalStretch.FromNode.WaterLevel.Value <= canalStretchResult.CriticalWaterLevel && canalStretch.FromNode.WaterLevel.Value > canalStretchResult.NormalWaterLevel)
                     {
                         options.InitialX = GetAbsoluteInitialLength(CanalStretches, canalStretch) + 0.0;
-                        options.InitialWaterLevel = canalStretch.FromNode.WaterLevel.Value - 0.01 /* Salvando numéricamente por la derecha el problema */;
+                        options.InitialWaterLevel = canalStretch.FromNode.WaterLevel.Value - Sensibility /* Salvando numéricamente por la derecha el problema */;
                         options.BackwardsAnalysis = false;
                         options.ExecuteAnalysis = true;
                     }
