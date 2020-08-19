@@ -17,7 +17,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
     /// </summary>
     public class Canal : ICanal
     {
-        private const double Sensibility = 0.002;
+        private const double Sensibility = 0.005;
 
         public Canal()
         {
