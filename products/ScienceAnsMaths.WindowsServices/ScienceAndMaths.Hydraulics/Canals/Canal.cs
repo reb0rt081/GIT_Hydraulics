@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.Serialization.Formatters;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,6 +37,39 @@ namespace ScienceAndMaths.Hydraulics.Canals
         /// Gets or sets the canal homogeneous sections.
         /// </summary>
         public List<ICanalStretchModel> CanalStretches { get; set; }
+
+        /// <summary>
+        /// Returns the active canal stretch from a given distance x
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        public ICanalStretchModel GetCanalStretchForAbsoluteX(double x)
+        {
+            ICanalStretchModel canalStretch = CanalStretches.FirstOrDefault(csfirst => CanalStretches.All(cs => cs.ToNode.Id != csfirst.FromNode.Id));
+            double relativeDistance = x;
+            bool found = false;
+
+            while(!found && relativeDistance > 0 && canalStretch != null)
+            {
+                if(relativeDistance < canalStretch.Length)
+                {
+                    found = true;
+                }
+                else
+                {
+                    relativeDistance -= canalStretch.Length;
+                    
+                    var nextStretch = CanalStretches.FirstOrDefault(cs => cs.FromNode.Id == canalStretch.ToNode.Id);
+
+                    if (relativeDistance > 0 || nextStretch != null)
+                    {
+                        canalStretch = nextStretch;
+                    }
+                }
+            }
+
+            return canalStretch;
+        }
 
         /// <summary>
         /// Executes the canal simulation

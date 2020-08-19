@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+
 using ScienceAndMaths.Shared;
 using ScienceAndMaths.Mathematics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ScienceAndMaths.Hydraulics.Canals;
+using ScienceAndMaths.Shared.Canals;
 
 namespace ScienceAndMaths.Hydraulics.Test
 {
@@ -61,6 +64,52 @@ namespace ScienceAndMaths.Hydraulics.Test
             Assert.IsTrue(criticalSlope > 0.0004);
             Assert.IsTrue(normalDepth > criticalDepth);
             Assert.IsTrue(Math.Abs(criticalDepth - 0.34593708152888353) <= double.Epsilon);
+        }
+
+        [TestMethod]
+        public void GetCanalStretchForAbsoluteXTest()
+        {
+            CanalEdge initialNode = new CanalEdge()
+            {
+                Id = "InitNode"
+            };
+
+            CanalEdge midNode = new CanalEdge()
+            {
+                Id = "MidNode"
+            };
+
+            CanalEdge endNode = new CanalEdge()
+            {
+                Id = "EndNode"
+            };
+
+            CanalStretch canal = new CanalStretch("stretch1", 600, 20.32, new RectangularSection(5, 0.028, 0));
+            canal.FromNode = initialNode;
+            canal.ToNode = midNode;
+            
+            CanalStretch canal2 = new CanalStretch("stretch2", 400, 20.32, new RectangularSection(5, 0.028, 0.004));
+            canal2.FromNode = midNode;
+            canal2.ToNode = endNode;
+
+            Canal globalCanal = new Canal();
+            globalCanal.CanalStretches = new List<ICanalStretchModel> { canal, canal2 };
+            globalCanal.CanelEdges = new List<ICanalEdge> { initialNode, midNode, endNode };
+            
+            ICanalStretchModel result = globalCanal.GetCanalStretchForAbsoluteX(0);
+            Assert.AreEqual(canal, result);
+
+            result = globalCanal.GetCanalStretchForAbsoluteX(300);
+            Assert.AreEqual(canal, result);
+
+            result = globalCanal.GetCanalStretchForAbsoluteX(600);
+            Assert.AreEqual(canal2, result);
+
+            result = globalCanal.GetCanalStretchForAbsoluteX(900);
+            Assert.AreEqual(canal2, result);
+
+            result = globalCanal.GetCanalStretchForAbsoluteX(1000);
+            Assert.AreEqual(canal2, result);
         }
     }
 }

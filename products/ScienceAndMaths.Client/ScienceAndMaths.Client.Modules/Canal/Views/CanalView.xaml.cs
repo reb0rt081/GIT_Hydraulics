@@ -218,7 +218,8 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
                 foreach (CanalPointResult pointResult in CanalViewModel.CanalData.CanalResult.CanalPointResults)
                 {
                     Line canalLine = new Line();
-                    ICanalSection canalSection = CanalViewModel.CanalData.GetCanalSection(pointResult);
+                    
+                    ICanalSection canalSection = CanalViewModel.CanalData.Canal.GetCanalStretchForAbsoluteX(pointResult.X).CanalSection;
                     double actualIncreaseX = increaseX * Math.Cos(Math.Atan(canalSection.Slope));
 
                     canalLine.Stroke = Brushes.Blue;

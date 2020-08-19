@@ -23,5 +23,12 @@ namespace ScienceAndMaths.Shared.Canals
         /// Gets or sets the canal homogeneous sections.
         /// </summary>
         List<ICanalStretchModel> CanalStretches { get; set; }
+
+        /// <summary>
+        /// Returns the active canal stretch from a given distance x
+        /// </summary>
+        /// <param name="x"></param>
+        /// <returns></returns>
+        ICanalStretchModel GetCanalStretchForAbsoluteX(double x);
     }
 }
