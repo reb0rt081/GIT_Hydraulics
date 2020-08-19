@@ -159,7 +159,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
 
                     if (options.BackwardsAnalysis)
                     {
-                        result.AddCanalPointResult(canalStretch.Id, canalStretch.Length, waterLevel);
+                        result.AddCanalPointResult(canalStretch.Id, x, waterLevel);
 
                         for (int i = 1; i <= steps; i++)
                         {
@@ -173,7 +173,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
                     }
                     else
                     {
-                        result.AddCanalPointResult(canalStretch.Id, 0.0, waterLevel);
+                        result.AddCanalPointResult(canalStretch.Id, x, waterLevel);
 
                         // Regimen lento se impone aguas abajo
                         // Regimen rapido se impone aguas arriba
