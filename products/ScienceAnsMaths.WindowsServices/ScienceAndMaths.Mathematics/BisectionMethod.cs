@@ -28,16 +28,16 @@ namespace ScienceAndMaths.Mathematics
         {
             double middle = double.MaxValue;
 
-            if (Function(IntervalBegin) * Function(IntervalEnd) > 0.0D)
+            if (Function(IntervalBegin) * Function(IntervalEnd) > 0.0d)
             {
                 return double.MaxValue;
             }
 
             while (Math.Abs(IntervalBegin - IntervalEnd) > epsilon)
             {
-                middle = (IntervalBegin + IntervalEnd) / 2.0D;
-                Console.WriteLine("X: " + middle);
-                if (Function(IntervalBegin) * Function(middle) < 0.0D)
+                middle = (IntervalBegin + IntervalEnd) / 2.0d;
+                
+                if (Function(IntervalBegin) * Function(middle) < 0.0d)
                 {
                     IntervalEnd = middle;
                 }
