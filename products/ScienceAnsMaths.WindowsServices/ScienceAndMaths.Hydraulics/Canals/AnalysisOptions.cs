@@ -12,6 +12,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
         {
             InitialX = 0d;
             InitialWaterLevel = 0d;
+            FinalWaterLevel = 0d;
             BackwardsAnalysis = false;
             ExecuteAnalysis = false;
             AnalysisSteps = 0;
@@ -20,6 +21,8 @@ namespace ScienceAndMaths.Hydraulics.Canals
         public double InitialX { get; set; }
 
         public double InitialWaterLevel { get; set; }
+
+        public double FinalWaterLevel { get; set; }
 
         public bool BackwardsAnalysis { get; set; }
 

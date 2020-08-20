@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BisectionMethod.cs" />
     <Compile Include="FEM\BaseInterpolationElement.cs" />
     <Compile Include="FEM\FiniteElementMethodModel.cs" />
     <Compile Include="FEM\LinearElement.cs" />

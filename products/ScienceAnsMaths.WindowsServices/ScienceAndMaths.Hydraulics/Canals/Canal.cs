@@ -121,14 +121,14 @@ namespace ScienceAndMaths.Hydraulics.Canals
                     : canalStretch.Length);
 
                 //  M flow 
-                if (canalStretch.CanalSection.Slope < canalStretchResult.CriticalSlope)
+                if (canalStretch.CanalSection.Slope > 0 && canalStretch.CanalSection.Slope < canalStretchResult.CriticalSlope)
                 {
                     // M1
                     // Regimen lento se impone aguas abajo
                     if (canalStretch.ToNode.WaterLevel.HasValue && canalStretch.ToNode.WaterLevel.Value > canalStretchResult.CriticalWaterLevel)
                     {
                         options.InitialX = GetAbsoluteInitialLength(CanalStretches, canalStretch) + canalStretch.Length;
-                        options.InitialWaterLevel = canalStretch.ToNode.WaterLevel.Value;
+                        options.FinalWaterLevel = canalStretch.ToNode.WaterLevel.Value;
                         options.BackwardsAnalysis = true;
                         options.ExecuteAnalysis = true;
                     }
@@ -138,7 +138,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
                     {
                         canalStretch.ToNode.WaterLevel = canalStretchResult.CriticalWaterLevel;
                         options.InitialX = GetAbsoluteInitialLength(CanalStretches, canalStretch) + canalStretch.Length;
-                        options.InitialWaterLevel = canalStretchResult.CriticalWaterLevel + Sensibility /* Salvando numéricamente por la izquierda el problema */;
+                        options.FinalWaterLevel = canalStretchResult.CriticalWaterLevel + Sensibility /* Salvando numéricamente por la izquierda el problema */;
                         options.BackwardsAnalysis = true;
                         options.ExecuteAnalysis = true;
                     }
@@ -191,7 +191,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
                 if(options.ExecuteAnalysis)
                 {
                     double x = options.InitialX;
-                    double waterLevel = options.InitialWaterLevel;
+                    double waterLevel = options.BackwardsAnalysis ? options.FinalWaterLevel : options.InitialWaterLevel;
 
                     int steps = options.AnalysisSteps;
 
@@ -205,7 +205,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
                         List<CanalPointResult> frontAnalysisResult = new List<CanalPointResult>();
                         double x2 = options.InitialX + canalStretch.Length;
 
-                        waterLevel = canalStretch.ToNode.WaterLevel.Value;
+                        waterLevel = options.FinalWaterLevel;
 
                         for (int i = 1; i <= steps; i++)
                         {
@@ -215,20 +215,28 @@ namespace ScienceAndMaths.Hydraulics.Canals
                             backwardsAnalysisResult.Add(new CanalPointResult(x2, waterLevel));
                         }
 
-                        waterLevel = canalStretch.FromNode.WaterLevel.Value;
+                        waterLevel = options.InitialWaterLevel;
 
-                        for (int i = 1; i <= steps; i++)
+                        while(waterLevel < canalStretchResult.CriticalWaterLevel - Sensibility)
                         {
                             waterLevel = solver.Solve(x, waterLevel);
                             x = x + solver.Interval;
 
-                            conjugateWaterLevelResult.Add(new CanalPointResult(x2, canalStretch.GetHydraulicJumpDownstreamDepth(waterLevel)));
+                            conjugateWaterLevelResult.Add(new CanalPointResult(x, canalStretch.GetHydraulicJumpDownstreamDepth(waterLevel)));
                             frontAnalysisResult.Add(new CanalPointResult(x, waterLevel));
                         }
 
                         Func<double, double> conjugatedEquation = GetHydraulicJumpEquation(backwardsAnalysisResult, conjugateWaterLevelResult);
-                        NewtonRaphson findHydraulicJump = new NewtonRaphson(conjugatedEquation);
-                        double hydraulicJumpX = findHydraulicJump.Solve(options.InitialX + 0.01, 0.01);
+                        BisectionMethod findHydraulicJump = new BisectionMethod(conjugatedEquation, options.InitialX + Sensibility, conjugateWaterLevelResult.OrderByDescending(wl => wl.X).First().X);
+                        double hydraulicJumpX = findHydraulicJump.Solve(0.01);
+
+                        // Found result, otherwise it could be "desagüe anegado"
+                        if(hydraulicJumpX < double.MaxValue)
+                        {
+                            result.AddCanalPointResult(canalStretch.Id, options.InitialX, options.InitialWaterLevel);
+                            result.AddRangeCanalPointResult(canalStretch.Id, frontAnalysisResult.Where(ar => ar.X < hydraulicJumpX).ToList());
+                            result.AddRangeCanalPointResult(canalStretch.Id, backwardsAnalysisResult.Where(ar => ar.X >= hydraulicJumpX).ToList());
+                        }
 
                     }
                     else if (options.BackwardsAnalysis)

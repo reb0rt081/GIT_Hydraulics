@@ -44,5 +44,15 @@ namespace ScienceAndMaths.Shared.Canals
 
             CanalStretchResults[canalStretchId].CanalPointResults.Add(new CanalPointResult(x, waterLevel));
         }
+
+        public void AddRangeCanalPointResult(string canalStretchId, List<CanalPointResult> canalPointResults)
+        {
+            if (!CanalStretchResults.ContainsKey(canalStretchId))
+            {
+                CanalStretchResults.Add(canalStretchId, new CanalStretchResult());
+            }
+
+            CanalStretchResults[canalStretchId].CanalPointResults.AddRange(canalPointResults);
+        }
     }
 }
