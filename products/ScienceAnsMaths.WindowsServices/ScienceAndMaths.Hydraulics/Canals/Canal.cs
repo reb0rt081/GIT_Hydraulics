@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.Serialization.Formatters;
 using System.Text;
@@ -141,14 +142,18 @@ namespace ScienceAndMaths.Hydraulics.Canals
                         options.BackwardsAnalysis = true;
                         options.ExecuteAnalysis = true;
                     }
+                    
                     // M3 Flow
                     // Regimen rapido se impone aguas arriba
-                    else if (canalStretch.FromNode.WaterLevel.HasValue)
+                    if (canalStretch.FromNode.WaterLevel.HasValue && canalStretch.FromNode.WaterLevel.Value < canalStretchResult.CriticalWaterLevel)
                     {
+                        //  Hydraulic jump will occur as we have in the same stretch both conditions for both flows
+                        options.HydraulicJumpOccurs = options.ExecuteAnalysis;
                         options.InitialX = GetAbsoluteInitialLength(CanalStretches, canalStretch) + 0.0;
                         options.InitialWaterLevel = canalStretch.FromNode.WaterLevel.Value;
                         options.BackwardsAnalysis = false;
                         options.ExecuteAnalysis = true;
+                        
                     }
                 }
                 //  S flow
@@ -193,7 +198,40 @@ namespace ScienceAndMaths.Hydraulics.Canals
                     solver.Interval = canalStretch.Length / steps;
                     solver.Equation = canalStretch.FlowEquation();
 
-                    if (options.BackwardsAnalysis)
+                    if(options.HydraulicJumpOccurs && canalStretch.FromNode.WaterLevel.HasValue && canalStretch.ToNode.WaterLevel.HasValue)
+                    {
+                        List<CanalPointResult> backwardsAnalysisResult = new List<CanalPointResult>();
+                        List<CanalPointResult> conjugateWaterLevelResult = new List<CanalPointResult>();
+                        List<CanalPointResult> frontAnalysisResult = new List<CanalPointResult>();
+                        double x2 = options.InitialX + canalStretch.Length;
+
+                        waterLevel = canalStretch.ToNode.WaterLevel.Value;
+
+                        for (int i = 1; i <= steps; i++)
+                        {
+                            waterLevel = solver.SolveBackwards(x2, waterLevel);
+                            x2 = x2 - solver.Interval;
+
+                            backwardsAnalysisResult.Add(new CanalPointResult(x2, waterLevel));
+                        }
+
+                        waterLevel = canalStretch.FromNode.WaterLevel.Value;
+
+                        for (int i = 1; i <= steps; i++)
+                        {
+                            waterLevel = solver.Solve(x, waterLevel);
+                            x = x + solver.Interval;
+
+                            conjugateWaterLevelResult.Add(new CanalPointResult(x2, canalStretch.GetHydraulicJumpDownstreamDepth(waterLevel)));
+                            frontAnalysisResult.Add(new CanalPointResult(x, waterLevel));
+                        }
+
+                        Func<double, double> conjugatedEquation = GetHydraulicJumpEquation(backwardsAnalysisResult, conjugateWaterLevelResult);
+                        NewtonRaphson findHydraulicJump = new NewtonRaphson(conjugatedEquation);
+                        double hydraulicJumpX = findHydraulicJump.Solve(options.InitialX + 0.01, 0.01);
+
+                    }
+                    else if (options.BackwardsAnalysis)
                     {
                         result.AddCanalPointResult(canalStretch.Id, x, waterLevel);
 
@@ -228,6 +266,12 @@ namespace ScienceAndMaths.Hydraulics.Canals
             }
 
             return result;
+        }
+
+        private Func<double, double> GetHydraulicJumpEquation(List<CanalPointResult> downstreamAnalysisResult, List<CanalPointResult> conjugatedResult)
+        {
+            return x => downstreamAnalysisResult.OrderBy(y => Math.Abs(y.X - x)).First().WaterLevel
+                - conjugatedResult.OrderBy(y => Math.Abs(y.X - x)).First().WaterLevel;
         }
 
         private double GetAbsoluteInitialLength(List<ICanalStretchModel> canalStretches, ICanalStretchModel activeCanalStretch)

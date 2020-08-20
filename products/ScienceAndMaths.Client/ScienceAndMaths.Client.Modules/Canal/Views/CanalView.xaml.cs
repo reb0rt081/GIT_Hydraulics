@@ -179,7 +179,7 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
                 canalLine.Y1 = previousY1;
 
                 Label canalIdlabel = new Label();
-                canalIdlabel.Content = CanalViewModel.CanalData.Canal.Id;
+                canalIdlabel.Content = canalStretch.Id;
                 Canvas.SetLeft(canalIdlabel, previousX1);
                 Canvas.SetTop(canalIdlabel, previousY1 + 10);
 

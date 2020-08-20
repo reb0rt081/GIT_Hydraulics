@@ -26,5 +26,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
         public bool ExecuteAnalysis { get; set; }
 
         public int AnalysisSteps { get; set; }
+
+        public bool HydraulicJumpOccurs { get; set; }
     }
 }
