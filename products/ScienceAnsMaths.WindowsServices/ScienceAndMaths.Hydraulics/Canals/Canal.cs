@@ -278,8 +278,21 @@ namespace ScienceAndMaths.Hydraulics.Canals
 
         private Func<double, double> GetHydraulicJumpEquation(List<CanalPointResult> downstreamAnalysisResult, List<CanalPointResult> conjugatedResult)
         {
-            return x => downstreamAnalysisResult.OrderBy(y => Math.Abs(y.X - x)).First().WaterLevel
-                - conjugatedResult.OrderBy(y => Math.Abs(y.X - x)).First().WaterLevel;
+            return x =>
+            {
+                List<CanalPointResult> downstreamWaterLevel = downstreamAnalysisResult.OrderBy(y => Math.Abs(y.X - x)).Take(2).OrderBy(y => y.X).ToList();
+                List<CanalPointResult> conjugatedWaterLevel = conjugatedResult.OrderBy(y => Math.Abs(y.X - x)).Take(2).OrderBy(y => y.X).ToList();
+
+                double downstremInterpolatedValue =
+                    (downstreamWaterLevel.Last().WaterLevel - downstreamWaterLevel.First().WaterLevel) / (downstreamWaterLevel.Last().X - downstreamWaterLevel.First().X)
+                    * (x - downstreamWaterLevel.First().X) + downstreamWaterLevel.Last().WaterLevel;
+
+                double conjugatedInterpolatedValue =
+                    (conjugatedWaterLevel.Last().WaterLevel - conjugatedWaterLevel.First().WaterLevel) / (conjugatedWaterLevel.Last().X - conjugatedWaterLevel.First().X)
+                    * (x - conjugatedWaterLevel.First().X) + conjugatedWaterLevel.Last().WaterLevel;
+
+                return downstremInterpolatedValue - conjugatedInterpolatedValue;
+            };
         }
 
         private double GetAbsoluteInitialLength(List<ICanalStretchModel> canalStretches, ICanalStretchModel activeCanalStretch)
