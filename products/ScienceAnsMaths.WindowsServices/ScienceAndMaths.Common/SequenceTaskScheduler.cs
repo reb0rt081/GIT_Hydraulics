@@ -11,7 +11,7 @@ namespace ScienceAndMaths.Common
 {
     public class SequenceTaskScheduler
     {
-        private readonly Dictionary<string, MessageQueue> currentlyUsedQueues = new Dictionary<string, MessageQueue>();
+        private readonly Dictionary<object, MessageQueue> currentlyUsedQueues = new Dictionary<object, MessageQueue>();
 
         public SequenceTaskScheduler()
         {
@@ -24,7 +24,7 @@ namespace ScienceAndMaths.Common
         public TaskScheduler TaskScheduler { get; set; }
 
         public void EnqueueWork<T>(Func<T> action, Action<ActionCompletedEventArgs<T>> eventInvoker,
-            string correlationId, string sequenceToken = null)
+            string correlationId, params object[] sequenceTokens)
         {
             Task task = new Task(() =>
             {
@@ -57,11 +57,11 @@ namespace ScienceAndMaths.Common
                 return task;
             };
 
-            EnqueueWorkAsync(func, sequenceToken).ObserveExceptions();
+            EnqueueWorkAsync(func, sequenceTokens).ObserveExceptions();
         }
 
         public void EnqueueWork(Action action, Action<ActionCompletedEventArgs> eventInvoker, string correlationId,
-            string sequenceToken = null)
+            params object[] sequenceTokens)
         {
             Task task = new Task(() =>
             {
@@ -93,29 +93,42 @@ namespace ScienceAndMaths.Common
                 return task;
             };
 
-            EnqueueWorkAsync(func, sequenceToken).ObserveExceptions();
+            EnqueueWorkAsync(func, sequenceTokens).ObserveExceptions();
         }
 
-        public Task EnqueueWorkAsync(Func<Task> workTask, string sequenceToken)
+        public Task EnqueueWorkAsync(Func<Task> workTask, params object[] sequenceTokens)
         {
-            if (string.IsNullOrEmpty(sequenceToken))
+            if (sequenceTokens.Length == 0 || (sequenceTokens.Length == 1 && sequenceTokens[0] == null) || sequenceTokens.All(o => o == null))
             {
                 return workTask();
             }
-            
-            WorkItem workItem = new WorkItem(1, workTask);
-            GetQueForToken(sequenceToken).QueueMessage(workItem);
+
+            WorkItem workItem;
+            if (sequenceTokens.Length == 1)
+            {
+                workItem = new WorkItem(1, workTask);
+                GetQueueForToken(sequenceTokens[0]).QueueMessage(workItem);
+                return workItem.Completion;
+            }
+
+            object[] checkedList = sequenceTokens.Where(o => o != null).Distinct().ToArray();
+            workItem = new WorkItem(checkedList.Length, workTask);
+
+            foreach (object token in checkedList)
+            {
+                GetQueueForToken(token).QueueMessage(workItem);
+            }
 
             return workItem.Completion;
         }
 
-        private MessageQueue GetQueForToken(string sequenceToken)
+        private MessageQueue GetQueueForToken(object sequenceToken)
         {
             lock (currentlyUsedQueues)
             {
                 if (!currentlyUsedQueues.TryGetValue(sequenceToken, out MessageQueue messageQueue))
                 {
-                    messageQueue = new MessageQueue(sequenceToken, () => RemoveMessageDispatcherByToken(sequenceToken));
+                    messageQueue = new MessageQueue(sequenceToken.ToString(), () => RemoveMessageDispatcherByToken(sequenceToken));
                     currentlyUsedQueues.Add(sequenceToken, messageQueue);
                 }
 
@@ -123,7 +136,7 @@ namespace ScienceAndMaths.Common
             }
         }
 
-        private void RemoveMessageDispatcherByToken(string token)
+        private void RemoveMessageDispatcherByToken(object token)
         {
             lock (currentlyUsedQueues)
             {
