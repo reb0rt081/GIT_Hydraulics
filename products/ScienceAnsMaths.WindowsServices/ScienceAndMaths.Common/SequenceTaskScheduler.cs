@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using ScienceAndMaths.Common.TaskExtension;
 using ScienceAndMaths.Domain;
@@ -50,7 +51,13 @@ namespace ScienceAndMaths.Common
 
             });
 
-            EnqueueWorkAsync(task, sequenceToken).ObserveExceptions();
+            Func<Task> func = () =>
+            {
+                task.Start(TaskScheduler);
+                return task;
+            };
+
+            EnqueueWorkAsync(func, sequenceToken).ObserveExceptions();
         }
 
         public void EnqueueWork(Action action, Action<ActionCompletedEventArgs> eventInvoker, string correlationId,
@@ -80,20 +87,26 @@ namespace ScienceAndMaths.Common
 
             });
 
-            EnqueueWorkAsync(task, sequenceToken).ObserveExceptions();
-        }
-
-        public Task EnqueueWorkAsync(Task task, string sequenceToken)
-        {
-            if (string.IsNullOrEmpty(sequenceToken))
+            Func<Task> func = () =>
             {
                 task.Start(TaskScheduler);
                 return task;
+            };
+
+            EnqueueWorkAsync(func, sequenceToken).ObserveExceptions();
+        }
+
+        public Task EnqueueWorkAsync(Func<Task> workTask, string sequenceToken)
+        {
+            if (string.IsNullOrEmpty(sequenceToken))
+            {
+                return workTask();
             }
             
-            GetQueForToken(sequenceToken).QueueMessage(task);
+            WorkItem workItem = new WorkItem(1, workTask);
+            GetQueForToken(sequenceToken).QueueMessage(workItem);
 
-            return task;
+            return workItem.Completion;
         }
 
         private MessageQueue GetQueForToken(string sequenceToken)
@@ -102,7 +115,7 @@ namespace ScienceAndMaths.Common
             {
                 if (!currentlyUsedQueues.TryGetValue(sequenceToken, out MessageQueue messageQueue))
                 {
-                    messageQueue = new MessageQueue(sequenceToken, TaskScheduler, () => RemoveMessageDispatcherByToken(sequenceToken));
+                    messageQueue = new MessageQueue(sequenceToken, () => RemoveMessageDispatcherByToken(sequenceToken));
                     currentlyUsedQueues.Add(sequenceToken, messageQueue);
                 }
 
@@ -129,21 +142,18 @@ namespace ScienceAndMaths.Common
 
     internal class MessageQueue : IDisposable
     {
-        private readonly List<Task> queuedTasks = new List<Task>();
+        private readonly List<WorkItem> queuedTasks = new List<WorkItem>();
         private readonly Action disposeAction;
-
-        internal TaskScheduler TaskScheduler { get; set; }
 
         internal string SequenceToken { get; set; }
 
-        internal MessageQueue(string sequenceToken, TaskScheduler taskScheduler, Action disposingAction)
+        internal MessageQueue(string sequenceToken, Action disposingAction)
         {
             SequenceToken = sequenceToken;
-            TaskScheduler = taskScheduler;
             disposeAction = disposingAction;
         }
 
-        internal void QueueMessage(Task newTask)
+        internal void QueueMessage(WorkItem newTask)
         {
             lock (queuedTasks)
             {
@@ -163,12 +173,12 @@ namespace ScienceAndMaths.Common
 
             while(canContinue)
             {
-                Task task = queuedTasks[0];
+                WorkItem workTask = null;
                 try
                 {
-                    task.Start(TaskScheduler);
+                    workTask = queuedTasks[0];
 
-                    await task;
+                    await workTask.WorkAsync();
                 }
                 catch (Exception exception)
                 {
@@ -178,7 +188,11 @@ namespace ScienceAndMaths.Common
                 {
                     lock (queuedTasks)
                     {
-                        queuedTasks.Remove(task);
+                        if(workTask != null)
+                        {
+                            queuedTasks.Remove(workTask);
+                        }
+
                         canContinue = queuedTasks.Count > 0;
 
                         if (!canContinue)
@@ -199,6 +213,51 @@ namespace ScienceAndMaths.Common
         public void Dispose()
         {
             disposeAction();
+        }
+    }
+
+    internal class WorkItem
+    {
+        #region Constants and Fields
+        private readonly TaskCompletionSource<bool> tcs;
+        private readonly Func<Task> workTask;
+        private int awaitingOperations;
+       
+        #endregion
+
+        public Task Completion => tcs.Task;
+
+        /// <summary>
+        ///     Creates a new instance of the WorkItem class.
+        /// </summary>
+        /// <param name="awaitingOperations">The awaiting operations.</param>
+        /// <param name="workTask">          The work task.</param>
+        public WorkItem(int awaitingOperations, Func<Task> workTask)
+        {
+            this.awaitingOperations = awaitingOperations;
+            this.workTask = workTask;
+            tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+        }
+
+        public async Task WorkAsync()
+        {
+            if (Interlocked.Decrement(ref awaitingOperations) == 0)
+            {
+                try
+                {
+                    await workTask();
+                    tcs.SetResult(true);
+                }
+                catch (Exception ex)
+                {
+                    tcs.SetException(ex);
+                    throw;
+                }
+            }
+            else
+            {
+                await tcs.Task;
+            }
         }
     }
 }
