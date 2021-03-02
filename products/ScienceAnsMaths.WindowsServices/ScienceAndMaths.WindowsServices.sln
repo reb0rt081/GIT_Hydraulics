@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.27703.2000
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Server", "ScienceAndMaths.Server\ScienceAndMaths.Server.csproj", "{3C869165-C9A6-4B25-BDB4-A93604C79334}"
 EndProject
@@ -32,6 +32,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.ServiceAgents", "ScienceAndMaths.ServiceAgents\ScienceAndMaths.ServiceAgents.csproj", "{AD291586-8CA9-4FFD-A607-AC694908A22B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Common", "ScienceAndMaths.Common\ScienceAndMaths.Common.csproj", "{1389BA52-0D48-4B0D-A907-A229FF679732}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Common.Test", "Test.U\ScienceAndMaths.Common.Test\ScienceAndMaths.Common.Test.csproj", "{156EEB2C-AE8C-41FF-A8EE-161426D40AF4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -95,6 +97,10 @@ Global
 		{1389BA52-0D48-4B0D-A907-A229FF679732}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1389BA52-0D48-4B0D-A907-A229FF679732}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1389BA52-0D48-4B0D-A907-A229FF679732}.Release|Any CPU.Build.0 = Release|Any CPU
+		{156EEB2C-AE8C-41FF-A8EE-161426D40AF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{156EEB2C-AE8C-41FF-A8EE-161426D40AF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{156EEB2C-AE8C-41FF-A8EE-161426D40AF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{156EEB2C-AE8C-41FF-A8EE-161426D40AF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -104,6 +110,7 @@ Global
 		{172CD2D7-B401-451D-AA88-96B889AC24F4} = {7EF3CB4B-337D-4040-89F9-E79D054516FC}
 		{9AD56D02-A61B-4D82-99A5-6AFD90881AA2} = {7EF3CB4B-337D-4040-89F9-E79D054516FC}
 		{2739BA50-1954-48AA-B781-8A7BF014433F} = {7EF3CB4B-337D-4040-89F9-E79D054516FC}
+		{156EEB2C-AE8C-41FF-A8EE-161426D40AF4} = {7EF3CB4B-337D-4040-89F9-E79D054516FC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BE24E04F-40D9-4FB0-AA78-F257C195F495}

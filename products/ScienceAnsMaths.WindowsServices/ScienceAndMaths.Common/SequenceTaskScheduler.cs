@@ -96,6 +96,16 @@ namespace ScienceAndMaths.Common
             EnqueueWorkAsync(func, sequenceTokens).ObserveExceptions();
         }
 
+        public Task EnqueueWorkAsync(Task task, params object[] sequenceTokens)
+        {
+            Func<Task> func = () =>
+            {
+                task.Start();
+                return task;
+            };
+            return EnqueueWorkAsync(func, sequenceTokens);
+        }
+
         public Task EnqueueWorkAsync(Func<Task> workTask, params object[] sequenceTokens)
         {
             if (sequenceTokens.Length == 0 || (sequenceTokens.Length == 1 && sequenceTokens[0] == null) || sequenceTokens.All(o => o == null))
@@ -258,7 +268,14 @@ namespace ScienceAndMaths.Common
             {
                 try
                 {
-                    await workTask();
+                    Task task = workTask();
+                    await task;
+
+                    if (task is Task<Task> nested)
+                    {
+                        await nested.Unwrap();
+                    }
+
                     tcs.SetResult(true);
                 }
                 catch (Exception ex)

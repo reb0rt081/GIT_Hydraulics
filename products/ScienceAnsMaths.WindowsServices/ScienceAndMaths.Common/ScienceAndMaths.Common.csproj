@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AsyncEventHandler.cs" />
+    <Compile Include="EventHandlerExtensions\EventHandlerExtensionMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SequenceTaskScheduler.cs" />
     <Compile Include="TaskExtension\TaskExtensionMethods.cs" />
