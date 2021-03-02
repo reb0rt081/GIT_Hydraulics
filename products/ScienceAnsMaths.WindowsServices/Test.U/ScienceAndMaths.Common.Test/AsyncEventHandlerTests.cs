@@ -20,24 +20,37 @@ namespace ScienceAndMaths.Common.Test
             eventRaised = false;
         }
         [TestMethod]
-        public async Task BasicTestAsyncEventHandler()
+        public async Task BasicTestAsyncScheduleEventHandler()
         {
             EventPatternTest eventRaiser = new EventPatternTest(new SequenceTaskScheduler());
             
             eventRaiser.TaskCompletedAsync += EventRaiserOnTaskCompletedAsync;
 
-            eventRaiser.OnTaskCompleted(Guid.NewGuid().ToString());
+            eventRaiser.QueueOnTaskCompleted(Guid.NewGuid().ToString());
 
             await processFinishedTask.Task;
 
             Assert.IsTrue(eventRaised);
         }
 
-        private async Task EventRaiserOnTaskCompletedAsync(object sender, string eventargs)
+        [TestMethod]
+        public async Task BasicTestAsyncEventHandler()
+        {
+            EventPatternTest eventRaiser = new EventPatternTest(new SequenceTaskScheduler());
+
+            eventRaiser.TaskCompletedAsync += EventRaiserOnTaskCompletedAsync;
+
+            await eventRaiser.OnTaskCompletedAsync(Guid.NewGuid().ToString());
+
+            Assert.IsTrue(eventRaised);
+            Assert.IsTrue(processFinishedTask.Task.IsCompleted);
+        }
+
+        private async Task EventRaiserOnTaskCompletedAsync(object sender, string eventArgs)
         {
             await Task.Delay(100);
 
-            Assert.IsNotNull(eventargs);
+            Assert.IsNotNull(eventArgs);
 
             eventRaised = true;
 
@@ -56,9 +69,19 @@ namespace ScienceAndMaths.Common.Test
             Scheduler = scheduler;
         }
 
-        public virtual void OnTaskCompleted(string id)
+        public void QueueOnTaskCompleted(string id)
         {
             TaskCompletedAsync.RaiseQueued(this, id, Scheduler, id);
+        }
+
+        public async  Task OnTaskCompletedAsync(string id)
+        {
+            AsyncEventHandler<string> handler = TaskCompletedAsync;
+
+            if(handler != null)
+            {
+                await handler.RaiseAsync(this, id);
+            }
         }
     }
 }
