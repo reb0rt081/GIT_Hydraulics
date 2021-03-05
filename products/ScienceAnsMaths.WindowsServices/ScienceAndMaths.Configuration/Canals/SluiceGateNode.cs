@@ -13,6 +13,9 @@ namespace ScienceAndMaths.Configuration.Canals
     public class SluiceGateNode : CanalNode
     {
         [DataMember]
+        public double GateWidth { get; set; }
+
+        [DataMember]
         public double GateOpening { get; set; }
 
         [DataMember]

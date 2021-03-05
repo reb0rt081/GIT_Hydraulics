@@ -112,7 +112,9 @@ namespace ScienceAndMaths.Hydraulics.Canals
 
                 if(postCanalStretch != null)
                 {
-                    postCriticalSection = postCanalStretch.CanalSection.GetNormalWaterLevel(postCanalStretch.Flow) < canalStretchResult.CriticalWaterLevel;
+                    double normalWaterLevel = postCanalStretch.CanalSection.GetNormalWaterLevel(postCanalStretch.Flow);
+
+                    postCriticalSection = normalWaterLevel <= canalStretchResult.CriticalWaterLevel;
                 }
 
                 AnalysisOptions options = new AnalysisOptions();

@@ -15,6 +15,11 @@ namespace ScienceAndMaths.Hydraulics.Canals
         private double? waterLevel;
 
         /// <summary>
+        /// Gets or sets the gate width
+        /// </summary>
+        public double GateWidth { get; set; }
+
+        /// <summary>
         /// Gets or sets the opening of the gate
         /// </summary>
         public double GateOpening { get; set; }
@@ -46,26 +51,26 @@ namespace ScienceAndMaths.Hydraulics.Canals
         }
 
         /// <summary>
-        /// Returns the flow per unit (m3/m) when the sluice gate is far enough from the imposed level downstream
+        /// Returns the flow (m3/S) when the sluice gate is far enough from the imposed level downstream
         /// </summary>
         public double GetFreeFlow
         {
             get
             {
-                return (ContractionCoefficient / (Math.Sqrt(1 + (ContractionCoefficient * GateOpening) / RetainedWaterLevel))) 
+                return GateWidth * (ContractionCoefficient / (Math.Sqrt(1 + (ContractionCoefficient * GateOpening) / RetainedWaterLevel))) 
                        * GateOpening 
                        * Math.Sqrt(2 * Constants.GravityAcceleration * RetainedWaterLevel);
             }
         }
 
         /// <summary>
-        /// Returns the flow per unit (m3/m) when the sluice gate is affected by the imposed level downstream, less capacity
+        /// Returns the flow (m3/s) when the sluice gate is affected by the imposed level downstream, less capacity
         /// </summary>
         public double GetImposedFlow
         {
             get
             {
-                return (ContractionCoefficient / Math.Sqrt(1 - Math.Pow((ContractionCoefficient * GateOpening) / RetainedWaterLevel, 2))) 
+                return GateWidth * (ContractionCoefficient / Math.Sqrt(1 - Math.Pow((ContractionCoefficient * GateOpening) / RetainedWaterLevel, 2))) 
                        * GateOpening 
                        * Math.Sqrt(2 * Constants.GravityAcceleration * (RetainedWaterLevel - ContractionCoefficient * GateOpening));
             }
