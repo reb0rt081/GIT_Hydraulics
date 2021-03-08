@@ -66,6 +66,7 @@
     <Compile Include="Canals\RectangularSectionConfiguration.cs" />
     <Compile Include="Canals\TrapezoidalSectionConfiguration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Users\UsersConfiguration.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ScienceAndMaths.Domain\ScienceAndMaths.Domain.csproj">

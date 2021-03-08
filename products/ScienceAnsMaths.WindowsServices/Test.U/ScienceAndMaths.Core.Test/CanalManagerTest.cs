@@ -42,7 +42,7 @@ namespace ScienceAndMaths.Core.Test
         }
 
         [TestMethod]
-        public void BasicCanalTest()
+        public void BasicCanalTest2()
         {
             CanalManager canalManager = new CanalManager();
 
