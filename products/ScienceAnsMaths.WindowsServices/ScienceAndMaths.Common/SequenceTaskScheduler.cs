@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
+using System.ServiceModel;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -23,6 +25,58 @@ namespace ScienceAndMaths.Common
         /// </summary>
         public TaskScheduler TaskScheduler { get; set; }
 
+        public void EnqueueUnitOfWork<T>(Func<T> action,
+            Action<ActionCompletedEventArgs<T>> eventInvoker,
+            string correlationId,
+            params object[] sequeneTokens)
+        {
+            IPrincipal principal = Thread.CurrentPrincipal;
+            string sessionId = OperationContext.Current.SessionId;  // we need to get the TransactionId Somehow
+
+            Task unitOfWorkTask = new Task(state =>
+            {
+                T result = default(T);
+                Exception exception = null;
+
+                try
+                {
+                    //UnitOfWork scope;
+                    Thread.CurrentPrincipal = principal;
+
+                    //the whole magic happens here, with the slightly modified UnitOfWorkScope
+                    //scope = new UnitOfWork(correlationId);
+                    
+                    //this needs to change per message now, as one unit-of-work can be spanned over several
+                    //UnitOfWork.Current.CorrelationId = correlationId;
+
+                    //use the scope as before
+                    //using (scope)
+                    //{
+                        result = action.Invoke();
+                        //scope.Complete();
+                    //} // in the dispose the thing will be either committed or left open
+                }
+                catch (Exception ex)
+                {
+                    exception = ex;
+                }
+
+                try
+                {
+                    eventInvoker(exception != null
+                        ? new ActionCompletedEventArgs<T>(correlationId, exception)
+                        : new ActionCompletedEventArgs<T>(correlationId, result));
+                }
+                catch (Exception ex)
+                {
+                    throw;
+                }
+            },
+                GetTransactionTaskData(sessionId),
+            TaskCreationOptions.None);
+
+            EnqueueWorkAsync(unitOfWorkTask, sequeneTokens).ObserveExceptions();
+        }
         public void EnqueueWork<T>(Func<T> action, Action<ActionCompletedEventArgs<T>> eventInvoker,
             string correlationId, params object[] sequenceTokens)
         {
@@ -161,6 +215,36 @@ namespace ScienceAndMaths.Common
                 }
             }
         }
+        public static TransactionTaskData GetTransactionTaskData(string transactionId)
+        {
+            TransactionTaskData data = new TransactionTaskData()
+            {
+                Mode = "SingleCall|TransactionStart|TransactionResumption",
+                TransactionId = transactionId
+            };
+
+            if (transactionId == "NoTransactionId")
+                return data;
+
+            //ITransactionManager TransactionManager = transactionManager as TransactionManager;
+            //if (sisTransactionManager != null)
+            //{
+            //    bool isFirstCallInTx;
+            //    try
+            //    {
+            //        isFirstCallInTx = TransactionManager.GetNumberOfCalls(transactionId) == 0;
+            //    }
+            //    catch (Exception)
+            //    {
+            //        return data;
+            //    }
+            //    data.Mode = isFirstCallInTx
+            //        ? "TransactionStart"
+            //        : "TranscationResumption";
+            //    data.Transaction = sisTransactionManager.GetTransaction(transactionId);
+            //}
+            return data;
+        }
     }
 
     internal class MessageQueue : IDisposable
@@ -289,5 +373,12 @@ namespace ScienceAndMaths.Common
                 await tcs.Task;
             }
         }
+    }
+
+    public class TransactionTaskData
+    {
+        public string Mode { get; set; }
+
+        public string TransactionId { get; set; }
     }
 }
