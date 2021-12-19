@@ -9,12 +9,33 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 using ScienceAndMaths.Configuration.Converter;
+using System.Text.RegularExpressions;
 
 namespace ScienceAndMaths.Configuration.Test
 {
     [TestClass]
     public class CanalConfigurationTest
     {
+        [TestMethod]
+        public void RegularExpressionTest()
+        {
+            List<int> solutions = new List<int> { 1238, 1812, 1936, 1937 };
+            string textToFilter =
+                "Valencia was founded as a Roman colony by the consul Decimus Junius Brutus Callaicus in 138 BC and called Valentia Edetanorum. In 714, Moroccan and Arab Moors occupied the city, introducing their language, religion and customs; they implemented improved irrigation systems and the cultivation of new crops as well. Valencia was the capital of the Taifa of Valencia. In 1238 the Christian king James I of Aragon conquered the city and divided the land among the nobles who helped him conquer it, as witnessed in the Llibre del Repartiment. He also created the new Kingdom of Valencia, which had its own laws (Furs), with Valencia as its main city and capital. In the 18th century Philip V of Spain abolished the privileges as punishment to the kingdom of Valencia for aligning with the Habsburg side in the War of the Spanish Succession. Valencia was the capital of Spain when Joseph Bonaparte moved the Court there in the summer of 1812. It also served as the capital between 1936 and 1937, during the Second Spanish Republic.";
+            string regexPattern = @"[\d+]{4}";
+            Regex regex = new Regex(regexPattern);
+            MatchCollection result = regex.Matches(textToFilter);
+
+            for (int count = 0; count < result.Count; count++)
+            {
+                int year = Convert.ToInt32(result[count].Value);
+                Console.WriteLine($"Regex result: {year}");
+                Assert.IsTrue(solutions.Contains(year));
+            }
+
+            Assert.AreEqual(4, result.Count);            
+        }
+
         [TestMethod]
         public void RectangularSerializingTest()
         {
