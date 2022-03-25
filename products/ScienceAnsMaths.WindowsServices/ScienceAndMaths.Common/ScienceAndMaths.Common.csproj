@@ -42,6 +42,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssemblyResolverExtensions.cs" />
     <Compile Include="AsyncEventHandler.cs" />
     <Compile Include="EventHandlerExtensions\EventHandlerExtensionMethods.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
