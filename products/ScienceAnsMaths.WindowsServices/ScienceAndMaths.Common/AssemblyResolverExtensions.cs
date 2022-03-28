@@ -33,6 +33,7 @@ namespace ScienceAndMaths.Common
 
         static AssemblyResolveExtensions()
         {
+            // We need to add the directory where the application runs with all its binaries
             TryAddDirectory("D:\\rbo\\Documents");
         }
         /// <summary>
