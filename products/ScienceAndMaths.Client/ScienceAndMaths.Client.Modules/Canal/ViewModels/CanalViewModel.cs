@@ -13,6 +13,12 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
 {
     public class CanalViewModel : ScienceAndMathsViewModel, INavigationAware, ICanalViewModel
     {
+        #region
+
+        private CanalGeometryData activeCanalGeometryData;
+
+        #endregion
+
         #region Constructor and Initialize
 
         [Dependency]
@@ -44,7 +50,16 @@ namespace ScienceAndMaths.Client.Modules.Canal.ViewModels
         #region Properties
 
         public CanalData CanalData { get; set; }
-        public CanalGeometryData ActiveCanalGeometryData { get; set; }
+
+        public CanalGeometryData ActiveCanalGeometryData
+        {
+            get { return activeCanalGeometryData; }
+            set
+            {
+                activeCanalGeometryData = value;
+                RaisePropertiesChanged();
+            }
+        }
 
         #endregion
 

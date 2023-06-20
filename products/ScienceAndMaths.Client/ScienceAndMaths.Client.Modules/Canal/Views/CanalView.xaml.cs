@@ -140,6 +140,13 @@ namespace ScienceAndMaths.Client.Modules.Canal.Views
 
                     canalCanvas.Children.Add(displayResultLabel);
                 }
+
+                ICanalStretchModel canalStretch = CanalViewModel.CanalData.GetCanalStretch((position.X - InitialCanalX) / ScaleX);
+
+                if(canalStretch != null)
+                {
+                    CanalViewModel.ActiveCanalGeometryData = CanalViewModel.CanalData.GetCanalGeometryData(canalStretch.Id);
+                }
             }
         }
 

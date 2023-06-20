@@ -25,11 +25,10 @@ namespace ScienceAndMaths.Shared
 
         public CanalSimulationResult CanalResult { get; set; }
 
-        public ICanalStretchModel GetCanalStretch(CanalPointResult canalPointResult)
+        public ICanalStretchModel GetCanalStretch(double relativeCanalX)
         {
             int canalIndex = 0;
-            double relativeCanalX = canalPointResult.X;
-
+            
             while(canalIndex < Canal.CanalStretches.Count)
             {
                 ICanalStretchModel canalStretch = Canal.CanalStretches[canalIndex];
@@ -41,6 +40,7 @@ namespace ScienceAndMaths.Shared
                 else
                 {
                     relativeCanalX -= canalStretch.Length;
+                    canalIndex++;
                 }
             }
 
@@ -54,7 +54,7 @@ namespace ScienceAndMaths.Shared
 
         public ICanalSection GetCanalSection(CanalPointResult canalPointResult)
         {
-            var canalStretch = GetCanalStretch(canalPointResult);
+            var canalStretch = GetCanalStretch(canalPointResult.X);
 
             if(canalStretch != null)
             {
