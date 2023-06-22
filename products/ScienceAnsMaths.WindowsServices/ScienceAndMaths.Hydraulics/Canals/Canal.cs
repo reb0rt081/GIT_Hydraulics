@@ -180,6 +180,16 @@ namespace ScienceAndMaths.Hydraulics.Canals
                         options.BackwardsAnalysis = false;
                         options.ExecuteAnalysis = true;
                     }
+                    // S2 flow
+                    // Regimen rapido se impone aguas arriba
+                    //  TODO el simbolo <= debe ser mejorado
+                    else if (canalStretch.FromNode.WaterLevel.HasValue && canalStretch.FromNode.WaterLevel.Value <= canalStretchResult.CriticalWaterLevel && canalStretch.FromNode.WaterLevel.Value < canalStretchResult.NormalWaterLevel)
+                    {
+                        options.InitialX = GetAbsoluteInitialLength(CanalStretches, canalStretch) + 0.0;
+                        options.InitialWaterLevel = canalStretch.FromNode.WaterLevel.Value - Sensibility /* Salvando numéricamente por la derecha el problema */;
+                        options.BackwardsAnalysis = false;
+                        options.ExecuteAnalysis = true;
+                    }
                 }
                 //  H flow
                 else
