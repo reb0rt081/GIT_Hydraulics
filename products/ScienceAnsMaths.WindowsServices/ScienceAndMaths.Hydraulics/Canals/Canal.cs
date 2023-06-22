@@ -180,7 +180,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
                         options.BackwardsAnalysis = false;
                         options.ExecuteAnalysis = true;
                     }
-                    // S2 flow
+                    // S3 flow
                     // Regimen rapido se impone aguas arriba
                     //  TODO el simbolo <= debe ser mejorado
                     else if (canalStretch.FromNode.WaterLevel.HasValue && canalStretch.FromNode.WaterLevel.Value <= canalStretchResult.CriticalWaterLevel && canalStretch.FromNode.WaterLevel.Value < canalStretchResult.NormalWaterLevel)
