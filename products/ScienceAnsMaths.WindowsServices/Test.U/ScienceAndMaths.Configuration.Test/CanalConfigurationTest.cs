@@ -448,6 +448,82 @@ namespace ScienceAndMaths.Configuration.Test
         }
 
         [TestMethod]
+        public void RectangularSerializingWithWaterLevelAndS1Test()
+        {
+            //  Arrange
+            XmlSerializer xmlSerializer = new XmlSerializer(typeof(CanalConfiguration));
+            CanalConfiguration canalConfiguration = new CanalConfiguration();
+            canalConfiguration.ConfigId = "TestConfig";
+
+            CanalNode initNode = new CanalNode()
+            {
+                NodeId = "InitNode"
+            };
+            CanalNode endNode = new CanalNode()
+            {
+                NodeId = "EndNode",
+                WaterLevel = 2.9
+            };
+            CanalArrow arrow = new CanalArrow()
+            {
+                ArrowId = "TestArrow",
+                Length = 900.0,
+                Flow = 50.0,
+                FromNodeId = initNode.NodeId,
+                ToNodeId = endNode.NodeId
+            };
+            arrow.CanalSection = new RectangularSectionConfiguration()
+            {
+                Roughness = 0.028,
+                Slope = 0.001,
+                Width = 5.0
+            };
+            canalConfiguration.Arrows = new List<CanalArrow>() { arrow };
+            canalConfiguration.Nodes = new List<CanalNode>() { initNode, endNode };
+            var xml = "";
+
+            //  Act
+            using (var sww = new StringWriter())
+            {
+                using (XmlWriter writer = XmlWriter.Create(sww))
+                {
+                    xmlSerializer.Serialize(writer, canalConfiguration);
+                    xml = sww.ToString(); // Your XML
+                }
+            }
+
+            //  Assert
+            Assert.IsTrue(xml != null);
+
+            CanalConfiguration deserializedConfiguration = null;
+
+            using (StringReader sr = new StringReader(xml))
+            {
+                deserializedConfiguration = (CanalConfiguration)xmlSerializer.Deserialize(sr);
+            }
+
+            Assert.IsTrue(deserializedConfiguration != null);
+            Assert.AreEqual(2, deserializedConfiguration.Nodes.Count);
+            Assert.AreEqual(1, deserializedConfiguration.Arrows.Count);
+
+            CanalConfigurationConverter converter = new CanalConfigurationConverter();
+
+            var data = converter.Convert(deserializedConfiguration);
+
+            Assert.IsTrue(data != null);
+            Assert.AreEqual(2, data.CanelEdges.Count);
+            Assert.IsTrue(data.CanelEdges.Any(ce => ce.WaterLevel.HasValue && ce.WaterLevel.Value == 2.9));
+            Assert.AreEqual(1, data.CanalStretches.Count);
+
+            canalConfiguration = converter.ConvertBack(data);
+
+            Assert.IsTrue(canalConfiguration != null);
+            Assert.AreEqual(2, canalConfiguration.Nodes.Count);
+            Assert.AreEqual(1, canalConfiguration.Arrows.Count);
+            Assert.AreEqual(0.001, canalConfiguration.Arrows.Single().CanalSection.Slope);
+        }
+
+        [TestMethod]
         public void TrapezoidSerializingTest()
         {
             //  Arrange

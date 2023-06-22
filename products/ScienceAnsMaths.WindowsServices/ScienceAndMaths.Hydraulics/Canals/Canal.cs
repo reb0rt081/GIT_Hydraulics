@@ -165,7 +165,10 @@ namespace ScienceAndMaths.Hydraulics.Canals
                     // Regimen lento se impone aguas abajo
                     if (canalStretch.ToNode.WaterLevel.HasValue && canalStretch.ToNode.WaterLevel.Value > canalStretchResult.CriticalWaterLevel)
                     {
-                        throw new NotImplementedException();
+                        options.InitialX = GetAbsoluteInitialLength(CanalStretches, canalStretch) + canalStretch.Length;
+                        options.FinalWaterLevel = canalStretch.ToNode.WaterLevel.Value;
+                        options.BackwardsAnalysis = true;
+                        options.ExecuteAnalysis = true;
                     }
                     // S2 flow
                     // Regimen rapido se impone aguas arriba
