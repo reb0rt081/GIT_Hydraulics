@@ -194,10 +194,23 @@ namespace ScienceAndMaths.Hydraulics.Canals
                 //  H flow
                 else
                 {
-                    if (canalStretch.FromNode.WaterLevel.HasValue)
+                    // H2 flow
+                    // Regimen lento se impone aguas abajo
+                    //  TODO el simbolo <= debe ser mejorado
+                    if (canalStretch.ToNode.WaterLevel.HasValue && canalStretch.ToNode.WaterLevel > canalStretchResult.CriticalWaterLevel)
+                    {
+                        options.InitialX = GetAbsoluteInitialLength(CanalStretches, canalStretch) + canalStretch.Length;
+                        options.FinalWaterLevel = canalStretch.ToNode.WaterLevel.Value;
+                        options.BackwardsAnalysis = true;
+                        options.ExecuteAnalysis = true;
+                    }
+                    // H3 flow
+                    // Regimen rapido se impone aguas arriba
+                    //  TODO el simbolo <= debe ser mejorado
+                    else if (canalStretch.FromNode.WaterLevel.HasValue && canalStretch.FromNode.WaterLevel <= canalStretchResult.CriticalWaterLevel)
                     {
                         options.InitialX = GetAbsoluteInitialLength(CanalStretches, canalStretch) + 0.0;
-                        options.InitialWaterLevel = canalStretch.FromNode.WaterLevel.Value;
+                        options.InitialWaterLevel = canalStretch.FromNode.WaterLevel.Value - Sensibility /* Salvando numéricamente por la derecha el problema */;
                         options.BackwardsAnalysis = false;
                         options.ExecuteAnalysis = true;
                     }
