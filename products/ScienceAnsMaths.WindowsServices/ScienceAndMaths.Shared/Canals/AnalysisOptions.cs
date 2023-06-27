@@ -1,12 +1,14 @@
-﻿namespace ScienceAndMaths.Shared.Canals
+﻿using System;
+
+namespace ScienceAndMaths.Shared.Canals
 {
     public class AnalysisOptions
     {
         public AnalysisOptions()
         {
             InitialX = 0d;
-            InitialWaterLevel = 0d;
-            FinalWaterLevel = 0d;
+            InitialWaterLevel = Double.MinValue;
+            FinalWaterLevel = Double.MinValue;
             BackwardsAnalysis = false;
             AnalysisFeasible = false;
             AnalysisSteps = 0;
