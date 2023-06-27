@@ -56,6 +56,16 @@ namespace ScienceAndMaths.Hydraulics.Canals
         public ICanalSectionModel CanalSection { get; set; }
 
         /// <summary>
+        /// Gets or sets the analysis options for this canal section
+        /// </summary>
+        public AnalysisOptions AnalysisOptions { get; set; }
+
+        /// <summary>
+        /// Gets or sets the main values regarding the canal stretch
+        /// </summary>
+        public CanalStretchResult CanalStretchResult { get; set; }
+
+        /// <summary>
         /// Returns the Froude number of a canal stretch at a given length
         /// </summary>
         /// <param name="waterLevel">The level of the water in the canal section</param>

@@ -81,6 +81,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
         public CanalSimulationResult ExecuteCanalSimulation()
         {
             var result = new CanalSimulationResult();
+            List<ICanalStretchModel> canalStretchSorted = new List<ICanalStretchModel>();
 
             RungeKutta solver = new RungeKutta();
 
@@ -216,7 +217,19 @@ namespace ScienceAndMaths.Hydraulics.Canals
                     }
                 }
 
-                if(options.ExecuteAnalysis)
+                canalStretch.AnalysisOptions = options;
+                canalStretch.CanalStretchResult = canalStretchResult;
+
+                canalStretchSorted.Add(canalStretch);
+            }
+
+            //  Solving the canal
+            foreach (var canalStretch in canalStretchSorted)
+            {
+                CanalStretchResult canalStretchResult = canalStretch.CanalStretchResult;
+                AnalysisOptions options = canalStretch.AnalysisOptions;
+
+                if (options.ExecuteAnalysis)
                 {
                     double x = options.InitialX;
                     double waterLevel = options.BackwardsAnalysis ? options.FinalWaterLevel : options.InitialWaterLevel;
@@ -226,7 +239,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
                     solver.Interval = canalStretch.Length / steps;
                     solver.Equation = canalStretch.FlowEquation();
 
-                    if(options.HydraulicJumpOccurs && canalStretch.FromNode.WaterLevel.HasValue && canalStretch.ToNode.WaterLevel.HasValue)
+                    if (options.HydraulicJumpOccurs && canalStretch.FromNode.WaterLevel.HasValue && canalStretch.ToNode.WaterLevel.HasValue)
                     {
                         List<CanalPointResult> backwardsAnalysisResult = new List<CanalPointResult>();
                         List<CanalPointResult> conjugateWaterLevelResult = new List<CanalPointResult>();
@@ -245,7 +258,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
 
                         waterLevel = options.InitialWaterLevel;
 
-                        while(waterLevel < canalStretchResult.CriticalWaterLevel - Sensibility)
+                        while (waterLevel < canalStretchResult.CriticalWaterLevel - Sensibility)
                         {
                             waterLevel = solver.Solve(x, waterLevel);
                             x = x + solver.Interval;
@@ -259,7 +272,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
                         double hydraulicJumpX = findHydraulicJump.Solve(0.01);
 
                         // Found result, otherwise it could be "desagüe anegado"
-                        if(hydraulicJumpX < double.MaxValue)
+                        if (hydraulicJumpX < double.MaxValue)
                         {
                             result.AddCanalPointResult(canalStretch.Id, options.InitialX, options.InitialWaterLevel);
                             result.AddRangeCanalPointResult(canalStretch.Id, frontAnalysisResult.Where(ar => ar.X < hydraulicJumpX).ToList());

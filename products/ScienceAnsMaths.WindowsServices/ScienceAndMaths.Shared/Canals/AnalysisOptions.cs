@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ScienceAndMaths.Hydraulics.Canals
+﻿namespace ScienceAndMaths.Shared.Canals
 {
     public class AnalysisOptions
     {

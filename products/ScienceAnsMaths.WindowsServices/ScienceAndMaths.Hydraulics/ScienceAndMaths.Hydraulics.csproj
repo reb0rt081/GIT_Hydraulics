@@ -41,7 +41,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Canals\AnalysisOptions.cs" />
     <Compile Include="Canals\Canal.cs" />
     <Compile Include="Canals\CanalEdge.cs" />
     <Compile Include="Canals\CanalStretch.cs" />

@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CanalData.cs" />
+    <Compile Include="Canals\AnalysisOptions.cs" />
     <Compile Include="Canals\CanalGeometryData.cs" />
     <Compile Include="Canals\CanalPointResult.cs" />
     <Compile Include="Canals\CanalSimulationResult.cs" />

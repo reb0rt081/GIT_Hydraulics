@@ -41,5 +41,15 @@ namespace ScienceAndMaths.Shared.Canals
         /// </summary>
         /// <returns></returns>
         double GetHydraulicJumpDownstreamDepth(double y1);
+
+        /// <summary>
+        /// Gets or sets the analysis options for this canal section
+        /// </summary>
+        AnalysisOptions AnalysisOptions { get; set; }
+
+        /// <summary>
+        /// Gets or sets the main values regarding the canal stretch
+        /// </summary>
+        CanalStretchResult CanalStretchResult { get; set; }
     }
 }
