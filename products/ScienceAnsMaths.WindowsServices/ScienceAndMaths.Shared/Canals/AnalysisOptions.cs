@@ -8,7 +8,7 @@
             InitialWaterLevel = 0d;
             FinalWaterLevel = 0d;
             BackwardsAnalysis = false;
-            ExecuteAnalysis = false;
+            AnalysisFeasible = false;
             AnalysisSteps = 0;
         }
 
@@ -20,7 +20,7 @@
 
         public bool BackwardsAnalysis { get; set; }
 
-        public bool ExecuteAnalysis { get; set; }
+        public bool AnalysisFeasible { get; set; }
 
         public int AnalysisSteps { get; set; }
 
