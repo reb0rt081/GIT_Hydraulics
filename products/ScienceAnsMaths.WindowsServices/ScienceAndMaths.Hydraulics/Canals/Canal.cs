@@ -80,10 +80,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
         /// <returns></returns>
         public CanalSimulationResult ExecuteCanalSimulation()
         {
-            var result = new CanalSimulationResult();
             List<ICanalStretchModel> canalStretchSorted = new List<ICanalStretchModel>();
-
-            RungeKutta solver = new RungeKutta();
 
             double flow = CanalStretches.Where(cs => cs.Flow > 0).Select(cs => cs.Flow).FirstOrDefault();
 
@@ -96,7 +93,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
 
             foreach (ICanalStretchModel canalStretch in CanalStretches)
             {
-                CanalStretchResult canalStretchResult = result.GetCanalStretchResult(canalStretch.Id);
+                CanalStretchResult canalStretchResult = new CanalStretchResult();
                 canalStretchResult.CriticalSlope = canalStretch.CanalSection.GetCriticalSlope(canalStretch.Flow);
                 canalStretchResult.CriticalWaterLevel = canalStretch.CanalSection.GetCriticalWaterLevel(canalStretch.Flow);
                 canalStretchResult.NormalWaterLevel = canalStretch.CanalSection.GetNormalWaterLevel(canalStretch.Flow);
@@ -227,10 +224,62 @@ namespace ScienceAndMaths.Hydraulics.Canals
                 canalStretchSorted.Add(canalStretch);
             }
 
+            
+
+            return PerformAnalysis(canalStretchSorted);
+        }
+
+        private Func<double, double> GetHydraulicJumpEquation(List<CanalPointResult> downstreamAnalysisResult, List<CanalPointResult> conjugatedResult)
+        {
+            return x =>
+            {
+                List<CanalPointResult> downstreamWaterLevel = downstreamAnalysisResult.OrderBy(y => Math.Abs(y.X - x)).Take(2).OrderBy(y => y.X).ToList();
+                List<CanalPointResult> conjugatedWaterLevel = conjugatedResult.OrderBy(y => Math.Abs(y.X - x)).Take(2).OrderBy(y => y.X).ToList();
+
+                double downstremInterpolatedValue =
+                    (downstreamWaterLevel.Last().WaterLevel - downstreamWaterLevel.First().WaterLevel) / (downstreamWaterLevel.Last().X - downstreamWaterLevel.First().X)
+                    * (x - downstreamWaterLevel.First().X) + downstreamWaterLevel.Last().WaterLevel;
+
+                double conjugatedInterpolatedValue =
+                    (conjugatedWaterLevel.Last().WaterLevel - conjugatedWaterLevel.First().WaterLevel) / (conjugatedWaterLevel.Last().X - conjugatedWaterLevel.First().X)
+                    * (x - conjugatedWaterLevel.First().X) + conjugatedWaterLevel.Last().WaterLevel;
+
+                return downstremInterpolatedValue - conjugatedInterpolatedValue;
+            };
+        }
+
+        private double GetAbsoluteInitialLength(List<ICanalStretchModel> canalStretches, ICanalStretchModel activeCanalStretch)
+        {
+            double length = 0d;
+            ICanalStretchModel currentCanalStretch = activeCanalStretch;
+
+            do
+            {
+                ICanalStretchModel priorCanalStretch = canalStretches.FirstOrDefault(cs => cs.ToNode.Id == currentCanalStretch.FromNode.Id);
+
+                if (priorCanalStretch != null)
+                {
+                    length += priorCanalStretch.Length;
+                }
+
+                currentCanalStretch = priorCanalStretch;
+
+            } while (currentCanalStretch != null);
+
+            return length;
+        }
+
+        private CanalSimulationResult PerformAnalysis(List<ICanalStretchModel> canalStretches)
+        {
+            var result = new CanalSimulationResult();
+            RungeKutta solver = new RungeKutta();
+
             //  Solving the canal
-            foreach (var canalStretch in canalStretchSorted.OrderByDescending(cs => cs.AnalysisOptions.AnalysisFeasible))
+            foreach (var canalStretch in canalStretches.OrderByDescending(cs => cs.AnalysisOptions.AnalysisFeasible))
             {
                 CanalStretchResult canalStretchResult = canalStretch.CanalStretchResult;
+                result.CanalStretchResults[canalStretch.Id] = canalStretchResult;
+
                 AnalysisOptions options = canalStretch.AnalysisOptions;
 
                 double x = options.InitialX;
@@ -327,46 +376,6 @@ namespace ScienceAndMaths.Hydraulics.Canals
             }
 
             return result;
-        }
-
-        private Func<double, double> GetHydraulicJumpEquation(List<CanalPointResult> downstreamAnalysisResult, List<CanalPointResult> conjugatedResult)
-        {
-            return x =>
-            {
-                List<CanalPointResult> downstreamWaterLevel = downstreamAnalysisResult.OrderBy(y => Math.Abs(y.X - x)).Take(2).OrderBy(y => y.X).ToList();
-                List<CanalPointResult> conjugatedWaterLevel = conjugatedResult.OrderBy(y => Math.Abs(y.X - x)).Take(2).OrderBy(y => y.X).ToList();
-
-                double downstremInterpolatedValue =
-                    (downstreamWaterLevel.Last().WaterLevel - downstreamWaterLevel.First().WaterLevel) / (downstreamWaterLevel.Last().X - downstreamWaterLevel.First().X)
-                    * (x - downstreamWaterLevel.First().X) + downstreamWaterLevel.Last().WaterLevel;
-
-                double conjugatedInterpolatedValue =
-                    (conjugatedWaterLevel.Last().WaterLevel - conjugatedWaterLevel.First().WaterLevel) / (conjugatedWaterLevel.Last().X - conjugatedWaterLevel.First().X)
-                    * (x - conjugatedWaterLevel.First().X) + conjugatedWaterLevel.Last().WaterLevel;
-
-                return downstremInterpolatedValue - conjugatedInterpolatedValue;
-            };
-        }
-
-        private double GetAbsoluteInitialLength(List<ICanalStretchModel> canalStretches, ICanalStretchModel activeCanalStretch)
-        {
-            double length = 0d;
-            ICanalStretchModel currentCanalStretch = activeCanalStretch;
-
-            do
-            {
-                ICanalStretchModel priorCanalStretch = canalStretches.FirstOrDefault(cs => cs.ToNode.Id == currentCanalStretch.FromNode.Id);
-
-                if (priorCanalStretch != null)
-                {
-                    length += priorCanalStretch.Length;
-                }
-
-                currentCanalStretch = priorCanalStretch;
-
-            } while (currentCanalStretch != null);
-
-            return length;
         }
     }
 }
