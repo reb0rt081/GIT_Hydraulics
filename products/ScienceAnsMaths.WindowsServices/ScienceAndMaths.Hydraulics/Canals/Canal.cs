@@ -154,6 +154,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
                         options.BackwardsAnalysis = false;
                         options.AnalysisFeasible = true;
                     }
+                    //  TODO make this work
                     //if (preCriticalSection || canalStretch.FromNode.WaterLevel.HasValue && canalStretch.FromNode.WaterLevel.Value < canalStretchResult.CriticalWaterLevel)
                     //{
                     //    canalStretchResult.BackwaterCurve = "M3";
