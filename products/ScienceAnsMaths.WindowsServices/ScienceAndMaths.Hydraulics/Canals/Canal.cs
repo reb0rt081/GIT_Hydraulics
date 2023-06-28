@@ -1,14 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Diagnostics;
 using System.Linq;
-using System.Runtime.Serialization.Formatters;
-using System.Text;
-using System.Threading.Tasks;
 
 using ScienceAndMaths.Mathematics;
-using ScienceAndMaths.Shared;
 using ScienceAndMaths.Shared.Canals;
 
 namespace ScienceAndMaths.Hydraulics.Canals
@@ -98,12 +92,9 @@ namespace ScienceAndMaths.Hydraulics.Canals
                 canalStretchResult.CriticalWaterLevel = canalStretch.CanalSection.GetCriticalWaterLevel(canalStretch.Flow);
                 canalStretchResult.NormalWaterLevel = canalStretch.CanalSection.GetNormalWaterLevel(canalStretch.Flow);
 
-                ICanalStretchModel preCanalStretch = CanalStretches.FirstOrDefault(cs => cs.ToNode.Id == canalStretch.FromNode.Id);
-                ICanalStretchModel postCanalStretch = CanalStretches.FirstOrDefault(cs => cs.FromNode.Id == canalStretch.ToNode.Id);
-
-                bool preCriticalSection = false;
-                bool postCriticalSection = false;
                 double normalWaterLevelConnectedStrech;
+                ICanalStretchModel preCanalStretch = CanalStretches.FirstOrDefault(cs => cs.ToNode.Id == canalStretch.FromNode.Id);
+                bool preCriticalSection = false;
 
                 if (preCanalStretch != null)
                 {
@@ -112,6 +103,8 @@ namespace ScienceAndMaths.Hydraulics.Canals
                     preCriticalSection = normalWaterLevelConnectedStrech <= canalStretchResult.CriticalWaterLevel;
                 }
 
+                ICanalStretchModel postCanalStretch = CanalStretches.FirstOrDefault(cs => cs.FromNode.Id == canalStretch.ToNode.Id);
+                bool postCriticalSection = false;
                 if (postCanalStretch != null)
                 {
                     normalWaterLevelConnectedStrech = postCanalStretch.CanalSection.GetNormalWaterLevel(postCanalStretch.Flow);
@@ -227,11 +220,8 @@ namespace ScienceAndMaths.Hydraulics.Canals
 
                 canalStretch.AnalysisOptions = options;
                 canalStretch.CanalStretchResult = canalStretchResult;
-
                 canalStretchSorted.Add(canalStretch);
             }
-
-            
 
             return PerformAnalysis(canalStretchSorted);
         }
