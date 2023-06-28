@@ -114,6 +114,7 @@ namespace ScienceAndMaths.Shared
                 CriticalSlope = CanalResult?.GetCanalStretchResult(canalStretchId)?.CriticalSlope ?? 0,
                 CriticalWaterLevel = CanalResult?.GetCanalStretchResult(canalStretchId)?.CriticalWaterLevel ?? 0,
                 NormalWaterLevel = CanalResult?.GetCanalStretchResult(canalStretchId)?.NormalWaterLevel ?? 0,
+                BackwaterCurve = CanalResult?.GetCanalStretchResult(canalStretchId)?.BackwaterCurve ?? "NotYetCalculated"
             };
         }
     }

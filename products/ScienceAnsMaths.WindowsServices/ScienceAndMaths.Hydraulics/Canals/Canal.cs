@@ -131,6 +131,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
                     // Regimen lento se impone aguas abajo
                     if (canalStretch.ToNode.WaterLevel.HasValue && canalStretch.ToNode.WaterLevel.Value > canalStretchResult.CriticalWaterLevel)
                     {
+                        canalStretchResult.BackwaterCurve = "M1";
                         options.InitialX = GetAbsoluteInitialLength(CanalStretches, canalStretch) + canalStretch.Length;
                         options.FinalWaterLevel = canalStretch.ToNode.WaterLevel.Value;
                         options.BackwardsAnalysis = true;
@@ -140,6 +141,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
                     // Regimen lento se impone aguas abajo
                     else if (postCriticalSection)
                     {
+                        canalStretchResult.BackwaterCurve = "M2";
                         canalStretch.ToNode.WaterLevel = canalStretchResult.CriticalWaterLevel;
                         options.InitialX = GetAbsoluteInitialLength(CanalStretches, canalStretch) + canalStretch.Length;
                         options.FinalWaterLevel = canalStretchResult.CriticalWaterLevel + Sensibility /* Salvando numéricamente por la izquierda el problema */;
@@ -151,13 +153,13 @@ namespace ScienceAndMaths.Hydraulics.Canals
                     // Regimen rapido se impone aguas arriba
                     if (canalStretch.FromNode.WaterLevel.HasValue && canalStretch.FromNode.WaterLevel.Value < canalStretchResult.CriticalWaterLevel)
                     {
+                        canalStretchResult.BackwaterCurve = "M3";
                         //  Hydraulic jump will occur as we have in the same stretch both conditions for both flows
                         options.HydraulicJumpOccurs = options.AnalysisFeasible;
                         options.InitialX = GetAbsoluteInitialLength(CanalStretches, canalStretch) + 0.0;
                         options.InitialWaterLevel = canalStretch.FromNode.WaterLevel.Value;
                         options.BackwardsAnalysis = false;
                         options.AnalysisFeasible = true;
-
                     }
                 }
                 //  S flow
@@ -167,6 +169,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
                     // Regimen lento se impone aguas abajo
                     if (canalStretch.ToNode.WaterLevel.HasValue && canalStretch.ToNode.WaterLevel.Value > canalStretchResult.CriticalWaterLevel)
                     {
+                        canalStretchResult.BackwaterCurve = "S1";
                         options.InitialX = GetAbsoluteInitialLength(CanalStretches, canalStretch) + canalStretch.Length;
                         options.FinalWaterLevel = canalStretch.ToNode.WaterLevel.Value;
                         options.BackwardsAnalysis = true;
@@ -177,6 +180,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
                     //  TODO el simbolo <= debe ser mejorado
                     else if (canalStretch.FromNode.WaterLevel.HasValue && canalStretch.FromNode.WaterLevel.Value <= canalStretchResult.CriticalWaterLevel && canalStretch.FromNode.WaterLevel.Value > canalStretchResult.NormalWaterLevel)
                     {
+                        canalStretchResult.BackwaterCurve = "S2";
                         options.InitialX = GetAbsoluteInitialLength(CanalStretches, canalStretch) + 0.0;
                         options.InitialWaterLevel = canalStretch.FromNode.WaterLevel.Value - Sensibility /* Salvando numéricamente por la derecha el problema */;
                         options.BackwardsAnalysis = false;
@@ -187,6 +191,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
                     //  TODO el simbolo <= debe ser mejorado
                     else if (canalStretch.FromNode.WaterLevel.HasValue && canalStretch.FromNode.WaterLevel.Value <= canalStretchResult.CriticalWaterLevel && canalStretch.FromNode.WaterLevel.Value < canalStretchResult.NormalWaterLevel)
                     {
+                        canalStretchResult.BackwaterCurve = "S3";
                         options.InitialX = GetAbsoluteInitialLength(CanalStretches, canalStretch) + 0.0;
                         options.InitialWaterLevel = canalStretch.FromNode.WaterLevel.Value - Sensibility /* Salvando numéricamente por la derecha el problema */;
                         options.BackwardsAnalysis = false;
@@ -201,6 +206,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
                     //  TODO el simbolo <= debe ser mejorado
                     if (canalStretch.ToNode.WaterLevel.HasValue && canalStretch.ToNode.WaterLevel > canalStretchResult.CriticalWaterLevel)
                     {
+                        canalStretchResult.BackwaterCurve = "H2";
                         options.InitialX = GetAbsoluteInitialLength(CanalStretches, canalStretch) + canalStretch.Length;
                         options.FinalWaterLevel = canalStretch.ToNode.WaterLevel.Value;
                         options.BackwardsAnalysis = true;
@@ -211,6 +217,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
                     //  TODO el simbolo <= debe ser mejorado
                     else if (canalStretch.FromNode.WaterLevel.HasValue && canalStretch.FromNode.WaterLevel <= canalStretchResult.CriticalWaterLevel)
                     {
+                        canalStretchResult.BackwaterCurve = "H3";
                         options.InitialX = GetAbsoluteInitialLength(CanalStretches, canalStretch) + 0.0;
                         options.InitialWaterLevel = canalStretch.FromNode.WaterLevel.Value - Sensibility /* Salvando numéricamente por la derecha el problema */;
                         options.BackwardsAnalysis = false;

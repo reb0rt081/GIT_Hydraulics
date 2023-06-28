@@ -16,5 +16,7 @@ namespace ScienceAndMaths.Shared.Canals
         public double CriticalSlope { get; set; }
 
         public double NormalWaterLevel { get; set; }
+
+        public string BackwaterCurve { get; set; }
     }
 }
