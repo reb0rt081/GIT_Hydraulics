@@ -154,6 +154,20 @@ namespace ScienceAndMaths.Hydraulics.Canals
                         options.BackwardsAnalysis = false;
                         options.AnalysisFeasible = true;
                     }
+                    //if (preCriticalSection || canalStretch.FromNode.WaterLevel.HasValue && canalStretch.FromNode.WaterLevel.Value < canalStretchResult.CriticalWaterLevel)
+                    //{
+                    //    canalStretchResult.BackwaterCurve = "M3";
+                    //    //  Hydraulic jump will occur as we have in the same stretch both conditions for both flows
+                    //    options.HydraulicJumpOccurs = options.AnalysisFeasible;
+                    //    options.InitialX = GetAbsoluteInitialLength(CanalStretches, canalStretch) + 0.0;
+                    //    options.BackwardsAnalysis = false;
+                        
+                    //    if(canalStretch.FromNode.WaterLevel.HasValue)
+                    //    {
+                    //        options.InitialWaterLevel = canalStretch.FromNode.WaterLevel.Value;
+                    //        options.AnalysisFeasible = true;
+                    //    }
+                    //}
                 }
                 //  S flow
                 else if (canalStretch.CanalSection.Slope > canalStretchResult.CriticalSlope)
@@ -272,107 +286,116 @@ namespace ScienceAndMaths.Hydraulics.Canals
             RungeKutta solver = new RungeKutta();
 
             //  Solving the canal
-            foreach (var canalStretch in canalStretches.OrderByDescending(cs => cs.AnalysisOptions.AnalysisFeasible))
+            foreach (ICanalStretchModel canalStretch in canalStretches.OrderByDescending(cs => cs.AnalysisOptions.AnalysisFeasible))
             {
-                CanalStretchResult canalStretchResult = canalStretch.CanalStretchResult;
-                result.CanalStretchResults[canalStretch.Id] = canalStretchResult;
-
-                AnalysisOptions options = canalStretch.AnalysisOptions;
-
-                double x = options.InitialX;
-
-                if (options.InitialWaterLevel < 0 && canalStretch.FromNode.WaterLevel.HasValue)
-                {
-                    options.InitialWaterLevel = canalStretch.FromNode.WaterLevel.Value;
-                }
-
-                if (options.FinalWaterLevel < 0 && canalStretch.ToNode.WaterLevel.HasValue)
-                {
-                    options.FinalWaterLevel = canalStretch.ToNode.WaterLevel.Value;
-                }
-
-                double waterLevel = options.BackwardsAnalysis ? options.FinalWaterLevel : options.InitialWaterLevel;
-
-                int steps = options.AnalysisSteps;
-
-                solver.Interval = canalStretch.Length / steps;
-                solver.Equation = canalStretch.FlowEquation();
-
-                if (options.HydraulicJumpOccurs && canalStretch.FromNode.WaterLevel.HasValue && canalStretch.ToNode.WaterLevel.HasValue)
-                {
-                    List<CanalPointResult> backwardsAnalysisResult = new List<CanalPointResult>();
-                    List<CanalPointResult> conjugateWaterLevelResult = new List<CanalPointResult>();
-                    List<CanalPointResult> frontAnalysisResult = new List<CanalPointResult>();
-                    double x2 = options.InitialX + canalStretch.Length;
-
-                    waterLevel = options.FinalWaterLevel;
-
-                    for (int i = 1; i <= steps; i++)
-                    {
-                        waterLevel = solver.SolveBackwards(x2, waterLevel);
-                        x2 = x2 - solver.Interval;
-
-                        backwardsAnalysisResult.Add(new CanalPointResult(x2, waterLevel));
-                    }
-
-                    waterLevel = options.InitialWaterLevel;
-
-                    while (waterLevel < canalStretchResult.CriticalWaterLevel - Sensibility)
-                    {
-                        waterLevel = solver.Solve(x, waterLevel);
-                        x = x + solver.Interval;
-
-                        conjugateWaterLevelResult.Add(new CanalPointResult(x, canalStretch.GetHydraulicJumpDownstreamDepth(waterLevel)));
-                        frontAnalysisResult.Add(new CanalPointResult(x, waterLevel));
-                    }
-
-                    Func<double, double> conjugatedEquation = GetHydraulicJumpEquation(backwardsAnalysisResult, conjugateWaterLevelResult);
-                    BisectionMethod findHydraulicJump = new BisectionMethod(conjugatedEquation, options.InitialX + Sensibility, conjugateWaterLevelResult.OrderByDescending(wl => wl.X).First().X);
-                    double hydraulicJumpX = findHydraulicJump.Solve(0.01);
-
-                    // Found result, otherwise it could be "desagüe anegado"
-                    if (hydraulicJumpX < double.MaxValue)
-                    {
-                        result.AddCanalPointResult(canalStretch.Id, options.InitialX, options.InitialWaterLevel);
-                        result.AddRangeCanalPointResult(canalStretch.Id, frontAnalysisResult.Where(ar => ar.X < hydraulicJumpX).ToList());
-                        result.AddRangeCanalPointResult(canalStretch.Id, backwardsAnalysisResult.Where(ar => ar.X >= hydraulicJumpX).ToList());
-                    }
-
-                }
-                else if (options.BackwardsAnalysis)
-                {
-                    result.AddCanalPointResult(canalStretch.Id, x, waterLevel);
-
-                    for (int i = 1; i <= steps; i++)
-                    {
-                        waterLevel = solver.SolveBackwards(x, waterLevel);
-                        x = x - solver.Interval;
-
-                        result.AddCanalPointResult(canalStretch.Id, x, waterLevel);
-                    }
-
-                    canalStretch.FromNode.WaterLevel = waterLevel;
-                }
-                else
-                {
-                    result.AddCanalPointResult(canalStretch.Id, x, waterLevel);
-
-                    // Regimen lento se impone aguas abajo
-                    // Regimen rapido se impone aguas arriba
-
-                    for (int i = 1; i <= steps; i++)
-                    {
-                        waterLevel = solver.Solve(x, waterLevel);
-                        x = x + solver.Interval;
-
-                        result.AddCanalPointResult(canalStretch.Id, x, waterLevel);
-                    }
-
-                    canalStretch.ToNode.WaterLevel = waterLevel;
-                }
+               SolveCanalStrech(canalStretch, result, solver);
             }
 
             return result;
+        }
+
+        private void SolveCanalStrech(ICanalStretchModel canalStretch, CanalSimulationResult result, RungeKutta solver)
+        {
+            //  Resetting points for safety
+            canalStretch.CanalStretchResult.CanalPointResults = new List<CanalPointResult>();
+
+            CanalStretchResult canalStretchResult = canalStretch.CanalStretchResult;
+            result.CanalStretchResults[canalStretch.Id] = canalStretchResult;
+
+            AnalysisOptions options = canalStretch.AnalysisOptions;
+
+            double x = options.InitialX;
+
+            if (options.InitialWaterLevel < 0 && canalStretch.FromNode.WaterLevel.HasValue)
+            {
+                options.InitialWaterLevel = canalStretch.FromNode.WaterLevel.Value;
+            }
+
+            if (options.FinalWaterLevel < 0 && canalStretch.ToNode.WaterLevel.HasValue)
+            {
+                options.FinalWaterLevel = canalStretch.ToNode.WaterLevel.Value;
+            }
+
+            double waterLevel = options.BackwardsAnalysis ? options.FinalWaterLevel : options.InitialWaterLevel;
+
+            int steps = options.AnalysisSteps;
+
+            solver.Interval = canalStretch.Length / steps;
+            solver.Equation = canalStretch.FlowEquation();
+
+            if (options.HydraulicJumpOccurs && canalStretch.FromNode.WaterLevel.HasValue && canalStretch.ToNode.WaterLevel.HasValue)
+            {
+                List<CanalPointResult> backwardsAnalysisResult = new List<CanalPointResult>();
+                List<CanalPointResult> conjugateWaterLevelResult = new List<CanalPointResult>();
+                List<CanalPointResult> frontAnalysisResult = new List<CanalPointResult>();
+                double x2 = options.InitialX + canalStretch.Length;
+
+                waterLevel = options.FinalWaterLevel;
+
+                for (int i = 1; i <= steps; i++)
+                {
+                    waterLevel = solver.SolveBackwards(x2, waterLevel);
+                    x2 = x2 - solver.Interval;
+
+                    backwardsAnalysisResult.Add(new CanalPointResult(x2, waterLevel));
+                }
+
+                waterLevel = options.InitialWaterLevel;
+
+                while (waterLevel < canalStretchResult.CriticalWaterLevel - Sensibility)
+                {
+                    waterLevel = solver.Solve(x, waterLevel);
+                    x = x + solver.Interval;
+
+                    conjugateWaterLevelResult.Add(new CanalPointResult(x, canalStretch.GetHydraulicJumpDownstreamDepth(waterLevel)));
+                    frontAnalysisResult.Add(new CanalPointResult(x, waterLevel));
+                }
+
+                Func<double, double> conjugatedEquation = GetHydraulicJumpEquation(backwardsAnalysisResult, conjugateWaterLevelResult);
+                BisectionMethod findHydraulicJump = new BisectionMethod(conjugatedEquation, options.InitialX + Sensibility, conjugateWaterLevelResult.OrderByDescending(wl => wl.X).First().X);
+                double hydraulicJumpX = findHydraulicJump.Solve(0.01);
+
+                //  TODO here there is no solution
+                // Found result, otherwise it could be "desagüe anegado"
+                if (hydraulicJumpX < double.MaxValue)
+                {
+                    result.AddCanalPointResult(canalStretch.Id, options.InitialX, options.InitialWaterLevel);
+                    result.AddRangeCanalPointResult(canalStretch.Id, frontAnalysisResult.Where(ar => ar.X < hydraulicJumpX).ToList());
+                    result.AddRangeCanalPointResult(canalStretch.Id, backwardsAnalysisResult.Where(ar => ar.X >= hydraulicJumpX).ToList());
+                }
+
+            }
+            else if (options.BackwardsAnalysis)
+            {
+                result.AddCanalPointResult(canalStretch.Id, x, waterLevel);
+
+                for (int i = 1; i <= steps; i++)
+                {
+                    waterLevel = solver.SolveBackwards(x, waterLevel);
+                    x = x - solver.Interval;
+
+                    result.AddCanalPointResult(canalStretch.Id, x, waterLevel);
+                }
+
+                canalStretch.FromNode.WaterLevel = waterLevel;
+            }
+            else
+            {
+                result.AddCanalPointResult(canalStretch.Id, x, waterLevel);
+
+                // Regimen lento se impone aguas abajo
+                // Regimen rapido se impone aguas arriba
+
+                for (int i = 1; i <= steps; i++)
+                {
+                    waterLevel = solver.Solve(x, waterLevel);
+                    x = x + solver.Interval;
+
+                    result.AddCanalPointResult(canalStretch.Id, x, waterLevel);
+                }
+
+                canalStretch.ToNode.WaterLevel = waterLevel;
+            }
         }
     }
 }
