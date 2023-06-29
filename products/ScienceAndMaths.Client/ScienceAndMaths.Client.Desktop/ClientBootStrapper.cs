@@ -49,11 +49,11 @@ namespace ScienceAndMaths.Client.Desktop
             
             regionManager.RegisterViewWithRegion(Shared.Constants.MainRegion, () => Container.Resolve<CanalView>(Shared.Constants.CanalView));
             
-            LocationView locationView = new LocationView();
-            Container.RegisterInstance<LocationView>(locationView, new ContainerControlledLifetimeManager());
-            Container.BuildUp(locationView);
+            //LocationView locationView = new LocationView();
+            //Container.RegisterInstance<LocationView>(locationView, new ContainerControlledLifetimeManager());
+            //Container.BuildUp(locationView);
 
-            regionManager.RegisterViewWithRegion(Shared.Constants.MainRegion, () => Container.Resolve<LocationView>(Shared.Constants.LocationView));
+            //regionManager.RegisterViewWithRegion(Shared.Constants.MainRegion, () => Container.Resolve<LocationView>(Shared.Constants.LocationView));
         }
 
         public void CheckUniqueInstanceIsRunning()

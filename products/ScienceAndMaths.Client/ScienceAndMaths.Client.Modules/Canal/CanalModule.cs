@@ -35,14 +35,14 @@ namespace ScienceAndMaths.Client.Modules.Canal
             return new ScienceAndMathsModuleInfo()
             {
                 Name = "Canals",
-                MainViewUri = typeof(LocationView).Name,
+                MainViewUri = typeof(CanalView).Name,
                 ImageUri = "pack://application:,,,/ScienceAndMaths.Client.Shared;component/Images/canal_icon.png"
             };
         }
 
         public override void OnInitialized(IContainerProvider containerProvider)
         {
-            this.RegisterViewAndViewModelInRegionAndRibbonAndContainer<LocationView, ILocationViewModel, LocationViewModel, LocationRibbon>(new LocationViewModel(), new LocationRibbon(), Shared.Constants.MainRegion, Shared.Constants.LocationView, Shared.Constants.LocationRibbon);
+            //this.RegisterViewAndViewModelInRegionAndRibbonAndContainer<LocationView, ILocationViewModel, LocationViewModel, LocationRibbon>(new LocationViewModel(), new LocationRibbon(), Shared.Constants.MainRegion, Shared.Constants.LocationView, Shared.Constants.LocationRibbon);
 
             this.RegisterViewAndViewModelInRegionAndRibbonAndContainer<CanalView, ICanalViewModel, CanalViewModel, CanalRibbon>(new CanalViewModel(), new CanalRibbon(), Shared.Constants.MainRegion, Shared.Constants.CanalView, Shared.Constants.CanalRibbon);
         }
