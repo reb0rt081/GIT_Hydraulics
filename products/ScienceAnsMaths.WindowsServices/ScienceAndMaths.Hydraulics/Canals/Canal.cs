@@ -345,7 +345,6 @@ namespace ScienceAndMaths.Hydraulics.Canals
                 BisectionMethod findHydraulicJump = new BisectionMethod(conjugatedEquation, options.InitialX + Sensibility, conjugateWaterLevelResult.OrderByDescending(wl => wl.X).First().X);
                 double hydraulicJumpX = findHydraulicJump.Solve(0.01);
 
-                //  TODO here there is no solution
                 // Found result, otherwise it could be "desagüe anegado"
                 if (hydraulicJumpX < double.MaxValue)
                 {
