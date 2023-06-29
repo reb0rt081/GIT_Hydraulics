@@ -7,10 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Server", "S
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test.U", "Test.U", "{7EF3CB4B-337D-4040-89F9-E79D054516FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Mathematics.Test", "Test.U\ScienceAndMaths.Mathematics.Test\ScienceAndMaths.Mathematics.Test.csproj", "{64D08C15-85E4-4DC5-BE8F-BD04D0ECAD1E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Hydraulics.Test", "Test.U\ScienceAndMaths.Hydraulics.Test\ScienceAndMaths.Hydraulics.Test.csproj", "{172CD2D7-B401-451D-AA88-96B889AC24F4}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Application", "ScienceAndMaths.Application\ScienceAndMaths.Application.csproj", "{D6154186-D621-4D44-853A-173886DBA0D2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Domain", "ScienceAndMaths.Domain\ScienceAndMaths.Domain.csproj", "{9DF6D77C-6ED1-4B3A-8639-4BFDEA83A579}"
@@ -33,11 +29,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Web", "Scie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.User", "ScienceAndMaths.User\ScienceAndMaths.User.csproj", "{C0E73C60-AF45-4177-90FC-C93239A9A807}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Shared", "ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj", "{E2FCAADC-CA8C-4DB9-8FC8-75D91B0984BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScienceAndMaths.Shared", "ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj", "{E2FCAADC-CA8C-4DB9-8FC8-75D91B0984BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Mathematics", "ScienceAndMaths.Mathematics\ScienceAndMaths.Mathematics.csproj", "{0C60F63A-B981-442A-A89F-D2C74CE65B19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScienceAndMaths.Mathematics", "ScienceAndMaths.Mathematics\ScienceAndMaths.Mathematics.csproj", "{0C60F63A-B981-442A-A89F-D2C74CE65B19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Hydraulics", "ScienceAndMaths.Hydraulics\ScienceAndMaths.Hydraulics.csproj", "{A849D8FF-86F4-45D0-BA3C-810FCE8AFFE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScienceAndMaths.Hydraulics", "ScienceAndMaths.Hydraulics\ScienceAndMaths.Hydraulics.csproj", "{A849D8FF-86F4-45D0-BA3C-810FCE8AFFE8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScienceAndMaths.Mathematics.Test", "Test.U\ScienceAndMaths.Mathematics.Test\ScienceAndMaths.Mathematics.Test.csproj", "{A84E0EB7-56FC-46E7-A9E9-8119BE3BA9E3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Hydraulics.Test", "Test.U\ScienceAndMaths.Hydraulics.Test\ScienceAndMaths.Hydraulics.Test.csproj", "{FCAEAC1A-0E42-4CCC-8256-33BD74988CA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,14 +49,6 @@ Global
 		{3C869165-C9A6-4B25-BDB4-A93604C79334}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C869165-C9A6-4B25-BDB4-A93604C79334}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C869165-C9A6-4B25-BDB4-A93604C79334}.Release|Any CPU.Build.0 = Release|Any CPU
-		{64D08C15-85E4-4DC5-BE8F-BD04D0ECAD1E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{64D08C15-85E4-4DC5-BE8F-BD04D0ECAD1E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{64D08C15-85E4-4DC5-BE8F-BD04D0ECAD1E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{64D08C15-85E4-4DC5-BE8F-BD04D0ECAD1E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{172CD2D7-B401-451D-AA88-96B889AC24F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{172CD2D7-B401-451D-AA88-96B889AC24F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{172CD2D7-B401-451D-AA88-96B889AC24F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{172CD2D7-B401-451D-AA88-96B889AC24F4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D6154186-D621-4D44-853A-173886DBA0D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D6154186-D621-4D44-853A-173886DBA0D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6154186-D621-4D44-853A-173886DBA0D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -113,16 +105,24 @@ Global
 		{A849D8FF-86F4-45D0-BA3C-810FCE8AFFE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A849D8FF-86F4-45D0-BA3C-810FCE8AFFE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A849D8FF-86F4-45D0-BA3C-810FCE8AFFE8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A84E0EB7-56FC-46E7-A9E9-8119BE3BA9E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A84E0EB7-56FC-46E7-A9E9-8119BE3BA9E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A84E0EB7-56FC-46E7-A9E9-8119BE3BA9E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A84E0EB7-56FC-46E7-A9E9-8119BE3BA9E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FCAEAC1A-0E42-4CCC-8256-33BD74988CA8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FCAEAC1A-0E42-4CCC-8256-33BD74988CA8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FCAEAC1A-0E42-4CCC-8256-33BD74988CA8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FCAEAC1A-0E42-4CCC-8256-33BD74988CA8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{64D08C15-85E4-4DC5-BE8F-BD04D0ECAD1E} = {7EF3CB4B-337D-4040-89F9-E79D054516FC}
-		{172CD2D7-B401-451D-AA88-96B889AC24F4} = {7EF3CB4B-337D-4040-89F9-E79D054516FC}
 		{9AD56D02-A61B-4D82-99A5-6AFD90881AA2} = {7EF3CB4B-337D-4040-89F9-E79D054516FC}
 		{2739BA50-1954-48AA-B781-8A7BF014433F} = {7EF3CB4B-337D-4040-89F9-E79D054516FC}
 		{156EEB2C-AE8C-41FF-A8EE-161426D40AF4} = {7EF3CB4B-337D-4040-89F9-E79D054516FC}
+		{A84E0EB7-56FC-46E7-A9E9-8119BE3BA9E3} = {7EF3CB4B-337D-4040-89F9-E79D054516FC}
+		{FCAEAC1A-0E42-4CCC-8256-33BD74988CA8} = {7EF3CB4B-337D-4040-89F9-E79D054516FC}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BE24E04F-40D9-4FB0-AA78-F257C195F495}
