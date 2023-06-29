@@ -144,31 +144,20 @@ namespace ScienceAndMaths.Hydraulics.Canals
 
                     // M3 Flow
                     // Regimen rapido se impone aguas arriba
-                    if (canalStretch.FromNode.WaterLevel.HasValue && canalStretch.FromNode.WaterLevel.Value < canalStretchResult.CriticalWaterLevel)
+                    if (preCriticalSection || canalStretch.FromNode.WaterLevel.HasValue && canalStretch.FromNode.WaterLevel.Value < canalStretchResult.CriticalWaterLevel)
                     {
                         canalStretchResult.BackwaterCurve = "M3";
                         //  Hydraulic jump will occur as we have in the same stretch both conditions for both flows
                         options.HydraulicJumpOccurs = options.AnalysisFeasible;
                         options.InitialX = GetAbsoluteInitialLength(CanalStretches, canalStretch) + 0.0;
-                        options.InitialWaterLevel = canalStretch.FromNode.WaterLevel.Value;
                         options.BackwardsAnalysis = false;
-                        options.AnalysisFeasible = true;
+
+                        if (canalStretch.FromNode.WaterLevel.HasValue)
+                        {
+                            options.InitialWaterLevel = canalStretch.FromNode.WaterLevel.Value;
+                            options.AnalysisFeasible = true;
+                        }
                     }
-                    //  TODO make this work
-                    //if (preCriticalSection || canalStretch.FromNode.WaterLevel.HasValue && canalStretch.FromNode.WaterLevel.Value < canalStretchResult.CriticalWaterLevel)
-                    //{
-                    //    canalStretchResult.BackwaterCurve = "M3";
-                    //    //  Hydraulic jump will occur as we have in the same stretch both conditions for both flows
-                    //    options.HydraulicJumpOccurs = options.AnalysisFeasible;
-                    //    options.InitialX = GetAbsoluteInitialLength(CanalStretches, canalStretch) + 0.0;
-                    //    options.BackwardsAnalysis = false;
-                        
-                    //    if(canalStretch.FromNode.WaterLevel.HasValue)
-                    //    {
-                    //        options.InitialWaterLevel = canalStretch.FromNode.WaterLevel.Value;
-                    //        options.AnalysisFeasible = true;
-                    //    }
-                    //}
                 }
                 //  S flow
                 else if (canalStretch.CanalSection.Slope > canalStretchResult.CriticalSlope)
@@ -343,7 +332,7 @@ namespace ScienceAndMaths.Hydraulics.Canals
 
                 waterLevel = options.InitialWaterLevel;
 
-                while (waterLevel < canalStretchResult.CriticalWaterLevel - Sensibility)
+                while (waterLevel < canalStretchResult.CriticalWaterLevel - Sensibility && x < options.InitialX + canalStretch.Length)
                 {
                     waterLevel = solver.Solve(x, waterLevel);
                     x = x + solver.Interval;
@@ -363,6 +352,25 @@ namespace ScienceAndMaths.Hydraulics.Canals
                     result.AddCanalPointResult(canalStretch.Id, options.InitialX, options.InitialWaterLevel);
                     result.AddRangeCanalPointResult(canalStretch.Id, frontAnalysisResult.Where(ar => ar.X < hydraulicJumpX).ToList());
                     result.AddRangeCanalPointResult(canalStretch.Id, backwardsAnalysisResult.Where(ar => ar.X >= hydraulicJumpX).ToList());
+                }
+                //  No result found, hydraulic jump must be upstream in upper stretch
+                else
+                {
+                    canalStretch.AnalysisOptions.BackwardsAnalysis = true;
+                    canalStretch.AnalysisOptions.InitialX = GetAbsoluteInitialLength(CanalStretches, canalStretch) + canalStretch.Length;
+                    canalStretch.AnalysisOptions.AnalysisFeasible = true;
+                    canalStretch.AnalysisOptions.HydraulicJumpOccurs = false;
+                    SolveCanalStrech(canalStretch, result, solver);
+
+                    var upstreamCanalStretch = CanalStretches.FirstOrDefault(cs => cs.ToNode == canalStretch.FromNode);
+                    if(upstreamCanalStretch != null)
+                    {
+                        upstreamCanalStretch.AnalysisOptions.BackwardsAnalysis = false;
+                        upstreamCanalStretch.AnalysisOptions.InitialX = GetAbsoluteInitialLength(CanalStretches, upstreamCanalStretch);
+                        upstreamCanalStretch.AnalysisOptions.AnalysisFeasible = true;
+                        upstreamCanalStretch.AnalysisOptions.HydraulicJumpOccurs = true;
+                        SolveCanalStrech(upstreamCanalStretch, result, solver);
+                    }
                 }
 
             }
