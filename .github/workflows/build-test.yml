@@ -52,7 +52,7 @@ jobs:
                              # https://help.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idruns-on
 
     env:
-      DOTNET_VERSION: '4.8' # The .NET SDK version to use
+      DOTNET_VERSION: '6.0.x' # The .NET SDK version to use
       Solution_Name: ScienceAndMaths.WindowsServices.sln                         # Replace with your solution name, i.e. MyWpfApp.sln.
       
     steps:
