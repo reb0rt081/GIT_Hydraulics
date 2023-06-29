@@ -54,7 +54,7 @@
       <Name>ScienceAndMaths.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj">
-      <Project>{32271CAC-A2CE-4F84-8065-C356E66E2895}</Project>
+      <Project>{E2FCAADC-CA8C-4DB9-8FC8-75D91B0984BE}</Project>
       <Name>ScienceAndMaths.Shared</Name>
     </ProjectReference>
   </ItemGroup>

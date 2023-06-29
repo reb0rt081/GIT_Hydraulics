@@ -61,11 +61,11 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ScienceAndMaths.Mathematics\ScienceAndMaths.Mathematics.csproj">
-      <Project>{fe52cf6d-a8e0-4b30-9fb9-926c71639bc2}</Project>
+      <Project>{0C60F63A-B981-442A-A89F-D2C74CE65B19}</Project>
       <Name>ScienceAndMaths.Mathematics</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj">
-      <Project>{32271CAC-A2CE-4F84-8065-C356E66E2895}</Project>
+      <Project>{E2FCAADC-CA8C-4DB9-8FC8-75D91B0984BE}</Project>
       <Name>ScienceAndMaths.Shared</Name>
     </ProjectReference>
   </ItemGroup>

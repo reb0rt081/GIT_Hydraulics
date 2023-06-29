@@ -112,7 +112,7 @@
       <Name>ScienceAndMaths.ServiceAgents</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ScienceAnsMaths.WindowsServices\ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj">
-      <Project>{32271CAC-A2CE-4F84-8065-C356E66E2895}</Project>
+      <Project>{7B4F4F24-9F8C-4CB7-A86B-019E61ED0E4D}</Project>
       <Name>ScienceAndMaths.Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\ScienceAndMaths.Client.Controls\ScienceAndMaths.Client.Controls.csproj">

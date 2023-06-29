@@ -58,15 +58,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\ScienceAndMaths.Hydraulics\ScienceAndMaths.Hydraulics.csproj">
-      <Project>{b14ff188-99e1-48f2-90ec-8745e42412a4}</Project>
+      <Project>{A849D8FF-86F4-45D0-BA3C-810FCE8AFFE8}</Project>
       <Name>ScienceAndMaths.Hydraulics</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ScienceAndMaths.Mathematics\ScienceAndMaths.Mathematics.csproj">
-      <Project>{fe52cf6d-a8e0-4b30-9fb9-926c71639bc2}</Project>
+      <Project>{0C60F63A-B981-442A-A89F-D2C74CE65B19}</Project>
       <Name>ScienceAndMaths.Mathematics</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj">
-      <Project>{32271cac-a2ce-4f84-8065-c356e66e2895}</Project>
+      <Project>{E2FCAADC-CA8C-4DB9-8FC8-75D91B0984BE}</Project>
       <Name>ScienceAndMaths.Shared</Name>
     </ProjectReference>
   </ItemGroup>
