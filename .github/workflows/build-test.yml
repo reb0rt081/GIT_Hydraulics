@@ -68,10 +68,10 @@ jobs:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
     - name: Install dependencies
-      run: dotnet restore
+      run: dotnet restore ./products/ScienceAnsMaths.WindowsServices/ScienceAndMaths.Libraries.sln
       
     - name: Build
-      run: dotnet build --configuration Release --no-restore
+      run: dotnet build ./products/ScienceAnsMaths.WindowsServices/ScienceAndMaths.Libraries.sln --configuration Release --no-restore
     
     - name: Test
-      run: dotnet test --no-restore --verbosity normal
+      run: dotnet test ./products/ScienceAnsMaths.WindowsServices/ScienceAndMaths.Libraries.sln --no-restore --verbosity normal
