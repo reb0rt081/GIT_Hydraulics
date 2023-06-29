@@ -5,8 +5,6 @@ VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test.U", "Test.U", "{7EF3CB4B-337D-4040-89F9-E79D054516FC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Configuration", "ScienceAndMaths.Configuration\ScienceAndMaths.Configuration.csproj", "{C3210660-EB04-4688-933D-A19A0DC18C1B}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScienceAndMaths.Shared", "ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj", "{E2FCAADC-CA8C-4DB9-8FC8-75D91B0984BE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScienceAndMaths.Mathematics", "ScienceAndMaths.Mathematics\ScienceAndMaths.Mathematics.csproj", "{0C60F63A-B981-442A-A89F-D2C74CE65B19}"
@@ -23,10 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{C3210660-EB04-4688-933D-A19A0DC18C1B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{C3210660-EB04-4688-933D-A19A0DC18C1B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{C3210660-EB04-4688-933D-A19A0DC18C1B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{C3210660-EB04-4688-933D-A19A0DC18C1B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E2FCAADC-CA8C-4DB9-8FC8-75D91B0984BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E2FCAADC-CA8C-4DB9-8FC8-75D91B0984BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E2FCAADC-CA8C-4DB9-8FC8-75D91B0984BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
