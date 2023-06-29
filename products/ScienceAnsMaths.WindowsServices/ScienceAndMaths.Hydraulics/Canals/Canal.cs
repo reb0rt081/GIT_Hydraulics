@@ -276,7 +276,9 @@ namespace ScienceAndMaths.Hydraulics.Canals
             RungeKutta solver = new RungeKutta();
 
             //  Solving the canal
-            foreach (ICanalStretchModel canalStretch in canalStretches.OrderByDescending(cs => cs.AnalysisOptions.AnalysisFeasible))
+            foreach (ICanalStretchModel canalStretch in canalStretches
+                         .OrderByDescending(cs => cs.AnalysisOptions.AnalysisFeasible)
+                         .ThenBy(cs => cs.AnalysisOptions.InitialX))
             {
                SolveCanalStrech(canalStretch, result, solver);
             }
