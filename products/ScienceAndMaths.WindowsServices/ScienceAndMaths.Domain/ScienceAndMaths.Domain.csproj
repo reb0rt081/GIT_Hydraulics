@@ -51,11 +51,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ScienceAndMaths.Hydraulics\ScienceAndMaths.Hydraulics.csproj">
+    <ProjectReference Include="..\..\ScienceAndMaths.Libraries\ScienceAndMaths.Hydraulics\ScienceAndMaths.Hydraulics.csproj">
       <Project>{A849D8FF-86F4-45D0-BA3C-810FCE8AFFE8}</Project>
       <Name>ScienceAndMaths.Hydraulics</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj">
+    <ProjectReference Include="..\..\ScienceAndMaths.Libraries\ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj">
       <Project>{E2FCAADC-CA8C-4DB9-8FC8-75D91B0984BE}</Project>
       <Name>ScienceAndMaths.Shared</Name>
     </ProjectReference>

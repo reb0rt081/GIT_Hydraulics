@@ -53,7 +53,6 @@ jobs:
 
     env:
       DOTNET_VERSION: '6.0.x' # The .NET SDK version to use
-      Solution_Name: ScienceAndMaths.WindowsServices.sln                         # Replace with your solution name, i.e. MyWpfApp.sln.
       
     steps:
     - name: Checkout
@@ -68,10 +67,10 @@ jobs:
         dotnet-version: ${{ env.DOTNET_VERSION }}
 
     - name: Install dependencies
-      run: dotnet restore ./products/ScienceAnsMaths.WindowsServices/ScienceAndMaths.Libraries.sln
+      run: dotnet restore ./products/ScienceAnsMaths.Libraries/ScienceAndMaths.Libraries.sln
       
     - name: Build
-      run: dotnet build ./products/ScienceAnsMaths.WindowsServices/ScienceAndMaths.Libraries.sln --configuration Release --no-restore
+      run: dotnet build ./products/ScienceAnsMaths.Libraries/ScienceAndMaths.Libraries.sln --configuration Release --no-restore
     
     - name: Test
-      run: dotnet test ./products/ScienceAnsMaths.WindowsServices/ScienceAndMaths.Libraries.sln --no-restore --verbosity normal
+      run: dotnet test ./products/ScienceAnsMaths.Libraries/ScienceAndMaths.Libraries.sln --no-restore --verbosity normal

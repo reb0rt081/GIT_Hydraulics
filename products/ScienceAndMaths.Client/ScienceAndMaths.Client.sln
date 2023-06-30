@@ -5,15 +5,15 @@ VisualStudioVersion = 17.0.32126.317
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Server", "Server", "{B359BC07-0A05-4750-BFC2-264710E45651}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Core", "..\ScienceAnsMaths.WindowsServices\ScienceAndMaths.Core\ScienceAndMaths.Core.csproj", "{233E869A-0F43-4E77-8DB7-3773EC7C83CE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Core", "..\ScienceAndMaths.WindowsServices\ScienceAndMaths.Core\ScienceAndMaths.Core.csproj", "{233E869A-0F43-4E77-8DB7-3773EC7C83CE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Application", "..\ScienceAnsMaths.WindowsServices\ScienceAndMaths.Application\ScienceAndMaths.Application.csproj", "{D6154186-D621-4D44-853A-173886DBA0D2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Application", "..\ScienceAndMaths.WindowsServices\ScienceAndMaths.Application\ScienceAndMaths.Application.csproj", "{D6154186-D621-4D44-853A-173886DBA0D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Domain", "..\ScienceAnsMaths.WindowsServices\ScienceAndMaths.Domain\ScienceAndMaths.Domain.csproj", "{9DF6D77C-6ED1-4B3A-8639-4BFDEA83A579}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Domain", "..\ScienceAndMaths.WindowsServices\ScienceAndMaths.Domain\ScienceAndMaths.Domain.csproj", "{9DF6D77C-6ED1-4B3A-8639-4BFDEA83A579}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.ServiceAgents", "..\ScienceAnsMaths.WindowsServices\ScienceAndMaths.ServiceAgents\ScienceAndMaths.ServiceAgents.csproj", "{AD291586-8CA9-4FFD-A607-AC694908A22B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.ServiceAgents", "..\ScienceAndMaths.WindowsServices\ScienceAndMaths.ServiceAgents\ScienceAndMaths.ServiceAgents.csproj", "{AD291586-8CA9-4FFD-A607-AC694908A22B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Configuration", "..\ScienceAnsMaths.WindowsServices\ScienceAndMaths.Configuration\ScienceAndMaths.Configuration.csproj", "{C3210660-EB04-4688-933D-A19A0DC18C1B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Configuration", "..\ScienceAndMaths.WindowsServices\ScienceAndMaths.Configuration\ScienceAndMaths.Configuration.csproj", "{C3210660-EB04-4688-933D-A19A0DC18C1B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Client.Controls", "ScienceAndMaths.Client.Controls\ScienceAndMaths.Client.Controls.csproj", "{18B5998D-433E-4CDB-A328-240A2A9D2BED}"
 EndProject
@@ -25,13 +25,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Client.Modu
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Client.Shared", "ScienceAndMaths.Client.Shared\ScienceAndMaths.Client.Shared.csproj", "{F61DE32B-CAD1-4BD4-9213-043D31D0BF06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Common", "..\ScienceAnsMaths.WindowsServices\ScienceAndMaths.Common\ScienceAndMaths.Common.csproj", "{1389BA52-0D48-4B0D-A907-A229FF679732}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Common", "..\ScienceAndMaths.WindowsServices\ScienceAndMaths.Common\ScienceAndMaths.Common.csproj", "{1389BA52-0D48-4B0D-A907-A229FF679732}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScienceAndMaths.Shared", "..\ScienceAnsMaths.WindowsServices\ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj", "{7B4F4F24-9F8C-4CB7-A86B-019E61ED0E4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScienceAndMaths.Shared", "..\ScienceAndMaths.Libraries\ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj", "{B907CAA9-E580-43DC-B535-A49F082DA20F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScienceAndMaths.Mathematics", "..\ScienceAnsMaths.WindowsServices\ScienceAndMaths.Mathematics\ScienceAndMaths.Mathematics.csproj", "{1AFF80A8-7ACE-4857-BD48-D3E83B009EBF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScienceAndMaths.Mathematics", "..\ScienceAndMaths.Libraries\ScienceAndMaths.Mathematics\ScienceAndMaths.Mathematics.csproj", "{4783D6AF-4D9D-48C5-8056-166CEE19E2D6}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScienceAndMaths.Hydraulics", "..\ScienceAnsMaths.WindowsServices\ScienceAndMaths.Hydraulics\ScienceAndMaths.Hydraulics.csproj", "{A304771C-5ACA-4FA4-B0F8-96A31026D7E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScienceAndMaths.Hydraulics", "..\ScienceAndMaths.Libraries\ScienceAndMaths.Hydraulics\ScienceAndMaths.Hydraulics.csproj", "{F8003378-36F2-4C9E-A01B-F470A10DCE6F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -83,18 +83,18 @@ Global
 		{1389BA52-0D48-4B0D-A907-A229FF679732}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1389BA52-0D48-4B0D-A907-A229FF679732}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1389BA52-0D48-4B0D-A907-A229FF679732}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7B4F4F24-9F8C-4CB7-A86B-019E61ED0E4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7B4F4F24-9F8C-4CB7-A86B-019E61ED0E4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7B4F4F24-9F8C-4CB7-A86B-019E61ED0E4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7B4F4F24-9F8C-4CB7-A86B-019E61ED0E4D}.Release|Any CPU.Build.0 = Release|Any CPU
-		{1AFF80A8-7ACE-4857-BD48-D3E83B009EBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1AFF80A8-7ACE-4857-BD48-D3E83B009EBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1AFF80A8-7ACE-4857-BD48-D3E83B009EBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1AFF80A8-7ACE-4857-BD48-D3E83B009EBF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A304771C-5ACA-4FA4-B0F8-96A31026D7E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A304771C-5ACA-4FA4-B0F8-96A31026D7E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A304771C-5ACA-4FA4-B0F8-96A31026D7E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A304771C-5ACA-4FA4-B0F8-96A31026D7E8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B907CAA9-E580-43DC-B535-A49F082DA20F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B907CAA9-E580-43DC-B535-A49F082DA20F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B907CAA9-E580-43DC-B535-A49F082DA20F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B907CAA9-E580-43DC-B535-A49F082DA20F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4783D6AF-4D9D-48C5-8056-166CEE19E2D6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4783D6AF-4D9D-48C5-8056-166CEE19E2D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4783D6AF-4D9D-48C5-8056-166CEE19E2D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4783D6AF-4D9D-48C5-8056-166CEE19E2D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8003378-36F2-4C9E-A01B-F470A10DCE6F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8003378-36F2-4C9E-A01B-F470A10DCE6F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8003378-36F2-4C9E-A01B-F470A10DCE6F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8003378-36F2-4C9E-A01B-F470A10DCE6F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -104,8 +104,8 @@ Global
 		{D6154186-D621-4D44-853A-173886DBA0D2} = {B359BC07-0A05-4750-BFC2-264710E45651}
 		{9DF6D77C-6ED1-4B3A-8639-4BFDEA83A579} = {B359BC07-0A05-4750-BFC2-264710E45651}
 		{1389BA52-0D48-4B0D-A907-A229FF679732} = {B359BC07-0A05-4750-BFC2-264710E45651}
-		{1AFF80A8-7ACE-4857-BD48-D3E83B009EBF} = {B359BC07-0A05-4750-BFC2-264710E45651}
-		{A304771C-5ACA-4FA4-B0F8-96A31026D7E8} = {B359BC07-0A05-4750-BFC2-264710E45651}
+		{4783D6AF-4D9D-48C5-8056-166CEE19E2D6} = {B359BC07-0A05-4750-BFC2-264710E45651}
+		{F8003378-36F2-4C9E-A01B-F470A10DCE6F} = {B359BC07-0A05-4750-BFC2-264710E45651}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {BE24E04F-40D9-4FB0-AA78-F257C195F495}

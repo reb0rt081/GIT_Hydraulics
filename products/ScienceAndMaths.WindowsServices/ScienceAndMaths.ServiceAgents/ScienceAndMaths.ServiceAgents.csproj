@@ -4,15 +4,14 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D6154186-D621-4D44-853A-173886DBA0D2}</ProjectGuid>
+    <ProjectGuid>{AD291586-8CA9-4FFD-A607-AC694908A22B}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ScienceAndMaths.Application</RootNamespace>
-    <AssemblyName>ScienceAndMaths.Application</AssemblyName>
+    <RootNamespace>ScienceAndMaths.ServiceAgents</RootNamespace>
+    <AssemblyName>ScienceAndMaths.ServiceAgents</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,6 +33,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
@@ -51,26 +53,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CanalFlowService.cs" />
-    <Compile Include="ConfigurationService.cs" />
+    <Compile Include="CanalDirectServiceAgent.cs" />
+    <Compile Include="ConfigurationDirectServiceAgent.cs" />
+    <Compile Include="ICanalServiceAgent.cs" />
+    <Compile Include="IConfigurationServiceAgent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\ScienceAndMaths.Common\ScienceAndMaths.Common.csproj">
-      <Project>{1389BA52-0D48-4B0D-A907-A229FF679732}</Project>
-      <Name>ScienceAndMaths.Common</Name>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ScienceAndMaths.Libraries\ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj">
+      <Project>{B907CAA9-E580-43DC-B535-A49F082DA20F}</Project>
+      <Name>ScienceAndMaths.Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\ScienceAndMaths.Domain\ScienceAndMaths.Domain.csproj">
       <Project>{9DF6D77C-6ED1-4B3A-8639-4BFDEA83A579}</Project>
       <Name>ScienceAndMaths.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj">
-      <Project>{E2FCAADC-CA8C-4DB9-8FC8-75D91B0984BE}</Project>
-      <Name>ScienceAndMaths.Shared</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

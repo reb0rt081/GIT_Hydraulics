@@ -107,13 +107,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\ScienceAnsMaths.WindowsServices\ScienceAndMaths.ServiceAgents\ScienceAndMaths.ServiceAgents.csproj">
+    <ProjectReference Include="..\..\ScienceAndMaths.Libraries\ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj">
+      <Project>{B907CAA9-E580-43DC-B535-A49F082DA20F}</Project>
+      <Name>ScienceAndMaths.Shared</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ScienceAndMaths.WindowsServices\ScienceAndMaths.ServiceAgents\ScienceAndMaths.ServiceAgents.csproj">
       <Project>{AD291586-8CA9-4FFD-A607-AC694908A22B}</Project>
       <Name>ScienceAndMaths.ServiceAgents</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\ScienceAnsMaths.WindowsServices\ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj">
-      <Project>{7B4F4F24-9F8C-4CB7-A86B-019E61ED0E4D}</Project>
-      <Name>ScienceAndMaths.Shared</Name>
     </ProjectReference>
     <ProjectReference Include="..\ScienceAndMaths.Client.Controls\ScienceAndMaths.Client.Controls.csproj">
       <Project>{18B5998D-433E-4CDB-A328-240A2A9D2BED}</Project>

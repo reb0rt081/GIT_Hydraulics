@@ -29,15 +29,15 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Web", "Scie
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.User", "ScienceAndMaths.User\ScienceAndMaths.User.csproj", "{C0E73C60-AF45-4177-90FC-C93239A9A807}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScienceAndMaths.Shared", "ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj", "{E2FCAADC-CA8C-4DB9-8FC8-75D91B0984BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScienceAndMaths.Shared", "..\ScienceAndMaths.Libraries\ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj", "{E2FCAADC-CA8C-4DB9-8FC8-75D91B0984BE}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScienceAndMaths.Mathematics", "ScienceAndMaths.Mathematics\ScienceAndMaths.Mathematics.csproj", "{0C60F63A-B981-442A-A89F-D2C74CE65B19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScienceAndMaths.Mathematics", "..\ScienceAndMaths.Libraries\ScienceAndMaths.Mathematics\ScienceAndMaths.Mathematics.csproj", "{0C60F63A-B981-442A-A89F-D2C74CE65B19}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScienceAndMaths.Hydraulics", "ScienceAndMaths.Hydraulics\ScienceAndMaths.Hydraulics.csproj", "{A849D8FF-86F4-45D0-BA3C-810FCE8AFFE8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScienceAndMaths.Hydraulics", "..\ScienceAndMaths.Libraries\ScienceAndMaths.Hydraulics\ScienceAndMaths.Hydraulics.csproj", "{A849D8FF-86F4-45D0-BA3C-810FCE8AFFE8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScienceAndMaths.Mathematics.Test", "Test.U\ScienceAndMaths.Mathematics.Test\ScienceAndMaths.Mathematics.Test.csproj", "{A84E0EB7-56FC-46E7-A9E9-8119BE3BA9E3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ScienceAndMaths.Mathematics.Test", "..\ScienceAndMaths.Libraries\Test.U\ScienceAndMaths.Mathematics.Test\ScienceAndMaths.Mathematics.Test.csproj", "{A84E0EB7-56FC-46E7-A9E9-8119BE3BA9E3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Hydraulics.Test", "Test.U\ScienceAndMaths.Hydraulics.Test\ScienceAndMaths.Hydraulics.Test.csproj", "{FCAEAC1A-0E42-4CCC-8256-33BD74988CA8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScienceAndMaths.Hydraulics.Test", "..\ScienceAndMaths.Libraries\Test.U\ScienceAndMaths.Hydraulics.Test\ScienceAndMaths.Hydraulics.Test.csproj", "{FCAEAC1A-0E42-4CCC-8256-33BD74988CA8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
