@@ -9,7 +9,7 @@ namespace ScienceAndMaths.MachineLearning.Test
         public void TestImage()
         {
             TestMachineLearningModel model = new TestMachineLearningModel();
-            var result = model.ClassifyImage(@".\Picture\plaza_mayor_de_madrid_0.jpg");
+            var result = model.ClassifyImage(@"./Picture/plaza_mayor_de_madrid_0.jpg");
             Assert.IsNotNull(result);
             Assert.AreEqual("Madrid", result.Prediction);
         }
