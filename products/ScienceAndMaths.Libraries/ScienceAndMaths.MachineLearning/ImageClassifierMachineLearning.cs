@@ -5,7 +5,7 @@ using static ScienceAndMaths_MachineLearning.MLModel;
 
 namespace ScienceAndMaths.MachineLearning
 {
-    public class TestMachineLearningModel
+    public class ImageClassifierMachineLearning
     {
         /// <summary>
         /// @"D:\rbo\Pictures\ML\Eslovenia\IMG-20230527-WA0000.jpeg"

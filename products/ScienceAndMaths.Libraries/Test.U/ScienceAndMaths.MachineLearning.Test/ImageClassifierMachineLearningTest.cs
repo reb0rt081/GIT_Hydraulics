@@ -3,12 +3,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace ScienceAndMaths.MachineLearning.Test
 {
     [TestClass]
-    public class TestMachineLearningModelTest
+    public class ImageClassifierMachineLearningTest
     {
         [TestMethod]
         public void TestImage()
         {
-            TestMachineLearningModel model = new TestMachineLearningModel();
+            ImageClassifierMachineLearning model = new ImageClassifierMachineLearning();
             var result = model.ClassifyImage(@"./Picture/plaza_mayor_de_madrid_0.jpg");
             Assert.IsNotNull(result);
             Assert.AreEqual("Madrid", result.Prediction);
