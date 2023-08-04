@@ -7,13 +7,13 @@ namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
 {
     public class MistakeBoundDisjunctionModel : IMistakeBoundConjunctionConcept, IMistakeBoundLearner<MistakeBoundChallenge>
     {
-        public int Dimension { get; set; }
+        public int Dimension { get; }
 
         public List<MistakeBoundChallenge> TrainingSet { get; set; }
 
         public List<MistakeBoundChallenge> ValidationSet { get; set; }
 
-        public List<bool> Concept { get; set; }
+        public List<bool> Concept { get; }
 
         public MistakeBoundDisjunctionModel(int dimension)
         {
@@ -54,6 +54,11 @@ namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
             }
 
             return result;
+        }
+
+        public void Train()
+        {
+            Train(TrainingSet);
         }
 
         public void Train(List<MistakeBoundChallenge> trainingSet)
