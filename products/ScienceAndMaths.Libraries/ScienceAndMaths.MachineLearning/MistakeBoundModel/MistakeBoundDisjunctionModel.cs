@@ -5,7 +5,7 @@ using ScienceAndMaths.Shared.MachineLearning;
 
 namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
 {
-    public class MistakeBoundConjunctionModel : IMistakeBoundConjunctionConcept, IMistakeBoundLearner<MistakeBoundChallenge>
+    public class MistakeBoundDisjunctionModel : IMistakeBoundConjunctionConcept, IMistakeBoundLearner<MistakeBoundChallenge>
     {
         public int Dimension { get; set; }
 
@@ -15,7 +15,7 @@ namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
 
         public List<bool> Concept { get; set; }
 
-        public MistakeBoundConjunctionModel(int dimension)
+        public MistakeBoundDisjunctionModel(int dimension)
         {
             Dimension = dimension;
             List<bool> concept = new List<bool>();
