@@ -5,15 +5,18 @@ using ScienceAndMaths.Shared.MachineLearning;
 
 namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
 {
+    /// <summary>
+    /// Mistake bound model that tries to learn the concept of Monotone Disjunction: x1 || x2
+    /// </summary>
     public class MistakeBoundDisjunctionModel : IMistakeBoundConjunctionConcept, IMistakeBoundLearner<MistakeBoundChallenge>
     {
         public int Dimension { get; }
 
-        public List<MistakeBoundChallenge> TrainingSet { get; set; }
+        public List<MistakeBoundChallenge> TrainingSet { get; protected set; }
 
-        public List<MistakeBoundChallenge> ValidationSet { get; set; }
+        public List<MistakeBoundChallenge> ValidationSet { get; protected set; }
 
-        public List<bool> Concept { get; }
+        public List<bool> Concept { get; protected set; }
 
         public MistakeBoundDisjunctionModel(int dimension)
         {
@@ -27,7 +30,7 @@ namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
             Concept = concept;
         }
 
-        public void Learn(MistakeBoundChallenge challenge)
+        public virtual void Learn(MistakeBoundChallenge challenge)
         {
             if(!challenge.Result && Predict(challenge))
             {
@@ -41,7 +44,7 @@ namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
             }
         }
 
-        public bool Predict(MistakeBoundChallenge challenge)
+        public virtual bool Predict(MistakeBoundChallenge challenge)
         {
             bool result = false;
 
@@ -56,12 +59,12 @@ namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
             return result;
         }
 
-        public void Train()
+        public virtual void Train()
         {
             Train(TrainingSet);
         }
 
-        public void Train(List<MistakeBoundChallenge> trainingSet)
+        public virtual void Train(List<MistakeBoundChallenge> trainingSet)
         {
             foreach (MistakeBoundChallenge challenge in trainingSet)
             {
