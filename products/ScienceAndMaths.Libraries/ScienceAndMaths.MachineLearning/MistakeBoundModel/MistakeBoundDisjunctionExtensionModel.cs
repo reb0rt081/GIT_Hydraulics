@@ -56,7 +56,7 @@ namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
 
         private MistakeBoundChallenge ExtendChallenge(MistakeBoundChallenge challenge)
         {
-            if(challenge.Challenge.Count < this.Dimension)
+            if(challenge.Challenge.Count == Dimension / 2)
             {
                 MistakeBoundChallenge extensionChallenge = new MistakeBoundChallenge();
                 extensionChallenge.Challenge = new List<bool>();
