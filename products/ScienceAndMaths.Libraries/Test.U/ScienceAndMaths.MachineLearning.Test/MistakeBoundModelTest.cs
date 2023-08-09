@@ -19,12 +19,42 @@ namespace ScienceAndMaths.MachineLearning.Test
     {
         private MistakeBoundDisjunctionModel mistakeBoundDisjunctionModel;
         private MistakeBoundDisjunctionExtensionModel mistakeBoundDisjunctionExtensionModel;
+        private DecisionTreeModel decisionTreeModel;
 
         [TestInitialize]
         public void Initialize()
         {
             mistakeBoundDisjunctionModel = new MistakeBoundDisjunctionModel(2);
             mistakeBoundDisjunctionExtensionModel = new MistakeBoundDisjunctionExtensionModel(2);
+            decisionTreeModel = new DecisionTreeModel(2);
+        }
+
+        [TestMethod]
+        public void PredictDecisionTreeTest()
+        {
+            bool result = decisionTreeModel.Predict(new MistakeBoundChallenge
+            {
+                Challenge = new List<bool>
+                {
+                    true,
+                    false
+                },
+                Result = true
+            });
+
+            Assert.IsTrue(result);
+
+            result = decisionTreeModel.Predict(new MistakeBoundChallenge
+            {
+                Challenge = new List<bool>
+                {
+                    false,
+                    false
+                },
+                Result = false
+            });
+
+            Assert.IsFalse(result);
         }
 
         [TestMethod]
