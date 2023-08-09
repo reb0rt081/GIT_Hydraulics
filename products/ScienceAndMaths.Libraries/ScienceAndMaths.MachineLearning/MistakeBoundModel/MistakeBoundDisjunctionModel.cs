@@ -22,8 +22,8 @@ namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
         {
             Dimension = dimension;
             List<bool> concept = new List<bool>();
-            for (int i = 0; i < Dimension; i++) 
-            { 
+            for (int i = 0; i < Dimension; i++)
+            {
                 concept.Add(true);
             }
 
@@ -32,13 +32,13 @@ namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
 
         public virtual void Learn(MistakeBoundChallenge challenge)
         {
-            if(!challenge.Result && Predict(challenge))
+            if (!challenge.Result && Predict(challenge))
             {
                 for (int i = 0; i < Dimension; i++)
                 {
                     if (challenge.Challenge[i])
                     {
-                       Concept[i] = false;
+                        Concept[i] = false;
                     }
                 }
             }

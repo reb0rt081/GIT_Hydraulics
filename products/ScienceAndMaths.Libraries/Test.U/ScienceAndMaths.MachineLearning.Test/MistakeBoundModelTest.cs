@@ -18,10 +18,13 @@ namespace ScienceAndMaths.MachineLearning.Test
     public class MistakeBoundModelTest
     {
         private MistakeBoundDisjunctionModel mistakeBoundDisjunctionModel;
+        private MistakeBoundDisjunctionExtensionModel mistakeBoundDisjunctionExtensionModel;
+
         [TestInitialize]
         public void Initialize()
         {
             mistakeBoundDisjunctionModel = new MistakeBoundDisjunctionModel(2);
+            mistakeBoundDisjunctionExtensionModel = new MistakeBoundDisjunctionExtensionModel(2);
         }
 
         [TestMethod]
@@ -131,6 +134,100 @@ namespace ScienceAndMaths.MachineLearning.Test
                     true
                 },
                 Result = false
+            }));
+        }
+
+        /// <summary>
+        /// Prepares a training set to validate a monotone disjunction example that should be validated
+        /// Test variables: {x1, x2}
+        /// Expected result: {x1 || !x2}, result does not depend on value of x2
+        /// Test data:
+        /// {0, 0} = 1 = {0, 0, 1, 1}
+        /// {0, 1} = 0 = {0, 1, 1, 0}
+        /// {1, 0} = 1 = {1, 0, 0, 1}
+        /// {1, 1} = 1 = {1, 1, 0, 0}
+        /// </summary>
+        [TestMethod]
+        public void TrainExtendedModelTest()
+        {
+            List<MistakeBoundChallenge> trainingSet = new List<MistakeBoundChallenge>
+            {
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {
+                        false,
+                        false
+                    },
+                    Result = true
+                },
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {
+                        true,
+                        false
+                    },
+                    Result = true
+                },
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {
+                        false,
+                        true
+                    },
+                    Result = false
+                },
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {
+                        true,
+                        true
+                    },
+                    Result = true
+                }
+            };
+
+            mistakeBoundDisjunctionExtensionModel.Train(trainingSet);
+
+            Assert.IsTrue(mistakeBoundDisjunctionExtensionModel.Predict(new MistakeBoundChallenge
+            {
+                Challenge = new List<bool>
+                {
+                    false,
+                    false
+                },
+                Result = true
+            }));
+            Assert.IsFalse(mistakeBoundDisjunctionExtensionModel.Predict(new MistakeBoundChallenge
+            {
+                Challenge = new List<bool>
+                {
+                    false,
+                    true
+                },
+                Result = true
+            }));
+
+            Assert.IsTrue(mistakeBoundDisjunctionExtensionModel.Predict(new MistakeBoundChallenge
+            {
+                Challenge = new List<bool>
+                {
+                    true,
+                    false
+                },
+                Result = false
+            }));
+            Assert.IsTrue(mistakeBoundDisjunctionExtensionModel.Predict(new MistakeBoundChallenge
+            {
+                Challenge = new List<bool>
+                {
+                    true,
+                    true
+                },
+                Result = true
             }));
         }
     }
