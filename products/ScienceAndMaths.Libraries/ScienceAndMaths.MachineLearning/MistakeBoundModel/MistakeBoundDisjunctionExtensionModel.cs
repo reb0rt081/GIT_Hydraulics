@@ -54,19 +54,26 @@ namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
             return base.ErrorRate(extendedTrainingSet);
         }
 
-        private static MistakeBoundChallenge ExtendChallenge(MistakeBoundChallenge challenge)
+        private MistakeBoundChallenge ExtendChallenge(MistakeBoundChallenge challenge)
         {
-            MistakeBoundChallenge extensionChallenge = new MistakeBoundChallenge();
-            extensionChallenge.Challenge = new List<bool>();
-            extensionChallenge.Result = challenge.Result;
-
-            foreach (var data in challenge.Challenge)
+            if(challenge.Challenge.Count < this.Dimension)
             {
-                extensionChallenge.Challenge.Add(data);
-                extensionChallenge.Challenge.Add(!data);
-            }
+                MistakeBoundChallenge extensionChallenge = new MistakeBoundChallenge();
+                extensionChallenge.Challenge = new List<bool>();
+                extensionChallenge.Result = challenge.Result;
 
-            return extensionChallenge;
+                foreach (var data in challenge.Challenge)
+                {
+                    extensionChallenge.Challenge.Add(data);
+                    extensionChallenge.Challenge.Add(!data);
+                }
+
+                return extensionChallenge;
+            }
+            else
+            {
+                return challenge;
+            }
         }
     }
 }

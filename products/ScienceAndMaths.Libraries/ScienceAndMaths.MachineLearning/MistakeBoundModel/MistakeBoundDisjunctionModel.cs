@@ -83,7 +83,7 @@ namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
                 }
             }
 
-            return (double) errors / validationSet.Count;
+            return (double) errors / validationSet.Count * 100;
         }
 
         public virtual double ErrorRate()

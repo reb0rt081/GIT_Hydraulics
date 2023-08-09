@@ -212,6 +212,8 @@ namespace ScienceAndMaths.MachineLearning.Test
                 },
                 Result = false
             }));
+
+            Assert.AreEqual(0, mistakeBoundDisjunctionModel.ErrorRate(trainingSet));
         }
 
         /// <summary>
@@ -306,6 +308,8 @@ namespace ScienceAndMaths.MachineLearning.Test
                 },
                 Result = true
             }));
+
+            Assert.AreEqual(0, mistakeBoundDisjunctionExtensionModel.ErrorRate(trainingSet));
         }
     }
 }
