@@ -43,7 +43,18 @@ namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
             base.Train(extendedTrainingSet);
         }
 
-        private MistakeBoundChallenge ExtendChallenge(MistakeBoundChallenge challenge)
+        public override double ErrorRate(List<MistakeBoundChallenge> trainingSet)
+        {
+            List<MistakeBoundChallenge> extendedTrainingSet = new List<MistakeBoundChallenge>();
+            foreach (var challenge in trainingSet)
+            {
+                extendedTrainingSet.Add(ExtendChallenge(challenge));
+            }
+
+            return base.ErrorRate(extendedTrainingSet);
+        }
+
+        private static MistakeBoundChallenge ExtendChallenge(MistakeBoundChallenge challenge)
         {
             MistakeBoundChallenge extensionChallenge = new MistakeBoundChallenge();
             extensionChallenge.Challenge = new List<bool>();

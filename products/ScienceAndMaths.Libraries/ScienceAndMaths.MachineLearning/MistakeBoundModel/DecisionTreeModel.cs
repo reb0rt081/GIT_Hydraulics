@@ -1,8 +1,6 @@
 ﻿using ScienceAndMaths.Shared.MachineLearning;
 using System;
 using System.Collections.Generic;
-using Tensorflow;
-using Tensorflow.Contexts;
 
 namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
 {
@@ -16,6 +14,7 @@ namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
         /// </summary>
         public int Size { get; }
 
+        public DecisionTreeNode RootNode { get;  }        
         /// <summary>
         /// Length of the longest path from root to leaf.
         /// </summary>
@@ -37,18 +36,56 @@ namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
             {
                 Concept.Add(i, new DecisionTreeNode(i));
             }
+
+            RootNode = Concept[0];
         }
 
         public bool Predict(MistakeBoundChallenge challenge)
         {
+            DecisionTreeNode nodeToEvaluate = RootNode;
+
+            return TravelDecisionTree(nodeToEvaluate, challenge);
+        }
+
+        public void Learn(MistakeBoundChallenge challenge)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Train(List<MistakeBoundChallenge> trainingSet)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// Returns the error rate in percentage
+        /// </summary>
+        /// <param name="validationSet"></param>
+        /// <returns></returns>
+        public double ErrorRate(List<MistakeBoundChallenge> validationSet)
+        {
+            int errors = 0;
+            foreach (MistakeBoundChallenge challenge in validationSet)
+            {
+                if (Predict(challenge) != challenge.Result)
+                {
+                    errors++;
+                }
+            }
+
+            return (double) errors / validationSet.Count * 100;
+        }
+
+        public bool TravelDecisionTree(DecisionTreeNode initialNode, MistakeBoundChallenge data)
+        {
+            DecisionTreeNode nodeToEvaluate = initialNode;
             int i = 0;
-            DecisionTreeNode nodeToEvaluate = Concept[i];
             while (i < Size || nodeToEvaluate != null)
             {
-                if (challenge.Challenge[nodeToEvaluate.Id])
+                if (data.Challenge[nodeToEvaluate.Id])
                 {
                     //  If true we check the right (TRUE) side
-                    if(nodeToEvaluate.RightNode != null)
+                    if (nodeToEvaluate.RightNode != null)
                     {
                         nodeToEvaluate = nodeToEvaluate.RightNode;
                     }
@@ -60,7 +97,7 @@ namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
                 else
                 {
                     //  If false we check the left (FALSE) side
-                    if(nodeToEvaluate.LeftNode != null)
+                    if (nodeToEvaluate.LeftNode != null)
                     {
                         nodeToEvaluate = nodeToEvaluate.LeftNode;
                     }
@@ -74,16 +111,6 @@ namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
             }
 
             return false;
-        }
-
-        public void Learn(MistakeBoundChallenge challenge)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Train(List<MistakeBoundChallenge> trainingSet)
-        {
-            throw new NotImplementedException();
         }
     }
 }

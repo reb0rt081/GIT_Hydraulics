@@ -58,6 +58,53 @@ namespace ScienceAndMaths.MachineLearning.Test
         }
 
         [TestMethod]
+        public void ErrorRateDecisionTreeTest()
+        {
+            double errorRate = decisionTreeModel.ErrorRate(new List<MistakeBoundChallenge>
+            {
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {
+                        false,
+                        false
+                    },
+                    Result = false
+                },
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {
+                        false,
+                        true
+                    },
+                    Result = false
+                },
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {
+                        true,
+                        false
+                    },
+                    Result = false
+                },
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {
+                        true,
+                        true
+                    },
+                    Result = true
+                }
+
+            });
+
+            Assert.AreEqual(25, errorRate);
+        }
+
+        [TestMethod]
         public void PredictModelTest()
         {
             bool result = mistakeBoundDisjunctionModel.Predict(new MistakeBoundChallenge

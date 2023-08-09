@@ -7,5 +7,7 @@ namespace ScienceAndMaths.Shared.MachineLearning
     public interface IMistakeBoundLearner<TChallenge>
     {
         void Train(List<TChallenge> trainingSet);
+
+        double ErrorRate(List<TChallenge> validationSet);
     }
 }

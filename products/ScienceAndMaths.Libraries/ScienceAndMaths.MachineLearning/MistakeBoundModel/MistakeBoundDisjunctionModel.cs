@@ -71,5 +71,24 @@ namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
                 Learn(challenge);
             }
         }
+
+        public virtual double ErrorRate(List<MistakeBoundChallenge> validationSet)
+        {
+            int errors = 0;
+            foreach (MistakeBoundChallenge challenge in validationSet)
+            {
+                if(Predict(challenge) != challenge.Result)
+                {
+                    errors++;
+                }
+            }
+
+            return (double) errors / validationSet.Count;
+        }
+
+        public virtual double ErrorRate()
+        {
+            return ErrorRate(ValidationSet);
+        }
     }
 }
