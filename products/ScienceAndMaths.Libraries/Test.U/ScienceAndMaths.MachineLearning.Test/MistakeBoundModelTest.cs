@@ -117,7 +117,7 @@ namespace ScienceAndMaths.MachineLearning.Test
         [TestMethod]
         public void TrainDecisionTreeTest()
         {
-            decisionTreeModel.Train(new List<MistakeBoundChallenge>
+            var trainingSet = new List<MistakeBoundChallenge>
             {
                 new MistakeBoundChallenge
                 {
@@ -156,7 +156,10 @@ namespace ScienceAndMaths.MachineLearning.Test
                     Result = true
                 }
 
-            });
+            };
+            decisionTreeModel.Train(trainingSet);
+
+            Assert.AreEqual(0, decisionTreeModel.ErrorRate(trainingSet));
         }
 
         [TestMethod]
