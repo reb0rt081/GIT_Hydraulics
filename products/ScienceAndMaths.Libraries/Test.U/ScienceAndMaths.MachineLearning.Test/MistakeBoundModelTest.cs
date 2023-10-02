@@ -104,6 +104,61 @@ namespace ScienceAndMaths.MachineLearning.Test
             Assert.AreEqual(25, errorRate);
         }
 
+        /// <summary>
+        /// In this example let us train the following decision tree as an example:
+        ///         [Residente en españa? (X1)]
+        ///           |             |
+        ///           | FALSE       | TRUE
+        ///         [FALSE]    [Ingresos > 20.000€ (X2)]
+        ///                     |             |
+        ///                     | FALSE       | TRUE
+        ///                   [FALSE]       [TRUE]
+        /// </summary>
+        [TestMethod]
+        public void TrainDecisionTreeTest()
+        {
+            decisionTreeModel.Train(new List<MistakeBoundChallenge>
+            {
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {
+                        false,
+                        false
+                    },
+                    Result = false
+                },
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {
+                        false,
+                        true
+                    },
+                    Result = false
+                },
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {
+                        true,
+                        false
+                    },
+                    Result = false
+                },
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {
+                        true,
+                        true
+                    },
+                    Result = true
+                }
+
+            });
+        }
+
         [TestMethod]
         public void PredictModelTest()
         {

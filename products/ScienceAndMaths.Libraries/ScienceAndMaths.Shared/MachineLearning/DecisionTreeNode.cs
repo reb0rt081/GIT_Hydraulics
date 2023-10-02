@@ -20,6 +20,8 @@
         /// </summary>
         public DecisionTreeNode RightNode { get; set; }
 
+        public bool IsLeaf { get; set; }
+
         public DecisionTreeNode(int id)
         {
             Id = id;

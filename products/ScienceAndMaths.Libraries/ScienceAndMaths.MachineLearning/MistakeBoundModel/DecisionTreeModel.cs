@@ -1,6 +1,7 @@
 ﻿using ScienceAndMaths.Shared.MachineLearning;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
 {
@@ -14,7 +15,7 @@ namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
         /// </summary>
         public int Size { get; }
 
-        public DecisionTreeNode RootNode { get;  }        
+        public DecisionTreeNode RootNode { get; protected set; }        
         /// <summary>
         /// Length of the longest path from root to leaf.
         /// </summary>
@@ -54,7 +55,97 @@ namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
 
         public void Train(List<MistakeBoundChallenge> trainingSet)
         {
-            throw new NotImplementedException();
+            List<NodeErrorRate> errorList = new List<NodeErrorRate>();
+            foreach (DecisionTreeNode node in Concept.Values.Where(node => !node.IsLeaf))
+            {
+                RootNode = node;
+                errorList.Add(new NodeErrorRate(node, ErrorRate(trainingSet)));
+            }
+
+            NodeErrorRate bestCurrentNode = errorList.OrderBy(ol => ol.ErrorRate).First();
+            RootNode = bestCurrentNode.Node;
+            RootNode.IsLeaf = true;
+
+            while (Concept.Values.Any(node => !node.IsLeaf))
+            {
+                NodeErrorRate bestLeftNode;
+                bool leftNodeFound = TryGetBestNexLeftTreeNode(bestCurrentNode.Node, bestCurrentNode.ErrorRate,
+                    Concept.Values.Where(node => !node.IsLeaf).ToList(), trainingSet, out bestLeftNode);
+
+                NodeErrorRate bestRightNode;
+                bool rightNodeFound = TryGetBestNextRightTreeNode(bestCurrentNode.Node, bestCurrentNode.ErrorRate,
+                    Concept.Values.Where(node => !node.IsLeaf).ToList(), trainingSet, out bestRightNode);
+
+                if (leftNodeFound)
+                {
+                    bestCurrentNode.Node.LeftNode = bestLeftNode.Node;
+                    bestCurrentNode.Node.LeftNode.IsLeaf = true;
+                    bestCurrentNode = bestLeftNode;
+                }
+                else if (rightNodeFound)
+                {
+                    bestCurrentNode.Node.RightNode = bestRightNode.Node;
+                    bestCurrentNode.Node.RightNode.IsLeaf = true;
+                    bestCurrentNode = bestRightNode;
+                }
+                else
+                {
+                    break;
+                }
+            }
+            
+        }
+
+        public bool TryGetBestNextRightTreeNode(DecisionTreeNode currentNode, double currentErrorRate, List<DecisionTreeNode> nodes, List<MistakeBoundChallenge> trainingSet, out NodeErrorRate bestNextNode)
+        {
+            List<NodeErrorRate> errorList = new List<NodeErrorRate>();
+            foreach (DecisionTreeNode node in nodes)
+            {
+                currentNode.RightNode = node;
+                errorList.Add(new NodeErrorRate(node, ErrorRate(trainingSet)));
+            }
+
+            currentNode.RightNode = null;
+            
+            NodeErrorRate bestNode = errorList.OrderBy(ol => ol.ErrorRate).First();
+            if (bestNode.ErrorRate < currentErrorRate)
+            {
+                bestNextNode = bestNode;
+                bestNextNode.Node.IsLeaf = true;
+                return true;
+            }
+            else
+            {
+                bestNextNode = null;
+                return false;
+            }
+
+        }
+
+        public bool TryGetBestNexLeftTreeNode(DecisionTreeNode currentNode, double currentErrorRate, List<DecisionTreeNode> nodes, List<MistakeBoundChallenge> trainingSet, out NodeErrorRate bestNextNode)
+        {
+            List<NodeErrorRate> errorList = new List<NodeErrorRate>();
+            foreach (DecisionTreeNode node in nodes)
+            {
+                currentNode.LeftNode = node;
+                errorList.Add(new NodeErrorRate(node, ErrorRate(trainingSet)));
+            }
+
+            currentNode.LeftNode = null;
+
+            NodeErrorRate bestNode = errorList.OrderBy(ol => ol.ErrorRate).First();
+            if (bestNode.ErrorRate < currentErrorRate)
+            {
+                bestNextNode = bestNode;
+                bestNextNode.Node.IsLeaf = true;
+                return true;
+            }
+            else
+            {
+                bestNextNode = null;
+                return false;
+            }
+
         }
 
         /// <summary>
@@ -67,7 +158,8 @@ namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
             int errors = 0;
             foreach (MistakeBoundChallenge challenge in validationSet)
             {
-                if (Predict(challenge) != challenge.Result)
+                bool result = Predict(challenge);
+                if (result != challenge.Result)
                 {
                     errors++;
                 }
