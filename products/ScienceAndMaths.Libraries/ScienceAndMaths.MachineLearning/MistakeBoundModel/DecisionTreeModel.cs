@@ -171,10 +171,18 @@ namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
 
         public double NegativeGiniRate(List<MistakeBoundChallenge> validationSet, double oldGain, DecisionTreeNode node)
         {
-            int negativeExamples = validationSet.Count(vs => !vs.Challenge[node.Id]);
-            int positiveExamples = validationSet.Count(vs => vs.Challenge[node.Id]);
-            return (double) negativeExamples / validationSet.Count * GiniIndex((double) validationSet.Count(vs => !vs.Result && !vs.Challenge[node.Id]) / negativeExamples)
-                + (double) positiveExamples / validationSet.Count * GiniIndex((double) validationSet.Count(vs => !vs.Result && vs.Challenge[node.Id]) / positiveExamples);
+            if(node != null)
+            {
+                int negativeExamples = validationSet.Count(vs => !vs.Challenge[node.Id]);
+                int positiveExamples = validationSet.Count(vs => vs.Challenge[node.Id]);
+                return (double)negativeExamples / validationSet.Count * GiniIndex((double)validationSet.Count(vs => !vs.Result && !vs.Challenge[node.Id]) / negativeExamples)
+                    + (double)positiveExamples / validationSet.Count * GiniIndex((double)validationSet.Count(vs => !vs.Result && vs.Challenge[node.Id]) / positiveExamples);
+            }
+            else
+            {
+                return GiniIndex((double)validationSet.Count(vs => !vs.Result)/validationSet.Count);
+            }
+            
         }
 
         /// <summary>

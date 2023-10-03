@@ -313,6 +313,10 @@ namespace ScienceAndMaths.MachineLearning.Test
 
 
             };
+
+            double index = decisionTreeModel.NegativeGiniRate(trainingSet, 0, null);
+            Assert.IsTrue(Math.Abs(index - (double)4 / 9) < 0.00001);
+
             double indexX1 = decisionTreeModel.NegativeGiniRate(trainingSet, 0, decisionTreeModel.Concept[0]);
             Assert.AreEqual(0.44, indexX1);
 
