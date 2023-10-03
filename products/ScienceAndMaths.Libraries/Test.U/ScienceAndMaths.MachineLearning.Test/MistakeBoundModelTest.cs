@@ -163,6 +163,164 @@ namespace ScienceAndMaths.MachineLearning.Test
         }
 
         [TestMethod]
+        public void GiniRateDecisionTreeTest()
+        {
+            var trainingSet = new List<MistakeBoundChallenge>
+            {
+                // 0 0 -> 0 (x1)
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {   
+                        false,
+                        false
+                    },
+                    Result = false
+                },
+                // 0 0 -> 1 (x1)
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {
+                        false,
+                        false
+                    },
+                    Result = true
+                },
+                // 0 1 -> 0 (x2)
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {
+                        false,
+                        true
+                    },
+                    Result = false
+                },
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {
+                        false,
+                        true
+                    },
+                    Result = false
+                },
+                // 0 1 -> 1 (x1)
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {
+                        false,
+                        true
+                    },
+                    Result = true
+                },
+                // 1 0 -> 0 (x3)
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {
+                        true,
+                        false
+                    },
+                    Result = false
+                },
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {
+                        true,
+                        false
+                    },
+                    Result = false
+                },
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {
+                        true,
+                        false
+                    },
+                    Result = false
+                },
+                // 1 0 -> 1 (x1)
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {
+                        true,
+                        false
+                    },
+                    Result = true
+                },
+                // 1 1 -> 0 (x4)
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {
+                        true,
+                        true
+                    },
+                    Result = false
+                },
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {
+                        true,
+                        true
+                    },
+                    Result = false
+                },
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {
+                        true,
+                        true
+                    },
+                    Result = false
+                },
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {
+                        true,
+                        true
+                    },
+                    Result = false
+                },
+                // 1 1 -> 1 (x2)
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {
+                        true,
+                        true
+                    },
+                    Result = true
+                },
+                new MistakeBoundChallenge
+                {
+                    Challenge = new List<bool>
+                    {
+                        true,
+                        true
+                    },
+                    Result = true
+                }
+
+
+            };
+            double indexX1 = decisionTreeModel.NegativeGiniRate(trainingSet, 0, decisionTreeModel.Concept[0]);
+            Assert.AreEqual(0.44, indexX1);
+
+            double indexX2 = decisionTreeModel.NegativeGiniRate(trainingSet, 0, decisionTreeModel.Concept[1]);
+            Assert.IsTrue(Math.Abs(indexX2 - (double) 4/9) < 0.00001);
+        }
+
+        [TestMethod]
         public void PredictModelTest()
         {
             bool result = mistakeBoundDisjunctionModel.Predict(new MistakeBoundChallenge

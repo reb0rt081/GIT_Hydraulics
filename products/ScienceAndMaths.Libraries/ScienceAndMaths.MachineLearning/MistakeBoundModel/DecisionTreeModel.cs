@@ -90,6 +90,7 @@ namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
                 }
                 else
                 {
+                    //  TODO check if by the time we have arrived here we have skipped some nodes
                     break;
                 }
             }
@@ -167,6 +168,25 @@ namespace ScienceAndMaths.MachineLearning.MistakeBoundModel
 
             return (double) errors / validationSet.Count * 100;
         }
+
+        public double NegativeGiniRate(List<MistakeBoundChallenge> validationSet, double oldGain, DecisionTreeNode node)
+        {
+            int negativeExamples = validationSet.Count(vs => !vs.Challenge[node.Id]);
+            int positiveExamples = validationSet.Count(vs => vs.Challenge[node.Id]);
+            return (double) negativeExamples / validationSet.Count * GiniIndex((double) validationSet.Count(vs => !vs.Result && !vs.Challenge[node.Id]) / negativeExamples)
+                + (double) positiveExamples / validationSet.Count * GiniIndex((double) validationSet.Count(vs => !vs.Result && vs.Challenge[node.Id]) / positiveExamples);
+        }
+
+        /// <summary>
+        /// Returns the gini index for certin value
+        /// </summary>
+        /// <param name="a"></param>
+        /// <returns></returns>
+        public double GiniIndex(double a)
+        {
+            return 2 * a * (1 - a);
+        }
+
 
         public bool TravelDecisionTree(DecisionTreeNode initialNode, MistakeBoundChallenge data)
         {
