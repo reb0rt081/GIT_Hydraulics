@@ -45,7 +45,7 @@ namespace ScienceAndMaths.MachineLearning.Test.Tools
         [TestMethod, Ignore]
         public void Test()
         {
-            CsvFileConverter.ConvertCsvToCsv(@"D:\CURSOS\ABDATACHALLENGE\BBDD y DataSet ejemplo\Datos demográficos INE\C2011_ccaa09_Indicadores.csv", @"D:\CURSOS\ABDATACHALLENGE\BBDD y DataSet ejemplo\Datos demográficos INE\cat_Indicadores.csv", new List<int> { 0, 1, 2, 3, 4, 5 });
+            CsvFileConverter.ConvertCsvToCsv(@"D:\CURSOS\ABDATACHALLENGE\BBDD y DataSet ejemplo\Datos demográficos INE\C2011_ccaa09_Indicadores.csv", @"D:\CURSOS\ABDATACHALLENGE\BBDD y DataSet ejemplo\Datos demográficos INE\cat_Indicadores.csv", new List<int> { 0, 1, 2, 3, 4, 5, 8, 37, 40, 74, 75, 76, 77, 114, 124, 131, 132, 133, 143, 144, 145, 146, 147, 148, 149 });
             Assert.IsTrue(File.Exists("test2.csv"));
         }
     }
