@@ -5,6 +5,7 @@ using System.IO;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using ScienceAndMaths.MachineLearning.Tools;
+using static Tensorflow.tensorflow;
 
 namespace ScienceAndMaths.MachineLearning.Test.Tools
 {
@@ -39,6 +40,13 @@ namespace ScienceAndMaths.MachineLearning.Test.Tools
                 
                 Assert.AreEqual(2, values.Length);
             }
+        }
+
+        [TestMethod, Ignore]
+        public void Test()
+        {
+            CsvFileConverter.ConvertCsvToCsv(@"D:\CURSOS\ABDATACHALLENGE\BBDD y DataSet ejemplo\Datos demográficos INE\C2011_ccaa09_Indicadores.csv", @"D:\CURSOS\ABDATACHALLENGE\BBDD y DataSet ejemplo\Datos demográficos INE\cat_Indicadores.csv", new List<int> { 0, 1, 2, 3, 4, 5 });
+            Assert.IsTrue(File.Exists("test2.csv"));
         }
     }
 }
