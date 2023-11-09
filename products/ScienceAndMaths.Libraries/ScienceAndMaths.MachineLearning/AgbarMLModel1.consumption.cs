@@ -16,16 +16,16 @@ namespace ScienceAndMaths_MachineLearning
         public class ModelInput
         {
             [LoadColumn(1)]
-            [ColumnName(@"Dia_semana")]
-            public float Dia_semana { get; set; }
+            [ColumnName(@"Day_week")]
+            public float Day_week { get; set; }
 
             [LoadColumn(2)]
-            [ColumnName(@"Mes")]
-            public float Mes { get; set; }
+            [ColumnName(@"Month")]
+            public float Month { get; set; }
 
             [LoadColumn(3)]
-            [ColumnName(@"Año")]
-            public float Año { get; set; }
+            [ColumnName(@"Year")]
+            public float Year { get; set; }
 
             [LoadColumn(4)]
             [ColumnName(@"Census_section")]
@@ -49,14 +49,14 @@ namespace ScienceAndMaths_MachineLearning
         #region model output class
         public class ModelOutput
         {
-            [ColumnName(@"Dia_semana")]
-            public float Dia_semana { get; set; }
+            [ColumnName(@"Day_week")]
+            public float Day_week { get; set; }
 
-            [ColumnName(@"Mes")]
-            public float Mes { get; set; }
+            [ColumnName(@"Month")]
+            public float Month { get; set; }
 
-            [ColumnName(@"Año")]
-            public float Año { get; set; }
+            [ColumnName(@"Year")]
+            public float Year { get; set; }
 
             [ColumnName(@"Census_section")]
             public float Census_section { get; set; }

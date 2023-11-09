@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.ML.Data;
+using Microsoft.ML.Trainers.FastTree;
 using Microsoft.ML.Trainers;
 using Microsoft.ML;
-using Microsoft.ML.Trainers.FastTree;
 
 namespace ScienceAndMaths_MachineLearning
 {
@@ -89,16 +89,9 @@ namespace ScienceAndMaths_MachineLearning
         public static IEstimator<ITransformer> BuildPipeline(MLContext mlContext)
         {
             // Data process configuration with pipeline data transformations
-            var pipeline = mlContext.Transforms
-                .ReplaceMissingValues(new[]
-                {
-                    new InputOutputColumnPair(@"Dia_semana", @"Dia_semana"),
-                    new InputOutputColumnPair(@"Mes", @"Mes"),
-                    new InputOutputColumnPair(@"Año", @"Año"),
-                    new InputOutputColumnPair(@"Census_section", @"Census_section"),
-                    new InputOutputColumnPair(@"Postcode", @"Postcode")
-                }).Append(mlContext.Transforms.Concatenate(@"Features", new[] { @"Dia_semana", @"Mes", @"Año", @"Census_section", @"Postcode" }))
-                                    .Append(mlContext.Regression.Trainers.FastForest(new FastForestRegressionTrainer.Options(){NumberOfTrees=49,NumberOfLeaves=13,FeatureFraction=0.9334245F,LabelColumnName=@"Consumption",FeatureColumnName=@"Features"}));
+            var pipeline = mlContext.Transforms.ReplaceMissingValues(new []{new InputOutputColumnPair(@"Day_week", @"Day_week"),new InputOutputColumnPair(@"Month", @"Month"),new InputOutputColumnPair(@"Year", @"Year"),new InputOutputColumnPair(@"Census_section", @"Census_section"),new InputOutputColumnPair(@"Postcode", @"Postcode")})      
+                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"Day_week",@"Month",@"Year",@"Census_section",@"Postcode"}))      
+                                    .Append(mlContext.Regression.Trainers.FastForest(new FastForestRegressionTrainer.Options(){NumberOfTrees=1004,NumberOfLeaves=4,FeatureFraction=1F,LabelColumnName=@"Consumption",FeatureColumnName=@"Features"}));
 
             return pipeline;
         }
