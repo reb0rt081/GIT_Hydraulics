@@ -1,0 +1,319 @@
+﻿{
+  "Scenario": "Regression",
+  "DataSource": {
+    "Type": "TabularFile",
+    "Version": 1,
+    "FilePath": "D:\\CURSOS\\ABDATACHALLENGE\\BBDD y DataSet ejemplo\\Test_ML_Data.csv",
+    "Delimiter": ";",
+    "DecimalMarker": ".",
+    "HasHeader": true,
+    "ColumnProperties": [
+      {
+        "ColumnName": "Fecha",
+        "ColumnPurpose": "Ignore",
+        "ColumnDataFormat": "String",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 4
+      },
+      {
+        "ColumnName": "Dia_semana",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 4
+      },
+      {
+        "ColumnName": "Mes",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 4
+      },
+      {
+        "ColumnName": "Año",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 4
+      },
+      {
+        "ColumnName": "Census_section",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 4
+      },
+      {
+        "ColumnName": "Postcode",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 4
+      },
+      {
+        "ColumnName": "Consumption",
+        "ColumnPurpose": "Label",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 4
+      }
+    ]
+  },
+  "Environment": {
+    "Type": "LocalCPU",
+    "Version": 1
+  },
+  "RunHistory": {
+    "Version": 3,
+    "Type": "Result",
+    "Trials": [
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastForestRegression",
+        "Score": 0.96158766244462512,
+        "RuntimeInSeconds": 0.521,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e3",
+          "e0": {
+            "OutputColumnNames": [
+              "Dia_semana",
+              "Mes",
+              "Año",
+              "Census_section",
+              "Postcode"
+            ],
+            "InputColumnNames": [
+              "Dia_semana",
+              "Mes",
+              "Año",
+              "Census_section",
+              "Postcode"
+            ]
+          },
+          "e1": {
+            "InputColumnNames": [
+              "Dia_semana",
+              "Mes",
+              "Año",
+              "Census_section",
+              "Postcode"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e3": {
+            "NumberOfTrees": 49,
+            "NumberOfLeaves": 13,
+            "FeatureFraction": 0.933424532,
+            "LabelColumnName": "Consumption",
+            "FeatureColumnName": "Features"
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastForestRegression",
+        "Score": 0.96069885147345568,
+        "RuntimeInSeconds": 0.649,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e3",
+          "e0": {
+            "OutputColumnNames": [
+              "Dia_semana",
+              "Mes",
+              "Año",
+              "Census_section",
+              "Postcode"
+            ],
+            "InputColumnNames": [
+              "Dia_semana",
+              "Mes",
+              "Año",
+              "Census_section",
+              "Postcode"
+            ]
+          },
+          "e1": {
+            "InputColumnNames": [
+              "Dia_semana",
+              "Mes",
+              "Año",
+              "Census_section",
+              "Postcode"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e3": {
+            "NumberOfTrees": 95,
+            "NumberOfLeaves": 53,
+            "FeatureFraction": 1.0,
+            "LabelColumnName": "Consumption",
+            "FeatureColumnName": "Features"
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastForestRegression",
+        "Score": 0.9606543235422158,
+        "RuntimeInSeconds": 0.32,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e3",
+          "e0": {
+            "OutputColumnNames": [
+              "Dia_semana",
+              "Mes",
+              "Año",
+              "Census_section",
+              "Postcode"
+            ],
+            "InputColumnNames": [
+              "Dia_semana",
+              "Mes",
+              "Año",
+              "Census_section",
+              "Postcode"
+            ]
+          },
+          "e1": {
+            "InputColumnNames": [
+              "Dia_semana",
+              "Mes",
+              "Año",
+              "Census_section",
+              "Postcode"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e3": {
+            "NumberOfTrees": 27,
+            "NumberOfLeaves": 4,
+            "FeatureFraction": 0.93195504,
+            "LabelColumnName": "Consumption",
+            "FeatureColumnName": "Features"
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastForestRegression",
+        "Score": 0.96053612167437541,
+        "RuntimeInSeconds": 0.469,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e3",
+          "e0": {
+            "OutputColumnNames": [
+              "Dia_semana",
+              "Mes",
+              "Año",
+              "Census_section",
+              "Postcode"
+            ],
+            "InputColumnNames": [
+              "Dia_semana",
+              "Mes",
+              "Año",
+              "Census_section",
+              "Postcode"
+            ]
+          },
+          "e1": {
+            "InputColumnNames": [
+              "Dia_semana",
+              "Mes",
+              "Año",
+              "Census_section",
+              "Postcode"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e3": {
+            "NumberOfTrees": 45,
+            "NumberOfLeaves": 7,
+            "FeatureFraction": 1.0,
+            "LabelColumnName": "Consumption",
+            "FeatureColumnName": "Features"
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastForestRegression",
+        "Score": 0.96031133162078675,
+        "RuntimeInSeconds": 0.268,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e3",
+          "e0": {
+            "OutputColumnNames": [
+              "Dia_semana",
+              "Mes",
+              "Año",
+              "Census_section",
+              "Postcode"
+            ],
+            "InputColumnNames": [
+              "Dia_semana",
+              "Mes",
+              "Año",
+              "Census_section",
+              "Postcode"
+            ]
+          },
+          "e1": {
+            "InputColumnNames": [
+              "Dia_semana",
+              "Mes",
+              "Año",
+              "Census_section",
+              "Postcode"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e3": {
+            "NumberOfTrees": 20,
+            "NumberOfLeaves": 4,
+            "FeatureFraction": 0.9887624,
+            "LabelColumnName": "Consumption",
+            "FeatureColumnName": "Features"
+          }
+        }
+      }
+    ],
+    "Estimators": {
+      "e0": "ReplaceMissingValues",
+      "e1": "Concatenate",
+      "e2": "FastTreeRegression",
+      "e3": "FastForestRegression",
+      "e4": "LbfgsPoissonRegressionRegression",
+      "e5": "SdcaRegression"
+    },
+    "Schema": "e0 * e1 * (e2 + e3 + e4 + e5)",
+    "MetricName": "RSquared",
+    "ModelFilePath": "C:\\Users\\rbo\\Documents\\GIT\\ScienceAndMaths\\products\\ScienceAndMaths.Libraries\\ScienceAndMaths.MachineLearning\\AgbarMLModel1.mlnet"
+  },
+  "Type": "TrainingConfig",
+  "Version": 4,
+  "TrainingOption": {
+    "Version": 2,
+    "Subsampling": false,
+    "Type": "RegressionTrainingOption",
+    "TrainingTime": 60,
+    "LabelColumn": "Consumption",
+    "ValidationOption": {
+      "Version": 0,
+      "Type": "CrossValidationValidationOption",
+      "NumberOfFolds": 5
+    }
+  }
+}
