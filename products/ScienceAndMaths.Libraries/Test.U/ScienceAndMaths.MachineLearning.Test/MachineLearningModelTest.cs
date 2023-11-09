@@ -19,7 +19,7 @@ namespace ScienceAndMaths.MachineLearning.Test
         public void TestAgbar()
         {
             //Load sample data
-            var sampleData = new AgbarMLModel1.ModelInput()
+            var sampleData = new AgbarMLModel1.ModelInput
             {
                 Dia_semana = 4,
                 Mes = 12,
