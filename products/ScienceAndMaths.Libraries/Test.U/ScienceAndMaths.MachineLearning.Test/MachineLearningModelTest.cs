@@ -21,11 +21,11 @@ namespace ScienceAndMaths.MachineLearning.Test
             //Load sample data
             var sampleData = new AgbarMLModel1.ModelInput()
             {
-                Dia_semana = 4F,
-                Mes = 12F,
-                Año = 2020F,
-                Census_section = 101220F,
-                Postcode = 8010F,
+                Dia_semana = 4,
+                Mes = 12,
+                Año = 2020,
+                Census_section = 101220,
+                Postcode = 8010
             };
 
             //Load model and predict output
