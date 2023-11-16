@@ -64,21 +64,21 @@ namespace ScienceAndMaths.MachineLearning.Test
             //Load sample data
             var sampleData = new AgbarMLModel1.ModelInput()
             {
-                Postcode = @"8028",
-                Month = @"11",
-                Day_of_week = @"3",
-                Population_higher16 = 93,
-                Population_highschool = 28,
-                Housing_biggerSize_rate = 3,
-                Reservoirs = 58,
-                Incomes = 20000,
+                Postcode = @"8026",
+                Month = @"3",
+                Day_of_week = @"1",
+                Population_higher16 = 88,
+                Population_highschool = 12,
+                Housing_biggerSize_rate = 0,
+                Reservoirs = 85,
+                Incomes = 18000,
             };
 
             //Load model and predict output
             var result = AgbarMLModel1.Predict(sampleData);
 
             Assert.IsNotNull(result);
-            Assert.IsTrue(result.Score > 0.5 && result.Score < 1, $"Normalized consumption is : {result.Score / 100}");
+            Assert.IsTrue(result.Score > 1 && result.Score < 2, $"Normalized consumption is : {result.Score}");
             Console.WriteLine($"Normalized consumption is : {result.Score/100}");
         }
     }
