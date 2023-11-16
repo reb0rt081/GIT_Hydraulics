@@ -13,10 +13,10 @@ using Microsoft.ML;
 
 namespace ScienceAndMaths_MachineLearning
 {
-    public partial class AgbarMLModel1
+    public partial class AgbarMLModelTest
     {
-        public const string RetrainFilePath =  @"D:\CURSOS\Model_1.csv";
-        public const char RetrainSeparatorChar = ',';
+        public const string RetrainFilePath =  @"D:\CURSOS\ABDATACHALLENGE\BBDD y DataSet ejemplo\Test_ML_Data.csv";
+        public const char RetrainSeparatorChar = ';';
         public const bool RetrainHasHeader =  true;
 
          /// <summary>
@@ -90,9 +90,10 @@ namespace ScienceAndMaths_MachineLearning
         public static IEstimator<ITransformer> BuildPipeline(MLContext mlContext)
         {
             // Data process configuration with pipeline data transformations
-            var pipeline = mlContext.Transforms.Categorical.OneHotEncoding(new []{new InputOutputColumnPair(@"Postcode", @"Postcode"),new InputOutputColumnPair(@"Month", @"Month"),new InputOutputColumnPair(@"Day_of_week", @"Day_of_week")}, outputKind: OneHotEncodingEstimator.OutputKind.Indicator)      
-                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"Postcode",@"Month",@"Day_of_week"}))      
-                                    .Append(mlContext.Regression.Trainers.FastTree(new FastTreeRegressionTrainer.Options(){NumberOfLeaves=112,MinimumExampleCountPerLeaf=2,NumberOfTrees=18,MaximumBinCountPerFeature=200,FeatureFraction=0.854453403478585,LearningRate=0.204607296971757,LabelColumnName=@"Normalized_c",FeatureColumnName=@"Features",DiskTranspose=false}));
+            var pipeline = mlContext.Transforms.Categorical.OneHotEncoding(new []{new InputOutputColumnPair(@"Day_week", @"Day_week"),new InputOutputColumnPair(@"Month", @"Month"),new InputOutputColumnPair(@"Census_section", @"Census_section"),new InputOutputColumnPair(@"Postcode", @"Postcode")}, outputKind: OneHotEncodingEstimator.OutputKind.Indicator)      
+                                    .Append(mlContext.Transforms.ReplaceMissingValues(@"Year", @"Year"))      
+                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"Day_week",@"Month",@"Census_section",@"Postcode",@"Year"}))      
+                                    .Append(mlContext.Regression.Trainers.FastForest(new FastForestRegressionTrainer.Options(){NumberOfTrees=4,NumberOfLeaves=4,FeatureFraction=1F,LabelColumnName=@"Consumption",FeatureColumnName=@"Features"}));
 
             return pipeline;
         }

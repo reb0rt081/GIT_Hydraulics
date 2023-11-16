@@ -3,47 +3,15 @@
   "DataSource": {
     "Type": "TabularFile",
     "Version": 1,
-    "FilePath": "D:\\CURSOS\\ABDATACHALLENGE\\BBDD y DataSet ejemplo\\Test_ML_Data.csv",
-    "Delimiter": ";",
+    "FilePath": "D:\\CURSOS\\Model_1.csv",
+    "Delimiter": ",",
     "DecimalMarker": ".",
     "HasHeader": true,
     "ColumnProperties": [
       {
-        "ColumnName": "Date",
+        "ColumnName": "Census_section",
         "ColumnPurpose": "Ignore",
         "ColumnDataFormat": "String",
-        "IsCategorical": false,
-        "Type": "Column",
-        "Version": 4
-      },
-      {
-        "ColumnName": "Day_week",
-        "ColumnPurpose": "Feature",
-        "ColumnDataFormat": "Single",
-        "IsCategorical": false,
-        "Type": "Column",
-        "Version": 4
-      },
-      {
-        "ColumnName": "Month",
-        "ColumnPurpose": "Feature",
-        "ColumnDataFormat": "Single",
-        "IsCategorical": true,
-        "Type": "Column",
-        "Version": 4
-      },
-      {
-        "ColumnName": "Year",
-        "ColumnPurpose": "Feature",
-        "ColumnDataFormat": "Single",
-        "IsCategorical": true,
-        "Type": "Column",
-        "Version": 4
-      },
-      {
-        "ColumnName": "Census_section",
-        "ColumnPurpose": "Feature",
-        "ColumnDataFormat": "Single",
         "IsCategorical": true,
         "Type": "Column",
         "Version": 4
@@ -51,16 +19,56 @@
       {
         "ColumnName": "Postcode",
         "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "String",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 4
+      },
+      {
+        "ColumnName": "Year",
+        "ColumnPurpose": "Ignore",
         "ColumnDataFormat": "Single",
         "IsCategorical": true,
         "Type": "Column",
         "Version": 4
       },
       {
-        "ColumnName": "Consumption",
+        "ColumnName": "Month",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "String",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 4
+      },
+      {
+        "ColumnName": "Day_of_week",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "String",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 4
+      },
+      {
+        "ColumnName": "Normalized_c",
         "ColumnPurpose": "Label",
         "ColumnDataFormat": "Single",
-        "IsCategorical": true,
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 4
+      },
+      {
+        "ColumnName": "Average_c",
+        "ColumnPurpose": "Ignore",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 4
+      },
+      {
+        "ColumnName": "consumption",
+        "ColumnPurpose": "Ignore",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
         "Type": "Column",
         "Version": 4
       }
@@ -77,221 +85,211 @@
       {
         "Version": 1,
         "Type": "Trial",
-        "TrainerName": "FastForestRegression",
-        "Score": 0.96090507158741656,
-        "RuntimeInSeconds": 4.91,
+        "TrainerName": "FastTreeRegression",
+        "Score": 0.040804624535427214,
+        "RuntimeInSeconds": 1.927,
         "Parameter": {
-          "_SCHEMA_": "e0 * e1 * e3",
+          "_SCHEMA_": "e0 * e1 * e2",
           "e0": {
             "OutputColumnNames": [
-              "Day_week",
+              "Postcode",
               "Month",
-              "Year",
-              "Census_section",
-              "Postcode"
+              "Day_of_week"
             ],
             "InputColumnNames": [
-              "Day_week",
+              "Postcode",
               "Month",
-              "Year",
-              "Census_section",
-              "Postcode"
+              "Day_of_week"
             ]
           },
           "e1": {
             "InputColumnNames": [
-              "Day_week",
+              "Postcode",
               "Month",
-              "Year",
-              "Census_section",
-              "Postcode"
+              "Day_of_week"
             ],
             "OutputColumnName": "Features"
           },
-          "e3": {
-            "NumberOfTrees": 1004,
-            "NumberOfLeaves": 4,
-            "FeatureFraction": 1.0,
-            "LabelColumnName": "Consumption",
-            "FeatureColumnName": "Features"
+          "e2": {
+            "NumberOfLeaves": 112,
+            "MinimumExampleCountPerLeaf": 2,
+            "NumberOfTrees": 18,
+            "MaximumBinCountPerFeature": 200,
+            "FeatureFraction": 0.85445340347858467,
+            "LearningRate": 0.20460729697175681,
+            "LabelColumnName": "Normalized_c",
+            "FeatureColumnName": "Features",
+            "DiskTranspose": false
           }
         }
       },
       {
         "Version": 1,
         "Type": "Trial",
-        "TrainerName": "FastForestRegression",
-        "Score": 0.96089835577983251,
-        "RuntimeInSeconds": 1.581,
+        "TrainerName": "FastTreeRegression",
+        "Score": 0.04070609613133036,
+        "RuntimeInSeconds": 1.607,
         "Parameter": {
-          "_SCHEMA_": "e0 * e1 * e3",
+          "_SCHEMA_": "e0 * e1 * e2",
           "e0": {
             "OutputColumnNames": [
-              "Day_week",
+              "Postcode",
               "Month",
-              "Year",
-              "Census_section",
-              "Postcode"
+              "Day_of_week"
             ],
             "InputColumnNames": [
-              "Day_week",
+              "Postcode",
               "Month",
-              "Year",
-              "Census_section",
-              "Postcode"
+              "Day_of_week"
             ]
           },
           "e1": {
             "InputColumnNames": [
-              "Day_week",
+              "Postcode",
               "Month",
-              "Year",
-              "Census_section",
-              "Postcode"
+              "Day_of_week"
             ],
             "OutputColumnName": "Features"
           },
-          "e3": {
-            "NumberOfTrees": 259,
-            "NumberOfLeaves": 4,
-            "FeatureFraction": 1.0,
-            "LabelColumnName": "Consumption",
-            "FeatureColumnName": "Features"
+          "e2": {
+            "NumberOfLeaves": 112,
+            "MinimumExampleCountPerLeaf": 2,
+            "NumberOfTrees": 18,
+            "MaximumBinCountPerFeature": 199,
+            "FeatureFraction": 0.85449399316765373,
+            "LearningRate": 0.20516486711848428,
+            "LabelColumnName": "Normalized_c",
+            "FeatureColumnName": "Features",
+            "DiskTranspose": false
           }
         }
       },
       {
         "Version": 1,
         "Type": "Trial",
-        "TrainerName": "FastForestRegression",
-        "Score": 0.96058200914135372,
-        "RuntimeInSeconds": 0.591,
+        "TrainerName": "FastTreeRegression",
+        "Score": 0.040679876668436421,
+        "RuntimeInSeconds": 1.887,
         "Parameter": {
-          "_SCHEMA_": "e0 * e1 * e3",
+          "_SCHEMA_": "e0 * e1 * e2",
           "e0": {
             "OutputColumnNames": [
-              "Day_week",
+              "Postcode",
               "Month",
-              "Year",
-              "Census_section",
-              "Postcode"
+              "Day_of_week"
             ],
             "InputColumnNames": [
-              "Day_week",
+              "Postcode",
               "Month",
-              "Year",
-              "Census_section",
-              "Postcode"
+              "Day_of_week"
             ]
           },
           "e1": {
             "InputColumnNames": [
-              "Day_week",
+              "Postcode",
               "Month",
-              "Year",
-              "Census_section",
-              "Postcode"
+              "Day_of_week"
             ],
             "OutputColumnName": "Features"
           },
-          "e3": {
-            "NumberOfTrees": 70,
-            "NumberOfLeaves": 6,
-            "FeatureFraction": 1.0,
-            "LabelColumnName": "Consumption",
-            "FeatureColumnName": "Features"
+          "e2": {
+            "NumberOfLeaves": 112,
+            "MinimumExampleCountPerLeaf": 2,
+            "NumberOfTrees": 19,
+            "MaximumBinCountPerFeature": 200,
+            "FeatureFraction": 0.85592086006873369,
+            "LearningRate": 0.2045631582096544,
+            "LabelColumnName": "Normalized_c",
+            "FeatureColumnName": "Features",
+            "DiskTranspose": false
           }
         }
       },
       {
         "Version": 1,
         "Type": "Trial",
-        "TrainerName": "FastForestRegression",
-        "Score": 0.95834588262824361,
-        "RuntimeInSeconds": 0.3,
+        "TrainerName": "FastTreeRegression",
+        "Score": 0.040655754162712832,
+        "RuntimeInSeconds": 1.74,
         "Parameter": {
-          "_SCHEMA_": "e0 * e1 * e3",
+          "_SCHEMA_": "e0 * e1 * e2",
           "e0": {
             "OutputColumnNames": [
-              "Day_week",
+              "Postcode",
               "Month",
-              "Year",
-              "Census_section",
-              "Postcode"
+              "Day_of_week"
             ],
             "InputColumnNames": [
-              "Day_week",
+              "Postcode",
               "Month",
-              "Year",
-              "Census_section",
-              "Postcode"
+              "Day_of_week"
             ]
           },
           "e1": {
             "InputColumnNames": [
-              "Day_week",
+              "Postcode",
               "Month",
-              "Year",
-              "Census_section",
-              "Postcode"
+              "Day_of_week"
             ],
             "OutputColumnName": "Features"
           },
-          "e3": {
-            "NumberOfTrees": 20,
-            "NumberOfLeaves": 4,
-            "FeatureFraction": 0.9131507,
-            "LabelColumnName": "Consumption",
-            "FeatureColumnName": "Features"
+          "e2": {
+            "NumberOfLeaves": 112,
+            "MinimumExampleCountPerLeaf": 2,
+            "NumberOfTrees": 17,
+            "MaximumBinCountPerFeature": 200,
+            "FeatureFraction": 0.85440875697577146,
+            "LearningRate": 0.20463938099662007,
+            "LabelColumnName": "Normalized_c",
+            "FeatureColumnName": "Features",
+            "DiskTranspose": false
           }
         }
       },
       {
         "Version": 1,
         "Type": "Trial",
-        "TrainerName": "FastForestRegression",
-        "Score": 0.95598524963575682,
-        "RuntimeInSeconds": 0.225,
+        "TrainerName": "FastTreeRegression",
+        "Score": 0.040510177313702989,
+        "RuntimeInSeconds": 1.551,
         "Parameter": {
-          "_SCHEMA_": "e0 * e1 * e3",
+          "_SCHEMA_": "e0 * e1 * e2",
           "e0": {
             "OutputColumnNames": [
-              "Day_week",
+              "Postcode",
               "Month",
-              "Year",
-              "Census_section",
-              "Postcode"
+              "Day_of_week"
             ],
             "InputColumnNames": [
-              "Day_week",
+              "Postcode",
               "Month",
-              "Year",
-              "Census_section",
-              "Postcode"
+              "Day_of_week"
             ]
           },
           "e1": {
             "InputColumnNames": [
-              "Day_week",
+              "Postcode",
               "Month",
-              "Year",
-              "Census_section",
-              "Postcode"
+              "Day_of_week"
             ],
             "OutputColumnName": "Features"
           },
-          "e3": {
-            "NumberOfTrees": 8,
-            "NumberOfLeaves": 5,
-            "FeatureFraction": 1.0,
-            "LabelColumnName": "Consumption",
-            "FeatureColumnName": "Features"
+          "e2": {
+            "NumberOfLeaves": 112,
+            "MinimumExampleCountPerLeaf": 2,
+            "NumberOfTrees": 18,
+            "MaximumBinCountPerFeature": 199,
+            "FeatureFraction": 0.85507481813687036,
+            "LearningRate": 0.20337449294365526,
+            "LabelColumnName": "Normalized_c",
+            "FeatureColumnName": "Features",
+            "DiskTranspose": false
           }
         }
       }
     ],
     "Estimators": {
-      "e0": "ReplaceMissingValues",
+      "e0": "OneHotEncoding",
       "e1": "Concatenate",
       "e2": "FastTreeRegression",
       "e3": "FastForestRegression",
@@ -307,13 +305,22 @@
   "TrainingOption": {
     "Version": 2,
     "Subsampling": false,
+    "Tuner": "eci-cfo",
     "Type": "RegressionTrainingOption",
-    "TrainingTime": 60,
-    "LabelColumn": "Consumption",
+    "TrainingTime": 600,
+    "OptimizeMetric": "RSquared",
+    "LabelColumn": "Normalized_c",
+    "AvailableTrainers": [
+      "SDCA",
+      "LBFGS",
+      "LGBM",
+      "FASTTREE",
+      "FASTFOREST"
+    ],
     "ValidationOption": {
       "Version": 0,
-      "Type": "CrossValidationValidationOption",
-      "NumberOfFolds": 5
+      "Type": "TrainValidateSplitValidationOption",
+      "SplitRatio": 0.2
     }
   }
 }

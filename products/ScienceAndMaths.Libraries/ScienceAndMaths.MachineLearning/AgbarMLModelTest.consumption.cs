@@ -7,51 +7,65 @@ using System.IO;
 using System.Collections.Generic;
 namespace ScienceAndMaths_MachineLearning
 {
-    public partial class AgbarMLModel1
+    public partial class AgbarMLModelTest
     {
         /// <summary>
-        /// model input class for AgbarMLModel1.
+        /// model input class for AgbarMLModelTest.
         /// </summary>
         #region model input class
         public class ModelInput
         {
             [LoadColumn(1)]
-            [ColumnName(@"Postcode")]
-            public string Postcode { get; set; }
+            [ColumnName(@"Day_week")]
+            public string Day_week { get; set; }
 
-            [LoadColumn(3)]
+            [LoadColumn(2)]
             [ColumnName(@"Month")]
             public string Month { get; set; }
 
+            [LoadColumn(3)]
+            [ColumnName(@"Year")]
+            public float Year { get; set; }
+
             [LoadColumn(4)]
-            [ColumnName(@"Day_of_week")]
-            public string Day_of_week { get; set; }
+            [ColumnName(@"Census_section")]
+            public string Census_section { get; set; }
 
             [LoadColumn(5)]
-            [ColumnName(@"Normalized_c")]
-            public float Normalized_c { get; set; }
+            [ColumnName(@"Postcode")]
+            public string Postcode { get; set; }
+
+            [LoadColumn(6)]
+            [ColumnName(@"Consumption")]
+            public float Consumption { get; set; }
 
         }
 
         #endregion
 
         /// <summary>
-        /// model output class for AgbarMLModel1.
+        /// model output class for AgbarMLModelTest.
         /// </summary>
         #region model output class
         public class ModelOutput
         {
-            [ColumnName(@"Postcode")]
-            public float[] Postcode { get; set; }
+            [ColumnName(@"Day_week")]
+            public float[] Day_week { get; set; }
 
             [ColumnName(@"Month")]
             public float[] Month { get; set; }
 
-            [ColumnName(@"Day_of_week")]
-            public float[] Day_of_week { get; set; }
+            [ColumnName(@"Year")]
+            public float Year { get; set; }
 
-            [ColumnName(@"Normalized_c")]
-            public float Normalized_c { get; set; }
+            [ColumnName(@"Census_section")]
+            public float[] Census_section { get; set; }
+
+            [ColumnName(@"Postcode")]
+            public float[] Postcode { get; set; }
+
+            [ColumnName(@"Consumption")]
+            public float Consumption { get; set; }
 
             [ColumnName(@"Features")]
             public float[] Features { get; set; }
@@ -63,7 +77,7 @@ namespace ScienceAndMaths_MachineLearning
 
         #endregion
 
-        private static string MLNetModelPath = Path.GetFullPath("AgbarMLModel1.mlnet");
+        private static string MLNetModelPath = Path.GetFullPath("AgbarMLModelTest.mlnet");
 
         public static readonly Lazy<PredictionEngine<ModelInput, ModelOutput>> PredictEngine = new Lazy<PredictionEngine<ModelInput, ModelOutput>>(() => CreatePredictEngine(), true);
 
