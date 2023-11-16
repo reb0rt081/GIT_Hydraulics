@@ -13,9 +13,9 @@ using Microsoft.ML;
 
 namespace ScienceAndMaths_MachineLearning
 {
-    public partial class AgbarMLModelFull
+    public partial class AgbarMLModelBasic
     {
-        public const string RetrainFilePath =  @"D:\CURSOS\Model_final.csv";
+        public const string RetrainFilePath =  @"D:\CURSOS\ABDATACHALLENGE\BBDD y DataSet ejemplo\Model_1.csv";
         public const char RetrainSeparatorChar = ',';
         public const bool RetrainHasHeader =  true;
 
@@ -91,9 +91,8 @@ namespace ScienceAndMaths_MachineLearning
         {
             // Data process configuration with pipeline data transformations
             var pipeline = mlContext.Transforms.Categorical.OneHotEncoding(new []{new InputOutputColumnPair(@"Postcode", @"Postcode"),new InputOutputColumnPair(@"Month", @"Month"),new InputOutputColumnPair(@"Day_of_week", @"Day_of_week")}, outputKind: OneHotEncodingEstimator.OutputKind.Indicator)      
-                                    .Append(mlContext.Transforms.ReplaceMissingValues(new []{new InputOutputColumnPair(@"Population_higher16", @"Population_higher16"),new InputOutputColumnPair(@"Population_highschool", @"Population_highschool"),new InputOutputColumnPair(@"Housing_biggerSize_rate", @"Housing_biggerSize_rate"),new InputOutputColumnPair(@"Reservoirs", @"Reservoirs"),new InputOutputColumnPair(@"Incomes", @"Incomes")}))      
-                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"Postcode",@"Month",@"Day_of_week",@"Population_higher16",@"Population_highschool",@"Housing_biggerSize_rate",@"Reservoirs",@"Incomes"}))      
-                                    .Append(mlContext.Regression.Trainers.FastTree(new FastTreeRegressionTrainer.Options(){NumberOfLeaves=9,MinimumExampleCountPerLeaf=6,NumberOfTrees=776,MaximumBinCountPerFeature=288,FeatureFraction=0.357382401140481,LearningRate=0.0435148316590262,LabelColumnName=@"Normalized_c",FeatureColumnName=@"Features",DiskTranspose=false}));
+                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"Postcode",@"Month",@"Day_of_week"}))      
+                                    .Append(mlContext.Regression.Trainers.FastTree(new FastTreeRegressionTrainer.Options(){NumberOfLeaves=11,MinimumExampleCountPerLeaf=2,NumberOfTrees=254,MaximumBinCountPerFeature=50,FeatureFraction=0.99999999,LearningRate=0.576635260274416,LabelColumnName=@"Normalized_c",FeatureColumnName=@"Features",DiskTranspose=false}));
 
             return pipeline;
         }

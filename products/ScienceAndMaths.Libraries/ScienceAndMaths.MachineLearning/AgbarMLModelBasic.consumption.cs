@@ -7,10 +7,10 @@ using System.IO;
 using System.Collections.Generic;
 namespace ScienceAndMaths_MachineLearning
 {
-    public partial class AgbarMLModelFull
+    public partial class AgbarMLModelBasic
     {
         /// <summary>
-        /// model input class for AgbarMLModelFull.
+        /// model input class for AgbarMLModelBasic.
         /// </summary>
         #region model input class
         public class ModelInput
@@ -31,32 +31,12 @@ namespace ScienceAndMaths_MachineLearning
             [ColumnName(@"Normalized_c")]
             public float Normalized_c { get; set; }
 
-            [LoadColumn(8)]
-            [ColumnName(@"Population_higher16")]
-            public float Population_higher16 { get; set; }
-
-            [LoadColumn(9)]
-            [ColumnName(@"Population_highschool")]
-            public float Population_highschool { get; set; }
-
-            [LoadColumn(10)]
-            [ColumnName(@"Housing_biggerSize_rate")]
-            public float Housing_biggerSize_rate { get; set; }
-
-            [LoadColumn(11)]
-            [ColumnName(@"Reservoirs")]
-            public float Reservoirs { get; set; }
-
-            [LoadColumn(12)]
-            [ColumnName(@"Incomes")]
-            public float Incomes { get; set; }
-
         }
 
         #endregion
 
         /// <summary>
-        /// model output class for AgbarMLModelFull.
+        /// model output class for AgbarMLModelBasic.
         /// </summary>
         #region model output class
         public class ModelOutput
@@ -73,21 +53,6 @@ namespace ScienceAndMaths_MachineLearning
             [ColumnName(@"Normalized_c")]
             public float Normalized_c { get; set; }
 
-            [ColumnName(@"Population_higher16")]
-            public float Population_higher16 { get; set; }
-
-            [ColumnName(@"Population_highschool")]
-            public float Population_highschool { get; set; }
-
-            [ColumnName(@"Housing_biggerSize_rate")]
-            public float Housing_biggerSize_rate { get; set; }
-
-            [ColumnName(@"Reservoirs")]
-            public float Reservoirs { get; set; }
-
-            [ColumnName(@"Incomes")]
-            public float Incomes { get; set; }
-
             [ColumnName(@"Features")]
             public float[] Features { get; set; }
 
@@ -98,7 +63,7 @@ namespace ScienceAndMaths_MachineLearning
 
         #endregion
 
-        private static string MLNetModelPath = Path.GetFullPath("AgbarMLModelFull.mlnet");
+        private static string MLNetModelPath = Path.GetFullPath("AgbarMLModelBasic.mlnet");
 
         public static readonly Lazy<PredictionEngine<ModelInput, ModelOutput>> PredictEngine = new Lazy<PredictionEngine<ModelInput, ModelOutput>>(() => CreatePredictEngine(), true);
 

@@ -17,23 +17,21 @@ namespace ScienceAndMaths.MachineLearning.Test
             Assert.AreEqual("Madrid", result.Prediction);
         }
 
-        [TestMethod, Ignore]
+        [TestMethod]
         public void TestAgbar()
         {
             //Load sample data
-            //Load sample data
-            var sampleData = new AgbarMLModel1.ModelInput()
+            var sampleData = new AgbarMLModelBasic.ModelInput()
             {
-                Postcode = "8001",
+                Postcode = "8010",
                 Month = "1",
                 Day_of_week = "7",
             };
-
             //Load model and predict output
-            var result1 = AgbarMLModel1.Predict(sampleData);
+            var result1 = AgbarMLModelBasic.Predict(sampleData);
 
             sampleData.Day_of_week = "1";
-            var result2 = AgbarMLModel1.Predict(sampleData);
+            var result2 = AgbarMLModelBasic.Predict(sampleData);
 
             Assert.IsNotNull(result1);
             Assert.IsNotNull(result2);

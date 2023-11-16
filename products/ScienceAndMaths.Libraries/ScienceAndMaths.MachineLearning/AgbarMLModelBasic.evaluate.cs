@@ -10,7 +10,7 @@ using Plotly.NET.LayoutObjects;
 
 namespace ScienceAndMaths_MachineLearning
 {
-    public partial class AgbarMLModelFull
+    public partial class AgbarMLModelBasic
     {
         /// <summary>
         /// Permutation feature importance (PFI) is a technique to determine the importance 
