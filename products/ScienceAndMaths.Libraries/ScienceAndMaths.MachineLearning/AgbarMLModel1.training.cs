@@ -15,7 +15,7 @@ namespace ScienceAndMaths_MachineLearning
 {
     public partial class AgbarMLModel1
     {
-        public const string RetrainFilePath =  @"D:\CURSOS\Model_1.csv";
+        public const string RetrainFilePath =  @"D:\CURSOS\ABDATACHALLENGE\BBDD y DataSet ejemplo\Model_final_variant.csv";
         public const char RetrainSeparatorChar = ',';
         public const bool RetrainHasHeader =  true;
 
@@ -91,8 +91,9 @@ namespace ScienceAndMaths_MachineLearning
         {
             // Data process configuration with pipeline data transformations
             var pipeline = mlContext.Transforms.Categorical.OneHotEncoding(new []{new InputOutputColumnPair(@"Postcode", @"Postcode"),new InputOutputColumnPair(@"Month", @"Month"),new InputOutputColumnPair(@"Day_of_week", @"Day_of_week")}, outputKind: OneHotEncodingEstimator.OutputKind.Indicator)      
-                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"Postcode",@"Month",@"Day_of_week"}))      
-                                    .Append(mlContext.Regression.Trainers.FastTree(new FastTreeRegressionTrainer.Options(){NumberOfLeaves=112,MinimumExampleCountPerLeaf=2,NumberOfTrees=18,MaximumBinCountPerFeature=200,FeatureFraction=0.854453403478585,LearningRate=0.204607296971757,LabelColumnName=@"Normalized_c",FeatureColumnName=@"Features",DiskTranspose=false}));
+                                    .Append(mlContext.Transforms.ReplaceMissingValues(new []{new InputOutputColumnPair(@"Population_higher16", @"Population_higher16"),new InputOutputColumnPair(@"Population_highschool", @"Population_highschool"),new InputOutputColumnPair(@"Housing_biggerSize_rate", @"Housing_biggerSize_rate"),new InputOutputColumnPair(@"Reservoirs", @"Reservoirs"),new InputOutputColumnPair(@"Incomes", @"Incomes")}))      
+                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"Postcode",@"Month",@"Day_of_week",@"Population_higher16",@"Population_highschool",@"Housing_biggerSize_rate",@"Reservoirs",@"Incomes"}))      
+                                    .Append(mlContext.Regression.Trainers.FastTree(new FastTreeRegressionTrainer.Options(){NumberOfLeaves=2312,MinimumExampleCountPerLeaf=4,NumberOfTrees=355,MaximumBinCountPerFeature=109,FeatureFraction=0.901607814811424,LearningRate=0.141369681854273,LabelColumnName=@"Normalized_c",FeatureColumnName=@"Features",DiskTranspose=false}));
 
             return pipeline;
         }

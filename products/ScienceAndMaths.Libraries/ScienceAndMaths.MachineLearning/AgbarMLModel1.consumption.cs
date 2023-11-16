@@ -31,6 +31,26 @@ namespace ScienceAndMaths_MachineLearning
             [ColumnName(@"Normalized_c")]
             public float Normalized_c { get; set; }
 
+            [LoadColumn(8)]
+            [ColumnName(@"Population_higher16")]
+            public float Population_higher16 { get; set; }
+
+            [LoadColumn(9)]
+            [ColumnName(@"Population_highschool")]
+            public float Population_highschool { get; set; }
+
+            [LoadColumn(10)]
+            [ColumnName(@"Housing_biggerSize_rate")]
+            public float Housing_biggerSize_rate { get; set; }
+
+            [LoadColumn(11)]
+            [ColumnName(@"Reservoirs")]
+            public float Reservoirs { get; set; }
+
+            [LoadColumn(12)]
+            [ColumnName(@"Incomes")]
+            public float Incomes { get; set; }
+
         }
 
         #endregion
@@ -52,6 +72,21 @@ namespace ScienceAndMaths_MachineLearning
 
             [ColumnName(@"Normalized_c")]
             public float Normalized_c { get; set; }
+
+            [ColumnName(@"Population_higher16")]
+            public float Population_higher16 { get; set; }
+
+            [ColumnName(@"Population_highschool")]
+            public float Population_highschool { get; set; }
+
+            [ColumnName(@"Housing_biggerSize_rate")]
+            public float Housing_biggerSize_rate { get; set; }
+
+            [ColumnName(@"Reservoirs")]
+            public float Reservoirs { get; set; }
+
+            [ColumnName(@"Incomes")]
+            public float Incomes { get; set; }
 
             [ColumnName(@"Features")]
             public float[] Features { get; set; }

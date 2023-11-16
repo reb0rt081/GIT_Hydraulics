@@ -25,11 +25,6 @@
   <ItemGroup>
     <ProjectReference Include="..\ScienceAndMaths.Shared\ScienceAndMaths.Shared.csproj" />
   </ItemGroup>
-  <ItemGroup Label="AgbarMLModel1">
-    <None Include="AgbarMLModel1.mlnet">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
   <ItemGroup Label="AgbarMLModelTest">
     <None Include="AgbarMLModelTest.mlnet">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -37,6 +32,11 @@
   </ItemGroup>
   <ItemGroup Label="AgbarMLModelFull">
     <None Include="AgbarMLModelFull.mlnet">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup Label="AgbarMLModel1">
+    <None Include="AgbarMLModel1.mlnet">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
