@@ -17,7 +17,7 @@ namespace ScienceAndMaths.MachineLearning.Test
             Assert.AreEqual("Madrid", result.Prediction);
         }
 
-        [TestMethod]
+        [TestMethod, Ignore]
         public void TestAgbar()
         {
             //Load sample data
@@ -40,7 +40,7 @@ namespace ScienceAndMaths.MachineLearning.Test
             Assert.IsTrue(result2.Score > result1.Score);
         }
 
-        [TestMethod, Ignore]
+        [TestMethod]
         public void TestAgbarTestModel()
         {
             var sampleData = new AgbarMLModelTest.ModelInput()
