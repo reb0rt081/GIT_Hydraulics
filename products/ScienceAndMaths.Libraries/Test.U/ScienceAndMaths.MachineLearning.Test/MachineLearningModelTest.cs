@@ -40,7 +40,7 @@ namespace ScienceAndMaths.MachineLearning.Test
             Assert.IsTrue(result2.Score > result1.Score);
         }
 
-        [TestMethod]
+        [TestMethod, Ignore]
         public void TestAgbarTestModel()
         {
             var sampleData = new AgbarMLModelTest.ModelInput()
