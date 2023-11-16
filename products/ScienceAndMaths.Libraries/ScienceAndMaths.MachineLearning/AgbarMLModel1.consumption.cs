@@ -27,29 +27,29 @@ namespace ScienceAndMaths_MachineLearning
             [ColumnName(@"Day_of_week")]
             public string Day_of_week { get; set; }
 
-            [LoadColumn(5)]
-            [ColumnName(@"Normalized_c")]
-            public float Normalized_c { get; set; }
+            [LoadColumn(7)]
+            [ColumnName(@"Consumption_per_meter")]
+            public float Consumption_per_meter { get; set; }
 
             [LoadColumn(8)]
-            [ColumnName(@"Population_higher16")]
-            public float Population_higher16 { get; set; }
+            [ColumnName(@"Population_higher16_rate")]
+            public float Population_higher16_rate { get; set; }
 
             [LoadColumn(9)]
-            [ColumnName(@"Population_highschool")]
-            public float Population_highschool { get; set; }
+            [ColumnName(@"Population_highschool_rate")]
+            public float Population_highschool_rate { get; set; }
 
             [LoadColumn(10)]
             [ColumnName(@"Housing_biggerSize_rate")]
             public float Housing_biggerSize_rate { get; set; }
 
             [LoadColumn(11)]
-            [ColumnName(@"Reservoirs")]
-            public float Reservoirs { get; set; }
+            [ColumnName(@"PERCENTAGE_RESERVOIR")]
+            public float PERCENTAGE_RESERVOIR { get; set; }
 
             [LoadColumn(12)]
-            [ColumnName(@"Incomes")]
-            public float Incomes { get; set; }
+            [ColumnName(@"income_percapita")]
+            public float Income_percapita { get; set; }
 
         }
 
@@ -70,23 +70,23 @@ namespace ScienceAndMaths_MachineLearning
             [ColumnName(@"Day_of_week")]
             public float[] Day_of_week { get; set; }
 
-            [ColumnName(@"Normalized_c")]
-            public float Normalized_c { get; set; }
+            [ColumnName(@"Consumption_per_meter")]
+            public float Consumption_per_meter { get; set; }
 
-            [ColumnName(@"Population_higher16")]
-            public float Population_higher16 { get; set; }
+            [ColumnName(@"Population_higher16_rate")]
+            public float Population_higher16_rate { get; set; }
 
-            [ColumnName(@"Population_highschool")]
-            public float Population_highschool { get; set; }
+            [ColumnName(@"Population_highschool_rate")]
+            public float Population_highschool_rate { get; set; }
 
             [ColumnName(@"Housing_biggerSize_rate")]
             public float Housing_biggerSize_rate { get; set; }
 
-            [ColumnName(@"Reservoirs")]
-            public float Reservoirs { get; set; }
+            [ColumnName(@"PERCENTAGE_RESERVOIR")]
+            public float PERCENTAGE_RESERVOIR { get; set; }
 
-            [ColumnName(@"Incomes")]
-            public float Incomes { get; set; }
+            [ColumnName(@"income_percapita")]
+            public float Income_percapita { get; set; }
 
             [ColumnName(@"Features")]
             public float[] Features { get; set; }

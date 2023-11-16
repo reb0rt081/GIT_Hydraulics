@@ -15,7 +15,7 @@ namespace ScienceAndMaths_MachineLearning
 {
     public partial class AgbarMLModel1
     {
-        public const string RetrainFilePath =  @"D:\CURSOS\ABDATACHALLENGE\BBDD y DataSet ejemplo\Model_final_variant.csv";
+        public const string RetrainFilePath =  @"D:\CURSOS\ABDATACHALLENGE\BBDD y DataSet ejemplo\Model_final_full.csv";
         public const char RetrainSeparatorChar = ',';
         public const bool RetrainHasHeader =  true;
 
@@ -91,9 +91,9 @@ namespace ScienceAndMaths_MachineLearning
         {
             // Data process configuration with pipeline data transformations
             var pipeline = mlContext.Transforms.Categorical.OneHotEncoding(new []{new InputOutputColumnPair(@"Postcode", @"Postcode"),new InputOutputColumnPair(@"Month", @"Month"),new InputOutputColumnPair(@"Day_of_week", @"Day_of_week")}, outputKind: OneHotEncodingEstimator.OutputKind.Indicator)      
-                                    .Append(mlContext.Transforms.ReplaceMissingValues(new []{new InputOutputColumnPair(@"Population_higher16", @"Population_higher16"),new InputOutputColumnPair(@"Population_highschool", @"Population_highschool"),new InputOutputColumnPair(@"Housing_biggerSize_rate", @"Housing_biggerSize_rate"),new InputOutputColumnPair(@"Reservoirs", @"Reservoirs"),new InputOutputColumnPair(@"Incomes", @"Incomes")}))      
-                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"Postcode",@"Month",@"Day_of_week",@"Population_higher16",@"Population_highschool",@"Housing_biggerSize_rate",@"Reservoirs",@"Incomes"}))      
-                                    .Append(mlContext.Regression.Trainers.FastTree(new FastTreeRegressionTrainer.Options(){NumberOfLeaves=750,MinimumExampleCountPerLeaf=11,NumberOfTrees=15,MaximumBinCountPerFeature=944,FeatureFraction=0.758553488707476,LearningRate=0.158657924820659,LabelColumnName=@"Normalized_c",FeatureColumnName=@"Features",DiskTranspose=false}));
+                                    .Append(mlContext.Transforms.ReplaceMissingValues(new []{new InputOutputColumnPair(@"Population_higher16_rate", @"Population_higher16_rate"),new InputOutputColumnPair(@"Population_highschool_rate", @"Population_highschool_rate"),new InputOutputColumnPair(@"Housing_biggerSize_rate", @"Housing_biggerSize_rate"),new InputOutputColumnPair(@"PERCENTAGE_RESERVOIR", @"PERCENTAGE_RESERVOIR"),new InputOutputColumnPair(@"income_percapita", @"income_percapita")}))      
+                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"Postcode",@"Month",@"Day_of_week",@"Population_higher16_rate",@"Population_highschool_rate",@"Housing_biggerSize_rate",@"PERCENTAGE_RESERVOIR",@"income_percapita"}))      
+                                    .Append(mlContext.Regression.Trainers.FastTree(new FastTreeRegressionTrainer.Options(){NumberOfLeaves=26,MinimumExampleCountPerLeaf=19,NumberOfTrees=4,MaximumBinCountPerFeature=162,FeatureFraction=0.99999999,LearningRate=0.999999776672986,LabelColumnName=@"Consumption_per_meter",FeatureColumnName=@"Features",DiskTranspose=false}));
 
             return pipeline;
         }
