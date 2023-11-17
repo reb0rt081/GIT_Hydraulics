@@ -15,9 +15,9 @@ namespace ScienceAndMaths_MachineLearning
         #region model input class
         public class ModelInput
         {
-            [LoadColumn(1)]
-            [ColumnName(@"Postcode")]
-            public string Postcode { get; set; }
+            [LoadColumn(0)]
+            [ColumnName(@"Census_section")]
+            public string Census_section { get; set; }
 
             [LoadColumn(3)]
             [ColumnName(@"Month")]
@@ -27,9 +27,9 @@ namespace ScienceAndMaths_MachineLearning
             [ColumnName(@"Day_of_week")]
             public string Day_of_week { get; set; }
 
-            [LoadColumn(7)]
-            [ColumnName(@"Consumption_per_meter")]
-            public float Consumption_per_meter { get; set; }
+            [LoadColumn(5)]
+            [ColumnName(@"Normalized_Consumption")]
+            public float Normalized_Consumption { get; set; }
 
             [LoadColumn(8)]
             [ColumnName(@"Population_higher16_rate")]
@@ -61,8 +61,8 @@ namespace ScienceAndMaths_MachineLearning
         #region model output class
         public class ModelOutput
         {
-            [ColumnName(@"Postcode")]
-            public float[] Postcode { get; set; }
+            [ColumnName(@"Census_section")]
+            public float[] Census_section { get; set; }
 
             [ColumnName(@"Month")]
             public float[] Month { get; set; }
@@ -70,8 +70,8 @@ namespace ScienceAndMaths_MachineLearning
             [ColumnName(@"Day_of_week")]
             public float[] Day_of_week { get; set; }
 
-            [ColumnName(@"Consumption_per_meter")]
-            public float Consumption_per_meter { get; set; }
+            [ColumnName(@"Normalized_Consumption")]
+            public float Normalized_Consumption { get; set; }
 
             [ColumnName(@"Population_higher16_rate")]
             public float Population_higher16_rate { get; set; }

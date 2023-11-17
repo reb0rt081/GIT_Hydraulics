@@ -90,10 +90,10 @@ namespace ScienceAndMaths_MachineLearning
         public static IEstimator<ITransformer> BuildPipeline(MLContext mlContext)
         {
             // Data process configuration with pipeline data transformations
-            var pipeline = mlContext.Transforms.Categorical.OneHotEncoding(new []{new InputOutputColumnPair(@"Postcode", @"Postcode"),new InputOutputColumnPair(@"Month", @"Month"),new InputOutputColumnPair(@"Day_of_week", @"Day_of_week")}, outputKind: OneHotEncodingEstimator.OutputKind.Indicator)      
+            var pipeline = mlContext.Transforms.Categorical.OneHotEncoding(new []{new InputOutputColumnPair(@"Census_section", @"Census_section"),new InputOutputColumnPair(@"Month", @"Month"),new InputOutputColumnPair(@"Day_of_week", @"Day_of_week")}, outputKind: OneHotEncodingEstimator.OutputKind.Indicator)      
                                     .Append(mlContext.Transforms.ReplaceMissingValues(new []{new InputOutputColumnPair(@"Population_higher16_rate", @"Population_higher16_rate"),new InputOutputColumnPair(@"Population_highschool_rate", @"Population_highschool_rate"),new InputOutputColumnPair(@"Housing_biggerSize_rate", @"Housing_biggerSize_rate"),new InputOutputColumnPair(@"PERCENTAGE_RESERVOIR", @"PERCENTAGE_RESERVOIR"),new InputOutputColumnPair(@"income_percapita", @"income_percapita")}))      
-                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"Postcode",@"Month",@"Day_of_week",@"Population_higher16_rate",@"Population_highschool_rate",@"Housing_biggerSize_rate",@"PERCENTAGE_RESERVOIR",@"income_percapita"}))      
-                                    .Append(mlContext.Regression.Trainers.FastTree(new FastTreeRegressionTrainer.Options(){NumberOfLeaves=26,MinimumExampleCountPerLeaf=19,NumberOfTrees=4,MaximumBinCountPerFeature=162,FeatureFraction=0.99999999,LearningRate=0.999999776672986,LabelColumnName=@"Consumption_per_meter",FeatureColumnName=@"Features",DiskTranspose=false}));
+                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"Census_section",@"Month",@"Day_of_week",@"Population_higher16_rate",@"Population_highschool_rate",@"Housing_biggerSize_rate",@"PERCENTAGE_RESERVOIR",@"income_percapita"}))      
+                                    .Append(mlContext.Regression.Trainers.FastTree(new FastTreeRegressionTrainer.Options(){NumberOfLeaves=4,MinimumExampleCountPerLeaf=2,NumberOfTrees=2761,MaximumBinCountPerFeature=383,FeatureFraction=0.686289909824176,LearningRate=0.999999776672986,LabelColumnName=@"Normalized_Consumption",FeatureColumnName=@"Features",DiskTranspose=false}));
 
             return pipeline;
         }

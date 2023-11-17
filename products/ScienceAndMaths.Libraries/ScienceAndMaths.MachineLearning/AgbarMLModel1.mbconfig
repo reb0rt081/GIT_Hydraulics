@@ -10,7 +10,7 @@
     "ColumnProperties": [
       {
         "ColumnName": "Census_section",
-        "ColumnPurpose": "Ignore",
+        "ColumnPurpose": "Feature",
         "ColumnDataFormat": "String",
         "IsCategorical": true,
         "Type": "Column",
@@ -18,7 +18,7 @@
       },
       {
         "ColumnName": "Postcode",
-        "ColumnPurpose": "Feature",
+        "ColumnPurpose": "Ignore",
         "ColumnDataFormat": "String",
         "IsCategorical": true,
         "Type": "Column",
@@ -50,7 +50,7 @@
       },
       {
         "ColumnName": "Normalized_Consumption",
-        "ColumnPurpose": "Ignore",
+        "ColumnPurpose": "Label",
         "ColumnDataFormat": "Single",
         "IsCategorical": false,
         "Type": "Column",
@@ -66,7 +66,7 @@
       },
       {
         "ColumnName": "Consumption_per_meter",
-        "ColumnPurpose": "Label",
+        "ColumnPurpose": "Ignore",
         "ColumnDataFormat": "Single",
         "IsCategorical": false,
         "Type": "Column",
@@ -126,18 +126,18 @@
         "Version": 1,
         "Type": "Trial",
         "TrainerName": "FastTreeRegression",
-        "Score": 0.16100502170251341,
-        "RuntimeInSeconds": 3.984,
+        "Score": 0.38218147767055244,
+        "RuntimeInSeconds": 49.425,
         "Parameter": {
           "_SCHEMA_": "e0 * e1 * e2 * e3",
           "e0": {
             "OutputColumnNames": [
-              "Postcode",
+              "Census_section",
               "Month",
               "Day_of_week"
             ],
             "InputColumnNames": [
-              "Postcode",
+              "Census_section",
               "Month",
               "Day_of_week"
             ]
@@ -160,7 +160,7 @@
           },
           "e2": {
             "InputColumnNames": [
-              "Postcode",
+              "Census_section",
               "Month",
               "Day_of_week",
               "Population_higher16_rate",
@@ -172,13 +172,137 @@
             "OutputColumnName": "Features"
           },
           "e3": {
-            "NumberOfLeaves": 26,
-            "MinimumExampleCountPerLeaf": 19,
-            "NumberOfTrees": 4,
-            "MaximumBinCountPerFeature": 162,
+            "NumberOfLeaves": 4,
+            "MinimumExampleCountPerLeaf": 2,
+            "NumberOfTrees": 2761,
+            "MaximumBinCountPerFeature": 383,
+            "FeatureFraction": 0.68628990982417615,
+            "LearningRate": 0.99999977667298645,
+            "LabelColumnName": "Normalized_Consumption",
+            "FeatureColumnName": "Features",
+            "DiskTranspose": false
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastTreeRegression",
+        "Score": 0.33559809190618139,
+        "RuntimeInSeconds": 191.813,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3",
+          "e0": {
+            "OutputColumnNames": [
+              "Census_section",
+              "Month",
+              "Day_of_week"
+            ],
+            "InputColumnNames": [
+              "Census_section",
+              "Month",
+              "Day_of_week"
+            ]
+          },
+          "e1": {
+            "OutputColumnNames": [
+              "Population_higher16_rate",
+              "Population_highschool_rate",
+              "Housing_biggerSize_rate",
+              "PERCENTAGE_RESERVOIR",
+              "income_percapita"
+            ],
+            "InputColumnNames": [
+              "Population_higher16_rate",
+              "Population_highschool_rate",
+              "Housing_biggerSize_rate",
+              "PERCENTAGE_RESERVOIR",
+              "income_percapita"
+            ]
+          },
+          "e2": {
+            "InputColumnNames": [
+              "Census_section",
+              "Month",
+              "Day_of_week",
+              "Population_higher16_rate",
+              "Population_highschool_rate",
+              "Housing_biggerSize_rate",
+              "PERCENTAGE_RESERVOIR",
+              "income_percapita"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e3": {
+            "NumberOfLeaves": 29,
+            "MinimumExampleCountPerLeaf": 2,
+            "NumberOfTrees": 2467,
+            "MaximumBinCountPerFeature": 1023,
+            "FeatureFraction": 0.0702504313298179,
+            "LearningRate": 0.99999977667298645,
+            "LabelColumnName": "Normalized_Consumption",
+            "FeatureColumnName": "Features",
+            "DiskTranspose": false
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastTreeRegression",
+        "Score": 0.317697708729211,
+        "RuntimeInSeconds": 24.464,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3",
+          "e0": {
+            "OutputColumnNames": [
+              "Census_section",
+              "Month",
+              "Day_of_week"
+            ],
+            "InputColumnNames": [
+              "Census_section",
+              "Month",
+              "Day_of_week"
+            ]
+          },
+          "e1": {
+            "OutputColumnNames": [
+              "Population_higher16_rate",
+              "Population_highschool_rate",
+              "Housing_biggerSize_rate",
+              "PERCENTAGE_RESERVOIR",
+              "income_percapita"
+            ],
+            "InputColumnNames": [
+              "Population_higher16_rate",
+              "Population_highschool_rate",
+              "Housing_biggerSize_rate",
+              "PERCENTAGE_RESERVOIR",
+              "income_percapita"
+            ]
+          },
+          "e2": {
+            "InputColumnNames": [
+              "Census_section",
+              "Month",
+              "Day_of_week",
+              "Population_higher16_rate",
+              "Population_highschool_rate",
+              "Housing_biggerSize_rate",
+              "PERCENTAGE_RESERVOIR",
+              "income_percapita"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e3": {
+            "NumberOfLeaves": 55,
+            "MinimumExampleCountPerLeaf": 9,
+            "NumberOfTrees": 654,
+            "MaximumBinCountPerFeature": 323,
             "FeatureFraction": 0.99999999,
             "LearningRate": 0.99999977667298645,
-            "LabelColumnName": "Consumption_per_meter",
+            "LabelColumnName": "Normalized_Consumption",
             "FeatureColumnName": "Features",
             "DiskTranspose": false
           }
@@ -188,18 +312,18 @@
         "Version": 1,
         "Type": "Trial",
         "TrainerName": "FastTreeRegression",
-        "Score": 0.15164231424313146,
-        "RuntimeInSeconds": 4.816,
+        "Score": 0.25045153151984867,
+        "RuntimeInSeconds": 3.855,
         "Parameter": {
           "_SCHEMA_": "e0 * e1 * e2 * e3",
           "e0": {
             "OutputColumnNames": [
-              "Postcode",
+              "Census_section",
               "Month",
               "Day_of_week"
             ],
             "InputColumnNames": [
-              "Postcode",
+              "Census_section",
               "Month",
               "Day_of_week"
             ]
@@ -222,7 +346,7 @@
           },
           "e2": {
             "InputColumnNames": [
-              "Postcode",
+              "Census_section",
               "Month",
               "Day_of_week",
               "Population_higher16_rate",
@@ -234,199 +358,75 @@
             "OutputColumnName": "Features"
           },
           "e3": {
-            "NumberOfLeaves": 22,
-            "MinimumExampleCountPerLeaf": 21,
-            "NumberOfTrees": 4,
-            "MaximumBinCountPerFeature": 204,
+            "NumberOfLeaves": 4,
+            "MinimumExampleCountPerLeaf": 14,
+            "NumberOfTrees": 35,
+            "MaximumBinCountPerFeature": 121,
+            "FeatureFraction": 0.98573055146477673,
+            "LearningRate": 0.67498375074798633,
+            "LabelColumnName": "Normalized_Consumption",
+            "FeatureColumnName": "Features",
+            "DiskTranspose": false
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastTreeRegression",
+        "Score": 0.218971859410231,
+        "RuntimeInSeconds": 3.497,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3",
+          "e0": {
+            "OutputColumnNames": [
+              "Census_section",
+              "Month",
+              "Day_of_week"
+            ],
+            "InputColumnNames": [
+              "Census_section",
+              "Month",
+              "Day_of_week"
+            ]
+          },
+          "e1": {
+            "OutputColumnNames": [
+              "Population_higher16_rate",
+              "Population_highschool_rate",
+              "Housing_biggerSize_rate",
+              "PERCENTAGE_RESERVOIR",
+              "income_percapita"
+            ],
+            "InputColumnNames": [
+              "Population_higher16_rate",
+              "Population_highschool_rate",
+              "Housing_biggerSize_rate",
+              "PERCENTAGE_RESERVOIR",
+              "income_percapita"
+            ]
+          },
+          "e2": {
+            "InputColumnNames": [
+              "Census_section",
+              "Month",
+              "Day_of_week",
+              "Population_higher16_rate",
+              "Population_highschool_rate",
+              "Housing_biggerSize_rate",
+              "PERCENTAGE_RESERVOIR",
+              "income_percapita"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e3": {
+            "NumberOfLeaves": 4,
+            "MinimumExampleCountPerLeaf": 14,
+            "NumberOfTrees": 15,
+            "MaximumBinCountPerFeature": 352,
             "FeatureFraction": 0.99999999,
-            "LearningRate": 0.99999977667298645,
-            "LabelColumnName": "Consumption_per_meter",
-            "FeatureColumnName": "Features",
-            "DiskTranspose": false
-          }
-        }
-      },
-      {
-        "Version": 1,
-        "Type": "Trial",
-        "TrainerName": "FastTreeRegression",
-        "Score": 0.15135573280900394,
-        "RuntimeInSeconds": 4.203,
-        "Parameter": {
-          "_SCHEMA_": "e0 * e1 * e2 * e3",
-          "e0": {
-            "OutputColumnNames": [
-              "Postcode",
-              "Month",
-              "Day_of_week"
-            ],
-            "InputColumnNames": [
-              "Postcode",
-              "Month",
-              "Day_of_week"
-            ]
-          },
-          "e1": {
-            "OutputColumnNames": [
-              "Population_higher16_rate",
-              "Population_highschool_rate",
-              "Housing_biggerSize_rate",
-              "PERCENTAGE_RESERVOIR",
-              "income_percapita"
-            ],
-            "InputColumnNames": [
-              "Population_higher16_rate",
-              "Population_highschool_rate",
-              "Housing_biggerSize_rate",
-              "PERCENTAGE_RESERVOIR",
-              "income_percapita"
-            ]
-          },
-          "e2": {
-            "InputColumnNames": [
-              "Postcode",
-              "Month",
-              "Day_of_week",
-              "Population_higher16_rate",
-              "Population_highschool_rate",
-              "Housing_biggerSize_rate",
-              "PERCENTAGE_RESERVOIR",
-              "income_percapita"
-            ],
-            "OutputColumnName": "Features"
-          },
-          "e3": {
-            "NumberOfLeaves": 25,
-            "MinimumExampleCountPerLeaf": 19,
-            "NumberOfTrees": 7,
-            "MaximumBinCountPerFeature": 223,
-            "FeatureFraction": 0.99999999,
-            "LearningRate": 0.65676350095342184,
-            "LabelColumnName": "Consumption_per_meter",
-            "FeatureColumnName": "Features",
-            "DiskTranspose": false
-          }
-        }
-      },
-      {
-        "Version": 1,
-        "Type": "Trial",
-        "TrainerName": "FastTreeRegression",
-        "Score": 0.14938167167680161,
-        "RuntimeInSeconds": 5.327,
-        "Parameter": {
-          "_SCHEMA_": "e0 * e1 * e2 * e3",
-          "e0": {
-            "OutputColumnNames": [
-              "Postcode",
-              "Month",
-              "Day_of_week"
-            ],
-            "InputColumnNames": [
-              "Postcode",
-              "Month",
-              "Day_of_week"
-            ]
-          },
-          "e1": {
-            "OutputColumnNames": [
-              "Population_higher16_rate",
-              "Population_highschool_rate",
-              "Housing_biggerSize_rate",
-              "PERCENTAGE_RESERVOIR",
-              "income_percapita"
-            ],
-            "InputColumnNames": [
-              "Population_higher16_rate",
-              "Population_highschool_rate",
-              "Housing_biggerSize_rate",
-              "PERCENTAGE_RESERVOIR",
-              "income_percapita"
-            ]
-          },
-          "e2": {
-            "InputColumnNames": [
-              "Postcode",
-              "Month",
-              "Day_of_week",
-              "Population_higher16_rate",
-              "Population_highschool_rate",
-              "Housing_biggerSize_rate",
-              "PERCENTAGE_RESERVOIR",
-              "income_percapita"
-            ],
-            "OutputColumnName": "Features"
-          },
-          "e3": {
-            "NumberOfLeaves": 22,
-            "MinimumExampleCountPerLeaf": 19,
-            "NumberOfTrees": 4,
-            "MaximumBinCountPerFeature": 159,
-            "FeatureFraction": 0.99999999,
-            "LearningRate": 0.71551904021906021,
-            "LabelColumnName": "Consumption_per_meter",
-            "FeatureColumnName": "Features",
-            "DiskTranspose": false
-          }
-        }
-      },
-      {
-        "Version": 1,
-        "Type": "Trial",
-        "TrainerName": "FastTreeRegression",
-        "Score": 0.14922429771825307,
-        "RuntimeInSeconds": 4.613,
-        "Parameter": {
-          "_SCHEMA_": "e0 * e1 * e2 * e3",
-          "e0": {
-            "OutputColumnNames": [
-              "Postcode",
-              "Month",
-              "Day_of_week"
-            ],
-            "InputColumnNames": [
-              "Postcode",
-              "Month",
-              "Day_of_week"
-            ]
-          },
-          "e1": {
-            "OutputColumnNames": [
-              "Population_higher16_rate",
-              "Population_highschool_rate",
-              "Housing_biggerSize_rate",
-              "PERCENTAGE_RESERVOIR",
-              "income_percapita"
-            ],
-            "InputColumnNames": [
-              "Population_higher16_rate",
-              "Population_highschool_rate",
-              "Housing_biggerSize_rate",
-              "PERCENTAGE_RESERVOIR",
-              "income_percapita"
-            ]
-          },
-          "e2": {
-            "InputColumnNames": [
-              "Postcode",
-              "Month",
-              "Day_of_week",
-              "Population_higher16_rate",
-              "Population_highschool_rate",
-              "Housing_biggerSize_rate",
-              "PERCENTAGE_RESERVOIR",
-              "income_percapita"
-            ],
-            "OutputColumnName": "Features"
-          },
-          "e3": {
-            "NumberOfLeaves": 26,
-            "MinimumExampleCountPerLeaf": 18,
-            "NumberOfTrees": 4,
-            "MaximumBinCountPerFeature": 172,
-            "FeatureFraction": 0.99373439329063706,
-            "LearningRate": 0.99999977667298645,
-            "LabelColumnName": "Consumption_per_meter",
+            "LearningRate": 0.96248858288926753,
+            "LabelColumnName": "Normalized_Consumption",
             "FeatureColumnName": "Features",
             "DiskTranspose": false
           }
@@ -453,9 +453,9 @@
     "Subsampling": false,
     "Tuner": "eci-cfo",
     "Type": "RegressionTrainingOption",
-    "TrainingTime": 600,
+    "TrainingTime": 700,
     "OptimizeMetric": "RSquared",
-    "LabelColumn": "Consumption_per_meter",
+    "LabelColumn": "Normalized_Consumption",
     "AvailableTrainers": [
       "SDCA",
       "LBFGS",
