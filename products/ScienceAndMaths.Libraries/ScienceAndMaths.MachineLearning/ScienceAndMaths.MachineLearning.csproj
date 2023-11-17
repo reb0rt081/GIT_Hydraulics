@@ -30,13 +30,13 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup Label="AgbarMLModelBasic">
-    <None Include="AgbarMLModelBasic.mlnet">
+  <ItemGroup Label="AgbarMLModel1">
+    <None Include="AgbarMLModel1.mlnet">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup Label="AgbarMLModel1">
-    <None Include="AgbarMLModel1.mlnet">
+  <ItemGroup Label="AgbarMLModelBasic">
+    <None Include="AgbarMLModelBasic.mlnet">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

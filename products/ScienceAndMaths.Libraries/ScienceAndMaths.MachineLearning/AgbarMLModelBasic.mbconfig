@@ -3,19 +3,11 @@
   "DataSource": {
     "Type": "TabularFile",
     "Version": 1,
-    "FilePath": "D:\\CURSOS\\ABDATACHALLENGE\\BBDD y DataSet ejemplo\\Model_1.csv",
+    "FilePath": "D:\\CURSOS\\ABDATACHALLENGE\\BBDD y DataSet ejemplo\\Model_basic.csv",
     "Delimiter": ",",
     "DecimalMarker": ".",
     "HasHeader": true,
     "ColumnProperties": [
-      {
-        "ColumnName": "Census_section",
-        "ColumnPurpose": "Ignore",
-        "ColumnDataFormat": "Single",
-        "IsCategorical": true,
-        "Type": "Column",
-        "Version": 4
-      },
       {
         "ColumnName": "Postcode",
         "ColumnPurpose": "Feature",
@@ -25,10 +17,18 @@
         "Version": 4
       },
       {
-        "ColumnName": "Year",
+        "ColumnName": "Date",
         "ColumnPurpose": "Ignore",
+        "ColumnDataFormat": "String",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 4
+      },
+      {
+        "ColumnName": "Year",
+        "ColumnPurpose": "Feature",
         "ColumnDataFormat": "Single",
-        "IsCategorical": true,
+        "IsCategorical": false,
         "Type": "Column",
         "Version": 4
       },
@@ -49,24 +49,8 @@
         "Version": 4
       },
       {
-        "ColumnName": "Normalized_c",
+        "ColumnName": "Average_Consumption",
         "ColumnPurpose": "Label",
-        "ColumnDataFormat": "Single",
-        "IsCategorical": false,
-        "Type": "Column",
-        "Version": 4
-      },
-      {
-        "ColumnName": "Average_c",
-        "ColumnPurpose": "Ignore",
-        "ColumnDataFormat": "Single",
-        "IsCategorical": false,
-        "Type": "Column",
-        "Version": 4
-      },
-      {
-        "ColumnName": "consumption",
-        "ColumnPurpose": "Ignore",
         "ColumnDataFormat": "Single",
         "IsCategorical": false,
         "Type": "Column",
@@ -86,10 +70,10 @@
         "Version": 1,
         "Type": "Trial",
         "TrainerName": "FastTreeRegression",
-        "Score": 0.036469510125809346,
-        "RuntimeInSeconds": 2.406,
+        "Score": 0.36568069044491069,
+        "RuntimeInSeconds": 0.321,
         "Parameter": {
-          "_SCHEMA_": "e0 * e1 * e2",
+          "_SCHEMA_": "e0 * e1 * e2 * e3",
           "e0": {
             "OutputColumnNames": [
               "Postcode",
@@ -103,196 +87,246 @@
             ]
           },
           "e1": {
-            "InputColumnNames": [
-              "Postcode",
-              "Month",
-              "Day_of_week"
+            "OutputColumnNames": [
+              "Year"
             ],
-            "OutputColumnName": "Features"
+            "InputColumnNames": [
+              "Year"
+            ]
           },
           "e2": {
-            "NumberOfLeaves": 11,
-            "MinimumExampleCountPerLeaf": 2,
-            "NumberOfTrees": 254,
-            "MaximumBinCountPerFeature": 50,
-            "FeatureFraction": 0.99999999,
-            "LearningRate": 0.57663526027441558,
-            "LabelColumnName": "Normalized_c",
-            "FeatureColumnName": "Features",
-            "DiskTranspose": false
-          }
-        }
-      },
-      {
-        "Version": 1,
-        "Type": "Trial",
-        "TrainerName": "FastTreeRegression",
-        "Score": 0.035791459744863641,
-        "RuntimeInSeconds": 1.132,
-        "Parameter": {
-          "_SCHEMA_": "e0 * e1 * e2",
-          "e0": {
-            "OutputColumnNames": [
-              "Postcode",
-              "Month",
-              "Day_of_week"
-            ],
             "InputColumnNames": [
               "Postcode",
               "Month",
-              "Day_of_week"
-            ]
-          },
-          "e1": {
-            "InputColumnNames": [
-              "Postcode",
-              "Month",
-              "Day_of_week"
-            ],
-            "OutputColumnName": "Features"
-          },
-          "e2": {
-            "NumberOfLeaves": 43,
-            "MinimumExampleCountPerLeaf": 9,
-            "NumberOfTrees": 20,
-            "MaximumBinCountPerFeature": 55,
-            "FeatureFraction": 0.99999999,
-            "LearningRate": 0.99999977667298645,
-            "LabelColumnName": "Normalized_c",
-            "FeatureColumnName": "Features",
-            "DiskTranspose": false
-          }
-        }
-      },
-      {
-        "Version": 1,
-        "Type": "Trial",
-        "TrainerName": "FastTreeRegression",
-        "Score": 0.03444473659308056,
-        "RuntimeInSeconds": 0.945,
-        "Parameter": {
-          "_SCHEMA_": "e0 * e1 * e2",
-          "e0": {
-            "OutputColumnNames": [
-              "Postcode",
-              "Month",
-              "Day_of_week"
-            ],
-            "InputColumnNames": [
-              "Postcode",
-              "Month",
-              "Day_of_week"
-            ]
-          },
-          "e1": {
-            "InputColumnNames": [
-              "Postcode",
-              "Month",
-              "Day_of_week"
-            ],
-            "OutputColumnName": "Features"
-          },
-          "e2": {
-            "NumberOfLeaves": 19,
-            "MinimumExampleCountPerLeaf": 12,
-            "NumberOfTrees": 11,
-            "MaximumBinCountPerFeature": 71,
-            "FeatureFraction": 0.92514962381815125,
-            "LearningRate": 0.99999977667298645,
-            "LabelColumnName": "Normalized_c",
-            "FeatureColumnName": "Features",
-            "DiskTranspose": false
-          }
-        }
-      },
-      {
-        "Version": 1,
-        "Type": "Trial",
-        "TrainerName": "FastTreeRegression",
-        "Score": 0.034412846240942319,
-        "RuntimeInSeconds": 1.004,
-        "Parameter": {
-          "_SCHEMA_": "e0 * e1 * e2",
-          "e0": {
-            "OutputColumnNames": [
-              "Postcode",
-              "Month",
-              "Day_of_week"
-            ],
-            "InputColumnNames": [
-              "Postcode",
-              "Month",
-              "Day_of_week"
-            ]
-          },
-          "e1": {
-            "InputColumnNames": [
-              "Postcode",
-              "Month",
-              "Day_of_week"
-            ],
-            "OutputColumnName": "Features"
-          },
-          "e2": {
-            "NumberOfLeaves": 167,
-            "MinimumExampleCountPerLeaf": 41,
-            "NumberOfTrees": 4,
-            "MaximumBinCountPerFeature": 59,
-            "FeatureFraction": 0.87125401897374655,
-            "LearningRate": 0.99999977667298645,
-            "LabelColumnName": "Normalized_c",
-            "FeatureColumnName": "Features",
-            "DiskTranspose": false
-          }
-        }
-      },
-      {
-        "Version": 1,
-        "Type": "Trial",
-        "TrainerName": "FastForestRegression",
-        "Score": 0.026624207139039791,
-        "RuntimeInSeconds": 0.95,
-        "Parameter": {
-          "_SCHEMA_": "e0 * e1 * e3",
-          "e0": {
-            "OutputColumnNames": [
-              "Postcode",
-              "Month",
-              "Day_of_week"
-            ],
-            "InputColumnNames": [
-              "Postcode",
-              "Month",
-              "Day_of_week"
-            ]
-          },
-          "e1": {
-            "InputColumnNames": [
-              "Postcode",
-              "Month",
-              "Day_of_week"
+              "Day_of_week",
+              "Year"
             ],
             "OutputColumnName": "Features"
           },
           "e3": {
-            "NumberOfTrees": 8,
-            "NumberOfLeaves": 4,
-            "FeatureFraction": 1.0,
-            "LabelColumnName": "Normalized_c",
-            "FeatureColumnName": "Features"
+            "NumberOfLeaves": 186,
+            "MinimumExampleCountPerLeaf": 18,
+            "NumberOfTrees": 7,
+            "MaximumBinCountPerFeature": 14,
+            "FeatureFraction": 0.71910838918439779,
+            "LearningRate": 0.95911209224623306,
+            "LabelColumnName": "Average_Consumption",
+            "FeatureColumnName": "Features",
+            "DiskTranspose": false
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastTreeRegression",
+        "Score": 0.36554113838568358,
+        "RuntimeInSeconds": 0.308,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3",
+          "e0": {
+            "OutputColumnNames": [
+              "Postcode",
+              "Month",
+              "Day_of_week"
+            ],
+            "InputColumnNames": [
+              "Postcode",
+              "Month",
+              "Day_of_week"
+            ]
+          },
+          "e1": {
+            "OutputColumnNames": [
+              "Year"
+            ],
+            "InputColumnNames": [
+              "Year"
+            ]
+          },
+          "e2": {
+            "InputColumnNames": [
+              "Postcode",
+              "Month",
+              "Day_of_week",
+              "Year"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e3": {
+            "NumberOfLeaves": 186,
+            "MinimumExampleCountPerLeaf": 18,
+            "NumberOfTrees": 7,
+            "MaximumBinCountPerFeature": 13,
+            "FeatureFraction": 0.71906559046123342,
+            "LearningRate": 0.95873012886328279,
+            "LabelColumnName": "Average_Consumption",
+            "FeatureColumnName": "Features",
+            "DiskTranspose": false
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastTreeRegression",
+        "Score": 0.36229202189397747,
+        "RuntimeInSeconds": 0.328,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3",
+          "e0": {
+            "OutputColumnNames": [
+              "Postcode",
+              "Month",
+              "Day_of_week"
+            ],
+            "InputColumnNames": [
+              "Postcode",
+              "Month",
+              "Day_of_week"
+            ]
+          },
+          "e1": {
+            "OutputColumnNames": [
+              "Year"
+            ],
+            "InputColumnNames": [
+              "Year"
+            ]
+          },
+          "e2": {
+            "InputColumnNames": [
+              "Postcode",
+              "Month",
+              "Day_of_week",
+              "Year"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e3": {
+            "NumberOfLeaves": 184,
+            "MinimumExampleCountPerLeaf": 19,
+            "NumberOfTrees": 7,
+            "MaximumBinCountPerFeature": 15,
+            "FeatureFraction": 0.71882420698599936,
+            "LearningRate": 0.99999977667298645,
+            "LabelColumnName": "Average_Consumption",
+            "FeatureColumnName": "Features",
+            "DiskTranspose": false
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastTreeRegression",
+        "Score": 0.36177626469615409,
+        "RuntimeInSeconds": 0.301,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3",
+          "e0": {
+            "OutputColumnNames": [
+              "Postcode",
+              "Month",
+              "Day_of_week"
+            ],
+            "InputColumnNames": [
+              "Postcode",
+              "Month",
+              "Day_of_week"
+            ]
+          },
+          "e1": {
+            "OutputColumnNames": [
+              "Year"
+            ],
+            "InputColumnNames": [
+              "Year"
+            ]
+          },
+          "e2": {
+            "InputColumnNames": [
+              "Postcode",
+              "Month",
+              "Day_of_week",
+              "Year"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e3": {
+            "NumberOfLeaves": 188,
+            "MinimumExampleCountPerLeaf": 18,
+            "NumberOfTrees": 7,
+            "MaximumBinCountPerFeature": 15,
+            "FeatureFraction": 0.71633950732397722,
+            "LearningRate": 0.99999977667298645,
+            "LabelColumnName": "Average_Consumption",
+            "FeatureColumnName": "Features",
+            "DiskTranspose": false
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastTreeRegression",
+        "Score": 0.36171423127407776,
+        "RuntimeInSeconds": 0.29,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e2 * e3",
+          "e0": {
+            "OutputColumnNames": [
+              "Postcode",
+              "Month",
+              "Day_of_week"
+            ],
+            "InputColumnNames": [
+              "Postcode",
+              "Month",
+              "Day_of_week"
+            ]
+          },
+          "e1": {
+            "OutputColumnNames": [
+              "Year"
+            ],
+            "InputColumnNames": [
+              "Year"
+            ]
+          },
+          "e2": {
+            "InputColumnNames": [
+              "Postcode",
+              "Month",
+              "Day_of_week",
+              "Year"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e3": {
+            "NumberOfLeaves": 185,
+            "MinimumExampleCountPerLeaf": 17,
+            "NumberOfTrees": 7,
+            "MaximumBinCountPerFeature": 13,
+            "FeatureFraction": 0.71978644135975911,
+            "LearningRate": 0.96340042671958581,
+            "LabelColumnName": "Average_Consumption",
+            "FeatureColumnName": "Features",
+            "DiskTranspose": false
           }
         }
       }
     ],
     "Estimators": {
       "e0": "OneHotEncoding",
-      "e1": "Concatenate",
-      "e2": "FastTreeRegression",
-      "e3": "FastForestRegression",
-      "e4": "LbfgsPoissonRegressionRegression",
-      "e5": "SdcaRegression"
+      "e1": "ReplaceMissingValues",
+      "e2": "Concatenate",
+      "e3": "FastTreeRegression",
+      "e4": "FastForestRegression",
+      "e5": "LbfgsPoissonRegressionRegression",
+      "e6": "SdcaRegression"
     },
-    "Schema": "e0 * e1 * (e2 + e3 + e4 + e5)",
+    "Schema": "e0 * e1 * e2 * (e3 + e4 + e5 + e6)",
     "MetricName": "RSquared",
     "ModelFilePath": "C:\\Users\\rbo\\Documents\\GIT\\ScienceAndMaths\\products\\ScienceAndMaths.Libraries\\ScienceAndMaths.MachineLearning\\AgbarMLModelBasic.mlnet"
   },
@@ -302,8 +336,8 @@
     "Version": 2,
     "Subsampling": false,
     "Type": "RegressionTrainingOption",
-    "TrainingTime": 600,
-    "LabelColumn": "Normalized_c",
+    "TrainingTime": 300,
+    "LabelColumn": "Average_Consumption",
     "ValidationOption": {
       "Version": 0,
       "Type": "TrainValidateSplitValidationOption",

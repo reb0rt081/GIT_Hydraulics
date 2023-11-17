@@ -15,7 +15,7 @@ namespace ScienceAndMaths_MachineLearning
 {
     public partial class AgbarMLModelBasic
     {
-        public const string RetrainFilePath =  @"D:\CURSOS\ABDATACHALLENGE\BBDD y DataSet ejemplo\Model_1.csv";
+        public const string RetrainFilePath =  @"D:\CURSOS\ABDATACHALLENGE\BBDD y DataSet ejemplo\Model_basic.csv";
         public const char RetrainSeparatorChar = ',';
         public const bool RetrainHasHeader =  true;
 
@@ -91,8 +91,9 @@ namespace ScienceAndMaths_MachineLearning
         {
             // Data process configuration with pipeline data transformations
             var pipeline = mlContext.Transforms.Categorical.OneHotEncoding(new []{new InputOutputColumnPair(@"Postcode", @"Postcode"),new InputOutputColumnPair(@"Month", @"Month"),new InputOutputColumnPair(@"Day_of_week", @"Day_of_week")}, outputKind: OneHotEncodingEstimator.OutputKind.Indicator)      
-                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"Postcode",@"Month",@"Day_of_week"}))      
-                                    .Append(mlContext.Regression.Trainers.FastTree(new FastTreeRegressionTrainer.Options(){NumberOfLeaves=11,MinimumExampleCountPerLeaf=2,NumberOfTrees=254,MaximumBinCountPerFeature=50,FeatureFraction=0.99999999,LearningRate=0.576635260274416,LabelColumnName=@"Normalized_c",FeatureColumnName=@"Features",DiskTranspose=false}));
+                                    .Append(mlContext.Transforms.ReplaceMissingValues(@"Year", @"Year"))      
+                                    .Append(mlContext.Transforms.Concatenate(@"Features", new []{@"Postcode",@"Month",@"Day_of_week",@"Year"}))      
+                                    .Append(mlContext.Regression.Trainers.FastTree(new FastTreeRegressionTrainer.Options(){NumberOfLeaves=186,MinimumExampleCountPerLeaf=18,NumberOfTrees=7,MaximumBinCountPerFeature=14,FeatureFraction=0.719108389184398,LearningRate=0.959112092246233,LabelColumnName=@"Average_Consumption",FeatureColumnName=@"Features",DiskTranspose=false}));
 
             return pipeline;
         }

@@ -15,9 +15,13 @@ namespace ScienceAndMaths_MachineLearning
         #region model input class
         public class ModelInput
         {
-            [LoadColumn(1)]
+            [LoadColumn(0)]
             [ColumnName(@"Postcode")]
             public string Postcode { get; set; }
+
+            [LoadColumn(2)]
+            [ColumnName(@"Year")]
+            public float Year { get; set; }
 
             [LoadColumn(3)]
             [ColumnName(@"Month")]
@@ -28,8 +32,8 @@ namespace ScienceAndMaths_MachineLearning
             public string Day_of_week { get; set; }
 
             [LoadColumn(5)]
-            [ColumnName(@"Normalized_c")]
-            public float Normalized_c { get; set; }
+            [ColumnName(@"Average_Consumption")]
+            public float Average_Consumption { get; set; }
 
         }
 
@@ -44,14 +48,17 @@ namespace ScienceAndMaths_MachineLearning
             [ColumnName(@"Postcode")]
             public float[] Postcode { get; set; }
 
+            [ColumnName(@"Year")]
+            public float Year { get; set; }
+
             [ColumnName(@"Month")]
             public float[] Month { get; set; }
 
             [ColumnName(@"Day_of_week")]
             public float[] Day_of_week { get; set; }
 
-            [ColumnName(@"Normalized_c")]
-            public float Normalized_c { get; set; }
+            [ColumnName(@"Average_Consumption")]
+            public float Average_Consumption { get; set; }
 
             [ColumnName(@"Features")]
             public float[] Features { get; set; }
