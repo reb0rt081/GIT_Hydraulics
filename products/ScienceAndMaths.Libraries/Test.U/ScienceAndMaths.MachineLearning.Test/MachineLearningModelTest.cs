@@ -1,6 +1,7 @@
 using System;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ScienceAndMaths.MachineLearning.Tools;
 using ScienceAndMaths_MachineLearning;
 
 namespace ScienceAndMaths.MachineLearning.Test
@@ -15,6 +16,32 @@ namespace ScienceAndMaths.MachineLearning.Test
             var result = model.ClassifyImage(@"./Picture/plaza_mayor_de_madrid_0.jpg");
             Assert.IsNotNull(result);
             Assert.AreEqual("Madrid", result.Prediction);
+        }
+
+        [TestMethod, Ignore]
+        public void TestFullDemand()
+        {
+            string[][] data = new string[800][];
+            for (int i = 0; i < 800; ++i)
+                data[i] = new string[1];
+
+            DateTime time = new DateTime(2022, 1, 1);
+            int j = 0;
+            while (time.Year <= 2023)
+            {
+                var sampleData = new MLModelConsumption.ModelInput()
+                {
+                    Year = time.Year,
+                    Month = time.Month,
+                    Day_of_week = (int) time.DayOfWeek+1,
+                };
+                var result = MLModelConsumption.Predict(sampleData);
+                //data[j][0] = time.ToString();
+                data[j][0] = result.Score.ToString();
+                time = time.AddDays(1);
+                j++;
+            }
+            CsvFileConverter.ConvertToCsv(@"D:\CURSOS\ABDATACHALLENGE\BBDD y DataSet ejemplo\Prediction_consumption.csv", data);
         }
 
         [TestMethod]

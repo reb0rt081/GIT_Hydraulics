@@ -1,0 +1,273 @@
+﻿{
+  "Scenario": "Regression",
+  "DataSource": {
+    "Type": "TabularFile",
+    "Version": 1,
+    "FilePath": "D:\\CURSOS\\ABDATACHALLENGE\\BBDD y DataSet ejemplo\\Model_consumption.csv",
+    "Delimiter": ",",
+    "DecimalMarker": ".",
+    "HasHeader": true,
+    "ColumnProperties": [
+      {
+        "ColumnName": "Date",
+        "ColumnPurpose": "Ignore",
+        "ColumnDataFormat": "String",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 4
+      },
+      {
+        "ColumnName": "Year",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 4
+      },
+      {
+        "ColumnName": "Month",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 4
+      },
+      {
+        "ColumnName": "Day_of_week",
+        "ColumnPurpose": "Feature",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": true,
+        "Type": "Column",
+        "Version": 4
+      },
+      {
+        "ColumnName": "Total_consumption",
+        "ColumnPurpose": "Label",
+        "ColumnDataFormat": "Single",
+        "IsCategorical": false,
+        "Type": "Column",
+        "Version": 4
+      }
+    ]
+  },
+  "Environment": {
+    "Type": "LocalCPU",
+    "Version": 1
+  },
+  "RunHistory": {
+    "Version": 3,
+    "Type": "Result",
+    "Trials": [
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastForestRegression",
+        "Score": 0.92444565634899067,
+        "RuntimeInSeconds": 0.244,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e3",
+          "e0": {
+            "OutputColumnNames": [
+              "Year",
+              "Month",
+              "Day_of_week"
+            ],
+            "InputColumnNames": [
+              "Year",
+              "Month",
+              "Day_of_week"
+            ]
+          },
+          "e1": {
+            "InputColumnNames": [
+              "Year",
+              "Month",
+              "Day_of_week"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e3": {
+            "NumberOfTrees": 24,
+            "NumberOfLeaves": 28,
+            "FeatureFraction": 0.9996059,
+            "LabelColumnName": "Total_consumption",
+            "FeatureColumnName": "Features"
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastForestRegression",
+        "Score": 0.92396904771585753,
+        "RuntimeInSeconds": 0.819,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e3",
+          "e0": {
+            "OutputColumnNames": [
+              "Year",
+              "Month",
+              "Day_of_week"
+            ],
+            "InputColumnNames": [
+              "Year",
+              "Month",
+              "Day_of_week"
+            ]
+          },
+          "e1": {
+            "InputColumnNames": [
+              "Year",
+              "Month",
+              "Day_of_week"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e3": {
+            "NumberOfTrees": 239,
+            "NumberOfLeaves": 6,
+            "FeatureFraction": 1.0,
+            "LabelColumnName": "Total_consumption",
+            "FeatureColumnName": "Features"
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastForestRegression",
+        "Score": 0.92378740408515336,
+        "RuntimeInSeconds": 0.499,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e3",
+          "e0": {
+            "OutputColumnNames": [
+              "Year",
+              "Month",
+              "Day_of_week"
+            ],
+            "InputColumnNames": [
+              "Year",
+              "Month",
+              "Day_of_week"
+            ]
+          },
+          "e1": {
+            "InputColumnNames": [
+              "Year",
+              "Month",
+              "Day_of_week"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e3": {
+            "NumberOfTrees": 42,
+            "NumberOfLeaves": 4,
+            "FeatureFraction": 1.0,
+            "LabelColumnName": "Total_consumption",
+            "FeatureColumnName": "Features"
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastForestRegression",
+        "Score": 0.92355070729305344,
+        "RuntimeInSeconds": 0.538,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e3",
+          "e0": {
+            "OutputColumnNames": [
+              "Year",
+              "Month",
+              "Day_of_week"
+            ],
+            "InputColumnNames": [
+              "Year",
+              "Month",
+              "Day_of_week"
+            ]
+          },
+          "e1": {
+            "InputColumnNames": [
+              "Year",
+              "Month",
+              "Day_of_week"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e3": {
+            "NumberOfTrees": 72,
+            "NumberOfLeaves": 4,
+            "FeatureFraction": 1.0,
+            "LabelColumnName": "Total_consumption",
+            "FeatureColumnName": "Features"
+          }
+        }
+      },
+      {
+        "Version": 1,
+        "Type": "Trial",
+        "TrainerName": "FastForestRegression",
+        "Score": 0.92262570785515408,
+        "RuntimeInSeconds": 0.217,
+        "Parameter": {
+          "_SCHEMA_": "e0 * e1 * e3",
+          "e0": {
+            "OutputColumnNames": [
+              "Year",
+              "Month",
+              "Day_of_week"
+            ],
+            "InputColumnNames": [
+              "Year",
+              "Month",
+              "Day_of_week"
+            ]
+          },
+          "e1": {
+            "InputColumnNames": [
+              "Year",
+              "Month",
+              "Day_of_week"
+            ],
+            "OutputColumnName": "Features"
+          },
+          "e3": {
+            "NumberOfTrees": 11,
+            "NumberOfLeaves": 4,
+            "FeatureFraction": 1.0,
+            "LabelColumnName": "Total_consumption",
+            "FeatureColumnName": "Features"
+          }
+        }
+      }
+    ],
+    "Estimators": {
+      "e0": "ReplaceMissingValues",
+      "e1": "Concatenate",
+      "e2": "FastTreeRegression",
+      "e3": "FastForestRegression",
+      "e4": "LbfgsPoissonRegressionRegression",
+      "e5": "SdcaRegression"
+    },
+    "Schema": "e0 * e1 * (e2 + e3 + e4 + e5)",
+    "MetricName": "RSquared",
+    "ModelFilePath": "C:\\Users\\rbo\\Documents\\GIT\\ScienceAndMaths\\products\\ScienceAndMaths.Libraries\\ScienceAndMaths.MachineLearning\\MLModelConsumption.mlnet"
+  },
+  "Type": "TrainingConfig",
+  "Version": 4,
+  "TrainingOption": {
+    "Version": 2,
+    "Subsampling": false,
+    "Type": "RegressionTrainingOption",
+    "TrainingTime": 60,
+    "LabelColumn": "Total_consumption",
+    "ValidationOption": {
+      "Version": 0,
+      "Type": "CrossValidationValidationOption",
+      "NumberOfFolds": 5
+    }
+  }
+}
