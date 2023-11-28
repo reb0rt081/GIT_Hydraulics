@@ -444,7 +444,7 @@
     },
     "Schema": "e0 * e1 * e2 * (e3 + e4 + e5 + e6)",
     "MetricName": "RSquared",
-    "ModelFilePath": "C:\\Users\\rbo\\Documents\\GIT\\ScienceAndMaths\\products\\ScienceAndMaths.Libraries\\ScienceAndMaths.MachineLearning\\AgbarMLModel1.mlnet"
+    "ModelFilePath": "C:\\Users\\rbo\\Documents\\GIT\\ScienceAndMaths\\products\\ScienceAndMaths.Libraries\\ScienceAndMaths.MachineLearning\\AgbarMLModelFull.mlnet"
   },
   "Type": "TrainingConfig",
   "Version": 4,

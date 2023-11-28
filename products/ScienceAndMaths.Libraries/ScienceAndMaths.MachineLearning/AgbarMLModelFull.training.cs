@@ -13,7 +13,7 @@ using Microsoft.ML;
 
 namespace ScienceAndMaths_MachineLearning
 {
-    public partial class AgbarMLModel1
+    public partial class AgbarMLModelFull
     {
         public const string RetrainFilePath =  @"D:\CURSOS\ABDATACHALLENGE\BBDD y DataSet ejemplo\Model_final_full.csv";
         public const char RetrainSeparatorChar = ',';

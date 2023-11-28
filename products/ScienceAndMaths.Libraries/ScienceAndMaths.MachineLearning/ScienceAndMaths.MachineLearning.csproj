@@ -30,11 +30,6 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup Label="AgbarMLModel1">
-    <None Include="AgbarMLModel1.mlnet">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
   <ItemGroup Label="AgbarMLModelBasic">
     <None Include="AgbarMLModelBasic.mlnet">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -42,6 +37,11 @@
   </ItemGroup>
   <ItemGroup Label="MLModelConsumption">
     <None Include="MLModelConsumption.mlnet">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Update="AgbarMLModelFull.mlnet">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

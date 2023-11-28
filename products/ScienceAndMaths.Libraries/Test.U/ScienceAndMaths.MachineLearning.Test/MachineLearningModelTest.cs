@@ -89,7 +89,7 @@ namespace ScienceAndMaths.MachineLearning.Test
         public void TestFinalAgbarModel()
         {
             //Load sample data
-            var sampleData = new AgbarMLModel1.ModelInput()
+            var sampleData = new AgbarMLModelFull.ModelInput()
             {
                 Census_section= "0801902067",
                 Month = @"7",
@@ -103,7 +103,7 @@ namespace ScienceAndMaths.MachineLearning.Test
 
             //Load model and predict output
             //Load model and predict output
-            var result = AgbarMLModel1.Predict(sampleData);
+            var result = AgbarMLModelFull.Predict(sampleData);
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Score > -60 && result.Score < 0, $"Normalized consumption is : {result.Score}");

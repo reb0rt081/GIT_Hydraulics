@@ -7,10 +7,10 @@ using System.IO;
 using System.Collections.Generic;
 namespace ScienceAndMaths_MachineLearning
 {
-    public partial class AgbarMLModel1
+    public partial class AgbarMLModelFull
     {
         /// <summary>
-        /// model input class for AgbarMLModel1.
+        /// model input class for AgbarMLModelFull.
         /// </summary>
         #region model input class
         public class ModelInput
@@ -56,7 +56,7 @@ namespace ScienceAndMaths_MachineLearning
         #endregion
 
         /// <summary>
-        /// model output class for AgbarMLModel1.
+        /// model output class for AgbarMLModelFull.
         /// </summary>
         #region model output class
         public class ModelOutput
@@ -98,7 +98,7 @@ namespace ScienceAndMaths_MachineLearning
 
         #endregion
 
-        private static string MLNetModelPath = Path.GetFullPath("AgbarMLModel1.mlnet");
+        private static string MLNetModelPath = Path.GetFullPath("AgbarMLModelFull.mlnet");
 
         public static readonly Lazy<PredictionEngine<ModelInput, ModelOutput>> PredictEngine = new Lazy<PredictionEngine<ModelInput, ModelOutput>>(() => CreatePredictEngine(), true);
 
