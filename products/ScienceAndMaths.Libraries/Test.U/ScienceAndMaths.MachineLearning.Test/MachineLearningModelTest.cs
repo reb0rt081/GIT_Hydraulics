@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ScienceAndMaths.MachineLearning.Tools;
@@ -18,12 +19,12 @@ namespace ScienceAndMaths.MachineLearning.Test
             Assert.AreEqual("Madrid", result.Prediction);
         }
 
-        [TestMethod, Ignore]
+        [TestMethod]
         public void TestFullDemand()
         {
             string[][] data = new string[800][];
             for (int i = 0; i < 800; ++i)
-                data[i] = new string[1];
+                data[i] = new string[2];
 
             DateTime time = new DateTime(2022, 1, 1);
             int j = 0;
@@ -36,12 +37,14 @@ namespace ScienceAndMaths.MachineLearning.Test
                     Day_of_week = (int) time.DayOfWeek+1,
                 };
                 var result = MLModelConsumption.Predict(sampleData);
-                //data[j][0] = time.ToString();
-                data[j][0] = result.Score.ToString();
+                data[j][0] = time.ToString();
+                data[j][1] = result.Score.ToString();
                 time = time.AddDays(1);
                 j++;
             }
-            CsvFileConverter.ConvertToCsv(@"D:\CURSOS\ABDATACHALLENGE\BBDD y DataSet ejemplo\Prediction_consumption.csv", data);
+            CsvFileConverter.ConvertToCsv(@"./Prediction_consumption.csv", data);
+            double averageConsumption = data.Select(d => Convert.ToInt32(d[1])).Average();
+            Assert.IsTrue(averageConsumption/1000000 < 200 && averageConsumption/1000000 > 150, $"Average consumption was expected to be less than 220 dam3/dia and it is {averageConsumption/1000000}");
         }
 
         [TestMethod]
@@ -82,7 +85,6 @@ namespace ScienceAndMaths.MachineLearning.Test
 
             Assert.IsNotNull(result);
             Assert.IsTrue(result.Score > 180 && result.Score < 200);
-
         }
 
         [TestMethod]
@@ -101,7 +103,6 @@ namespace ScienceAndMaths.MachineLearning.Test
                 Income_percapita = 22299,
             };
 
-            //Load model and predict output
             //Load model and predict output
             var result = AgbarMLModelFull.Predict(sampleData);
 
