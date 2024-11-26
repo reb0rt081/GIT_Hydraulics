@@ -182,7 +182,7 @@ namespace ScienceAndMaths.Common
             if (sequenceTokens.Length == 1)
             {
                 workItem = new WorkItem(1, workTask);
-                GetQueueForToken(sequenceTokens[0]).QueueMessage(workItem);
+                QueueWorkItemSafely(sequenceTokens[0], workItem);
                 return workItem.Completion;
             }
 
@@ -191,10 +191,37 @@ namespace ScienceAndMaths.Common
 
             foreach (object token in checkedList)
             {
-                GetQueueForToken(token).QueueMessage(workItem);
+                QueueWorkItemSafely(token, workItem);
             }
 
             return workItem.Completion;
+        }
+
+        private void QueueWorkItemSafely(object token, WorkItem workItem)
+        {
+            bool success;
+            int attempt = 0;
+            do
+            {
+                ++attempt;
+                success = true;
+                var queue = GetQueueForToken(token);
+
+                try
+                {
+                    queue.QueueMessage(workItem);
+                }
+                catch (ObjectDisposedException)
+                {
+                    success = false;
+                }
+            }
+            while (!success && attempt < 30);
+
+            if (!success)
+            {
+                GetQueueForToken(token).QueueMessage(workItem, false);
+            }
         }
 
         private MessageQueue GetQueueForToken(object sequenceToken)
@@ -264,6 +291,9 @@ namespace ScienceAndMaths.Common
         private readonly Action disposeAction;
         private readonly SemaphoreSlim semaphoreTasks;
 
+        public bool IsDisposed { get; private set; }
+        public event EventHandler<Exception> QueuedDispatchExceptionOccured;
+
         internal string SequenceToken { get; set; }
 
         internal MessageQueue(string sequenceToken, Action disposingAction, SemaphoreSlim semaphore = null)
@@ -273,10 +303,20 @@ namespace ScienceAndMaths.Common
             this.semaphoreTasks = semaphore;
         }
 
-        internal void QueueMessage(WorkItem newTask)
+        internal void QueueMessage(WorkItem newTask, bool throwIfDisposed = true)
         {
             lock (queuedTasks)
             {
+                if (IsDisposed)
+                {
+                    if (throwIfDisposed)
+                    {
+                        ObjectDisposedException disposedException = new ObjectDisposedException(SequenceToken, $"Queue for token {SequenceToken} already disposed");
+                        OnQueuedDispatchExceptionOccured(disposedException);
+                        throw disposedException;
+                    }
+                }
+
                 queuedTasks.Add(newTask);
 
                 if (queuedTasks.Count == 1)
@@ -296,13 +336,13 @@ namespace ScienceAndMaths.Common
                 WorkItem workTask = null;
                 try
                 {
+                    //  Reading index 0 is thread safe (as long as index zero exists)
                     workTask = queuedTasks[0];
-
                     await workTask.WorkAsync(semaphoreTasks ?? new SemaphoreSlim(1, 1));
                 }
                 catch (Exception exception)
                 {
-                    throw;
+                    OnQueuedDispatchExceptionOccured(exception);
                 }
                 finally
                 {
@@ -333,6 +373,16 @@ namespace ScienceAndMaths.Common
         public void Dispose()
         {
             disposeAction();
+            IsDisposed = true;
+        }
+
+        protected virtual void OnQueuedDispatchExceptionOccured(Exception e)
+        {
+            EventHandler<Exception> handler = QueuedDispatchExceptionOccured;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
         }
     }
 
