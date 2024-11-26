@@ -14,10 +14,20 @@ namespace ScienceAndMaths.Common
     public class SequenceTaskScheduler
     {
         private readonly Dictionary<object, MessageQueue> currentlyUsedQueues = new Dictionary<object, MessageQueue>();
+        private readonly SemaphoreSlim semaphore;
+        private const int DefaultConsumerSize = 100;
 
-        public SequenceTaskScheduler()
+        public SequenceTaskScheduler(int? customConsumerCount = null)
         {
+            int consumerCount = customConsumerCount ?? DefaultConsumerSize;
             TaskScheduler = TaskScheduler.Default;
+
+            if (consumerCount <= 0)
+            {
+                throw new ArgumentException("Consumer count must be greater than zero.", nameof(consumerCount));
+            }
+
+            semaphore = new SemaphoreSlim(consumerCount, consumerCount); // consumerCount is the maximum number of parallel tasks
         }
 
         /// <summary>
@@ -162,12 +172,13 @@ namespace ScienceAndMaths.Common
 
         public Task EnqueueWorkAsync(Func<Task> workTask, params object[] sequenceTokens)
         {
+            WorkItem workItem;
             if (sequenceTokens.Length == 0 || (sequenceTokens.Length == 1 && sequenceTokens[0] == null) || sequenceTokens.All(o => o == null))
             {
-                return workTask();
+                workItem = new WorkItem(1, workTask);
+                return workItem.WorkAsync(semaphore);
             }
 
-            WorkItem workItem;
             if (sequenceTokens.Length == 1)
             {
                 workItem = new WorkItem(1, workTask);
@@ -251,13 +262,15 @@ namespace ScienceAndMaths.Common
     {
         private readonly List<WorkItem> queuedTasks = new List<WorkItem>();
         private readonly Action disposeAction;
+        private readonly SemaphoreSlim semaphoreTasks;
 
         internal string SequenceToken { get; set; }
 
-        internal MessageQueue(string sequenceToken, Action disposingAction)
+        internal MessageQueue(string sequenceToken, Action disposingAction, SemaphoreSlim semaphore = null)
         {
             SequenceToken = sequenceToken;
             disposeAction = disposingAction;
+            this.semaphoreTasks = semaphore;
         }
 
         internal void QueueMessage(WorkItem newTask)
@@ -285,7 +298,7 @@ namespace ScienceAndMaths.Common
                 {
                     workTask = queuedTasks[0];
 
-                    await workTask.WorkAsync();
+                    await workTask.WorkAsync(semaphoreTasks ?? new SemaphoreSlim(1, 1));
                 }
                 catch (Exception exception)
                 {
@@ -346,12 +359,13 @@ namespace ScienceAndMaths.Common
             tcs = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
         }
 
-        public async Task WorkAsync()
+        public async Task WorkAsync(SemaphoreSlim semaphore)
         {
             if (Interlocked.Decrement(ref awaitingOperations) == 0)
             {
                 try
                 {
+                    await semaphore.WaitAsync();
                     Task task = workTask();
                     await task;
 
@@ -366,6 +380,10 @@ namespace ScienceAndMaths.Common
                 {
                     tcs.SetException(ex);
                     throw;
+                }
+                finally
+                {
+                    semaphore.Release();
                 }
             }
             else
